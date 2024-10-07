@@ -14,41 +14,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        *{
+        * {
             font-family: 'Poppins';
             color: white;
         }
-        body{
+        body {
             background-color: #121212;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            transition: margin-left 0.3s;
         }
- 
+        #sidebar {
+            background-color: #262626;
+            transition: transform 0.3s ease; 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            bottom: 0; 
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%); 
+        }
+        .content {
+            flex: 1; 
+            transition: margin-left 0.3s; 
+            margin-left: 16rem;
+        }
+        .sidebar-hidden-content {
+            margin-left: 0; 
+        }
     </style>
 </head>
 <body>
-    <header class="flex items-center justify-between m-5">
-        <img class="size-14 rounded-full" src="pics/logo.jpg" alt="logo">
-        <h1 class="text-yellow-500 font-medium">ARK VISIONS</h1>
-        <button class="flex">
-            <a class="bg-yellow-500 p-2 hover:bg-yellow-200 rounded-3xl ease-in-out duration-300 text-xs" href="#">Admin 
-                 <i class="fa-solid fa-user  text-yellow-500 rounded-full p-1 bg-black"></i></a>
-        </button>
-    </header>
-    <main class="flex m-5">
-        <nav>
-            <ul class="text-white bg-zinc-800 max-w-max p-6 rounded-lg font-medium flex-col  ">
-                <li class=""><i class="fa-solid fa-border-all"></i><a href="admin.html"> Dashboard</a></li>
-                <li class="my-6"><i class="fa-solid fa-users"></i><a href="clients.html"> Clients</a></li>
-                <li class="my-6"><i class="fa-solid fa-book"></i><a href="#"> Bookings</a></li>
-                <li class=""><i class="fa-solid fa-images"></i><a href="#"> Photo Managment</a></li>
-            </ul>
-        </nav>
-        <div class="m-5 ">
-            <h1 class="text-2xl">Hey, Admin</h1>
-            <h2 class="m-5 p-5 rounded-2xl bg-yellow-500 text-black">Latest Updates</h2>
 
+    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+      
+        <div>
+            <div class="m-7 flex justify-center">
+                <img class="rounded-full w-28" src="pics/logo.jpg" alt="Logo">
+            </div>
+            
+            <nav class="mt-10 border-t-4 border-yellow-500">
+                <a href="#" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
+                </a>
+                <a href="#" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-users mr-4"></i> Clients
+                </a>
+                <a href="#" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                </a>
+                <a href="#" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                </a>
+            </nav>
         </div>
+    
+        <div>
+            <a href="#" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
 
+    <main class="content">
+        <button id="toggleSidebar" class="p-4 text-yellow-500">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <div class="p-5">
+            <h2 class="text-2xl font-semibold text-yellow-500">Hey, Admin</h2>
+            <p class="mt-4 bg-gradient-to-r from-yellow-500 to-yellow-200 text-black p-5 rounded-2xl w-full">Latest Updates</p>
+        </div>
     </main>
 
+    <script>
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggleSidebar');
+        const content = document.querySelector('.content');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+            content.classList.toggle('sidebar-hidden-content');
+        });
+    </script>
 </body>
 </html>
