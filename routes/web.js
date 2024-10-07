@@ -12,5 +12,20 @@ route.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+route.get('/client', (req, res) => {
+  res.render('client/index'); 
+});
+
+route.get('/client/booking', (req, res) => {
+  res.render('client/booking'); 
+});
+
+route.get('/client/album', (req, res) => {
+  res.render('client/album'); 
+});
+
+route.get('/client/gallery', (req, res) => {
+  res.render('client/gallery'); 
+});
 
 module.exports = route;
