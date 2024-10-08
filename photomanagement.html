@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin</title>
     <link rel="icon" href="pics/logo.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,12 +42,6 @@
         .sidebar-hidden-content {
             margin-left: 0; 
         }
-        .card {
-            background-color: #1F1F1F;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
     </style>
 </head>
 <body>
@@ -58,8 +52,8 @@
                 <img class="rounded-full w-28" src="pics/logo.jpg" alt="Logo">
             </div>
             <nav class="mt-10 border-t-4 border-yellow-500">
-                <a href="admin.html" class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-yellow-500">
-                    <i class="fa-solid fa-house mr-4 text-gray-800"></i> Dashboard
+                <a href="admin.html" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
                 </a>
                 <a href="adminclients.html" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-users mr-4"></i> Clients
@@ -67,8 +61,8 @@
                 <a href="adminbookings.html" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
                 </a>
-                <a href="photomanagement.html" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
-                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                <a href="photomanagement.html" class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-yellow-500">
+                    <i class="fa-solid fa-image mr-4 text-gray-800"></i> Photo Management
                 </a>
             </nav>
         </div>
@@ -85,35 +79,42 @@
         </button>
         
         <div class="p-5">
-            <h2 class="text-2xl font-semibold text-yellow-500">Hey, Admin</h2>
-            <p class="mt-4 bg-gradient-to-r from-yellow-500 to-yellow-200 text-black p-5 rounded-2xl w-full">Latest Updates</p>
-            
-            <!-- Dashboard Overview Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-                <div class="card">
-                    <h3 class="text-lg font-semibold">Total Clients</h3>
-                    <p class="text-4xl font-bold">12</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold">New Bookings</h3>
-                    <p class="text-4xl font-bold">6</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold">Total Photos</h3>
-                    <p class="text-4xl font-bold">123</p>
-                </div>
-            </div>
+            <h2 class="text-2xl font-semibold text-yellow-500">Manage Clients' Albums</h2>
 
-            <div class="mt-10 card">
-                <h3 class="text-lg font-semibold">Recent Activity</h3>
-                <ul class="mt-4 space-y-2">
-                    <li class="bg-gray-800 p-2 rounded">Client Pesci uploaded a new photo.</li>
-                    <li class="bg-gray-800 p-2 rounded">Client jeyem made a new booking.</li>
-                    <li class="bg-gray-800 p-2 rounded">New client added: Sigrae Siomai.</li>
-                </ul>
-            </div>
+            <div class="mt-4 space-y-6">
+  
+                <div class="border border-gray-700 p-4 rounded-lg bg-gray-700">
+                    <h3 class="text-lg font-semibold">ID: 1</h3>
+                    <p class="text-gray-400">jeyem</p>
 
-    
+                    <div class="mt-4">
+                        <input type="file" id="uploadImageClient1" accept="image/*" class="hidden" />
+                        <label for="uploadImageClient1" class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                            <i class="fa-solid fa-upload"></i> Upload Image
+                        </label>
+                        <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded ml-4">
+                            <i class="fa-solid fa-trash"></i> Delete Image
+                        </button>
+                    </div>
+                </div>
+
+                <div class="border border-gray-700 p-4 rounded-lg bg-gray-700">
+                    <h3 class="text-lg font-semibold">ID: 2</h3>
+                    <p class="text-gray-400">Pesci</p>
+
+                    <div class="mt-4">
+                        <input type="file" id="uploadImageClient2" accept="image/*" class="hidden" />
+                        <label for="uploadImageClient2" class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                            <i class="fa-solid fa-upload"></i> Upload Image
+                        </label>
+                        <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded ml-4">
+                            <i class="fa-solid fa-trash"></i> Delete Image
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </main>
 
