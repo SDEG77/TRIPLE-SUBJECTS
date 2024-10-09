@@ -14,6 +14,16 @@ route.get('/signup', (req, res) => {
 });
 
 // CLIENT GET ROUTES
+route.get('/email-verification', (req, res) => {
+  res.render('email-verification');
+});
+route.get('/forgot-password', (req, res) => {
+  res.render('forgot-password');
+});
+
+route.get('/new-password', (req, res) => {
+  res.render('new-password');
+});
 route.get('/client', (req, res) => {
   res.render('client/index'); 
 });

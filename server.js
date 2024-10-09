@@ -11,6 +11,8 @@ app.listen(PORT, () => {
 app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
+app.set('views', './views');
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', clientController);
