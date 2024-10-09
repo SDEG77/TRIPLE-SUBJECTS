@@ -13,17 +13,19 @@ route.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-// CLIENT GET ROUTES
-route.get('/email-verification', (req, res) => {
-  res.render('email-verification');
-});
-route.get('/forgot-password', (req, res) => {
+route.get('/forgot', (req, res) => {
   res.render('forgot-password');
 });
 
-route.get('/new-password', (req, res) => {
+route.get('/forgot/email', (req, res) => {
+  res.render('email-verification');
+});
+
+route.get('/forgot/new', (req, res) => {
   res.render('new-password');
 });
+
+// CLIENT GET ROUTES
 route.get('/client', (req, res) => {
   res.render('client/index'); 
 });
@@ -32,8 +34,8 @@ route.get('/client/booking', (req, res) => {
   res.render('client/booking'); 
 });
 
-route.get('/client/album', (req, res) => {
-  res.render('client/album'); 
+route.get('/client/profile', (req, res) => {
+  res.render('client/profile'); 
 });
 
 route.get('/client/gallery', (req, res) => {
