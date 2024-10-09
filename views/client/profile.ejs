@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="/css/output.css"> -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +34,7 @@
     }
 </style>
 <body class="overflow-x-hidden flex flex-col"> 
-    <%- include('../partials/client-navbar') %>
+    <%- include('../components/client-navbar') %>
 
 
     <div class="flex flex-col mt-[150px] px-[15%] gap-10 md:flex-row items-center md:items-start md:justify-center ">
@@ -47,9 +49,9 @@
             <hr class="border-[1px] border-[#121212] mt-5">
 
             <div class="flex flex-col gap-3">
-                <a href="/client/profile" class="flex mt-5 bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="#" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2"><i class="fa-solid fa-power-off"></i>Logout</a>
+                <a href="/ark/client/profile" class="flex mt-5 bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
+                <a href="/ark/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
+                <a href="/ark/login" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2"><i class="fa-solid fa-power-off"></i>Logout</a>
             </div>
         </div>
 
@@ -86,7 +88,7 @@
     </div>
 
     <!-- Footer -->
-    <%- include('../partials/client-footer') %>
+    <%- include('../components/client-footer') %>
 
     <!-- End of Footer -->
 

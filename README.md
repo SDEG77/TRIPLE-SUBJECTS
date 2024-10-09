@@ -1,7 +1,7 @@
 # Our Project for Jesboy & the Other Two
 
 > This is a project that uses Express and Mongo DB.
-> Please like and subscribe motherfucker.
+> Please like and subscribe mothertrucker.
 
 |                  MEMBERS                    |
 |:-------------------------------------------:|
@@ -129,7 +129,7 @@
 - [ ] Provide the missing images for the img tags
 - [ ] Give the delete and cancel buttons their own confirmation modal "Are you sure you want to blah blah blah"
 - [ ] Make hamburger icon bigger
-- [ ] Fix the margin for the "Logout" button
+- [ ] Fix the margin for the "Logout" button in Photo Management Page
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -138,6 +138,14 @@
 
 # BACKENDS (TODOS)
 - [ ] ***BACKEND FINISHED***
+
+---
+
+## Misc.
+- [ ] Make the guest middleware
+- [ ] Make the client middleware
+- [ ] Make the admin middleware
+- [ ] **MISC FINISHED**
 
 ---
 
@@ -155,25 +163,25 @@
 ---
 ## Register Page
 
-- [ ] Register Function
-- [ ] Unique Email Rule
-- [ ] Hashed Password
-- [ ] Redirect to login page after signup
-- [ ] Make error message if email is taken or confirmation password does not match
-- [ ] **REGISTER PAGE FINISHED**
+- [X] Register Function
+- [X] Unique Email Rule
+- [X] Hashed Password
+- [X] Redirect to login page after signup
+- [X] Make error message if email is taken
+- [X] **REGISTER PAGE FINISHED**
 
 ---
 
 ## **Login Page**
-- [ ] Login Function
+- [X] Login Function
+- [X] Make error message if wrong credentials
 - [ ] Remember me function
-- [ ] Make error message if wrong credentials
+- [ ] Create session one logged in
 - [ ] **LOGIN PAGE FINISHED**
 
 ---
 
 ## **Forgot Password Page**
-- [ ] Fix the email page's linking of Tailwind
 - [ ] Fix the new password page's linking of Tailwind
 - [ ] Send verification email
 - [ ] Give a waiting function to the verification page after email sent (300 seconds)
