@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Ark Vision</title>
+</head>
+<style>
+    *{
+        font-family: 'Poppins';
+    }
+    header{
+        background-color: #F6DE03;
+    }
+    body{
+        background-color: #121212;
+    }
+    header button{
+        border: 1px solid black;
+    }
+    .island{
+        font-family: 'Island Moments', cursive;
+    }
+</style>
+<body class="overflow-x-hidden flex flex-col"> 
+
+    <header class="flex p-4 justify-center gap-10 items-center fixed top-0 left-0 right-0 z-30">
+        <p class="font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+        <button class="p-2 rounded-[20px] text-sm"><a href="/signup">Register now</a></button>
+        <span class="text-3xl hover:cursor-pointer" id="close">&times;</span>
+    </header>
+
+    
+    <!-- Navigation Bar -->
+    <nav class="text-white flex justify-between px-[10%] items-center fixed top-[68px] left-0 right-0 z-30 p-4 bg-[#121212]" style="box-shadow: 0 2px 5px #f6de0336;">
+        <div class="logo">
+            <h1 class="font-extrabold text-[#F6DE03] text-xl">ARK VISION</h1>
+        </div>
+
+        <ul class="flex gap-14 uppercase">
+            <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="#services">Services</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="#pricing">Pricing</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+        </ul>
+
+        <div class="flex gap-5 items-center">
+            <a class="px-8 py-1 text-center rounded-[20px] border-2 border-[#F6DE03]" href="/login">LOGIN</a>
+            <a class="px-4 py-1 text-center text-black rounded-[20px] bg-[#F6DE03]" href="/signup">GET STARTED</a>
+        </div>
+    </nav>
+    <!-- End of Navigation Bar -->
+
+    <!-- Home -->
+    <section id="home" class="scroll-mt-[200px]">
+        <div class="px-[10%] mt-[180px] flex flex-col-reverse gap-5 justify-between md:flex-row relative z-20">
+            <div>
+                <span class="bg-[#F6DE03] px-4 rounded-[20px] font-bold text-sm md:text-lg">EASY SCHEDULING PHOTOSHOOT WITH ARK VISION</span>
+                <h1 class="text-white font-bold text-[60px]">Easy scheduling <br>ahead for your <br>needs</h1>
+                <p class="text-[#C2C1C1]">Ark vision is your is your scheduling automation platform <br>
+                    for eliminating the back-and-forth emails for finding the <br>
+                    perfect time - and so much more
+                </p>
+
+                <div class="mt-5 flex gap-5 items-center">
+                    <a class="px-8 py-1 text-center text-white rounded-[20px] border-2 border-[#F6DE03]" href="/signup" class="cursor-pointer">Signup for free</a>
+                    <a class="px-4 py-1 text-center text-black rounded-[20px] bg-[#F6DE03]" href="#about">Learn more Ark Vision</a>
+                </div>
+            </div>
+
+
+            <div>
+                <img src="/assets/img/Group 2.png" alt="">
+            </div>
+
+            <div class="flex justify-center gap-2 absolute -bottom-20 right-20 left-20">
+                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
+                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
+            </div>
+        </div>
+    </section>
+    <!-- End of Home -->
+
+
+    <!-- About Us -->
+    <section id="about" class="-scroll-mt-[80px]">
+        <div class="px-[10%] mt-64 flex flex-col justify-center gap-12 md:gap-[12rem] items-center sm:flex-col md:flex-row relative z-10">
+            
+            <img class="absolute md:z-1 w-full" src="/assets/img/Ellipse 13 (1).png">
+
+            <div>
+                <img src="/assets/img/Group 3.png">
+            </div>
+
+            <div class="w-fit md:w-[450px]">
+                <h1 class="text-3xl font-bold text-[#F6DE03] mb-5">About us</h1>
+                <p class="text-white font-light text-[18px] text-justify">
+                    Ark Visions Self Portrait Studio is a cutting-edge 
+                    photography studio dedicated to providing a unique 
+                    experience for every client. Our mission is to deliver 
+                    high-quality self-portraits and professional shoots 
+                    tailored to meet the needs and aspirations of our 
+                    customers.
+                </p>
+
+                <p class="text-white font-light mt-10 text-[18px] text-justify">
+                    At Ark Visions, we believe that everyone has a story 
+                    worth telling. Each session is crafted to reflect the 
+                    individuality of our clients, making sure that their 
+                    personality shines through in every shot. We offer a 
+                    variety of customization package options, ranging 
+                    from solo and duo sessions to group shoots, allowing 
+                    our clients to choose the perfect fit for their needs.
+                </p>
+            </div>
+
+            <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
+                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
+                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
+            </div>
+        </div>
+    </section>
+    <!-- End of About Us -->
+
+
+
+    <!-- SERVICES -->
+
+    <section id="services" class="-scroll-mt-[120px]">
+        <div class="px-[10%] mt-64 flex flex-col items-center">
+            <h1 class="text-center text-[#F6DE03] font-regular text-[40px]">Services</h1>
+            <p class="island text-center text-[#F6DE03] text-[40px]">Self-Directed Portrait Digital Packages</p>
+
+            <div class="mt-24 grid gap-20 grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3">
+                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
+                    <img class="w-[180px] self-center" src="/assets/img/image.png">
+                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
+                    <hr class="border-2 border-[#F6DE03]">
+                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                </div>
+
+                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
+                    <img class="w-[180px] self-center" src="/assets/img/image.png">
+                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
+                    <hr class="border-2 border-[#F6DE03]">
+                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                </div>
+
+                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
+                    <img class="w-[180px] self-center" src="/assets/img/image.png">
+                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
+                    <hr class="border-2 border-[#F6DE03]">
+                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                </div>
+            </div>
+        </div>
+   
+        <div class="px-[10%] mt-24 pb-64 flex flex-col items-center relative">
+            <p class="island text-center text-[#F6DE03] text-[40px]">Professional Shots Portrait Digital Packages</p>
+
+            <div class="mt-24 grid gap-20 grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3">
+                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
+                    <img class="w-[180px] self-center" src="/assets/img/image.png">
+                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
+                    <hr class="border-2 border-[#F6DE03]">
+                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                </div>
+
+                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
+                    <img class="w-[180px] self-center" src="/assets/img/image.png">
+                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
+                    <hr class="border-2 border-[#F6DE03]">
+                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                </div>
+
+                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
+                    <img class="w-[180px] self-center" src="/assets/img/image.png">
+                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
+                    <hr class="border-2 border-[#F6DE03]">
+                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                </div>
+            </div>
+            <div class="flex justify-center gap-2 absolute bottom-[100px] right-20 left-20">
+                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
+                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
+            </div>
+        </div>
+    </section>
+
+    <!-- End of Services -->
+
+
+    <!-- Pricing -->
+
+    <section id="pricing" class="scroll-mt-[140px]">
+        <div class="flex flex-col items-center">
+            <h1 class="text-[#F6DE03] text-center text-[40px]">PRICING</h1>
+            <span class="island text-center text-[#F6DE03] text-[40px] mb-10">Self Portraits Digital Packages</span>
+
+            <div class="grid gap-2 grid-cols-1 justify-center gap-20 md:grid-cols-2 lg:grid-cols-3 relative z-10">
+                <!-- Solo Package -->
+                <div class="cursor-pointer w-[300px]">
+                    <div class="rounded-[25px]" style="box-shadow: 0 0 10px #f6de038d">
+                        <div class="pt-2 px-6 pb-8 bg-[#F6DE03] flex flex-col rounded-t-[25px] ">
+                            <h1 class="text-center text-[40px] font-bold">Solo</h1>
+                            <div class="flex gap-10 pb2 justify-center mt-[70px] items-center">
+                                <p class="font-bold text-[10px]">$100-15mins</p>
+                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
+                            </div>
+                            <div class="flex gap-10 justify-center items-center">
+                                <p class="font-bold text-[10px]">$100-15mins</p>
+                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
+                            </div>
+                        </div>
+                        <div class="bg-[#121212] rounded-b-[25px] pb-12 flex flex-col">
+                            <h1 class="text-center text-[12px] font-bold mt-[20px] text-[#F6DE03]">ADDITIONAL</h1>
+                            <div class="p-5 text-[#F6DE03]">
+                                <div class="flex gap-10 justify-center mt-5">
+                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                    <p class="fotn-bold text-[11px]">PHP-149</p>
+                                </div>
+                                <div class="flex gap-10 justify-center mt-5">
+                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                    <p class="fotn-bold text-[11px]">PHP-149</p>
+                                </div>
+                                <div class="flex gap-10 justify-center mt-5">
+                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                    <p class="fotn-bold text-[11px]">PHP-149</p>
+                                </div>
+                            </div>
+
+                            <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]"><a href="#">AVAIL NOW</a></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Solo Package -->
+
+
+                <!-- Duo Package -->
+                <div class="cursor-pointer w-[300px]">
+                    <div class="rounded-[25px]" style="box-shadow: 0 0 10px #f6de038d">
+                        <div class="pt-2 px-6 pb-8 bg-[#F6DE03] flex flex-col rounded-t-[25px] ">
+                            <h1 class="text-center text-[40px] font-bold">DUO</h1>
+                            <div class="flex gap-10 pb2 justify-center mt-[70px] items-center">
+                                <p class="font-bold text-[10px]">$100-15mins</p>
+                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
+                            </div>
+                            <div class="flex gap-10 justify-center items-center">
+                                <p class="font-bold text-[10px]">$100-15mins</p>
+                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
+                            </div>
+                        </div>
+                        <div class="bg-[#121212] rounded-b-[25px] pb-12 flex flex-col">
+                            <h1 class="text-center text-[12px] font-bold mt-[20px] text-[#F6DE03]">ADDITIONAL</h1>
+                            <div class="p-5 text-[#F6DE03]">
+                                <div class="flex gap-10 justify-center mt-5">
+                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                    <p class="fotn-bold text-[11px]">PHP-149</p>
+                                </div>
+                                <div class="flex gap-10 justify-center mt-5">
+                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                    <p class="fotn-bold text-[11px]">PHP-149</p>
+                                </div>
+                                <div class="flex gap-10 justify-center mt-5">
+                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                    <p class="fotn-bold text-[11px]">PHP-149</p>
+                                </div>
+                            </div>
+
+                            <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]"><a href="#">AVAIL NOW</a></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Duo Package -->
+
+                <!-- Group Package -->
+            <div class="cursor-pointer w-[300px]">
+                <div class="rounded-[25px]" style="box-shadow: 0 0 10px #f6de038d">
+                    <div class="pt-2 px-6 pb-8 bg-[#F6DE03] flex flex-col rounded-t-[25px] ">
+                        <h1 class="text-center text-[40px] font-bold">GROUP</h1>
+                        <div class="flex gap-10 pb2 justify-center mt-[70px] items-center">
+                            <p class="font-bold text-[10px]">$100-15mins</p>
+                            <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
+                        </div>
+                        <div class="flex gap-10 justify-center items-center">
+                            <p class="font-bold text-[10px]">$100-15mins</p>
+                            <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
+                        </div>
+                    </div>
+                    <div class="bg-[#121212] rounded-b-[25px] pb-12 flex flex-col">
+                        <h1 class="text-center text-[12px] font-bold mt-[20px] text-[#F6DE03]">ADDITIONAL</h1>
+                        <div class="p-5 text-[#F6DE03]">
+                            <div class="flex gap-10 justify-center mt-5">
+                                <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                <p class="fotn-bold text-[11px]">PHP-149</p>
+                            </div>
+                            <div class="flex gap-10 justify-center mt-5">
+                                <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                <p class="fotn-bold text-[11px]">PHP-149</p>
+                            </div>
+                            <div class="flex gap-10 justify-center mt-5">
+                                <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
+                                <p class="fotn-bold text-[11px]">PHP-149</p>
+                            </div>
+                        </div>
+
+                        <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]"><a href="#">AVAIL NOW</a></button>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Group Package -->          
+        </div>
+    </section>
+        <!-- End of Pricing -->
+
+
+
+        <!-- Contact Us Form -->
+        <h1 class="text-[#F6DE03] text-center text-[40px] mt-[250px]">Get in touch</h1>
+        <p class="text-center text-[42px] text-white mb-8">Contact us</p>
+
+        <div class="justify-center gap-20 flex p-8 rounded-[25px] w-fit self-center" style="box-shadow: 0 0 5px #f6de038d;">
+            <div class="flex flex-col gap-3">
+                <img src="/assets/img/image 8.png" class="w-[450px]">
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
+            </div>
+
+            <form action="#" class="flex flex-col gap-2 w-[350px] p-5 rounded-[25px]" style="box-shadow: 0 0 5px #f6de038d;">
+                <h1 class="text-[#FFFFFF] font-semibold tracking-widest mb-5">SEND US A MESSAGE</h1>
+                <input type="text" placeholder="Name" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3">
+                <input type="text" placeholder="Email" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3">
+                <input type="text" placeholder="Subject" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3">
+                <input type="text" placeholder="Message" class="bg-transparent outline-none text-white rounded-[15px] h-[100px] p-2 mb-3" style="box-shadow: 0 0 5px #f6de0365;">
+
+                <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">SUBMIT</button>
+            </form>
+        </div>
+        <!-- End of Contact Us Form -->
+
+
+
+        <!-- Footer -->
+        <footer class="px-[10%] pt-8 w-full mt-64" style="box-shadow: 0 0 5px #f6de038d;">
+            <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
+                <h1 class="text-[#F6DE03] text-[26px] uppercase font-extrabold">Ark Vision</h1>
+                
+                <ul class="flex gap-14 uppercase">
+                    <li><a href="#hodme" class="hover:text-[#F6DE03] text-white">Home</a></li>
+                    <li><a href="#services" class="hover:text-[#F6DE03] text-white">Services</a></li>
+                    <li><a href="#pricing" class="hover:text-[#F6DE03] text-white">Pricing</a></li>
+                    <li><a href="#about" class="hover:text-[#F6DE03] text-white">About</a></li>
+                </ul>
+
+                <div class="flex flex-col gap-3 ml-20">
+                    <h1 class="text-[#F6DE03] text-[20px]">Want To Get Start</h1>
+                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
+                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
+                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
+                </div>
+            </nav>
+        </footer>
+        <!-- End of Footer -->
+
+</body>
+
+<script>
+    document.getElementById("close").addEventListener("click", function(){
+        document.querySelector("header").style.display = "none";
+    });
+
+    document.querySelector("header").addEventListener("click", function(){
+        document.querySelector("nav").style.top = "0px";
+    });
+
+</script>
+</html>
