@@ -191,7 +191,65 @@
 
 ---
 ## ADMIN PAGE
-- [x] None yet. Assign more here if you want
+- 
+Admin Dashboard Management
+--------------------------
+-[ ] Dashboard Overview
+  -[ ] Implement a dashboard to view booking statistics, such as total bookings and most  popular packages.
+  -[ ] Fetch and display confirmed bookings with detailed booking information, including client details, selected services, add-ons, and payment status.
+
+User Management
+---------------
+-[ ] Implement CRUD operations for client accounts.
+  -[ ] Add, edit, delete, and retrieve user profiles.
+ 
+
+Booking Management
+------------------
+-[ ] Implement CRUD operations for bookings.
+  -[ ] Create, view, update, and delete bookings from the admin panel.
+  -[ ] Set up a notification system for new bookings and updates to existing bookings.
+  -[ ] Develop logic for handling booking statuses (e.g., pending, confirmed, completed, canceled).
+  -[ ] Allow admins to approve or cancel bookings as necessary.
+
+Photo Management
+----------------
+-[ ] Enable file upload for gallery photos linked to user bookings.
+  -[ ] Organize uploaded photos according to specific bookings for easy retrieval.
+  -[ ] Provide functionality to delete photos from users’ galleries.
+
+Service Management
+------------------
+-[ ] Implement CRUD functions for managing services.
+  -[ ] Add, edit, delete, and retrieve information about available services.
+
+Package Management
+------------------
+-[ ] Implement CRUD functions for packages.
+  -[ ] Allow the admin to create, update, delete, and view packages offered in the booking system.
+
+Add-Ons Management
+------------------
+-[ ] Implement CRUD operations for add-ons (e.g., extra time, additional packages).
+  -[ ] Associate add-ons with specific bookings and adjust booking totals accordingly.
+
+Payment Verification
+--------------------
+-[ ] Enable functionality to verify GCash payment receipts uploaded by users.
+  -[ ] Create an admin interface to mark payments as verified or rejected.
+  -[ ] Automatically confirm bookings upon successful payment verification.
+
+Reporting and Analytics
+-----------------------
+-[ ] Implement a dashboard section for viewing booking statistics, such as total bookings and most popular packages.
+  -[ ] Set up report generation for analyzing booking trends and revenue tracking.
+  -[ ] Provide options for exporting booking and payment data for financial record-keeping.
+
+Security and Access Control
+---------------------------
+
+  -[ ] Ensure logging of all key activities (e.g., booking approvals, payment verifications, user management actions).
+
 
 ---
 ---
