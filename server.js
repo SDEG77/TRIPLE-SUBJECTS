@@ -36,7 +36,7 @@ mongoose.connect(process.env.MONGOURI).then(() => {
   
   app.use('/ark/client', clientRoutes);
 
-  app.use('/ark/admin/', adminRoutes);
+  app.use('/ark/admin', adminRoutes,);
 
   app.listen(PORT, () => {
     console.log(`SERVER RUNNING ON PORT: [http://localhost:${PORT}/]`);
