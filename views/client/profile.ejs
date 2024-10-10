@@ -42,8 +42,16 @@
             <div class="flex items-center gap-2">
                 <img src="/assets/img/image.png" class="w-[50px] rounded-[100%]">
                 <div>
-                    <h1 class="text-[12px]">John Michael</h1>
-                    <p class="text-[10px]">johnmichaeljonatas@gmail.com</p>
+                    <h1 class="text-[12px]">
+                        <% try{ %>
+                        <%= name %>
+                        <% }catch{} %>
+                    </h1>
+                    <p class="text-[10px]">
+                        <% try{ %>
+                            <%= email %>
+                        <% }catch{} %>
+                    </p>
                 </div>
             </div>
             <hr class="border-[1px] border-[#121212] mt-5">
@@ -51,7 +59,7 @@
             <div class="flex flex-col gap-3">
                 <a href="/ark/client/profile" class="flex mt-5 bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
                 <a href="/ark/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/login" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2"><i class="fa-solid fa-power-off"></i>Logout</a>
+                <a href="/ark/client/logout" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2"><i class="fa-solid fa-power-off"></i>Logout</a>
             </div>
         </div>
 
@@ -62,8 +70,16 @@
                 <div class="flex items-center gap-2 mt-4">
                     <img src="/assets/img/image.png" class="w-[50px] rounded-[100%]">
                     <div>
-                        <h1 class="text-[15px]">John Michael</h1>
-                        <p class="text-[13px]">johnmichaeljonatas@gmail.com</p>
+                        <h1 class="text-[15px]">
+                            <% try{ %>
+                                <%= name %>
+                            <% }catch{} %>
+                        </h1>
+                        <p class="text-[13px]">
+                            <% try{ %>
+                                <%= email %>
+                            <% }catch{} %>
+                        </p>
                     </div>
                 </div>
                 <p class="flex gap-2 border-b-[1px] border-[#121212] text-[15px] font-semibold mt-5">Schedule Status:<span>Pending</span></p>

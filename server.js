@@ -42,3 +42,4 @@ mongoose.connect(process.env.MONGOURI).then(() => {
     console.log(`SERVER RUNNING ON PORT: [http://localhost:${PORT}/]`);
   });
 })
+
