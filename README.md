@@ -246,7 +246,7 @@ Reporting and Analytics
 -----------------------
 -[ ] Implement a dashboard section for viewing booking statistics, such as total bookings and most popular packages.
   -[ ] Set up report generation for analyzing booking trends and revenue tracking.
-  -[ ] Provide options for exporting booking and payment data for financial record-keeping.
+  -[ ] Provide options for exporting booking and payment data for financial record-keeping.!
 
 Security and Access Control
 ---------------------------
