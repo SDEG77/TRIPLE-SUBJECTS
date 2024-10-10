@@ -1,5 +1,6 @@
 const route = require('express').Router();
 const LoggerController = require('../controllers/LoggerController') ;
+const User = require('../models/User');
 
 route.get('/', (req, res) => {
   res.render('./general/index');
@@ -34,15 +35,28 @@ route.get('/login', (req, res) => {
   res.render('./general/login');
 });
 
+let loginMiddleware;
+
 route.post('/login', async (req, res) => {
-  if(await LoggerController.login({
+  const logger = await LoggerController.login({
     email: req.body.email,
     password: req.body.password,
-  })) {
-    res.redirect('/ark/client')
+  });
+  
+  if(logger) {
+    const credentials = await User.find({ email: req.body.email });
+
+    req.session.name = `${credentials[0].fname.toUpperCase()} ${credentials[0].lname.toUpperCase()}`;
+    req.session.email = credentials[0].email;
+    req.session.logged = true;
+    loginMiddleware = true;
+
+    res.redirect('/ark/client');
     // console.log('general was true')
   } else {
     // console.log('general was false')
+    req.session.logged = false;
+    
     res.render('./general/login', {
       message: '(Password was incorrect!)',
       email: req.body.email,
@@ -62,4 +76,4 @@ route.get('/forgot/new', (req, res) => {
   res.render('./general/new-password');
 });
 
-module.exports = route;
+module.exports =  route;

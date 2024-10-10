@@ -41,8 +41,16 @@
             <div class="flex items-center gap-2">
                 <img src="/assets/img/image.png" class="w-[50px] rounded-[100%]">
                 <div>
-                    <h1 class="text-[12px]">John Michael</h1>
-                    <p class="text-[10px]">johnmichaeljonatas@gmail.com</p>
+                    <h1 class="text-[12px]">
+                        <% try{ %>
+                            <%= name %>
+                        <% }catch{} %>
+                    </h1>
+                    <p class="text-[10px]">
+                        <% try{ %>
+                            <%= email %>
+                        <% }catch{} %>
+                    </p>
                 </div>
             </div>
             <hr class="border-[1px] border-[#121212] mt-5">

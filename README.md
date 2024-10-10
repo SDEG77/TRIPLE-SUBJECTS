@@ -109,6 +109,7 @@
 - [ ] Give "Select All" & "Deselect All" their own styling when active
 - [ ] Make "CLEAR ALL" button more easier to find
 - [ ] Give "Book Now" & "Submit Receipt" hover effects
+- [ ] Make booking page for service number 2 (ship with proffesional)
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -116,6 +117,7 @@
 ## PROFILE PAGE
 - [ ] Fix the sidebar div: the email is overflowing out of the box
 - [ ] Give "Edit Profile" & "Save Changes" hover effect
+- [ ] Make popup modal for Edit Profile
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -130,7 +132,14 @@
 - [ ] Give the delete and cancel buttons their own confirmation modal "Are you sure you want to blah blah blah"
 - [ ] Make hamburger icon bigger
 - [ ] Fix the margin for the "Logout" button in Photo Management Page
-- [ ] **FINISHED ALL TASKS**
+
+- [ ] **ADMIN PAGE PAGES**
+
+> ***MISSING PAGES***
+- [ ] ADD PAGE FOR SERVICES
+- [ ] ADD PAGE FOR PACKAGES
+
+- [ ] **FINISHED MISSING PAGES**
 
 ---
 ---
@@ -143,7 +152,7 @@
 
 ## Misc.
 - [ ] Make the guest middleware
-- [ ] Make the client middleware
+- [X] Make the client middleware
 - [ ] Make the admin middleware
 - [ ] **MISC FINISHED**
 
@@ -162,12 +171,6 @@
 
 ---
 ## Register Page
-
-- [X] Register Function
-- [X] Unique Email Rule
-- [X] Hashed Password
-- [X] Redirect to login page after signup
-- [X] Make error message if email is taken
 - [X] **REGISTER PAGE FINISHED**
 
 ---
@@ -175,8 +178,8 @@
 ## **Login Page**
 - [X] Login Function
 - [X] Make error message if wrong credentials
+- [X] Create session once logged in
 - [ ] Remember me function
-- [ ] Create session one logged in
 - [ ] **LOGIN PAGE FINISHED**
 
 ---
@@ -258,5 +261,10 @@ Security and Access Control
 |:---:|
 |Make a page for the email verification (FRONT/FORGOT)|
 |Make a page for the change old password (FRONT/FORGOT)|
+|Register Function (BACK/REGISTER)|
+|Unique Email Rule (BACK/REGISTER)|
+|Hashed Password (BACK/REGISTER)|
+|Redirect to login page after signup (BACK/REGISTER)|
+|Make error message if email is taken (BACK/REGISTER)|
 
 ~~***very good, binasa mo lahat!***~~
