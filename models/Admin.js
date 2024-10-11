@@ -8,6 +8,7 @@ const adminSchema = mongoose.Schema({
   password: { type: String, required: true },
 });
 
+/** @type {import('mongoose').Model()} */
 const Admin = mongoose.model('Admin', adminSchema);
 
 module.exports = Admin;

@@ -4,42 +4,51 @@ const bcrypt = require('bcrypt');
 
 class Register {  
   async register(params) {
-    if(params.fname || params.lname || params.email || params.password) {
-      let unique = await User.find({ email: params.email });
-      
-      if(unique.length > 0) {
-        // console.log(unique.length)
-        return false;
-        
-      } else {
-        // console.log('true in register')
-        const salt = await bcrypt.genSalt();
-        const hashed = await bcrypt.hash(params.password, salt);
+    let unique;
 
-        await User.insertMany({
-          fname: params.fname,
-          lname: params.lname,
-          email: params.email,
-          password: hashed,
-        })
-  
-        return true;
-      }
+    // check if not empty
+    if(params.fname || params.lname || params.email || params.password) {
+      unique = await User.find({ email: params.email });
     }
+
+    // checks if email already exists
+    if(unique.length > 0) {
+      return false;      
+    } 
+    
+    const salt = await bcrypt.genSalt();
+    const hashed = await bcrypt.hash(params.password, salt);
+
+    await User.insertMany({
+      fname: params.fname,
+      lname: params.lname,
+      email: params.email,
+      password: hashed,
+    })
+
+    return true;
   }
 
   async login(params) {
-    if(params.email || params.password) {
-      const check = await User.find({email: params.email});  
+    let check;
+    let compare;
 
-      if(await bcrypt.compare(params.password, check[0].password)) {
-        // console.log('password correct')
-        return true;
-      } else {
-        // console.log('password incorrect')
-        return false;
-      }
+    if(params.email || params.password) {
+      check = await User.find({email: params.email})  
     }
+
+    if(check.length > 0) {
+      compare = await bcrypt.compare(params.password, check[0].password);
+    }
+
+    if(compare) {
+      // console.log('password correct')
+      return true;
+    } 
+    
+    // console.log('password incorrect')
+    return false;
+  
   }
 }
 

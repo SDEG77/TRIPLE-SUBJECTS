@@ -1,30 +1,42 @@
 // seedAdmin.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Admin = require('./models/Admin'); // Ensure path is correct
+const Admin = require('./models/Admin');
+const env = require('dotenv');
 
-const dbURI = 'mongodb://localhost:27017/triple'; // Adjust as needed
+env.config();
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB database "triple"'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+const dbURI = process.env.MONGO_URI;
+
+mongoose.connect(dbURI)
+  .then(() => console.log('-> Entered triple database: Attempting to seed to admin collection'))
+  .catch((err) => console.error('-> MongoDB connection error:', err));
 
 const seedAdmin = async () => {
+  let admin;
+  
   try {
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash('Romark007!', salt); // Replace with desired password
+    const hashedPassword = await bcrypt.hash('1234', salt);
 
-    const admin = new Admin({
+    admin = new Admin({
       fname: 'Romark',
       lname: 'Bayan',
-      email: 'romark7bayan@gmail.com', // Replace with desired email
+      email: 'admin@secret.com', 
       password: hashedPassword,
     });
-
-    await admin.save();
-    console.log('Admin user created successfully in "admin" collection of "triple" database');
   } catch (error) {
-    console.error('Error creating admin user:', error);
+    console.error('Error seeding admin:', error);
+  }
+  
+  try {
+    await admin.save();
+    console.log(`-> Admin seeded successfully:
+[email: admin@secret.com]
+[password: 1234]
+      `);
+  } catch (err) {
+    console.log("-> ADMIN ALREADY SEEDED TO COLLECTION:")
   } finally {
     mongoose.connection.close();
   }
