@@ -129,6 +129,7 @@
 
 ## ADMIN PAGE
 - [ ] Provide the missing images for the img tags
+- [ ] Give Client Page an edit modal
 - [ ] Give the delete and cancel buttons their own confirmation modal "Are you sure you want to blah blah blah"
 - [ ] Make hamburger icon bigger
 - [ ] Fix the margin for the "Logout" button in Photo Management Page
@@ -205,8 +206,10 @@
 ---
 
 ## **User Management Page**
-- [ ] Implement CRUD operations for client accounts.
-- [ ] Add, edit, delete, and retrieve user profiles.
+- [X] Implement CRUD operations for client accounts.
+- [X] View and delete
+- [ ] Edit function
+- [ ] Finished the User Management Page
  
 ---
 

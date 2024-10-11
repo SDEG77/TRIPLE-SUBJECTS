@@ -2,6 +2,8 @@ const route = require('express').Router();
 const AdminAuth = require('../controllers/AdminAuth');
 const Admin = require('../models/Admin');
 
+const AdminController = require('../controllers/AdminController');
+
 route.get('/login', (req, res) => {
   res.render('admin/adminlogin', { message: '' });
 })
@@ -46,20 +48,30 @@ route.get('/bookings', (req, res) => {
     res.redirect('./login');
   }
 })
-route.get('/clients', (req, res) => {
+
+route.get('/clients', async (req, res) => {
   if(req.session.isAdminLogged) {
-    res.render('./admin/adminclients');
+    const clients = await AdminController.viewClients();
+    
+    res.render('./admin/adminclients', {'clients': clients});
   } else {
     res.redirect('./login');
   }
 })
-route.get('/client', (req, res) => {
+
+route.post('/clients', async (req, res) => {
   if(req.session.isAdminLogged) {
-    res.render('./admin/clients');
+    await AdminController.deleteClient(req.body.id);
+
+    const clients = await AdminController.viewClients();
+
+    res.render('./admin/adminclients', {'clients': clients});
   } else {
     res.redirect('./login');
   }
 })
+
+
 route.get('/photo-management', (req, res) => {
   if(req.session.isAdminLogged) {
     res.render('./admin/photomanagement');

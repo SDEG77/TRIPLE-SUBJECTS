@@ -94,40 +94,32 @@
                         <th class="py-2 px-4 border-b border-gray-600 text-left">ID</th>
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Username</th>
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Email Address</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Contact Number</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Action</th>
+                        <th colspan="100"  class="py-2 px-4 border-b border-gray-600 text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd:bg-gray-700 even:bg-gray-700">
-                        <td class="py-2 px-4 border-b border-gray-600">1</td>
-                        <td class="py-2 px-4 border-b border-gray-600">jeyem</td>
-                        <td class="py-2 px-4 border-b border-gray-600">johnmichaeljonatas@gmail.com</td>
-                        <td class="py-2 px-4 border-b border-gray-600">09171234567</td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded">
-                                <i class="fa-solid fa-pen"></i> Edit
-                            </button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
-                                <i class="fa-solid fa-trash"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="odd:bg-gray-700 even:bg-gray-800">
-                        <td class="py-2 px-4 border-b border-gray-600">2</td>
-                        <td class="py-2 px-4 border-b border-gray-600">Pesci</td>
-                        <td class="py-2 px-4 border-b border-gray-600">aldenpesco@gmail.com</td>
-                        <td class="py-2 px-4 border-b border-gray-600">09171234567</td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded">
-                                <i class="fa-solid fa-pen"></i> Edit
-                            </button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
-                                <i class="fa-solid fa-trash"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                    <% let yah = "py-2 px-4 border-b border-gray-600"; %>
+
+                    <% clients.map((client) => { %>
+                        <tr class="odd:bg-gray-700 even:bg-gray-700">
+                            <td class="<%= yah %>"> <%= client._id %> </td>
+                            <td class="<%= yah %>" > <%= client.fname %> <%= client.lname %> </td>
+                            <td class="<%= yah %>"> <%= client.email %> </td>
+                            <td class="py-2 px-4 border-b border-gray-600 flex justify-center gap-4">
+                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+
+                                <form action="/ark/admin/clients" method="post">
+                                    <input type="hidden" value="<%= client._id %>" name="id">
+                                    
+                                    <button onclick="!confirm('You sure?') && event.preventDefault()" type="submit" class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
+                                        <i class="fa-solid fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
                 </tbody>
             </table>
         </div>
