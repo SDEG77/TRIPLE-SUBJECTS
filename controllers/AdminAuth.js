@@ -3,17 +3,20 @@ const bcrypt = require('bcrypt');
 
 class AdminAuth {
   async login(params) {
+    let admin;
+    
     if (params.email && params.password) {
       // Find admin by email
-      const admin = await Admin.findOne({ email: params.email });
-      if (admin && await bcrypt.compare(params.password, admin.password)) {
-        // Login success
-        return true;
-      } else {
-        // Login failure
-        return false;
-      }
+      admin = await Admin.findOne({ email: params.email });
     }
+
+    if (admin && await bcrypt.compare(params.password, admin.password)) {
+      // Login success
+      return true;
+    } 
+    
+    // Login failure
+    return false;
   }
 }
 

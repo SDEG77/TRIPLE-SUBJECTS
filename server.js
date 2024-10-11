@@ -5,7 +5,6 @@ const ENV = require('dotenv');
 const path = require('path');
 
 const mongoose = require('mongoose');
-const User = require('./models/User.js');
 
 const generalRoutes = require('./routes/general.js');
 const clientRoutes = require('./routes/client');
@@ -17,7 +16,7 @@ ENV.config()
 
 const PORT = process.env.PORT || 6969;
 
-mongoose.connect(process.env.MONGOURI).then(() => {  
+mongoose.connect(process.env.MONGO_URI).then(() => {  
   app.use(express.static(path.join(__dirname, 'public')));
   
   app.set('view engine', 'ejs');
@@ -39,7 +38,7 @@ mongoose.connect(process.env.MONGOURI).then(() => {
   app.use('/ark/admin', adminRoutes,);
 
   app.listen(PORT, () => {
-    console.log(`SERVER RUNNING ON PORT: [http://localhost:${PORT}/]`);
+    console.log(`SERVER RUNNING ON: [http://localhost:${PORT}/ark]`);
   });
 })
 
