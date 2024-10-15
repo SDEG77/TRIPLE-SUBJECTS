@@ -84,10 +84,10 @@
         </button>
         
         <div class="p-5">
-            <h2 class="text-2xl font-semibold text-yellow-500">Users</h2>
+            <h2 class="text-2xl font-semibold text-yellow-500">Clients</h2>
         </div>
-         <!-- Table Section -->
-         <div class="mt-6 m-5">
+        <!-- Table Section -->
+        <div class="mt-6 m-5">
             <table class="min-w-full bg-gray-800 border border-gray-800">
                 <thead>
                     <tr class="bg-gray-800">
@@ -106,10 +106,6 @@
                             <td class="<%= yah %>" > <%= client.fname %> <%= client.lname %> </td>
                             <td class="<%= yah %>"> <%= client.email %> </td>
                             <td class="py-2 px-4 border-b border-gray-600 flex justify-center gap-4">
-                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded">
-                                    <i class="fa-solid fa-pen"></i> Edit
-                                </button>
-
                                 <form action="/ark/admin/clients" method="post">
                                     <input type="hidden" value="<%= client._id %>" name="id">
                                     

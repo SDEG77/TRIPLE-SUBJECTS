@@ -25,8 +25,8 @@
 ---
 
 ## Misc.
-- [ ] **MISC FINSIHED**
 - [ ] Give all hover effects a transition
+- [ ] **MISC FINSIHED**
 
 ---
 
@@ -123,7 +123,7 @@
 ---
 
 ## GALLERY PAGE
-- [ ] **FINISHED ALL TASKS**
+- [X] **FINISHED ALL TASKS**
 
 ---
 
@@ -137,8 +137,7 @@
 - [ ] **ADMIN PAGE PAGES**
 
 > ***MISSING PAGES***
-- [ ] ADD PAGE FOR SERVICES
-- [ ] ADD PAGE FOR PACKAGES
+- [ ] **RESOURCE MANAGEMENT PAGE** ```(REFER TO BACKEND TODO LIST IN RESOURCE MANAGEMENT PAGE SECTION FOR MORE CONTEXT)```
 
 - [ ] **FINISHED MISSING PAGES**
 
@@ -148,14 +147,6 @@
 
 # BACKENDS (TODOS)
 - [ ] ***BACKEND FINISHED***
-
----
-
-## Misc.
-- [ ] Make the guest middleware
-- [X] Make the client middleware
-- [ ] Make the admin middleware
-- [ ] **MISC FINISHED**
 
 ---
 
@@ -202,23 +193,23 @@
 - [ ] Dashboard Overview
 - [ ] Implement a dashboard to view booking statistics, such as total bookings and most  popular packages.
 - [ ] Fetch and display confirmed bookings with detailed booking information, including client details, selected services, add-ons, and payment status.
+- [ ] ***Finished the Dashboard Page***
 
 ---
 
 ## **User Management Page**
-- [X] Implement CRUD operations for client accounts.
+- [X] Implement READ & DELETE operations for client accounts.
 - [X] View and delete
-- [ ] Edit function
-- [ ] Finished the User Management Page
+- [X] ***Finished the User Management Page***
  
 ---
 
 ## **Booking Management Page**
 - [ ] Implement CRUD operations for bookings.
-- [ ] Create, view, update, and delete bookings from the admin panel.
 - [ ] Set up a notification system for new bookings and updates to existing bookings.
 - [ ] Develop logic for handling booking statuses (e.g., pending, confirmed, completed, canceled).
 - [ ] Allow admins to approve or cancel bookings as necessary.
+- [ ] ***Finished the Booking Management Page***
 
 ---
 
@@ -226,6 +217,7 @@
 - [ ] Enable file upload for gallery photos linked to user bookings.
 - [ ] Organize uploaded photos according to specific bookings for easy retrieval.
 - [ ] Provide functionality to delete photos from users’ galleries.
+- [ ] ***Finished the Photo Management Page***
 
 ---
 
@@ -233,28 +225,36 @@
 > ***Service Management Section***
 - [ ] Implement CRUD functions for managing services.
 - [ ] Add, edit, delete, and retrieve information about available services.
+- [ ] ***Finished the Service Management Section***
 
 > ***Package Management Section***
 - [ ] Implement CRUD functions for packages.
 - [ ] Allow the admin to create, update, delete, and view packages offered in the booking system.
+- [ ] ***Finished the Package Management Section***
 
 > ***Add-Ons Management Section***
 - [ ] Implement CRUD operations for add-ons (e.g., extra time, additional packages).
 - [ ] Associate add-ons with specific bookings and adjust booking totals accordingly.
+- [ ] ***Finished the Add-ons Management Section***
 
 > ***Payment Verification Section***
 - [ ] Enable functionality to verify GCash payment receipts uploaded by users.
 - [ ] Create an admin interface to mark payments as verified or rejected.
 - [ ] Automatically confirm bookings upon successful payment verification.
-
+- [ ] ***Finished the Payment Verification Section***
 
 ---
 
 ## **Misc**
+- [ ] Make the guest middleware
+- [X] Make the client middleware
+- [x] Make the admin middleware
 - [ ] Implement a dashboard section for viewing booking statistics, such as total bookings and most popular packages.
 - [ ] Set up report generation for analyzing booking trends and revenue tracking.
 - [ ] Provide options for exporting booking and payment data for financial record-keeping.!
 - [ ] Ensure logging of all key activities (e.g., booking approvals, payment verifications, user management actions).
+- [ ] ***Finished the Miscellaneous***
+
 
 ---
 ---

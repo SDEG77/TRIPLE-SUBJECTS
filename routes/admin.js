@@ -34,9 +34,14 @@ route.post('/login', async (req, res) => {
   }
 });
 
-route.get('/', (req, res) => {
+route.get('/', async (req, res) => {
   if(req.session.isAdminLogged) {
-    res.render('./admin/admin');
+    const totalClients = await AdminController.totalClients();
+
+    res.render('./admin/admin', {
+      totalClients: totalClients
+    });
+
   } else {
     res.redirect('./login');
   }

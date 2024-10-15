@@ -1,6 +1,18 @@
 const User = require('../models/User');
 
 class AdminController {
+  async totalClients() {
+    let total = await User.find();
+
+    if(total) {
+      // Some clients found
+      return total.length;
+    }
+
+    // None found
+    return 0;
+  }
+
   async viewClients() {
     const users = await User.find();
 
