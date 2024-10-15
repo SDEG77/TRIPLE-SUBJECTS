@@ -110,7 +110,7 @@
 - [x] Make "CLEAR ALL" button more easier to find
 - [x] Give "Book Now" & "Submit Receipt" hover effects
 - [x] Make booking page for service number 2 (ship with proffesional)
-- [x] **FINISHED ALL TASKS**
+- [ ] **FINISHED ALL TASKS**
 
 ---
 
@@ -118,7 +118,7 @@
 - [x] Fix the sidebar div: the email is overflowing out of the box
 - [ ] Give "Edit Profile", "Save Changes", and "Cancel" buttons hover effects
 - [x] Make popup modal for Edit Profile
-- [x] **FINISHED ALL TASKS**
+- [ ] **FINISHED ALL TASKS**
 
 ---
 
