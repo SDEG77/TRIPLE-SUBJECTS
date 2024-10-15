@@ -71,12 +71,12 @@
 - [ ] **PAGE FINISHED**
 
 > ***REGISTER MODAL***
-- [ ] Improve the UX of this page
-- [ ] Make the "login" anchor much easier to see
-- [ ] Give focus effect for all inputs
-- [ ] Decrease font size of inputted text
-- [ ] Give the submit button a hover effect
-- [ ] Make the submit button bigger
+- [x] Improve the UX of this page
+- [x] Make the "login" anchor much easier to see
+- [ ] Give focus effect for all inputs **(yellow foucs)**
+- [x] Decrease font size of inputted text
+- [x] Give the submit button a hover effect
+- [x] Make the submit button bigger
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -84,11 +84,11 @@
 - [ ] **PAGE FINISHED**
 
 > ***LOGIN MODAL***
-- [ ] Improve the UX of this page
-- [ ] Make all of the links easier to read
-- [ ] Give focus effect for all inputs
-- [ ] Give the submit button a hover effect
-- [ ] Make the submit button bigger
+- [x] Improve the UX of this page
+- [x] Make all of the links easier to read
+- [ ] Give focus effect for all inputs **(yellow focus)**
+- [x] Give the submit button a hover effect
+- [ ] Make the submit button bigger **(pandak padin)**
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -104,21 +104,21 @@
 
 ## BOOKING PAGE
 - [ ] Style the radio & checkbox button
-- [ ] Fix the active state of the nav bar (currently active is ALBUM, which is wrong)
-- [ ] Make the date icon white. The icon is blending in with the BG
+- [x] Fix the active state of the nav bar (currently active is ALBUM, which is wrong)
+- [x] Make the date icon white. The icon is blending in with the BG
 - [ ] Give "Select All" & "Deselect All" their own styling when active
-- [ ] Make "CLEAR ALL" button more easier to find
-- [ ] Give "Book Now" & "Submit Receipt" hover effects
-- [ ] Make booking page for service number 2 (ship with proffesional)
-- [ ] **FINISHED ALL TASKS**
+- [x] Make "CLEAR ALL" button more easier to find
+- [x] Give "Book Now" & "Submit Receipt" hover effects
+- [x] Make booking page for service number 2 (ship with proffesional)
+- [x] **FINISHED ALL TASKS**
 
 ---
 
 ## PROFILE PAGE
-- [ ] Fix the sidebar div: the email is overflowing out of the box
-- [ ] Give "Edit Profile" & "Save Changes" hover effect
-- [ ] Make popup modal for Edit Profile
-- [ ] **FINISHED ALL TASKS**
+- [x] Fix the sidebar div: the email is overflowing out of the box
+- [ ] Give "Edit Profile", "Save Changes", and "Cancel" buttons hover effects
+- [x] Make popup modal for Edit Profile
+- [x] **FINISHED ALL TASKS**
 
 ---
 

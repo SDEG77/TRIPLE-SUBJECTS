@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <link rel="stylesheet" href="/css/output.css"> -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +31,62 @@
     .island{
         font-family: 'Island Moments', cursive;
     }
+    .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            text-align: center;
+            position: relative;
+            top: -100px;
+            opacity: 0;
+            animation: slideDown 0.5s forwards;
+        }
+
+        @keyframes slideDown {
+            0% {
+                top: -100px;
+                opacity: 0;
+            }
+            100% {
+                top: 100px; 
+                opacity: 1;
+            }
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #121212;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            background-color: #f44336;
+        }
 </style>
 <body class="overflow-x-hidden flex flex-col"> 
     <%- include('../components/client-navbar') %>
@@ -58,8 +113,8 @@
 
             <div class="flex flex-col gap-3">
                 <a href="/ark/client/profile" class="flex mt-5 bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/logout" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2"><i class="fa-solid fa-power-off"></i>Logout</a>
+                <a href="/ark/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
+                <a href="/ark/client/logout" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-power-off "></i>Logout</a>
             </div>
         </div>
 
@@ -94,20 +149,78 @@
                     <h1>Email</h1>
                     <p>johnmichaeljonatas@gmail.com</p>
                 </div>
-
-                <div class="flex justify-between items-center mt-[100px]">
-                    <button class="border-b-[2px] border-[#121212] text-[#121212] font-semibold flex items-center gap-2 h-fit"><i class="fa-solid fa-pencil"></i>Edit Profile</button>
-                    <button type="submit" class="mb-4 px-4 py-2 text-center text-[#F6DE03] rounded-[10px] bg-[#121212]" >Save Changes</button>
+                <div class="p-4 flex justify-between items-center border-[1px] border-t-[#F6DE03] border-b-[#121212] border-r-[#F6DE03] border-l-[#F6DE03]">
+                    <h1>Password</h1>
+                    <div class="flex items-center">
+                        <p id="password" class="mr-2">**********</p>
+                        <button id="togglePassword" class="focus:outline-none">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
+
+                <div class="flex justify-between items-center mt-[50px]">
+                    <button class="edit-btn border-b-[2px] border-[#121212] text-[#121212] font-semibold flex items-center gap-2 h-fit mb-5" id="editProfileBtn"><i class="fa-solid fa-pencil"></i>Edit Profile</button>
+                </div>
+
+                <!-- Edit Profile Modal -->
+                <div id="editProfileModal" class="modal">
+                    <div class="modal-content">
+                        <h2>Edit Profile</h2>
+                        <form action="#" method="POST">
+                            <input type="text" name="" placeholder="Enter your name" required>
+                            <input type="email" name="" placeholder="Enter your email" required>
+                            <input type="password" name="" placeholder="Enter your password" required>
+                            <button type="submit">Save Changes</button>
+                            <button type="button" class="close-btn" id="closeModalBtn">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of Edit Profile Modal -->
+
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <%- include('../components/client-footer') %>
-
     <!-- End of Footer -->
 
 </body> 
+
+<script>
+    var modal = document.getElementById("editProfileModal");
+    var editBtn = document.getElementById("editProfileBtn");
+    var closeModalBtn = document.getElementById("closeModalBtn");
+
+    editBtn.onclick = function() {
+        modal.style.display = "flex";
+    }
+
+    closeModalBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordText = document.getElementById('password');
+
+    let isPasswordHidden = true;
+
+    togglePassword.addEventListener('click', function() {
+        if (isPasswordHidden) {
+            passwordText.textContent = 'sibudaksinapokako'; 
+            isPasswordHidden = false;
+        } else {
+            passwordText.textContent = '**********';
+            isPasswordHidden = true;
+        }
+    });
+</script>
 
 </html>
