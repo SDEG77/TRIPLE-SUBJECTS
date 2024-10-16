@@ -29,13 +29,15 @@ body{
         <div><img class="w-[400px]" src="/assets/img/image 3.png" alt=""></div>
 
         <form action="/ark/login" method="post"  class="p-10 w-[350px] flex flex-col justify-center">
-            <h1 class="text-[#000000] uppercase font-bold text-[20px] text-center p-2 bg-[#F6DE03] rounded-[10px]">Ark Visions</h1>
+            <h1 id="easter"
+            onclick="easter(); console.log(counter)"
+             class="hover:cursor-pointer text-[#000000] uppercase font-bold text-[20px] text-center p-2 bg-[#F6DE03] rounded-[10px]">Ark Visions</h1>
             <h1 class="mt-2 font-bold text-[25px]">Welcome Back</h1>
             <p class="mt-3 text-[12px] font-semibold mb-[2px]">Please login to your account</p>
             <hr class="border-2 border-[#F6DE03]">
             <div class="flex flex-col gap-1 mt-[8px]">
                 <label for="email" class="text-[13px] font-bold">Email</label>
-                <input required type="email" name="email" value="<% try{ %>  <%= email %>  <% }catch{} %>"  class="border-[1px] border-[black] rounded-[10px] p-[2px]">
+                <input required type="email" name="email" value="<% try{ %>  <%= email %>  <% }catch{} %>"  class="border-[1px] border-[black] rounded-[10px] p-[5px]">
             </div>
             <div class="flex flex-col gap-1 mt-1">
                 <label for="password" class="text-[13px] font-bold">
@@ -47,7 +49,7 @@ body{
                         </span>
                     <% }catch{} %>
                 </label>
-                <input required type="password" name="password" class="border-[1px] border-[black] rounded-[10px] p-[2px]">
+                <input required type="password" name="password" class="border-[1px] border-[black] rounded-[10px] p-[5px]">
             </div>
 
             <div class="flex justify-between items-center mt-3"> 
@@ -56,13 +58,24 @@ body{
                     <p class="ml-1 text-[12px]">Remember me</p>
                 </div>
 
-                <a href="/ark/forgot"  class="text-[12px] font-bold underline text-[#F6DE03] cursor-pointer">Forgot Password</a>
+                <a href="/ark/forgot"  class="text-[12px] font-bold underline text-[#121212] cursor-pointer">Forgot Password</a>
             </div>
-            <button type="submit" class="bg-[#F6DE03] mt-3 w-fit self-center rounded-[20px] py-[5px] px-[43%] self-center font-bold text-[14px]">Login</button>
-            <p class="mt-3 text-[11px] font-semibold flex gap-2">Not Registered Yet?<a href="/ark/signup" class="underline text-[#F6DE03]">Create an Account</a></p>
+            <button type="submit" class="bg-[#F6DE03] mt-3 w-fit rounded-[20px] py-[5px] px-[43%] self-center font-bold text-[14px] hover:cursor-pointer hover:bg-transparent hover:text-[#121212] hover:border-[1px] hover:border-[#121212] transition-all duration-200 ease-out hover:ease-in">Login</button>
+            <p class="mt-3 text-[11px] font-semibold flex gap-2">Not Registered Yet?<a href="/ark/signup" class="underline text-[#121212] font-bold">Create an Account</a></p>
 
         </form>
     </div>
     
 </body>
 </html>
+
+<script>
+    let counter = 0;
+
+    function easter() {
+        counter++;
+        if(counter === 5) {
+        window.location.href = 'http://localhost:6969/ark/admin/login';
+        }
+    }
+</script>

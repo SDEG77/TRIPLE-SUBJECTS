@@ -25,8 +25,8 @@
 ---
 
 ## Misc.
-- [ ] **MISC FINSIHED**
 - [ ] Give all hover effects a transition
+- [ ] **MISC FINSIHED**
 
 ---
 
@@ -71,12 +71,12 @@
 - [ ] **PAGE FINISHED**
 
 > ***REGISTER MODAL***
-- [ ] Improve the UX of this page
-- [ ] Make the "login" anchor much easier to see
-- [ ] Give focus effect for all inputs
-- [ ] Decrease font size of inputted text
-- [ ] Give the submit button a hover effect
-- [ ] Make the submit button bigger
+- [x] Improve the UX of this page
+- [x] Make the "login" anchor much easier to see
+- [ ] Give focus effect for all inputs **(yellow foucs)**
+- [x] Decrease font size of inputted text
+- [x] Give the submit button a hover effect
+- [x] Make the submit button bigger
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -84,11 +84,11 @@
 - [ ] **PAGE FINISHED**
 
 > ***LOGIN MODAL***
-- [ ] Improve the UX of this page
-- [ ] Make all of the links easier to read
-- [ ] Give focus effect for all inputs
-- [ ] Give the submit button a hover effect
-- [ ] Make the submit button bigger
+- [x] Improve the UX of this page
+- [x] Make all of the links easier to read
+- [ ] Give focus effect for all inputs **(yellow focus)**
+- [x] Give the submit button a hover effect
+- [ ] Make the submit button bigger **(pandak padin)**
 - [ ] **FINISHED ALL TASKS**
 
 ---
@@ -104,31 +104,32 @@
 
 ## BOOKING PAGE
 - [ ] Style the radio & checkbox button
-- [ ] Fix the active state of the nav bar (currently active is ALBUM, which is wrong)
-- [ ] Make the date icon white. The icon is blending in with the BG
+- [x] Fix the active state of the nav bar (currently active is ALBUM, which is wrong)
+- [x] Make the date icon white. The icon is blending in with the BG
 - [ ] Give "Select All" & "Deselect All" their own styling when active
-- [ ] Make "CLEAR ALL" button more easier to find
-- [ ] Give "Book Now" & "Submit Receipt" hover effects
-- [ ] Make booking page for service number 2 (ship with proffesional)
+- [x] Make "CLEAR ALL" button more easier to find
+- [x] Give "Book Now" & "Submit Receipt" hover effects
+- [x] Make booking page for service number 2 (ship with proffesional)
 - [ ] **FINISHED ALL TASKS**
 
 ---
 
 ## PROFILE PAGE
-- [ ] Fix the sidebar div: the email is overflowing out of the box
-- [ ] Give "Edit Profile" & "Save Changes" hover effect
-- [ ] Make popup modal for Edit Profile
+- [x] Fix the sidebar div: the email is overflowing out of the box
+- [ ] Give "Edit Profile", "Save Changes", and "Cancel" buttons hover effects
+- [x] Make popup modal for Edit Profile
 - [ ] **FINISHED ALL TASKS**
 
 ---
 
 ## GALLERY PAGE
-- [ ] **FINISHED ALL TASKS**
+- [X] **FINISHED ALL TASKS**
 
 ---
 
 ## ADMIN PAGE
 - [ ] Provide the missing images for the img tags
+- [ ] Give Client Page an edit modal
 - [ ] Give the delete and cancel buttons their own confirmation modal "Are you sure you want to blah blah blah"
 - [ ] Make hamburger icon bigger
 - [ ] Fix the margin for the "Logout" button in Photo Management Page
@@ -136,8 +137,7 @@
 - [ ] **ADMIN PAGE PAGES**
 
 > ***MISSING PAGES***
-- [ ] ADD PAGE FOR SERVICES
-- [ ] ADD PAGE FOR PACKAGES
+- [ ] **RESOURCE MANAGEMENT PAGE** ```(REFER TO BACKEND TODO LIST IN RESOURCE MANAGEMENT PAGE SECTION FOR MORE CONTEXT)```
 
 - [ ] **FINISHED MISSING PAGES**
 
@@ -147,14 +147,6 @@
 
 # BACKENDS (TODOS)
 - [ ] ***BACKEND FINISHED***
-
----
-
-## Misc.
-- [ ] Make the guest middleware
-- [X] Make the client middleware
-- [ ] Make the admin middleware
-- [ ] **MISC FINISHED**
 
 ---
 
@@ -201,21 +193,23 @@
 - [ ] Dashboard Overview
 - [ ] Implement a dashboard to view booking statistics, such as total bookings and most  popular packages.
 - [ ] Fetch and display confirmed bookings with detailed booking information, including client details, selected services, add-ons, and payment status.
+- [ ] ***Finished the Dashboard Page***
 
 ---
 
 ## **User Management Page**
-- [ ] Implement CRUD operations for client accounts.
-- [ ] Add, edit, delete, and retrieve user profiles.
+- [X] Implement READ & DELETE operations for client accounts.
+- [X] View and delete
+- [X] ***Finished the User Management Page***
  
 ---
 
 ## **Booking Management Page**
 - [ ] Implement CRUD operations for bookings.
-- [ ] Create, view, update, and delete bookings from the admin panel.
 - [ ] Set up a notification system for new bookings and updates to existing bookings.
 - [ ] Develop logic for handling booking statuses (e.g., pending, confirmed, completed, canceled).
 - [ ] Allow admins to approve or cancel bookings as necessary.
+- [ ] ***Finished the Booking Management Page***
 
 ---
 
@@ -223,6 +217,7 @@
 - [ ] Enable file upload for gallery photos linked to user bookings.
 - [ ] Organize uploaded photos according to specific bookings for easy retrieval.
 - [ ] Provide functionality to delete photos from users’ galleries.
+- [ ] ***Finished the Photo Management Page***
 
 ---
 
@@ -230,28 +225,36 @@
 > ***Service Management Section***
 - [ ] Implement CRUD functions for managing services.
 - [ ] Add, edit, delete, and retrieve information about available services.
+- [ ] ***Finished the Service Management Section***
 
 > ***Package Management Section***
 - [ ] Implement CRUD functions for packages.
 - [ ] Allow the admin to create, update, delete, and view packages offered in the booking system.
+- [ ] ***Finished the Package Management Section***
 
 > ***Add-Ons Management Section***
 - [ ] Implement CRUD operations for add-ons (e.g., extra time, additional packages).
 - [ ] Associate add-ons with specific bookings and adjust booking totals accordingly.
+- [ ] ***Finished the Add-ons Management Section***
 
 > ***Payment Verification Section***
 - [ ] Enable functionality to verify GCash payment receipts uploaded by users.
 - [ ] Create an admin interface to mark payments as verified or rejected.
 - [ ] Automatically confirm bookings upon successful payment verification.
-
+- [ ] ***Finished the Payment Verification Section***
 
 ---
 
 ## **Misc**
+- [ ] Make the guest middleware
+- [X] Make the client middleware
+- [x] Make the admin middleware
 - [ ] Implement a dashboard section for viewing booking statistics, such as total bookings and most popular packages.
 - [ ] Set up report generation for analyzing booking trends and revenue tracking.
 - [ ] Provide options for exporting booking and payment data for financial record-keeping.!
 - [ ] Ensure logging of all key activities (e.g., booking approvals, payment verifications, user management actions).
+- [ ] ***Finished the Miscellaneous***
+
 
 ---
 ---

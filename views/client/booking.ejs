@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -136,6 +137,9 @@ input[type="date"] {
     transform: translateY(0);
     opacity: 1;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
 
 
 </style>
@@ -148,19 +152,21 @@ input[type="date"] {
     <h1 class="text-[#F6DE03] text-center text-[40px] mt-[120px]">Services</h1>
     <p class="island text-center text-[#F6DE03] text-[40px]">Self Directed Portrait Digital</p>
 
-    <form action="#" class="flex flex-col justify-center gap-5 mt-10 px-[15%] relative">
+    <form action="/ark/client/booking" method="post"  class="flex flex-col justify-center gap-5 mt-10 px-[15%] relative">
+        <input type="hidden" value="<%= id %>" name="id">
+
         <!-- Packages -->
         <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> 
             <!-- Solo -->         
             <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
                 <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">SOLO</h1>
                 <div class="flex gap-2">
-                    <input type="radio" name="">
+                    <input type="radio" name="service">
                     <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
                 </div>
                 <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
                 <div class="flex gap-2">
-                    <input type="radio" name="">
+                    <input type="radio" name="service">
                     <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
                 </div>
                 <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
@@ -171,13 +177,13 @@ input[type="date"] {
             <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
                 <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">DUO</h1>
                 <div class="flex gap-2">
-                    <input type="radio" name="">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
+                    <input type="radio" value="₱456-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱456-15MINS</h1>
                 </div>
                 <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
                 <div class="flex gap-2">
-                    <input type="radio" name="">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
+                    <input type="radio" value="₱654-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱654-15MINS</h1>
                 </div>
                 <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
             </div>
@@ -187,19 +193,72 @@ input[type="date"] {
             <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
                 <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">GROUP</h1>
                 <div class="flex gap-2">
-                    <input type="radio" name="">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
+                    <input type="radio" value="₱789-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱789-15MINS</h1>
                 </div>
                 <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
                 <div class="flex gap-2">
-                    <input type="radio" name="">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
+                    <input type="radio" value="₱987-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱987-15MINS</h1>
                 </div>
                 <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
             </div>
             <!-- End of Group -->
         </div>
-        <!-- End of Packages -->
+
+        <p class="island text-center text-[#F6DE03] mt-[60px] text-[40px]">Professional Directed Portrait Digital</p>
+
+        <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> 
+            <!-- Solo -->         
+            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
+                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">SOLO</h1>
+                <div class="flex gap-2">
+                    <input type="radio" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
+                </div>
+                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
+                <div class="flex gap-2">
+                    <input type="radio" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
+                </div>
+                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
+            </div>
+            <!-- End of Solo -->         
+
+            <!-- Duo -->
+            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
+                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">DUO</h1>
+                <div class="flex gap-2">
+                    <input type="radio" value="₱456-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱456-15MINS</h1>
+                </div>
+                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
+                <div class="flex gap-2">
+                    <input type="radio" value="₱654-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱654-15MINS</h1>
+                </div>
+                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
+            </div>
+            <!-- End of Duo -->
+
+            <!-- Group -->
+            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
+                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">GROUP</h1>
+                <div class="flex gap-2">
+                    <input type="radio" value="₱789-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱789-15MINS</h1>
+                </div>
+                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
+                <div class="flex gap-2">
+                    <input type="radio" value="₱987-15MINS" name="service">
+                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱987-15MINS</h1>
+                </div>
+                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
+            </div>
+            <!-- End of Group -->
+        </div>
+
+        
 
         <!-- Add On & Time -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 justify-around">
@@ -219,22 +278,21 @@ input[type="date"] {
             <div class="flex flex-col">
                 <div class="flex flex-col">
                     <label for="date" class="mb-3 text-[#F6DE03] text-[20px]">Date</label>
-                    <input type="date">
+                    <input name="date" type="date">
                 </div>
                 
-                <select name="" id="" class="mt-5 bg-transparent rounded-[10px] px-4 py-[5px] text-white w-[250px]" style="box-shadow: 0 0 5px #f6de038d;">
-                    <option value="" class="bg-[#121212] text-white">Select Time</option>
-                    <option value="" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
-                    <option value="" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
-                    <option value="" class="bg-[#121212] text-white">10:00 AM - 11:00 AM</option>
-                    <option value="" class="bg-[#121212] text-white">11:00 AM - 12:00 AM</option>
-                    <option value="" class="bg-[#121212] text-white">1:00 PM - 2:00 PM</option>
-                    <option value="" class="bg-[#121212] text-white">2:00 PM - 3:00 PM</option>
-                    <option value="" class="bg-[#121212] text-white">3:00 PM - 4:00 PM</option>
+                <select name="time" id="" class="mt-5 bg-transparent rounded-[10px] px-4 py-[5px] text-white w-[250px]" style="box-shadow: 0 0 5px #f6de038d;">
+                    <option selected disabled value="unset" class="bg-[#121212] text-white">Select Time</option>
+                    <option value="8:00 AM to 9:00 AM" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
+                    <option value="9:00 AM to 10:00 AM" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
+                    <option value="10:00 AM to 11:00 AM" class="bg-[#121212] text-white">10:00 AM - 11:00 AM</option>
+                    <option value="11:00 AM to 12:00 AM" class="bg-[#121212] text-white">11:00 AM - 12:00 AM</option>
+                    <option value="1:00 PM to 2:00 PM" class="bg-[#121212] text-white">1:00 PM - 2:00 PM</option>
+                    <option value="2:00 PM to 3:00 PM" class="bg-[#121212] text-white">2:00 PM - 3:00 PM</option>
+                    <option value="3:00 PM to 4:00 PM" class="bg-[#121212] text-white">3:00 PM - 4:00 PM</option>
                 </select>
             </div>
             <!-- End of Time -->
-
             
             <!-- Additional -->
             <div class="flex flex-col w-[330px]">
@@ -283,13 +341,13 @@ input[type="date"] {
         <hr class="border-[1px] border-[#F6DE03] mt-5">
 
         <div class="flex justify-between flex-col md:flex-row">
-            <button type="reset" class="underline h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL</button>
+            <button type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
 
             <div class="flex flex-col md:flex-row gap-5">
-                <p class="font-semibold text-[#F6DE03]">Total Price:<span>Php 2,450.00</span></p>
+                <p class="font-semibold text-[#F6DE03]">Total Price:<span>Php 0,000.00</span></p>
                 <div class="flex flex-col gap-2">
-                    <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px]" onclick="confirmAndOpenModal()">Book Now</button>
-                    <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px]" id="submitReceiptBtn">Submit Receipt</button>
+                    <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px] hover:bg-transparent hover:text-[#F6DE03] hover:border-[1px] hover:border-[#F6DE03] transition duration-200 ease-out hover:ease-in" >Book Now</button>
+                    <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button>
                 </div>
             </div>
         </div>
@@ -305,96 +363,31 @@ input[type="date"] {
             </div>
         </div>
         <!-- End of Gcash Modal -->
-
-        <!-- Receipt Modal -->
-        <div id="receiptModal" class="modal">
-            <div class="modal-content bg-[#f6de03] w-[350px] relative">
-                <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span>
-                <h1 class="text-black font-semibold mb-2">Submit Receipt</h1>
-                <form>
-                    <label for="receipt" class="text-[#F6DE03]">Upload Receipt:</label>
-                    <input type="file" id="receipt" class="block mb-2 border border-black rounded-md w-full" required>
-                    <button type="submit" class="bg-black text-[#F6DE03] px-4 py-2 rounded-md">Submit</button>
-                </form>
-            </div>
-        </div>
-        <!-- End of Receipt Modal -->
     </form>
 
+    <!-- Receipt Modal -->
+    <div id="receiptModal" class="modal">
+        <div class="modal-content bg-[#f6de03] w-[350px] relative">
+            <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span>
+            <h1 class="text-black font-semibold mb-2">Submit Receipt</h1>
+            <form>
+                <label for="receipt" class="text-[#F6DE03]">Upload Receipt:</label>
+                <input type="file" id="receipt" class="block mb-2 border border-black rounded-md w-full" required>
+                <button type="submit" class="bg-black text-[#F6DE03] px-4 py-2 rounded-md">Submit</button>
+            </form>
+        </div>
+    </div>
+    <!-- End of Receipt Modal -->
 
 
     <%- include('../components/client-footer') %>
 
-
+    <% try { %>
+    <div id="<%= message %>"  class="hidden"></div>
+    <% } catch{} %>
 </body>
-
-<script>
-    const modal = document.getElementById("myModal");
-    const btn = document.getElementById("bookNowBtn");
-    const closeBtn = document.querySelector(".close");
-
-    btn.onclick = function() {
-        if (confirm('Are you sure you want to book now?')) {
-            modal.style.display = "flex";
-            setTimeout(function() {
-                modal.classList.add("show");
-                document.body.style.overflow = "hidden";
-            }, 10);
-        }
-    }
-
-    closeBtn.onclick = function() {
-        modal.classList.remove("show");
-        setTimeout(function() {
-            modal.style.display = "none";
-            document.body.style.overflow = "auto"; 
-        }, 400);
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.classList.remove("show");
-            setTimeout(function() {
-                modal.style.display = "none";
-                document.body.style.overflow = "auto"; 
-            }, 400);
-        }
-    }
-
-    const submitReceiptBtn = document.getElementById("submitReceiptBtn");
-    const receiptModal = document.getElementById("receiptModal");
-    const closeModal = receiptModal.querySelector(".close");
-
-    submitReceiptBtn.onclick = function() {
-        receiptModal.style.display = "flex";
-        receiptModal.classList.add("show");
-    }
-
-    closeModal.onclick = function() {
-        receiptModal.style.display = "none";
-        receiptModal.classList.remove("show");
-    }
-
-    window.onclick = function(event) {
-        if (event.target === receiptModal) {
-            receiptModal.style.display = "none";
-            receiptModal.classList.remove("show");
-        }
-    }
-
-    const selectAllBtn = document.getElementById("selectAllBtn");
-    const checkboxes = document.querySelectorAll(".option-checkbox");
-
-    selectAllBtn.onclick = function() {
-        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-        
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = !allChecked;
-        });
-
-        selectAllBtn.textContent = allChecked ? "Select All" : "Deselect All";
-    }
-</script>
-
-
 </html>
+
+<script src="/js/booking.js" >
+    
+</script>
