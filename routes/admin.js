@@ -37,18 +37,13 @@ route.post('/login', async (req, res) => {
 route.get('/', async (req, res) => {
   if(req.session.isAdminLogged) {
     const totalClients = await AdminController.totalClients();
+    const totalBookings = await AdminController.totalBookings();
 
     res.render('./admin/admin', {
-      totalClients: totalClients
+      totalClients: totalClients,
+      totalBookings: totalBookings,
     });
 
-  } else {
-    res.redirect('./login');
-  }
-})
-route.get('/bookings', (req, res) => {
-  if(req.session.isAdminLogged) {
-    res.render('./admin/adminbookings');
   } else {
     res.redirect('./login');
   }
@@ -76,6 +71,19 @@ route.post('/clients', async (req, res) => {
   }
 })
 
+route.get('/bookings', async (req, res) => {
+  const result = await AdminController.viewBookings();
+
+  
+
+  if(req.session.isAdminLogged) {
+    res.render('./admin/adminbookings', {
+      snatch: result,
+    });
+  } else {
+    res.redirect('./login');
+  }
+})
 
 route.get('/photo-management', (req, res) => {
   if(req.session.isAdminLogged) {

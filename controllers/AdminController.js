@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Booking = require('../models/Booking');
 
 class AdminController {
   async totalClients() {
@@ -12,7 +13,6 @@ class AdminController {
     // None found
     return 0;
   }
-
   async viewClients() {
     const users = await User.find();
 
@@ -33,6 +33,32 @@ class AdminController {
 
     // console.log(`got pass barrier: ${target._id}`)
     await User.deleteOne({_id: target._id});
+  }
+
+  async totalBookings() {
+    let total = await Booking.find();
+
+    if(total) {
+      // Some clients found
+      return total.length;
+    }
+
+    // None found
+    return 0;
+  }
+
+  async viewBookings() {
+    const bookings = await Booking.find();
+    const users = await User.find();
+
+    if(bookings.length > 0) {
+      return {
+        bookings: bookings,
+        users: users,
+      };
+    }
+
+    return false;
   }
 }
 

@@ -46,7 +46,7 @@ route.post('/login', async (req, res) => {
   if(logger) {
     const credentials = await User.find({ email: req.body.email });
 
-    req.session.id = credentials[0]._id;
+    req.session.userID = credentials[0]._id.toString();
     req.session.name = `${credentials[0].fname.toUpperCase()} ${credentials[0].lname.toUpperCase()}`;
     req.session.email = credentials[0].email;
     req.session.logged = true;
