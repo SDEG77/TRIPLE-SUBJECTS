@@ -14,7 +14,7 @@ route.get('/', (req, res) => {
 route.get('/booking', (req, res) => {
   if(req.session.logged) {
     res.render('client/booking', {
-      id: req.session.id,
+      id: req.session.userID,
       name: req.session.name
     });
   } else {
@@ -25,6 +25,8 @@ route.get('/booking', (req, res) => {
 route.post('/booking', async (req, res) => {
   let success;
   
+
+
   if(req.session.logged) {
     success = await BookingController.store({
       client_id: req.body.id,
@@ -40,17 +42,17 @@ route.post('/booking', async (req, res) => {
 
   if(success) {
     res.render('client/booking', {
-      id: req.session.id,
+      id: req.session.userID,
       name: req.session.name,
       message: "Booking Successful",
-      id: req.session.id,
+      id: req.session.userID,
     });
   } else {
     res.render('client/booking', {
-      id: req.session.id,
+      id: req.session.userID,
       name: req.session.name,
       message: "Booking Unsuccessful",
-      id: req.session.id,
+      id: req.session.userID,
     });
   }
 });
