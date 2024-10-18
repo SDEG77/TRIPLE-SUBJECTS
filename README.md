@@ -1,18 +1,16 @@
 # Our Project for Jesboy & the Other Two
 
 > This is a project that uses Express and Mongo DB.
-> Please like and subscribe mothertrucker.
+> Please like and subscribe mga yahoos.
 
 |                  MEMBERS                    |
 |:-------------------------------------------:|
-|      **```[ Backend Developers ]```**       |
 |          **Sigrae Derf Gabriel**            | 
 |             **Romark Bayan**                |
-|  **```[ Frontend Developers & UI/UX ]```**  |
 |           **John Anthony Pesco**            |
 |           **Ace Cornico Padilla**           |
-|       **```[ Fulltank Developer ]```**      |
 |          **John Michael Jonatas**           |
+|          **John Kim Alcantara**             |
 
 ---
 ---
@@ -33,6 +31,7 @@
 ## Landing Page
 - [ ] **PAGE FINISHED**
 > ***HEADER***
+- [ ] Replace the lorem ipsum from the yellow notif bar
 - [ ] Fix the close function for the yellow notification at the top of the page. **(The notif closes when you click any part of the div, which is wrong)**
 - [ ] Give the "Login", "Get Started", and "Client" buttons hover effects
 - [ ] Give the "Ark Vision" an href to the #home section
@@ -128,18 +127,37 @@
 ---
 
 ## ADMIN PAGE
+> ***MISC***
 - [ ] Provide the missing images for the img tags
-- [ ] Give Client Page an edit modal
-- [ ] Give the delete and cancel buttons their own confirmation modal "Are you sure you want to blah blah blah"
 - [ ] Make hamburger icon bigger
+- [ ] **FINISHED MISC**
+
+> ***LOGIN PAGE***
+- [ ] Make yellow text readable
+- [ ] Improve the general UX of this page
+- [ ] Give a link back to the client page 
+- [ ] **FINISHED logging PAGE**
+
+> ***DASHBOARD PAGE***
+- [ ] Pie chart each for most popular services & packages
+- [ ] Make a div for the currently approved bookings
+- [ ] **FINISHED DASHBOARD PAGE**
+
+> ***CLIENT PAGE***
+- [ ] Give the delete button a confirmation modal "Are you sure you want to blah blah blah"
+- [ ] **FINISHED CLIENT PAGE**
+
+> ***BOOKINGS PAGE***
+- [ ] Give remove button a confirmation modal
+- [ ] **FINISHED BOOKINGS PAGE**
+
+> ***PHOTO MANAGEMENT PAGE***
 - [ ] Fix the margin for the "Logout" button in Photo Management Page
+- [ ] **FINISHED PHOTO MANAGEMENT PAGE**
 
-- [ ] **ADMIN PAGE PAGES**
-
-> ***MISSING PAGES***
-- [ ] **RESOURCE MANAGEMENT PAGE** ```(REFER TO BACKEND TODO LIST IN RESOURCE MANAGEMENT PAGE SECTION FOR MORE CONTEXT)```
-
-- [ ] **FINISHED MISSING PAGES**
+> ***RESOURCE MANAGEMENT PAGE***
+- [ ] *Currently being worked on by romark*
+- [ ] **FINISHED RESOURCE MANAGEMENT PAGE**
 
 ---
 ---
@@ -190,33 +208,34 @@
 
 ---
 ## **Admin Dashboard Page**
-- [ ] Dashboard Overview
-- [ ] Implement a dashboard to view booking statistics, such as total bookings and most  popular packages.
-- [ ] Fetch and display confirmed bookings with detailed booking information, including client details, selected services, add-ons, and payment status.
+- [X] Display total bookings
+- [X] Display total clients
+- [ ] Provide data for the pie charts
+- [ ] Make the recent activity functional
+- [ ] Display currently approved bookings
 - [ ] ***Finished the Dashboard Page***
 
 ---
 
 ## **User Management Page**
 - [X] Implement READ & DELETE operations for client accounts.
-- [X] View and delete
 - [X] ***Finished the User Management Page***
  
 ---
 
 ## **Booking Management Page**
-- [ ] Implement CRUD operations for bookings.
-- [ ] Set up a notification system for new bookings and updates to existing bookings.
+- [x] Implement read, update, and delete funcs for bookings.
 - [ ] Develop logic for handling booking statuses (e.g., pending, confirmed, completed, canceled).
-- [ ] Allow admins to approve or cancel bookings as necessary.
 - [ ] ***Finished the Booking Management Page***
 
 ---
 
 ## **Photo Management Page**
 - [ ] Enable file upload for gallery photos linked to user bookings.
+- [ ] Upload photo function
+- [ ] Update photo function
+- [ ] Remove photos function
 - [ ] Organize uploaded photos according to specific bookings for easy retrieval.
-- [ ] Provide functionality to delete photos from users’ galleries.
 - [ ] ***Finished the Photo Management Page***
 
 ---
@@ -253,6 +272,7 @@
 - [ ] Set up report generation for analyzing booking trends and revenue tracking.
 - [ ] Provide options for exporting booking and payment data for financial record-keeping.!
 - [ ] Ensure logging of all key activities (e.g., booking approvals, payment verifications, user management actions).
+- [ ] Set up a notification system for new bookings and updates to existing bookings.
 - [ ] ***Finished the Miscellaneous***
 
 

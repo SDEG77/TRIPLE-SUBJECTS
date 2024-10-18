@@ -1,7 +1,7 @@
 // seedAdmin.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Admin = require('./models/Admin');
+const Admin = require('../models/Admin');
 const env = require('dotenv');
 
 env.config();
