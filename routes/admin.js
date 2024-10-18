@@ -93,5 +93,12 @@ route.get('/logout', (req, res) => {
   }
 })
 
+route.get('/adminservicespackages', (req, res) => {
+  res.render('admin/adminservicespackages');
+})
+
+route.get('/addons', (req, res) => {
+  res.render('admin/addons');
+})
 
 module.exports = route;
