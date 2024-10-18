@@ -3,6 +3,9 @@ const AdminAuth = require('../controllers/AdminAuth');
 const Admin = require('../models/Admin');
 
 const AdminController = require('../controllers/AdminController');
+const ServicesController = require('../controllers/ServicesController');
+const PackageController = require('../controllers/PackageController');
+const AddOnController = require('../controllers/AddOnController');
 
 route.get('/login', (req, res) => {
   res.render('admin/adminlogin', { message: '' });
@@ -101,12 +104,24 @@ route.get('/logout', (req, res) => {
   }
 })
 
-route.get('/adminservicespackages', (req, res) => {
-  res.render('admin/adminservicespackages');
-})
+// routes/admin.js
+route.get('/resource', async (req, res) => {
+  if (req.session.isAdminLogged) {
+    try {
+      const services = await ServicesController.getServices(req, res);
+      const packages = await PackageController.getPackages(req, res);
+      const addOns = await AddOnController.getAddOns(req, res);
 
-route.get('/addons', (req, res) => {
-  res.render('admin/addons');
-})
+      res.render('admin/resource', { services, packages, addOns });
+    } catch (error) {
+      console.error('Error rendering resource page:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  } else {
+    res.redirect('/login');
+  }
+});
+
+
 
 module.exports = route;
