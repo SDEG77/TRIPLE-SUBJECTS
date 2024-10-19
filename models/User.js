@@ -5,6 +5,8 @@ const userSchema = mongoose.Schema({
   lname: String,
   email: String,
   password: String,
+  
+  
 });
 
 /** @type {import('mongoose').Model} */

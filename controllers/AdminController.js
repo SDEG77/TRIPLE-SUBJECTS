@@ -1,11 +1,12 @@
-const User = require('../models/User');
-const Booking = require('../models/Booking');
+const User = require("../models/User");
+const Booking = require("../models/Booking");
+const Image = require("../models/Image");
 
 class AdminController {
   async totalClients() {
     let total = await User.find();
 
-    if(total) {
+    if (total) {
       // Some clients found
       return total.length;
     }
@@ -16,7 +17,7 @@ class AdminController {
   async viewClients() {
     const users = await User.find();
 
-    if(users.length <= 0) {
+    if (users.length <= 0) {
       return false;
     }
 
@@ -26,19 +27,19 @@ class AdminController {
   async deleteClient(id) {
     const target = await User.findById(id);
 
-    if(!target) {
+    if (!target) {
       // console.log('blovcked')
-      return false
+      return false;
     }
 
     // console.log(`got pass barrier: ${target._id}`)
-    await User.deleteOne({_id: target._id});
+    await User.deleteOne({ _id: target._id });
   }
 
   async totalBookings() {
     let total = await Booking.find();
 
-    if(total) {
+    if (total) {
       // Some clients found
       return total.length;
     }
@@ -51,7 +52,7 @@ class AdminController {
     const bookings = await Booking.find();
     const users = await User.find();
 
-    if(bookings.length > 0) {
+    if (bookings.length > 0) {
       return {
         bookings: bookings,
         users: users,
@@ -60,6 +61,18 @@ class AdminController {
 
     return false;
   }
+
+  async viewPhotos() {
+    const photos = await Image.find(); // Fetch all images
+    return photos; // Return the images (could be empty if none found)
+  }
+
+  async viewClientImages(clientId) {
+    const images = await Image.find({ clientId: clientId }); // Filter by clientId
+    return images; // Return the images array (will be empty if none found)
+  }
+  
+  
 }
 
 const admin = new AdminController();
