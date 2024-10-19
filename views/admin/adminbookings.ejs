@@ -118,6 +118,7 @@
             <h2 class="text-2xl font-semibold text-yellow-500">Bookings</h2>
         </div>
         <div class="mt-6 m-5">
+            <% if(snatch.bookings){ %>
             <table class="min-w-full bg-gray-800 border border-gray-800">
                 <thead>
                     <tr class="bg-gray-800">
@@ -153,19 +154,40 @@
                         <td class="py-2 px-4 border-b border-gray-600"> <%= user.fname.toUpperCase() %> <%= user.lname.toUpperCase() %> </td>
                         <td class="py-2 px-4 border-b border-gray-600"> <%= booking.service %> </td>
                         <td class="py-2 px-4 border-b border-gray-600"> <%= `${months[index]} ${day} || ${booking.time}` %> </td>
-                        <td class="py-2 px-4 border-b border-gray-600"> <%= booking.status %> </td>
+                        <td class="py-2 px-4 border-b border-gray-600 font-semibold <%= booking.status === 'accepted' ? 'text-lime-400' : 'text-rose-500' %>"> <%= booking.status %> </td>
                         <td class="py-2 px-4 border-b border-gray-600">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded" id="<%= booking.id %>">
-                                <i class="fa-solid fa-eye"></i> View
-                            </button>
+                            <% if(!booking.payment_status === "pending"){ %>
+                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded" id="<%= booking.id %>">
+                                    <i class="fa-solid fa-eye"></i> View
+                                </button>
+                            <% } else {%>
+                                <span class="text-rose-500 font-semibold" >None Provided</span>
+                            <% } %>
                         </td>
                         <td class="py-2 px-4 border-b border-gray-600">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
-                                <i class="fa-solid fa-check"></i> Accept
-                            </button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
-                                <i class="fa-solid fa-times"></i> Cancel
-                            </button>
+                            <form class="inline-block" action="./accept" method="post">
+                                <input type="hidden" name="id" value="<%= booking.id %>" >
+
+                                <button type="submit"  class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
+                                    <i class="fa-solid fa-check"></i> Accept
+                                </button>
+                            </form>
+
+                            <form class="inline-block" action="./cancel" method="post">
+                                <input type="hidden" name="id" value="<%= booking.id %>" >
+
+                                <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
+                                    <i class="fa-solid fa-times"></i> Cancel
+                                </button>
+                            </form>
+
+                            <form class="inline-block" action="./bookings/remove" method="post">
+                                <input type="hidden" value="<%= booking.id %>" name="id">
+                                
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 font-bold text-white py-1 px-2 rounded">
+                                    <i class="fa-solid fa-times"></i> Remove
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     <% } %> <!--endIf -->
@@ -174,6 +196,7 @@
                     <% } catch{} %>
                 </tbody>
             </table>
+            <% } %>
         </div>
         
         <div id="paymentModal" class="modal">

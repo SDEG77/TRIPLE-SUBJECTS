@@ -17,6 +17,18 @@ class BookingController {
       return false;
     }
   }
+
+  async accept(id) {
+    await Booking.updateOne({_id: id}, {status: "accepted"});
+  }
+
+  async cancel(id) {
+    await Booking.updateOne({_id: id}, {status: "cancelled"});
+  }
+
+  async remove(id) {
+    await Booking.deleteOne({_id: id});
+  }
 }
 
 

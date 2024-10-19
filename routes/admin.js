@@ -1,12 +1,15 @@
 const route = require('express').Router();
 const AdminAuth = require('../controllers/AdminAuth');
-const Admin = require('../models/Admin');
 
+const Admin = require('../models/Admin');
 const AdminController = require('../controllers/AdminController');
 const ServicesController = require('../controllers/ServicesController');
 const PackageController = require('../controllers/PackageController');
 const AddOnController = require('../controllers/AddOnController');
 
+const BookingController = require('../controllers/BookingController');
+
+// LOGIN ROUTES
 route.get('/login', (req, res) => {
   res.render('admin/adminlogin', { message: '' });
 })
@@ -37,6 +40,7 @@ route.post('/login', async (req, res) => {
   }
 });
 
+// DASHBOARD ROUTE
 route.get('/', async (req, res) => {
   if(req.session.isAdminLogged) {
     const totalClients = await AdminController.totalClients();
@@ -52,6 +56,7 @@ route.get('/', async (req, res) => {
   }
 })
 
+// CLIENT PAGE ROUTES
 route.get('/clients', async (req, res) => {
   if(req.session.isAdminLogged) {
     const clients = await AdminController.viewClients();
@@ -74,10 +79,9 @@ route.post('/clients', async (req, res) => {
   }
 })
 
+// BOOKING PAGE ROUTES
 route.get('/bookings', async (req, res) => {
   const result = await AdminController.viewBookings();
-
-  
 
   if(req.session.isAdminLogged) {
     res.render('./admin/adminbookings', {
@@ -88,6 +92,36 @@ route.get('/bookings', async (req, res) => {
   }
 })
 
+route.post('/bookings/accept', async (req, res) => {
+  if(req.session.isAdminLogged) {
+    await BookingController.accept(req.body.id);
+    res.redirect('./');
+  } else {
+    res.redirect('./login');
+  }
+})
+
+route.post('/bookings/cancel', async (req, res) => {
+  if(req.session.isAdminLogged) {
+    await BookingController.cancel(req.body.id);
+  
+    res.redirect('./');
+  } else {
+    res.redirect('./login');
+  }
+})
+
+route.post('/bookings/remove', async (req, res) => {
+  if(req.session.isAdminLogged) {
+    await BookingController.remove(req.body.id);
+  
+    res.redirect('./');
+  } else {
+    res.redirect('./login');
+  }
+})
+
+// PHOTO MANAGEMENT PAGE ROUTES
 route.get('/photo-management', (req, res) => {
   if(req.session.isAdminLogged) {
     res.render('./admin/photomanagement');
@@ -104,7 +138,7 @@ route.get('/logout', (req, res) => {
   }
 })
 
-// routes/admin.js
+// RESOURCE ROUTES
 route.get('/resource', async (req, res) => {
   if (req.session.isAdminLogged) {
     try {
