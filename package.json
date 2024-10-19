@@ -5,8 +5,15 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon server.js",
-    "seed": "node seedAdmin.js",
-    "migrate": "node ./devTools/freshMigrate.js"
+    
+    "seed:admin": "node ./devTools/seeders/seedAdmin.js",
+    "seed:addons": "node ./devTools/seeders/addonseeder.js",
+    "seed:packages": "node ./devTools/seeders/packageseeder.js",
+    "seed:services": "node ./devTools/seeders/serviceseeder.js",
+
+    "seed:tables": "npm-run-all seed:addons seed:services seed:packages",
+    
+    "fresh": "node ./devTools/freshMigrate.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +31,7 @@
     "@types/express": "^5.0.0",
     "@types/express-session": "^1.18.0",
     "nodemon": "^3.1.7",
+    "npm-run-all": "^4.1.5",
     "tailwindcss": "^3.4.13"
   }
 }

@@ -138,7 +138,7 @@ route.get('/logout', (req, res) => {
   }
 })
 
-// routes/admin.js
+// RESOURCE ROUTES
 route.get('/resource', async (req, res) => {
   if (req.session.isAdminLogged) {
     try {

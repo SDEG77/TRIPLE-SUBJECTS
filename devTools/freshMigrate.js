@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const env = require('dotenv');
+
 const User = require('../models/User');
 const Booking = require('../models/Booking');
+const Package = require('../models/Package');
+const Service = require('../models/Service');
+const Addon = require('../models/AddOn');
 
 env.config();
 
@@ -15,6 +19,9 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
 async function full() {
   await User.deleteMany({});
   await Booking.deleteMany({});
+  await Package.deleteMany({});
+  await Service.deleteMany({});
+  await Addon.deleteMany({});
 }
 
 async function bookings() {
