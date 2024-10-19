@@ -152,6 +152,14 @@ route.post("/photo-management/delete", async (req, res) => {
   }
 });
 
+route.get("/feedback", (req, res) => {
+  if (req.session.isAdminLogged) {
+    res.render("./admin/feedback");
+  } else {
+    res.redirect("./login");
+  }
+});
+
 
 
 route.get("/logout", (req, res) => {
