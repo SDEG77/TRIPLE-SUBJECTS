@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" href="pics/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { font-family: 'Poppins', sans-serif; color: white; }
+        body { background-color: #121212; margin: 0; display: flex; }
+        #sidebar { background-color: #262626; transition: transform 0.3s ease; position: fixed; left: 0; top: 0; bottom: 0; width: 16rem; }
+        .sidebar-hidden { transform: translateX(-100%); }
+        .content { flex: 1; margin-left: 16rem; padding: 2rem; }
+        .sidebar-hidden-content { margin-left: 0; }
+        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); }
+        .modal-content { background-color: #262626; margin: 15% auto; padding: 20px; width: 80%; border-radius: 5px; }
+        .close { color: white; float: right; font-size: 28px; font-weight: bold; }
+        .close:hover, .close:focus { color: #999; text-decoration: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+        <div>
+            <div class="m-7 flex justify-center">
+                <img class="rounded-full w-28" src="/assets/logo.jpg" alt="Logo">
+            </div>
+            <nav class="mt-10 border-t-4 border-yellow-500">
+                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
+                </a>
+                <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-users mr-4"></i> Clients
+                </a>
+                <a href="/ark/admin/bookings" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                </a>
+                <a href="/ark/admin/photo-management" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                </a>
+                <a href="/ark/admin/adminservicespackages" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-box mr-4"></i> Service Packages
+                </a>
+                <a href="/ark/admin/addons" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-box mr-4"></i> Addons
+                </a>
+            </nav>
+        </div>
+        <div>
+            <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <main class="content">
+        <button id="toggleSidebar" class="p-4 text-yellow-500"><i class="fa-solid fa-bars"></i></button>
+
+        <!-- Add-on Management Section -->
+        <div class="p-5">
+            <h2 class="text-2xl font-semibold text-yellow-500">Add-on Management</h2>
+            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddonModal()">Add New Add-on</button>
+            <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
+                <thead>
+                    <tr class="bg-gray-800">
+                        <th class="py-2 px-4 border-b border-gray-600 text-left">Add-on Name</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left">Description</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left">Price</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="addonTable">
+                    <!-- Placeholder content for add-ons -->
+                    <tr class="odd:bg-gray-700 even:bg-gray-800">
+                        <td class="py-2 px-4 border-b border-gray-600">Take all enhanced photos</td>
+                        <td class="py-2 px-4 border-b border-gray-600">Get all enhanced photos.</td>
+                        <td class="py-2 px-4 border-b border-gray-600">₱249</td>
+                        <td class="py-2 px-4 border-b border-gray-600">
+                            <button class="bg-blue-500 text-white py-1 px-2 rounded" onclick="openAddonModal()">Edit</button>
+                            <button class="bg-red-500 text-white py-1 px-2 rounded" onclick="alert('Delete Add-on')">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add-on Modal -->
+        <div id="addonModal" class="modal">
+            <div class="modal-content bg-gray-800 p-5 rounded-lg shadow-lg">
+                <span class="close text-red-500 cursor-pointer" onclick="closeAddonModal()">&times;</span>
+                <h2 class="text-yellow-500 font-semibold text-2xl mb-4" id="addonModalTitle">Add Add-on</h2>
+                <form id="addonForm" onsubmit="event.preventDefault(); saveAddon();">
+                    <input type="hidden" id="addonId">
+                    <div class="mb-4">
+                        <label class="text-yellow-500">Add-on Name</label>
+                        <input type="text" id="addonName" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-yellow-500">Description</label>
+                        <textarea id="addonDescription" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-yellow-500">Price</label>
+                        <input type="number" id="addonPrice" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                    </div>
+                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar toggle function
+        document.getElementById('toggleSidebar').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('sidebar-hidden');
+            document.querySelector('.content').classList.toggle('sidebar-hidden-content');
+        });
+
+        // Functions to open/close Add-on modal
+        const openAddonModal = () => {
+            document.getElementById('addonForm').reset();
+            document.getElementById('addonModal').style.display = 'block';
+        };
+
+        const closeAddonModal = () => document.getElementById('addonModal').style.display = 'none';
+
+        // Placeholder for saving the Add-on (could be extended with AJAX)
+        function saveAddon() {
+            const name = document.getElementById('addonName').value;
+            const description = document.getElementById('addonDescription').value;
+            const price = document.getElementById('addonPrice').value;
+
+            alert(`Add-on saved!\nName: ${name}\nDescription: ${description}\nPrice: ₱${price}`);
+            closeAddonModal();
+        }
+    </script>
+</body>
+</html>

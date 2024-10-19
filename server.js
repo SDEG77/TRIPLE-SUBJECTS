@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const generalRoutes = require('./routes/general.js');
 const clientRoutes = require('./routes/client');
 const adminRoutes = require('./routes/admin');
-
+const resourceRoutes = require('./routes/resource')
 const session = require('express-session');
 
 ENV.config()
@@ -31,11 +31,15 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
     cookie: { secure: false }
   }));
 
+  const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
+
   app.use('/ark', generalRoutes);
   
   app.use('/ark/client', clientRoutes);
 
-  app.use('/ark/admin', adminRoutes,);
+  app.use('/ark/admin', adminRoutes, resourceRoutes);
 
   app.listen(PORT, () => {
     console.log(`SERVER RUNNING ON PORT: [http://localhost:${PORT}/ark]`);
