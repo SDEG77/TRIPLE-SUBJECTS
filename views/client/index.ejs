@@ -20,305 +20,249 @@
         background-color: #F6DE03;
     }
     body{
-        background-color: #121212;
+        background-color: #000000;
     }
     header button{
-        border: 1px solid black;
+        border: 1px solid rgb(0, 0, 0);
     }
+
     .island{
+
         font-family: 'Island Moments', cursive;
     }
 </style>
 <body class="overflow-x-hidden flex flex-col"> 
-    <!-- Navigation Bar -->
-    <nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212]" style="box-shadow: 0 2px 5px #f6de0336;">
-        <div class="logo">
-            <h1 class="font-extrabold text-[#F6DE03] text-xl">ARK VISION</h1>
-        </div>
+  <!-- Navigation Bar -->
+<nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212]/0">
+    <div class="logo">
+        <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
+    </div>
 
-        <ul class="flex gap-14 uppercase">
-            <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
-            <li><a class="hover:text-[#F6DE03]" href="#services">Services</a></li>
-            <li><a class="hover:text-[#F6DE03]" href="#pricing">Booking</a></li>
-            <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
-        </ul>
+    <ul class="flex gap-14 uppercase">
+        <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="#services">Gallery</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="/ark/client/booking">Booking</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+    </ul>
 
-        <div class="flex gap-5 items-center">
-            <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold" href="/ark/client/profile">
-                
-                <% try{ %>
-                <%= name %>
-                <% }catch{} %>
+    <div class="flex gap-5 items-center">
+        <a class="w-fit px-2 py-2 text-center text-yellow-400 rounded-[20px] bg-[#f5d939]/0 font-bold" href="/ark/client/profile">
+            <% try{ %>
+            <%= name %>
+            <% }catch{} %>
         </a>
+    </div>
+</nav>
+<!-- End of Navigation Bar -->
+
+<!-- Home -->
+<section id="home" class="scroll-mt-[200px] bg-cover bg-center" style="background-image: url('/assets/img/Homebg.jpg'); min-height: 100vh;">
+    <div class="px-[10%] mt-[240px] flex-col-reverse gap-5 relative z-20 w-full">
+        <div class="bg-black bg-opacity-0 p-8 rounded-lg" style="width: 1200px;">
+            <span class="bg-[#F6DE03] px-4 rounded-[20px] font-bold text-sm md:text-lg">EASY SCHEDULING PHOTOSHOOT WITH ARK VISION</span>
+            <h1 class="text-white font-bold text-[60px]">Easy scheduling ahead for your needs</h1>
+            <p class="text-[#C2C1C1]">Ark vision is your scheduling automation platform <br>
+                for eliminating the back-and-forth emails for finding the <br>
+                perfect time - and so much more
+            </p>
+
+            <div class="mt-5 flex gap-5 items-center">    
+                <a class="px-4 py-1 text-center text-black rounded-[20px] text-2xl bg-[#F6DE03]" href="/ark/client/booking">Book Now</a>
+            </div>
         </div>
-    </nav>
-    <!-- End of Navigation Bar -->
+    </div>
+</section>
+<!-- End of Home -->
+     
 
-    <!-- Home -->
-    <section id="home" class="scroll-mt-[200px]">
-        <div class="px-[10%] mt-[180px] flex flex-col-reverse gap-5 justify-between md:flex-row relative z-20">
-            <div>
-                <span class="bg-[#F6DE03] px-4 rounded-[20px] font-bold text-sm md:text-lg">EASY SCHEDULING PHOTOSHOOT WITH ARK VISION</span>
-                <h1 class="text-white font-bold text-[60px]">Easy scheduling <br>ahead for your <br>needs</h1>
-                <p class="text-[#C2C1C1]">Ark vision is your is your scheduling automation platform <br>
-                    for eliminating the back-and-forth emails for finding the <br>
-                    perfect time - and so much more
-                </p>
+<!-- 
+<section id="about" class="-scroll-mt-[80px] bg-cover bg-center relative" style="background-image: url('/assets/img/couplebw.jpg'); min-height: 80vh;">
+    <div class="w-fit md:w-[800px] p-8 bg-black bg-opacity-0 rounded-lg pl-20 mt-52 ml-[1000px] items-end">
+        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
+         <p class="text-white font-light text-[24px] text-right">
+            Ark Visions Self Portrait Studio is a cutting-edge 
+            photography studio dedicated to providing a unique 
+            experience for every client. Our mission is to deliver 
+            high-quality self-portraits and professional shoots 
+            tailored to meet the needs and aspirations of our 
+            customers.
+        </p> 
 
-                <div class="mt-5 flex gap-5 items-center">
-                    <a class="px-4 py-1 text-center text-black rounded-[20px] bg-[#F6DE03]" href="#about">Book Now</a>
-                </div>
-            </div>
+        <p class="text-white font-light mt-10 text-[24px] text-justify">
+            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
+
+        </p>
+    </div>
+<section id="about" class="-scroll-mt-[80px] flex items-center min-h-[80vh]">
+    <div class="w-1/2 flex justify-center items-center p-8">
+        <img src="/assets/img/couplebw.jpg" alt="Couple" class="rounded-full w-1/2 h-auto object-cover">
+    </div>
+    <div class="w-1/2 p-8">
+        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
+        <p class="text-white font-light mt-10 text-[24px] text-justify">
+            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
+        </p>
+    </div>
+</section> -->
 
 
-            <div>
-                <img src="/assets/img/Group 2.png" alt="">
-            </div>
 
-            <div class="flex justify-center gap-2 absolute -bottom-20 right-20 left-20">
+
+    <!-- <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
+        <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
+        <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
+    </div> -->
+</section>
+
+
+            <!-- <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
                 <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
                 <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
             </div>
-        </div>
-    </section>
-    <!-- End of Home -->
-
-
-    <!-- About Us -->
-    <section id="about" class="-scroll-mt-[80px]">
-        <div class="px-[10%] mt-64 flex flex-col justify-center gap-12 md:gap-[12rem] items-center sm:flex-col md:flex-row relative z-10">
-            
-            <img class="absolute md:z-1 w-full" src="/assets/img/Ellipse 13 (1).png">
-
-            <div>
-                <img src="/assets/img/Group 3.png">
-            </div>
-
-            <div class="w-fit md:w-[450px]">
-                <h1 class="text-3xl font-bold text-[#F6DE03] mb-5">About us</h1>
-                <p class="text-white font-light text-[18px] text-justify">
-                    Ark Visions Self Portrait Studio is a cutting-edge 
-                    photography studio dedicated to providing a unique 
-                    experience for every client. Our mission is to deliver 
-                    high-quality self-portraits and professional shoots 
-                    tailored to meet the needs and aspirations of our 
-                    customers.
-                </p>
-
-                <p class="text-white font-light mt-10 text-[18px] text-justify">
-                    At Ark Visions, we believe that everyone has a story 
-                    worth telling. Each session is crafted to reflect the 
-                    individuality of our clients, making sure that their 
-                    personality shines through in every shot. We offer a 
-                    variety of customization package options, ranging 
-                    from solo and duo sessions to group shoots, allowing 
-                    our clients to choose the perfect fit for their needs.
-                </p>
-            </div>
-
-            <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
-            </div>
-        </div>
+        </div> -->
     </section>
     <!-- End of About Us -->
 
+<!-- SERVICES -->
+<section id="services" class="relative w-full">
+    <div class="w-full mt-10 mb-10 flex flex-col items-center">
+        <h1 class="text-center text-white font-regular text-[40px] mb-8">Gallery</h1>
 
-
-    <!-- SERVICES -->
-
-    <section id="services" class="-scroll-mt-[120px]">
-        <div class="px-[10%] mt-64 flex flex-col items-center">
-            <h1 class="text-center text-[#F6DE03] font-regular text-[40px]">Services</h1>
-            <p class="island text-center text-[#F6DE03] text-[40px]">Self-Directed Portrait Digital Packages</p>
-
-            <div class="mt-24 grid gap-20 grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3">
-                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
-                    <img class="w-[180px] self-center" src="/assets/img/image.png">
-                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
-                    <hr class="border-2 border-[#F6DE03]">
-                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+        <!-- Carousel Container -->
+        <div class="relative w-full overflow-hidden">
+            <!-- Services Cards (Now Displaying 13 Car Photos) -->
+            <div class="flex gap-6 transition-transform duration-500" id="combinedCarousel">
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car.jpg" alt="Car 1">
                 </div>
-
-                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
-                    <img class="w-[180px] self-center" src="/assets/img/image.png">
-                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
-                    <hr class="border-2 border-[#F6DE03]">
-                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (1).jpg" alt="Car 1">
                 </div>
-
-                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
-                    <img class="w-[180px] self-center" src="/assets/img/image.png">
-                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
-                    <hr class="border-2 border-[#F6DE03]">
-                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (2).jpg" alt="Car 2">
                 </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (3).jpg" alt="Car 3">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (4).jpg" alt="Car 4">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (5).jpg" alt="Car 5">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (6).jpg" alt="Car 6">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (7).jpg" alt="Car 7">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (8).jpg" alt="Car 8">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (9).jpg" alt="Car 9">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (10).jpg" alt="Car 10">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (11).jpg" alt="Car 11">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (12).jpg" alt="Car 12">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (13).jpg" alt="Car 13">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (14).jpg" alt="Car 14">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (15).jpg" alt="Car 15">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (16).jpg" alt="Car 16">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (17).jpg" alt="Car 17">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (18).jpg" alt="Car 18">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (19).jpg" alt="Car 19">
+                </div>
+                
+
             </div>
         </div>
-   
-        <div class="px-[10%] mt-24 pb-64 flex flex-col items-center relative">
-            <p class="island text-center text-[#F6DE03] text-[40px]">Professional Shots Portrait Digital Packages</p>
+    </div>
+    <!-- Left Arrow -->
+    <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#F6DE03]/0 w-16 h-16 rounded-full invert" onclick="moveCombinedCarousel(-1)">
+        <span class="text-4xl">&#9664;</span>
+    </button>
+ 
+ <!-- Right Arrow -->
+ <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#F6DE03]/0 px-2 py-2 rounded-full invert pr-12" onclick="moveCombinedCarousel(1)">
+    <span class="text-4xl">&#9654;</span>
+ </button>
+</div>
+    </div>
+</section>
 
-            <div class="mt-24 grid gap-20 grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3">
-                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
-                    <img class="w-[180px] self-center" src="/assets/img/image.png">
-                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
-                    <hr class="border-2 border-[#F6DE03]">
-                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
-                </div>
 
-                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
-                    <img class="w-[180px] self-center" src="/assets/img/image.png">
-                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
-                    <hr class="border-2 border-[#F6DE03]">
-                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
-                </div>
+  
 
-                <div class="w-fit rounded-[20px] p-6 flex flex-col" style="box-shadow: 0 0 10px #f6de038d; ">
-                    <img class="w-[180px] self-center" src="/assets/img/image.png">
-                    <h1 class="text-[#F6DE03] mt-5 text-xl mb-2">SOLO</h1>
-                    <hr class="border-2 border-[#F6DE03]">
-                    <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">BOOK NOW</button>
-                </div>
-            </div>
-            <div class="flex justify-center gap-2 absolute bottom-[100px] right-20 left-20">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
-            </div>
+
+         
+      
+
+
+
+  <!-- Services Overview with Featured Image and Avail Now Button -->
+<section id="services-overview" class="scroll-mt-[140px] text-center py-10 bg-[#000000]">
+    <h1 class="text-white text-center text-[40px]">Our Packages</h1>
+    <p class="text-yellow-400 mt-5 mb-10 px-4 md:px-[10%]">
+        Explore our self-directed and professional photoshoot packages designed to meet your needs. Whether you're looking for a solo session, a duo shoot, or a group experience, we’ve got the perfect package for you!
+    </p>
+
+    <!-- Featured Image -->
+    <div class="relative w-full h-[600px] mb-10">
+        <img class="w-full h-full object-cover" src="/assets/img/cover.jpg" alt="Featured Photoshoot">
+        <!-- <div class="absolute inset-0 flex items-center justify-center">
+            <button class="px-8 py-4 bg-[#F6DE03] text-black font-bold text-lg rounded-[20px]">
+                <a href="/ark/client/booking">AVAIL NOW</a>
+            </button>
+        </div> -->
+    </div>
+
+    <!-- Call to Action Button (Optional if you want another button under the image) -->
+    <button class="px-8 py-4 bg-[#F6DE03] text-black font-bold text-2xl rounded-[20px]">
+        <a href="/ark/client/booking">AVAIL NOW</a>
+    </button>
+</section>
+
+<section id="about" class="-scroll-mt-[80px] ml-24 flex space-x-64 items-center min-h-[80vh]">
+    <div class="flex justify-center items-center p-8 pl-11">
+        <!-- Circular image with glow and border -->
+        <div class="relative ml-40 w-[500px]">
+            <img src="/assets/img/profile3.jpg" alt="Couple" class="rounded-full h-auto object-cover border-4 border-[#F6DE03] shadow-xs shadow-[#F6DE03]/50">
+            <!-- Optional glow effect around the image -->
+            <!-- <div class="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6DE03] to-transparent blur-md opacity-50"></div> -->
         </div>
-    </section>
-
-    <!-- End of Services -->
-
-
-    <!-- Pricing -->
-
-    <section id="pricing" class="scroll-mt-[140px]">
-        <div class="flex flex-col items-center">
-            <h1 class="text-[#F6DE03] text-center text-[40px]">PRICING</h1>
-            <span class="island text-center text-[#F6DE03] text-[40px] mb-10">Self Portraits Digital Packages</span>
-
-            <div class="grid gap-2 grid-cols-1 justify-center gap-20 md:grid-cols-2 lg:grid-cols-3 relative z-10">
-                <!-- Solo Package -->
-                <div class="cursor-pointer w-[300px]">
-                    <div class="rounded-[25px]" style="box-shadow: 0 0 10px #f6de038d">
-                        <div class="pt-2 px-6 pb-8 bg-[#F6DE03] flex flex-col rounded-t-[25px] ">
-                            <h1 class="text-center text-[40px] font-bold">Solo</h1>
-                            <div class="flex gap-10 pb2 justify-center mt-[70px] items-center">
-                                <p class="font-bold text-[10px]">$100-15mins</p>
-                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
-                            </div>
-                            <div class="flex gap-10 justify-center items-center">
-                                <p class="font-bold text-[10px]">$100-15mins</p>
-                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
-                            </div>
-                        </div>
-                        <div class="bg-[#121212] rounded-b-[25px] pb-12 flex flex-col">
-                            <h1 class="text-center text-[12px] font-bold mt-[20px] text-[#F6DE03]">ADDITIONAL</h1>
-                            <div class="p-5 text-[#F6DE03]">
-                                <div class="flex gap-10 justify-center mt-5">
-                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                    <p class="fotn-bold text-[11px]">PHP-149</p>
-                                </div>
-                                <div class="flex gap-10 justify-center mt-5">
-                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                    <p class="fotn-bold text-[11px]">PHP-149</p>
-                                </div>
-                                <div class="flex gap-10 justify-center mt-5">
-                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                    <p class="fotn-bold text-[11px]">PHP-149</p>
-                                </div>
-                            </div>
-
-                            <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]"><a href="/ark/client/booking">AVAIL NOW</a></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Solo Package -->
-
-
-                <!-- Duo Package -->
-                <div class="cursor-pointer w-[300px]">
-                    <div class="rounded-[25px]" style="box-shadow: 0 0 10px #f6de038d">
-                        <div class="pt-2 px-6 pb-8 bg-[#F6DE03] flex flex-col rounded-t-[25px] ">
-                            <h1 class="text-center text-[40px] font-bold">DUO</h1>
-                            <div class="flex gap-10 pb2 justify-center mt-[70px] items-center">
-                                <p class="font-bold text-[10px]">$100-15mins</p>
-                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
-                            </div>
-                            <div class="flex gap-10 justify-center items-center">
-                                <p class="font-bold text-[10px]">$100-15mins</p>
-                                <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
-                            </div>
-                        </div>
-                        <div class="bg-[#121212] rounded-b-[25px] pb-12 flex flex-col">
-                            <h1 class="text-center text-[12px] font-bold mt-[20px] text-[#F6DE03]">ADDITIONAL</h1>
-                            <div class="p-5 text-[#F6DE03]">
-                                <div class="flex gap-10 justify-center mt-5">
-                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                    <p class="fotn-bold text-[11px]">PHP-149</p>
-                                </div>
-                                <div class="flex gap-10 justify-center mt-5">
-                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                    <p class="fotn-bold text-[11px]">PHP-149</p>
-                                </div>
-                                <div class="flex gap-10 justify-center mt-5">
-                                    <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                    <p class="fotn-bold text-[11px]">PHP-149</p>
-                                </div>
-                            </div>
-
-                            <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]"><a href="/ark/client/booking">AVAIL NOW</a></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Duo Package -->
-
-                <!-- Group Package -->
-            <div class="cursor-pointer w-[300px]">
-                <div class="rounded-[25px]" style="box-shadow: 0 0 10px #f6de038d">
-                    <div class="pt-2 px-6 pb-8 bg-[#F6DE03] flex flex-col rounded-t-[25px] ">
-                        <h1 class="text-center text-[40px] font-bold">GROUP</h1>
-                        <div class="flex gap-10 pb2 justify-center mt-[70px] items-center">
-                            <p class="font-bold text-[10px]">$100-15mins</p>
-                            <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
-                        </div>
-                        <div class="flex gap-10 justify-center items-center">
-                            <p class="font-bold text-[10px]">$100-15mins</p>
-                            <p class="fotn-bold text-[8px]">UNLI SHOT, GET ENHANCED PHOTO</p>
-                        </div>
-                    </div>
-                    <div class="bg-[#121212] rounded-b-[25px] pb-12 flex flex-col">
-                        <h1 class="text-center text-[12px] font-bold mt-[20px] text-[#F6DE03]">ADDITIONAL</h1>
-                        <div class="p-5 text-[#F6DE03]">
-                            <div class="flex gap-10 justify-center mt-5">
-                                <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                <p class="fotn-bold text-[11px]">PHP-149</p>
-                            </div>
-                            <div class="flex gap-10 justify-center mt-5">
-                                <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                <p class="fotn-bold text-[11px]">PHP-149</p>
-                            </div>
-                            <div class="flex gap-10 justify-center mt-5">
-                                <p class="font-bold text-[11px]">TAKE ALL ENHANCED PHOTO</p>
-                                <p class="fotn-bold text-[11px]">PHP-149</p>
-                            </div>
-                        </div>
-
-                        <button class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]"><a href="/ark/client/booking">AVAIL NOW</a></button>
-                    </div>
-                </div>
-            </div>
-            <!-- End of Group Package -->          
-        </div>
-    </section>
-        <!-- End of Pricing -->
+    </div>
+    <div class="w-1/2 pr-16">
+        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
+        <p class="text-white font-light mt-10 text-[24px] text-left pr-24">
+            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
+        </p>
+    </div>
+</section>
 
 
 
         <!-- Contact Us Form -->
-        <h1 class="text-[#F6DE03] text-center text-[40px] mt-[250px]">Get in touch</h1>
+        <h1 class="text-[#F6DE03] text-center text-[40px] mt-[40px]">Get in touch</h1>
         <p class="text-center text-[42px] text-white mb-8">Contact us</p>
 
         <div class="justify-center gap-20 flex p-8 rounded-[25px] w-fit self-center" style="box-shadow: 0 0 5px #f6de038d;">
@@ -367,13 +311,38 @@
 </body>
 
 <script>
-    document.getElementById("close").addEventListener("click", function(){
-        document.querySelector("header").style.display = "none";
-    });
+    // document.getElementById("close").addEventListener("click", function(){
+    //     document.querySelector("header").style.display = "none";
+    // });
 
-    document.querySelector("header").addEventListener("click", function(){
-        document.querySelector("nav").style.top = "0px";
-    });
+    // document.querySelector("header").addEventListener("click", function(){
+    //     document.querySelector("nav").style.top = "0px";
+    // });
 
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        let combinedSlide = 0;
+        function moveCombinedCarousel(direction) {
+            const carousel = document.getElementById('combinedCarousel');
+            const totalSlides = carousel.children.length;
+            const cardWidth = 500; // 300px is the width of each card
+            combinedSlide += direction;
+
+            // Ensure the slide index stays within bounds
+            if (combinedSlide < 0) {
+                combinedSlide = totalSlides - 1;
+            } else if (combinedSlide >= totalSlides) {
+                combinedSlide = 0;
+            }
+
+            // Update the carousel's transform property to slide
+            const offset = -combinedSlide * cardWidth;
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Bind the function to the window so it can be accessed by the buttons
+        window.moveCombinedCarousel = moveCombinedCarousel;
+    });
 </script>
 </html>
