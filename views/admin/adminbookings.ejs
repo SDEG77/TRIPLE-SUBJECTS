@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
             font-family: 'Poppins';
             color: white;
         }
+
         body {
             background-color: #121212;
             margin: 0 auto;
@@ -23,59 +27,68 @@
             display: flex;
             transition: margin-left 0.3s;
         }
+
         #sidebar {
             background-color: #262626;
-            transition: transform 0.3s ease; 
-            position: absolute; 
-            left: 0; 
-            top: 0; 
-            bottom: 0; 
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
         }
+
         .sidebar-hidden {
-            transform: translateX(-100%); 
+            transform: translateX(-100%);
         }
+
         .content {
-            flex: 1; 
-            transition: margin-left 0.3s; 
+            flex: 1;
+            transition: margin-left 0.3s;
             margin-left: 16rem;
         }
+
         .sidebar-hidden-content {
-            margin-left: 0; 
+            margin-left: 0;
         }
+
         /* Modal styles */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 50; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0, 0, 0, 0.7); 
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
         }
+
         .modal-content {
-            background-color: #262626; 
-            margin: 15% auto; 
-            padding: 20px; 
-            border: 1px solid #888; 
-            width: 80%; 
+            background-color: #262626;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
             border-radius: 5px;
         }
+
         .close {
-            color: white; 
-            float: right; 
-            font-size: 28px; 
+            color: white;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
         }
+
         .close:hover,
         .close:focus {
-            color: #999; 
-            text-decoration: none; 
+            color: #999;
+            text-decoration: none;
             cursor: pointer;
         }
     </style>
 </head>
+
 <body>
 
     <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
@@ -84,21 +97,30 @@
                 <img class="rounded-full w-28" src="/assets/logo.jpg" alt="Logo">
             </div>
             <nav class="mt-10 border-t-4 border-yellow-500">
-                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-house mr-4"></i> Dashboard
                 </a>
-                <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/clients"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-users mr-4"></i> Clients
                 </a>
-                <a href="/ark/admin/bookings" class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-yellow-500">
+                <a href="/ark/admin/bookings"
+                    class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-yellow-500">
                     <i class="fa-solid fa-calendar-days mr-4 text-gray-800"></i> Bookings
                 </a>
-                <a href="/ark/admin/photo-management" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/photo-management"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-image mr-4"></i> Photo Management
                 </a>
 
-                <a href="/ark/admin/resource" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/resource"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                </a>
+                <a href="/ark/admin/feedback"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-message mr-4"></i> Feedback
                 </a>
             </nav>
         </div>
@@ -113,92 +135,98 @@
         <button id="toggleSidebar" class="p-4 text-yellow-500">
             <i class="fa-solid fa-bars"></i>
         </button>
-        
+
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Bookings</h2>
         </div>
         <div class="mt-6 m-5">
             <% if(snatch.bookings){ %>
-            <table class="min-w-full bg-gray-800 border border-gray-800">
-                <thead>
-                    <tr class="bg-gray-800">
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Name</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Services</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Requested Date</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Status</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Proof of Payment</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% try{ %>
-                    <% snatch.bookings.map(booking => { %>
-                    <% 
-                    const date = new Date(booking.date);
+                <table class="min-w-full bg-gray-800 border border-gray-800">
+                    <thead>
+                        <tr class="bg-gray-800">
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Name</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Services</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Requested Date</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Status</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Proof of Payment</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% try{ %>
+                            <% snatch.bookings.map(booking=> { %>
+                                <% const date=new Date(booking.date); const day=date.getDate(); const
+                                    index=date.getMonth(); const months=[ "January" , "February" , "March" , "April"
+                                    , "May" , "June" , "July" , "August" , "September" , "October" , "November"
+                                    , "December" ]; %>
 
-                    const day = date.getDate(); 
-                    const index = date.getMonth();
-                
-                    const months = [
-                        "January", "February", "March",
-                        "April", "May", "June", 
-                        "July", "August", "September", 
-                        "October", "November", "December"
-                    ];
-                        
-                    %>
+                                    <% snatch.users.map(user=> { %>
+                                        <% if(user.id===booking.client_id){ %>
+                                            <tr class="odd:bg-gray-700 even:bg-gray-800">
+                                                <td class="py-2 px-4 border-b border-gray-600">
+                                                    <%= user.fname.toUpperCase() %>
+                                                        <%= user.lname.toUpperCase() %>
+                                                </td>
+                                                <td class="py-2 px-4 border-b border-gray-600">
+                                                    <%= booking.service %>
+                                                </td>
+                                                <td class="py-2 px-4 border-b border-gray-600">
+                                                    <%= `${months[index]} ${day} || ${booking.time}` %>
+                                                </td>
+                                                <td
+                                                    class="py-2 px-4 border-b border-gray-600 font-semibold <%= booking.status === 'accepted' ? 'text-lime-400' : 'text-rose-500' %>">
+                                                    <%= booking.status %>
+                                                </td>
+                                                <td class="py-2 px-4 border-b border-gray-600">
+                                                    <% if(!booking.payment_status==="pending" ){ %>
+                                                        <button
+                                                            class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
+                                                            id="<%= booking.id %>">
+                                                            <i class="fa-solid fa-eye"></i> View
+                                                        </button>
+                                                        <% } else {%>
+                                                            <span class="text-rose-500 font-semibold">None
+                                                                Provided</span>
+                                                            <% } %>
+                                                </td>
+                                                <td class="py-2 px-4 border-b border-gray-600">
+                                                    <form class="inline-block" action="./accept" method="post">
+                                                        <input type="hidden" name="id" value="<%= booking.id %>">
 
-                    <% snatch.users.map(user => { %>
-                    <% if(user.id === booking.client_id){ %>
-                    <tr class="odd:bg-gray-700 even:bg-gray-800">
-                        <td class="py-2 px-4 border-b border-gray-600"> <%= user.fname.toUpperCase() %> <%= user.lname.toUpperCase() %> </td>
-                        <td class="py-2 px-4 border-b border-gray-600"> <%= booking.service %> </td>
-                        <td class="py-2 px-4 border-b border-gray-600"> <%= `${months[index]} ${day} || ${booking.time}` %> </td>
-                        <td class="py-2 px-4 border-b border-gray-600 font-semibold <%= booking.status === 'accepted' ? 'text-lime-400' : 'text-rose-500' %>"> <%= booking.status %> </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <% if(!booking.payment_status === "pending"){ %>
-                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded" id="<%= booking.id %>">
-                                    <i class="fa-solid fa-eye"></i> View
-                                </button>
-                            <% } else {%>
-                                <span class="text-rose-500 font-semibold" >None Provided</span>
-                            <% } %>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <form class="inline-block" action="./accept" method="post">
-                                <input type="hidden" name="id" value="<%= booking.id %>" >
+                                                        <button type="submit"
+                                                            class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
+                                                            <i class="fa-solid fa-check"></i> Accept
+                                                        </button>
+                                                    </form>
 
-                                <button type="submit"  class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
-                                    <i class="fa-solid fa-check"></i> Accept
-                                </button>
-                            </form>
+                                                    <form class="inline-block" action="./cancel" method="post">
+                                                        <input type="hidden" name="id" value="<%= booking.id %>">
 
-                            <form class="inline-block" action="./cancel" method="post">
-                                <input type="hidden" name="id" value="<%= booking.id %>" >
+                                                        <button
+                                                            class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
+                                                            <i class="fa-solid fa-times"></i> Cancel
+                                                        </button>
+                                                    </form>
 
-                                <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
-                                    <i class="fa-solid fa-times"></i> Cancel
-                                </button>
-                            </form>
+                                                    <form class="inline-block" action="./bookings/remove" method="post">
+                                                        <input type="hidden" value="<%= booking.id %>" name="id">
 
-                            <form class="inline-block" action="./bookings/remove" method="post">
-                                <input type="hidden" value="<%= booking.id %>" name="id">
-                                
-                                <button type="submit" class="bg-red-500 hover:bg-red-600 font-bold text-white py-1 px-2 rounded">
-                                    <i class="fa-solid fa-times"></i> Remove
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% } %> <!--endIf -->
-                    <% }) %> <!--endInnerMap -->
-                    <% }) %> <!--endOuterMap -->
-                    <% } catch{} %>
-                </tbody>
-            </table>
-            <% } %>
+                                                        <button type="submit"
+                                                            class="bg-red-500 hover:bg-red-600 font-bold text-white py-1 px-2 rounded">
+                                                            <i class="fa-solid fa-times"></i> Remove
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <% } %> <!--endIf -->
+                                                <% }) %> <!--endInnerMap -->
+                                                    <% }) %> <!--endOuterMap -->
+                                                        <% } catch{} %>
+                    </tbody>
+                </table>
+                <% } %>
         </div>
-        
+
         <div id="paymentModal" class="modal">
             <div class="modal-content rounded-lg shadow-lg p-5 bg-gray-800">
                 <span class="close text-red-500 hover:text-red-700" style="cursor:pointer;">&times;</span>
@@ -210,6 +238,7 @@
     </main>
 
 </body>
+
 </html>
 
 <script>
@@ -222,23 +251,23 @@
         content.classList.toggle('sidebar-hidden-content');
     });
 
-    
+
     const modal = document.getElementById("paymentModal");
     const closeButton = document.getElementsByClassName("close")[0];
 
-    document.getElementById("viewPaymentBtn1").onclick = function() {
-        modal.style.display = "block";
-    };
-    
-    document.getElementById("viewPaymentBtn2").onclick = function() {
+    document.getElementById("viewPaymentBtn1").onclick = function () {
         modal.style.display = "block";
     };
 
-    closeButton.onclick = function() {
+    document.getElementById("viewPaymentBtn2").onclick = function () {
+        modal.style.display = "block";
+    };
+
+    closeButton.onclick = function () {
         modal.style.display = "none";
     };
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }
