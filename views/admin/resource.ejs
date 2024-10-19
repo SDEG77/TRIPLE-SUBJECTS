@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,41 +10,105 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * { font-family: 'Poppins'; color: white; }
-        body { background-color: #121212; margin: 0 auto; padding: 0; display: flex; }
-        #sidebar { background-color: #262626; transition: transform 0.3s ease; position: absolute; left: 0; top: 0; bottom: 0; }
-        .sidebar-hidden { transform: translateX(-100%); }
-        .content { flex: 1; margin-left: 16rem; }
-        .sidebar-hidden-content { margin-left: 0; }
-        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); }
-        .modal-content { background-color: #262626; margin: 15% auto; padding: 20px; width: 80%; border-radius: 5px; }
-        .close { color: white; float: right; font-size: 28px; font-weight: bold; }
-        .close:hover, .close:focus { color: #999; text-decoration: none; cursor: pointer; }
+        * {
+            font-family: 'Poppins';
+            color: white;
+        }
+
+        body {
+            background-color: #121212;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+        }
+
+        #sidebar {
+            background-color: #262626;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 16rem;
+        }
+
+        .sidebar-hidden-content {
+            margin-left: 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #262626;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
             <div class="m-7 flex justify-center">
                 <img class="rounded-full w-28" src="/assets/logo.jpg" alt="Logo">
             </div>
             <nav class="mt-10 border-t-4 border-yellow-500">
-                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-house mr-4"></i> Dashboard
                 </a>
-                <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/clients"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-users mr-4"></i> Clients
                 </a>
-                <a href="/ark/admin/bookings" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/bookings"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
                 </a>
-                <a href="/ark/admin/photo-management" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/photo-management"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-image mr-4"></i> Photo Management
                 </a>
-                <a href="/ark/admin/resource" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <a href="/ark/admin/resource"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                     <i class="fa-solid fa-box mr-4"></i> Resource Control Center
                 </a>
             </nav>
@@ -55,13 +120,14 @@
         </div>
     </div>
 
-    <main class="content">
+    <main class="content h-[100vh] overflow-auto">
         <button id="toggleSidebar" class="p-4 text-yellow-500"><i class="fa-solid fa-bars"></i></button>
 
         <!-- Service Management Section -->
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Service Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddServiceModal()">Add New Service</button>
+            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddServiceModal()">Add New
+                Service</button>
             <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
                 <thead>
                     <tr class="bg-gray-800">
@@ -71,18 +137,25 @@
                     </tr>
                 </thead>
                 <tbody id="serviceTable">
-                    <% services.forEach(service => { %>
+                    <% services.forEach(service=> { %>
                         <tr class="odd:bg-gray-700 even:bg-gray-800">
-                            <td class="py-2 px-4 border-b border-gray-600"><%= service.name %></td>
-                            <td class="py-2 px-4 border-b border-gray-600"><%= service.description %></td>
                             <td class="py-2 px-4 border-b border-gray-600">
-                                <button class="bg-blue-500 text-white py-1 px-2 rounded" onclick="openEditServiceModal('<%= service._id %>')">Edit</button>
-                                <form method="POST" action="services/<%= service._id %>?_method=DELETE" style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded" type="submit">Delete</button>
+                                <%= service.name %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <%= service.description %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <button class="bg-blue-500 text-white py-1 px-2 rounded"
+                                    onclick="openEditServiceModal('<%= service._id %>')">Edit</button>
+                                <form method="POST" action="services/<%= service._id %>?_method=DELETE"
+                                    style="display:inline;">
+                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                        type="submit">Delete</button>
                                 </form>
                             </td>
                         </tr>
-                    <% }); %>
+                        <% }); %>
                 </tbody>
             </table>
         </div>
@@ -90,7 +163,8 @@
         <!-- Package Management Section -->
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Package Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddPackageModal()">Add New Package</button>
+            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddPackageModal()">Add New
+                Package</button>
             <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
                 <thead>
                     <tr class="bg-gray-800">
@@ -104,26 +178,36 @@
                     </tr>
                 </thead>
                 <tbody id="packageTable">
-                    <% packages.forEach(package => { %>
+                    <% packages.forEach(package=> { %>
                         <tr class="odd:bg-gray-700 even:bg-gray-800">
                             <td class="py-2 px-4 border-b border-gray-600">
-                                <% package.services.forEach(service => { %>
+                                <% package.services.forEach(service=> { %>
                                     <%= service.name %><br>
-                                <% }); %>
+                                        <% }); %>
                             </td>
-                            <td class="py-2 px-4 border-b border-gray-600"><%= package.name %></td>
-                            <td class="py-2 px-4 border-b border-gray-600"><%= package.description %></td>
-
-                            <td class="py-2 px-4 border-b border-gray-600"><%= package.duration %> mins</td>
-                            <td class="py-2 px-4 border-b border-gray-600">₱<%= package.price %></td>
                             <td class="py-2 px-4 border-b border-gray-600">
-                                <button class="bg-blue-500 text-white py-1 px-2 rounded" onclick="openEditPackageModal('<%= package._id %>')">Edit</button>
-                                <form method="POST" action="packages/<%= package._id %>?_method=DELETE" style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded" type="submit">Delete</button>
+                                <%= package.name %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <%= package.description %>
+                            </td>
+
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <%= package.duration %> mins
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">₱<%= package.price %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <button class="bg-blue-500 text-white py-1 px-2 rounded"
+                                    onclick="openEditPackageModal('<%= package._id %>')">Edit</button>
+                                <form method="POST" action="packages/<%= package._id %>?_method=DELETE"
+                                    style="display:inline;">
+                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                        type="submit">Delete</button>
                                 </form>
                             </td>
                         </tr>
-                    <% }); %>
+                        <% }); %>
                 </tbody>
             </table>
         </div>
@@ -131,7 +215,8 @@
         <!-- Add-on Management Section -->
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Add-on Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddAddonModal()">Add New Add-on</button>
+            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddAddonModal()">Add New
+                Add-on</button>
             <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
                 <thead>
                     <tr class="bg-gray-800">
@@ -142,19 +227,27 @@
                     </tr>
                 </thead>
                 <tbody id="addonTable">
-                    <% addOns.forEach(addOn => { %>
+                    <% addOns.forEach(addOn=> { %>
                         <tr class="odd:bg-gray-700 even:bg-gray-800">
-                            <td class="py-2 px-4 border-b border-gray-600"><%= addOn.name %></td>
-                            <td class="py-2 px-4 border-b border-gray-600"><%= addOn.description %></td>
-                            <td class="py-2 px-4 border-b border-gray-600">₱<%= addOn.price %></td>
                             <td class="py-2 px-4 border-b border-gray-600">
-                                <button class="bg-blue-500 text-white py-1 px-2 rounded" onclick="openEditAddonModal('<%= addOn._id %>')">Edit</button>
-                                <form method="POST" action="addons/<%= addOn._id %>?_method=DELETE" style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded" type="submit">Delete</button>
+                                <%= addOn.name %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <%= addOn.description %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">₱<%= addOn.price %>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-600">
+                                <button class="bg-blue-500 text-white py-1 px-2 rounded"
+                                    onclick="openEditAddonModal('<%= addOn._id %>')">Edit</button>
+                                <form method="POST" action="addons/<%= addOn._id %>?_method=DELETE"
+                                    style="display:inline;">
+                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                        type="submit">Delete</button>
                                 </form>
                             </td>
                         </tr>
-                    <% }); %>
+                        <% }); %>
                 </tbody>
             </table>
         </div>
@@ -171,7 +264,8 @@
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Description</label>
-                        <textarea name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                        <textarea name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded"
+                            required></textarea>
                     </div>
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
                 </form>
@@ -187,11 +281,13 @@
                     <input type="hidden" id="editServiceId" name="serviceId">
                     <div class="mb-4">
                         <label class="text-yellow-500">Service Name</label>
-                        <input type="text" id="editServiceName" name="name" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="text" id="editServiceName" name="name"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Description</label>
-                        <textarea id="editServiceDescription" name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                        <textarea id="editServiceDescription" name="description"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
                     </div>
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
                 </form>
@@ -206,10 +302,13 @@
                 <form action="/ark/admin/packages" method="POST">
                     <div class="mb-4">
                         <label class="text-yellow-500">Service Type</label>
-                        <select name="services" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required multiple>
-                            <% services.forEach(service => { %>
-                                <option value="<%= service._id %>"><%= service.name %></option>
-                            <% }); %>
+                        <select name="services" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required
+                            multiple>
+                            <% services.forEach(service=> { %>
+                                <option value="<%= service._id %>">
+                                    <%= service.name %>
+                                </option>
+                                <% }); %>
                         </select>
                     </div>
                     <div class="mb-4">
@@ -218,15 +317,18 @@
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Duration</label>
-                        <input type="number" name="duration" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="number" name="duration" class="w-full bg-gray-700 text-white py-2 px-4 rounded"
+                            required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Price</label>
-                        <input type="number" name="price" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="number" name="price" class="w-full bg-gray-700 text-white py-2 px-4 rounded"
+                            required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Description</label>
-                        <textarea name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                        <textarea name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded"
+                            required></textarea>
                     </div>
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
                 </form>
@@ -242,27 +344,34 @@
                     <input type="hidden" id="editPackageId" name="packageId">
                     <div class="mb-4">
                         <label class="text-yellow-500">Service Type</label>
-                        <select id="editServiceType" name="services" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required multiple>
-                            <% services.forEach(service => { %>
-                                <option value="<%= service._id %>"><%= service.name %></option>
-                            <% }); %>
+                        <select id="editServiceType" name="services"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required multiple>
+                            <% services.forEach(service=> { %>
+                                <option value="<%= service._id %>">
+                                    <%= service.name %>
+                                </option>
+                                <% }); %>
                         </select>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Package Name</label>
-                        <input type="text" id="editPackageName" name="name" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="text" id="editPackageName" name="name"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Duration</label>
-                        <input type="number" id="editPackageDuration" name="duration" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="number" id="editPackageDuration" name="duration"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Price</label>
-                        <input type="number" id="editPackagePrice" name="price" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="number" id="editPackagePrice" name="price"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Description</label>
-                        <textarea id="editPackageDescription" name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                        <textarea id="editPackageDescription" name="description"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
                     </div>
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
                 </form>
@@ -273,7 +382,7 @@
         <div id="addAddonModal" class="modal">
             <div class="modal-content bg-gray-800 p-5 rounded-lg shadow-lg">
                 <span class="close text-red-500 cursor-pointer" onclick="closeAddAddonModal()">&times;</span>
-                <h2 class="text-yellow-500 font-semibold text-2xl mb-4">Add Add-on                </h2>
+                <h2 class="text-yellow-500 font-semibold text-2xl mb-4">Add Add-on </h2>
                 <form action="/ark/admin/addons" method="POST">
                     <div class="mb-4">
                         <label class="text-yellow-500">Add-on Name</label>
@@ -281,11 +390,13 @@
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Description</label>
-                        <textarea name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                        <textarea name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded"
+                            required></textarea>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Price</label>
-                        <input type="number" name="price" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="number" name="price" class="w-full bg-gray-700 text-white py-2 px-4 rounded"
+                            required>
                     </div>
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
                 </form>
@@ -301,15 +412,18 @@
                     <input type="hidden" id="editAddonId" name="addonId">
                     <div class="mb-4">
                         <label class="text-yellow-500">Add-on Name</label>
-                        <input type="text" id="editAddonName" name="name" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="text" id="editAddonName" name="name"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Description</label>
-                        <textarea id="editAddonDescription" name="description" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
+                        <textarea id="editAddonDescription" name="description"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required></textarea>
                     </div>
                     <div class="mb-4">
                         <label class="text-yellow-500">Price</label>
-                        <input type="number" id="editAddonPrice" name="price" class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
+                        <input type="number" id="editAddonPrice" name="price"
+                            class="w-full bg-gray-700 text-white py-2 px-4 rounded" required>
                     </div>
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Save</button>
                 </form>
@@ -330,18 +444,18 @@
             }
         };
         toggleSidebar();
-    
+
         // Service Modal functions
         const openAddServiceModal = () => {
             const modal = document.getElementById('addServiceModal');
             if (modal) modal.style.display = 'block';
         };
-    
+
         const closeAddServiceModal = () => {
             const modal = document.getElementById('addServiceModal');
             if (modal) modal.style.display = 'none';
         };
-    
+
         const openEditServiceModal = (serviceId) => {
             fetch(`services/${serviceId}/edit`)
                 .then(response => response.json())
@@ -357,23 +471,23 @@
                 })
                 .catch(error => console.error('Error fetching service:', error));
         };
-    
+
         const closeEditServiceModal = () => {
             const modal = document.getElementById('editServiceModal');
             if (modal) modal.style.display = 'none';
         };
-    
+
         // Package Modal functions
         const openAddPackageModal = () => {
             const modal = document.getElementById('addPackageModal');
             if (modal) modal.style.display = 'block';
         };
-    
+
         const closeAddPackageModal = () => {
             const modal = document.getElementById('addPackageModal');
             if (modal) modal.style.display = 'none';
         };
-    
+
         const openEditPackageModal = (packageId) => {
             fetch(`/ark/admin/packages/${packageId}/edit`)
                 .then(response => response.json())
@@ -385,36 +499,36 @@
                         document.getElementById('editPackageDuration').value = package.duration;
                         document.getElementById('editPackagePrice').value = package.price;
                         document.getElementById('editPackageDescription').value = package.description;
-    
+
                         const serviceTypeSelect = document.getElementById('editServiceType');
                         const selectedServices = package.services.map(service => service._id);
                         Array.from(serviceTypeSelect.options).forEach(option => {
                             option.selected = selectedServices.includes(option.value);
                         });
-    
+
                         document.getElementById('editPackageForm').action = `packages/${package._id}?_method=PUT`;
                         modal.style.display = 'block';
                     }
                 })
                 .catch(error => console.error('Error fetching package:', error));
         };
-    
+
         const closeEditPackageModal = () => {
             const modal = document.getElementById('editPackageModal');
             if (modal) modal.style.display = 'none';
         };
-    
+
         // Add-on Modal functions
         const openAddAddonModal = () => {
             const modal = document.getElementById('addAddonModal');
             if (modal) modal.style.display = 'block';
         };
-    
+
         const closeAddAddonModal = () => {
             const modal = document.getElementById('addAddonModal');
             if (modal) modal.style.display = 'none';
         };
-    
+
         const openEditAddonModal = (addonId) => {
             fetch(`addons/${addonId}/edit`)
                 .then(response => response.json())
@@ -425,45 +539,44 @@
                         document.getElementById('editAddonName').value = addon.name;
                         document.getElementById('editAddonDescription').value = addon.description;
                         document.getElementById('editAddonPrice').value = addon.price;
-    
+
                         document.getElementById('editAddonForm').action = `addons/${addon._id}?_method=PUT`;
                         modal.style.display = 'block';
                     }
                 })
                 .catch(error => console.error('Error fetching add-on:', error));
         };
-    
+
         const closeEditAddonModal = () => {
             const modal = document.getElementById('editAddonModal');
             if (modal) modal.style.display = 'none';
         };
-    
+
         // Delete package function
         const deletePackage = (packageId) => {
             if (confirm('Are you sure you want to delete this package?')) {
                 fetch(`packages/${packageId}`, {
                     method: 'DELETE'
                 })
-                .then(response => window.location.reload())
-                .catch(error => console.error('Error deleting package:', error));
+                    .then(response => window.location.reload())
+                    .catch(error => console.error('Error deleting package:', error));
             }
         };
-    
+
         // Delete add-on function
         const deleteAddon = (addonId) => {
             if (confirm('Are you sure you want to delete this add-on?')) {
                 fetch(`addons/${addonId}`, {
                     method: 'DELETE'
                 })
-                .then(response => window.location.reload())
-                .catch(error => console.error('Error deleting add-on:', error));
+                    .then(response => window.location.reload())
+                    .catch(error => console.error('Error deleting add-on:', error));
             }
         };
     </script>
-    
-    
-    
+
+
+
 </body>
+
 </html>
-
-

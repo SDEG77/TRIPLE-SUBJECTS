@@ -5,14 +5,11 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon server.js",
-    
     "seed:admin": "node ./devTools/seeders/seedAdmin.js",
     "seed:addons": "node ./devTools/seeders/addonseeder.js",
     "seed:packages": "node ./devTools/seeders/packageseeder.js",
     "seed:services": "node ./devTools/seeders/serviceseeder.js",
-
     "seed:tables": "npm-run-all seed:addons seed:services seed:packages",
-    
     "fresh": "node ./devTools/freshMigrate.js"
   },
   "keywords": [],
@@ -25,7 +22,8 @@
     "express": "^4.21.0",
     "express-session": "^1.18.1",
     "method-override": "^3.0.0",
-    "mongoose": "^8.7.0"
+    "mongoose": "^8.7.2",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
