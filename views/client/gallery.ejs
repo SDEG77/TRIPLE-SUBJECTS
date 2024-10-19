@@ -63,17 +63,22 @@
         </div>
 
 
-        <div class="bg-[#F6DE03] p-4 rounded-[20px] w-fit md:w-3/4 py-10 px-8">
+        <div class="bg-[#F6DE03] p-4 rounded-[20px] h-[500px] overflow-auto w-fit md:w-3/4 py-10 px-8">
             <h1 class="text-[24px] text-[#121212] font-bold uppercase">Album</h1>
             <hr class="border-[2px] border-[#121212]">
             <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <img src="/assets/img/image.png" class="w-[200px]">
-                <img src="/assets/img/image.png" class="w-[200px]">
-                <img src="/assets/img/image.png" class="w-[200px]">
-                <img src="/assets/img/image.png" class="w-[200px]">
-                <img src="/assets/img/image.png" class="w-[200px]">
+                <% if (photo.length > 0) { %>
+                    <% photo.forEach(function(img) { %>
+                        <img src="/uploads/<%= img.filename %>" alt="<%= img.filename %>" class="w-[350px] h-auto hover:cursor-pointer hover:animate-pulse rounded-[15px]">
+                        <% }); %>
+                <% } else { %>
+                    <p>No photos available</p>
+                <% } %>
+                
             </div>
         </div>
+        
+        
     </div>
 
     <!-- Footer -->

@@ -14,6 +14,12 @@ class AdminController {
     // None found
     return 0;
   }
+  async totalImage() {
+    let total = await Image.find();
+    if (total) {
+      return total.length;
+    }
+  }
   async viewClients() {
     const users = await User.find();
 
@@ -63,16 +69,23 @@ class AdminController {
   }
 
   async viewPhotos() {
-    const photos = await Image.find(); // Fetch all images
-    return photos; // Return the images (could be empty if none found)
+    const photos = await Image.find();
+    return photos;
   }
 
   async viewClientImages(clientId) {
-    const images = await Image.find({ clientId: clientId }); // Filter by clientId
-    return images; // Return the images array (will be empty if none found)
+    const images = await Image.find({ clientId: clientId });
+    return images;
   }
-  
-  
+
+  //delete image
+  async deletePhoto(id) {
+    const image = await Image.findById(id);
+    if (!image) {
+      throw new Error("Image not found");
+    }
+    await Image.deleteOne({ _id: image._id });
+  }
 }
 
 const admin = new AdminController();

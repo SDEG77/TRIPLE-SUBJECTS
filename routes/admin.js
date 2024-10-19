@@ -46,10 +46,12 @@ route.get("/", async (req, res) => {
   if (req.session.isAdminLogged) {
     const totalClients = await AdminController.totalClients();
     const totalBookings = await AdminController.totalBookings();
+    const totalPhotos = await AdminController.totalImage();
 
     res.render("./admin/admin", {
       totalClients: totalClients,
       totalBookings: totalBookings,
+      totalPhotos: totalPhotos
     });
   } else {
     res.redirect("./login");
@@ -125,13 +127,32 @@ route.post("/bookings/remove", async (req, res) => {
 route.get("/photo-management", async (req, res) => {
   if (req.session.isAdminLogged) {
     const clients = await AdminController.viewClients();
-    const photos = await AdminController.viewPhotos(); // This should fetch all images
+    const photos = await AdminController.viewPhotos(); 
 
     res.render("./admin/photomanagement", { clients: clients, photos: photos });
   } else {
     res.redirect("./login");
   }
 });
+
+// routes.js or your route file
+
+route.post("/photo-management/delete", async (req, res) => {
+  console.log(req.body); 
+  if (req.session.isAdminLogged) {
+    try {
+      await AdminController.deletePhoto(req.body.id);
+      res.redirect("/ark/admin/photo-management");
+    } catch (error) {
+      console.error("Error deleting photo:", error);
+      res.redirect("/ark/admin/photo-management"); 
+    }
+  } else {
+    res.redirect("./login");
+  }
+});
+
+
 
 route.get("/logout", (req, res) => {
   if (req.session.isAdminLogged) {
