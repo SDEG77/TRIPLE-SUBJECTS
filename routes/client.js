@@ -4,10 +4,11 @@ const BookingController = require('../controllers/BookingController');
 const ServiceController = require('../controllers/ServicesController');
 const PackageController = require('../controllers/PackageController');
 const AddOnController = require('../controllers/AddOnController');
+const ClientController = require('../controllers/ClientController');
 
 route.get('/', (req, res) => {
   if (req.session.logged) {
-    res.render('client/index', {
+    res.render('client/index',  {
       name: req.session.name
     });
   } else {
@@ -105,16 +106,21 @@ route.get('/profile', (req, res) => {
   }
 });
 
-route.get('/gallery', (req, res) => {
-  if(req.session.logged) {
-    res.render('client/gallery', {
-      name: req.session.name,
-      email: req.session.email,
-    }); 
+route.get('/gallery', async (req, res) => {
+  if (req.session.logged) {
+      const clientId = req.session.userID;
+      const photo = await ClientController.viewPhotos(clientId);
+      res.render('client/gallery', {
+          name: req.session.name,
+          email: req.session.email,
+          photo: photo,
+      });
   } else {
-    res.redirect('../login')
+      res.redirect('../login');
   }
-});  
+});
+
+
 
 route.get('/logout', (req, res) => {
   if(req.session.logged) {
