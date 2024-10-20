@@ -31,8 +31,8 @@
 ## Landing Page
 - [ ] **PAGE FINISHED**
 > ***HEADER***
-- [ ] Replace the lorem ipsum from the yellow notif bar
-- [ ] Fix the close function for the yellow notification at the top of the page. **(The notif closes when you click any part of the div, which is wrong)**
+- [x] Replace the lorem ipsum from the yellow notif bar
+- [x] Fix the close function for the yellow notification at the top of the page. **(The notif closes when you click any part of the div, which is wrong)**
 - [ ] Give the "Login", "Get Started", and "Client" buttons hover effects
 - [ ] Give the "Ark Vision" an href to the #home section
 - [ ] Give all hrefs an active effect if clicked or window is currently viewing the section

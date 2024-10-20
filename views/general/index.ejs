@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,57 +11,90 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <title>Ark Vision</title>
 </head>
 <style>
-    *{
+    * {
         font-family: 'Poppins';
     }
-    header{
+
+    header {
         background-color: #F6DE03;
     }
-    body{
+
+    body {
         background-color: #121212;
     }
-    header button{
+
+    header button {
         border: 1px solid black;
     }
-    .island{
+
+    .island {
         font-family: 'Island Moments', cursive;
     }
 </style>
-<body class="overflow-x-hidden flex flex-col"> 
 
-    <header class="flex p-4 justify-center gap-10 items-center fixed top-0 left-0 right-0 z-30">
+<body class="overflow-x-hidden flex flex-col">
+
+    <header id="header"  class="flex p-4 justify-center gap-10 items-center fixed top-0 left-0 right-0 z-30">
         <p class="font-semibold">Capture your perfect moments with Ark Visions Photo Studio! Book now for an unforgettable experience.</p>
         <button class="p-2 rounded-[20px] text-sm"><a href="/ark/signup">Register now</a></button>
         <span class="text-3xl hover:cursor-pointer" id="close">&times;</span>
     </header>
     
 
-    
+
     <!-- Navigation Bar -->
-    <nav class="text-white flex justify-between px-[10%] items-center fixed top-[68px] left-0 right-0 z-30 p-4 bg-[#121212]" style="box-shadow: 0 2px 5px #f6de0336;">
+    <nav id="nav"
+        class="text-white flex justify-between px-[10%] items-center fixed top-[68px] left-0 right-0 z-30 p-4 bg-[#121212]"
+        style="box-shadow: 0 2px 5px #f6de0336;">
         <div class="logo">
             <h1 class="font-extrabold text-[#F6DE03] text-xl">ARK VISION</h1>
         </div>
 
-        <ul class="flex gap-14 uppercase">
+        <ul class="hidden lg:flex gap-14 uppercase">
             <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
             <li><a class="hover:text-[#F6DE03]" href="#services">Gallery</a></li>
             <li><a class="hover:text-[#F6DE03]" href="/ark/signup">Booking</a></li>
             <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
         </ul>
 
-        <div class="flex gap-5 items-center">
+        <div class="hidden lg:flex gap-5 items-center">
             <a class="px-8 py-1 text-center rounded-[20px] border-2 border-[#F6DE03]" href="/ark/login">LOGIN</a>
             <a class="px-4 py-1 text-center text-black rounded-[20px] bg-[#F6DE03]" href="/ark/signup">GET STARTED</a>
+        </div>
+
+        <div class="lg:hidden block">
+            <button id="hamburger" class="text-white focus:outline-none">
+                <!-- Simple icon using font-awesome or an SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="menu" class="hidden absolute top-[70px] bg-[#121212] w-full right-0 p-10">
+            <ul class=" flex flex-col gap-2 uppercase">
+                <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#services">Services</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+            </ul>
+
+            <div class="flex mt-2 gap-2">
+                <a class="px-8 py-1 text-center rounded-[20px] border-2 border-[#F6DE03]" href="/ark/login">LOGIN</a>
+                <a class="px-4 py-1 text-center text-black rounded-[20px] bg-[#F6DE03]" href="/ark/signup">GET
+                    STARTED</a>
+            </div>
         </div>
     </nav>
     <!-- End of Navigation Bar -->
 
-  <!-- Home -->
+<!-- Home -->
 <section id="home" class="scroll-mt-[200px] bg-cover bg-center" style="background-image: url('/assets/img/Homebg.jpg'); min-height: 100vh;">
     <div class="px-[10%] mt-[240px] flex-col-reverse gap-5 relative z-20 w-full">
         <div class="bg-black bg-opacity-0 p-8 rounded-lg" style="width: 1200px;">
@@ -77,56 +111,6 @@
         </div>
     </div>
 </section>
-<!-- End of Home -->
-     
-
-<!-- 
-<section id="about" class="-scroll-mt-[80px] bg-cover bg-center relative" style="background-image: url('/assets/img/couplebw.jpg'); min-height: 80vh;">
-    <div class="w-fit md:w-[800px] p-8 bg-black bg-opacity-0 rounded-lg pl-20 mt-52 ml-[1000px] items-end">
-        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
-         <p class="text-white font-light text-[24px] text-right">
-            Ark Visions Self Portrait Studio is a cutting-edge 
-            photography studio dedicated to providing a unique 
-            experience for every client. Our mission is to deliver 
-            high-quality self-portraits and professional shoots 
-            tailored to meet the needs and aspirations of our 
-            customers.
-        </p> 
-
-        <p class="text-white font-light mt-10 text-[24px] text-justify">
-            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
-
-        </p>
-    </div>
-<section id="about" class="-scroll-mt-[80px] flex items-center min-h-[80vh]">
-    <div class="w-1/2 flex justify-center items-center p-8">
-        <img src="/assets/img/couplebw.jpg" alt="Couple" class="rounded-full w-1/2 h-auto object-cover">
-    </div>
-    <div class="w-1/2 p-8">
-        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
-        <p class="text-white font-light mt-10 text-[24px] text-justify">
-            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
-        </p>
-    </div>
-</section> -->
-
-
-
-
-    <!-- <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
-        <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
-        <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
-    </div> -->
-</section>
-
-
-            <!-- <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
-            </div>
-        </div> -->
-    </section>
-    <!-- End of About Us -->
 
 <!-- SERVICES -->
 <section id="services" class="relative w-full">
@@ -214,14 +198,6 @@
 </div>
     </div>
 </section>
-
-
-  
-
-
-         
-      
-
 
 
   <!-- Services Overview with Featured Image and Avail Now Button -->
@@ -318,29 +294,29 @@
                     <li><a href="/ark/client/gallery" class="hover:text-[#F6DE03] text-white">Album</a></li>
                 </ul>
 
-                <div class="flex flex-col gap-3 ml-20">
-                    <h1 class="text-[#F6DE03] text-[20px]">Want To Get Start</h1>
-                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
-                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
-                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
-                </div>
-            </nav>
-        </footer>
-        <!-- End of Footer -->
+            <div class="flex flex-col gap-3 ml-20">
+                <h1 class="text-[#F6DE03] text-[20px]">Want To Get Start</h1>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png"
+                        class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100
+                </p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png"
+                        class="w-[20px] mr-2">044 511-5924</p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png"
+                        class="w-[20px] mr-2">arkvision@gmail.com</p>
+            </div>
+        </nav>
+    </footer>
+    <!-- End of Footer -->
 
 </body>
 
 <script>
-    document.getElementById("close").addEventListener("click", function(){
-        document.querySelector("header").style.display = "none";
+    let close = document.getElementById('close');
+    close.addEventListener('click', () => {
+        document.querySelector('#header').style.display = 'none';
+        document.querySelector('#nav').style.top = '0px';
     });
 
-     document.querySelector("header").addEventListener("click", function(){
-         document.querySelector("nav").style.top = "0px";
-    });
-
-
-    
     document.addEventListener('DOMContentLoaded', function() {
         let combinedSlide = 0;
         function moveCombinedCarousel(direction) {
@@ -364,5 +340,17 @@
         // Bind the function to the window so it can be accessed by the buttons
         window.moveCombinedCarousel = moveCombinedCarousel;
     });
+    
+    
+    let hamburger = document.getElementById('hamburger');
+    hamburger.addEventListener('click', () => {
+        let menu = document.querySelector('#menu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    });
 </script>
+
 </html>
