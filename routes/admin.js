@@ -9,6 +9,8 @@ const AddOnController = require("../controllers/AddOnController");
 
 
 const BookingController = require("../controllers/BookingController");
+const ContactController = require("../controllers/ContactController");
+
 
 // LOGIN ROUTES
 route.get("/login", (req, res) => {
@@ -152,13 +154,22 @@ route.post("/photo-management/delete", async (req, res) => {
   }
 });
 
-route.get("/feedback", (req, res) => {
+route.get('/feedback', async (req, res) => {
   if (req.session.isAdminLogged) {
-    res.render("./admin/feedback");
+    await ContactController.getFeedbacks(req, res); // Use the controller function to fetch feedbacks
   } else {
-    res.redirect("./login");
+    res.redirect('/login');
   }
 });
+
+
+
+// Route to handle the reply to feedback (POST request)
+route.post('/admin/feedback/reply', async (req, res) => {
+  if (req.session.isAdminLogged) {
+
+  await ContactController.replyToFeedback(req, res);
+}});
 
 
 
@@ -188,5 +199,7 @@ route.get("/resource", async (req, res) => {
     res.redirect("/login");
   }
 });
+
+
 
 module.exports = route;

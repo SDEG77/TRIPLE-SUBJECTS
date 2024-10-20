@@ -4,7 +4,7 @@ const ClientController = require('../controllers/ClientController');
 
 route.get('/', (req, res) => {
   if (req.session.logged) {
-    res.render('client/index', {
+    res.render('client/index',  {
       name: req.session.name
     });
   } else {

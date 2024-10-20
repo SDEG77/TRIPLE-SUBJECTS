@@ -11,81 +11,94 @@
     <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <title>Ark Vision</title>
 </head>
 <style>
-    *{
+    * {
         font-family: 'Poppins';
     }
-    header{
+    header {
         background-color: #F6DE03;
     }
-    body{
+    body {
         background-color: #121212;
     }
-    header button{
+    header button {
         border: 1px solid black;
     }
-    .island{
+    .island {
         font-family: 'Island Moments', cursive;
     }
+    .gallery-item {
+        transition: transform 0.2s ease-in-out;
+    }
+    .gallery-item:hover {
+        transform: scale(1.05);
+    }
 </style>
-<body class="overflow-x-hidden flex flex-col"> 
+<body class="overflow-x-hidden flex flex-col">
     <!-- Navigation Bar -->
     <%- include('../components/client-navbar') %>
 
-
-    <div class="flex flex-col mt-[150px] px-[15%] gap-10 md:flex-row items-center md:items-start md:justify-center ">
-        <div class="fle flex-col gap-5 bg-[#F6DE03] p-4 rounded-[20px] w-fit md:w-1/4 h-fit">
+    <!-- Container for sidebar and gallery -->
+    <div class="flex flex-col mt-[100px] px-[5%] gap-10 md:flex-row items-center md:items-start md:justify-center">
+        
+        <!-- Sidebar -->
+        <div class="fle flex-col gap-5 bg-[#1E1E1E]/0 p-4 rounded-[20px] w-fit md:w-1/6 h-fit">
             <div class="flex items-center gap-2">
                 <img src="/assets/img/image.png" class="w-[50px] rounded-[100%]">
                 <div>
-                    <h1 class="text-[12px]">
+                    <h1 class="text-[12px] text-white">
                         <% try{ %>
                             <%= name %>
                         <% }catch{} %>
                     </h1>
-                    <p class="text-[10px]">
+                    <p class="text-[10px] text-gray-400">
                         <% try{ %>
                             <%= email %>
                         <% }catch{} %>
                     </p>
                 </div>
             </div>
-            <hr class="border-[1px] border-[#121212] mt-5">
+            <hr class="border-[1px] border-gray-700 mt-5">
 
             <div class="flex flex-col gap-3">
-                <a href="/ark/client/profile" class="flex mt-5 hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/gallery" class="flex bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/login" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-power-off "></i>Logout</a>
+                <a href="/ark/client/profile" class="flex mt-5 hover:bg-gray-800 hover:text-white relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in text-gray-400">
+                    <i class="fa-solid fa-user"></i> My Profile 
+                    <span class="absolute right-2 text-[20px] bottom-1">></span>
+                </a>
+                <a href="/ark/client/gallery" class="flex bg-gray-800 text-white relative p-2 items-center gap-2">
+                    <i class="fa-solid fa-image"></i> Gallery 
+                    <span class="absolute right-2 text-[20px] bottom-1">></span>
+                </a>
+                <a href="/ark/login" class="flex hover:bg-gray-800 hover:text-white p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in text-gray-400">
+                    <i class="fa-solid fa-power-off "></i> Logout
+                </a>
             </div>
         </div>
 
-
-        <div class="bg-[#F6DE03] p-4 rounded-[20px] h-[500px] overflow-auto w-fit md:w-3/4 py-10 px-8">
-            <h1 class="text-[24px] text-[#121212] font-bold uppercase">Album</h1>
-            <hr class="border-[2px] border-[#121212]">
-            <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Gallery Section -->
+        <div class="p-4 rounded-[20px] h-[auto] w-full md:w-/4 py-10 px-8 bg-[#121212]">
+            <h1 class="text-[24px] text-white font-bold uppercase">Album</h1>
+            <hr class="border-[2px] border-gray-700">
+            <div class="mt-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 <% if (photo.length > 0) { %>
                     <% photo.forEach(function(img) { %>
-                        <img src="/uploads/<%= img.filename %>" alt="<%= img.filename %>" class="w-[350px] h-auto hover:cursor-pointer hover:animate-pulse rounded-[15px]">
-                        <% }); %>
+                        <div class="relative">
+                            <img src="/uploads/<%= img.filename %>" alt="<%= img.filename %>" class="gallery-item w-full h-auto object-cover">
+                        </div>
+                    <% }); %>
                 <% } else { %>
-                    <p>No photos available</p>
+                    <p class="text-gray-400">No photos available</p>
                 <% } %>
-                
             </div>
         </div>
-        
-        
     </div>
 
     <!-- Footer -->
     <%- include('../components/client-footer') %>
-
     <!-- End of Footer -->
 
-</body> 
-
+</body>
 </html>

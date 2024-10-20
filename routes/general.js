@@ -4,10 +4,12 @@ const User = require('../models/User');
 const adminAuth = require('../controllers/AdminAuth');
 const Admin = require('../models/Admin');
 const express = require('express');
+const contactController = require('../controllers/ContactController');
+
 
 
 route.get('/', (req, res) => {
-  res.render('./general/index');
+  res.render('./general/index', { success: null, error: null });
 });
 
 // SIGNUP ROUTES
@@ -80,6 +82,11 @@ route.get('/forgot/email', (req, res) => {
 route.get('/forgot/new', (req, res) => {
   res.render('./general/new-password');
 });
+
+// routes/contactRoutes.js
+
+
+route.post('/contact', contactController.submitContactForm);
 
 
 module.exports =  route;
