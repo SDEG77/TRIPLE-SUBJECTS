@@ -4,12 +4,15 @@ const bookingSchema = mongoose.Schema({
   client_id: String,
   package: String,
   service: String,
+  addOns: Array,
   date: Date,
   time: String,
   status: String,
   payment_status: String,
-  created_at: Date,
-  updated_at: Date,
+  total: String,
+
+  // created_at: Date,
+  // updated_at: Date,
 });
 
 

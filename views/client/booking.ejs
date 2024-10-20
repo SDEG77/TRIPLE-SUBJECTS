@@ -147,118 +147,41 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     <%- include('../components/client-navbar') %>
 
-
-    <!-- Services -->
     <h1 class="text-[#F6DE03] text-center text-[40px] mt-[120px]">Services</h1>
-    <p class="island text-center text-[#F6DE03] text-[40px]">Self Directed Portrait Digital</p>
-
-    <form action="/ark/client/booking" method="post"  class="flex flex-col justify-center gap-5 mt-10 px-[15%] relative">
+    
+    <form action="/ark/client/booking" method="post" class="flex flex-col justify-center gap-32 mt-10 px-[15%] relative">
         <input type="hidden" value="<%= id %>" name="id">
+        <input type="hidden" id="total" name="total">
+        <% services.map(service => { %>
+            <p class="island text-center text-[#F6DE03] text-[40px]"> <%= service.name %> </p>
+            
+            <div class="flex flex-col gap-10"> <!-- the grid's container -->            
+                <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> <!-- the grid itself -->
+                    <% groups.map(group => { %>
+                        <% if(group._id.serviceName === service.name){ %>
+                            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
+                                <% 
+                                    let locked; 
+                                %>                
+                                <% group.packages.map(package => { %>
+                                    <% if(!locked){ %>
+                                        <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold"> <%= package.name %> </h1>
+                                    <% } locked = true; %>
+                                    <div class="flex gap-2">
+                                        <input type="radio" name="service" id="<%= package.price %>" value="₱<%= package.price %> / <%= package.name %>-<%= package.duration %> / <%= service.name %>">
+                                        <h1 class="text-[#F6DE03] text-[30px] font-bold">₱<%= package.price %> - <%= package.duration %> MINS</h1>
+                                    </div>
+                                    <p class="text-[#F6DE03] text-[10px]"> <%= package.description %> </p>
+                                <% }) %> <!-- endPackageMap -->
+                            </div> <!-- endPackageDiv -->
+                        <% } %> <!-- endIf -->
+                    <% }) %> <!-- endGroupsMap -->
+                    </div> <!-- endGrid -->
+                </div> <!-- endGridContainer -->
+        <% }) %> <!-- endServicesMap -->
+    </form>
 
-        <!-- Packages -->
-        <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> 
-            <!-- Solo -->         
-            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">SOLO</h1>
-                <div class="flex gap-2">
-                    <input type="radio" name="service" value="₱299-15MINS" >
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-                <div class="flex gap-2">
-                    <input type="radio" name="service" value="₱299-15MINS" >
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-            </div>
-            <!-- End of Solo -->         
-
-            <!-- Duo -->
-            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">DUO</h1>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱456-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱456-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱654-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱654-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-            </div>
-            <!-- End of Duo -->
-
-            <!-- Group -->
-            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">GROUP</h1>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱789-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱789-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱987-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱987-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-            </div>
-            <!-- End of Group -->
-        </div>
-
-        <p class="island text-center text-[#F6DE03] mt-[60px] text-[40px]">Professional Directed Portrait Digital</p>
-
-        <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> 
-            <!-- Solo -->         
-            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">SOLO</h1>
-                <div class="flex gap-2">
-                    <input type="radio" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-                <div class="flex gap-2">
-                    <input type="radio" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱299-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-            </div>
-            <!-- End of Solo -->         
-
-            <!-- Duo -->
-            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">DUO</h1>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱456-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱456-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱654-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱654-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-            </div>
-            <!-- End of Duo -->
-
-            <!-- Group -->
-            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold">GROUP</h1>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱789-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱789-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-                <div class="flex gap-2">
-                    <input type="radio" value="₱987-15MINS" name="service">
-                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱987-15MINS</h1>
-                </div>
-                <p class="text-[#F6DE03] text-[10px]">(UNLI SHOT, GET ENHANCED PHOTO)</p>
-            </div>
-            <!-- End of Group -->
-        </div>
-
-        
+    
 
         <!-- Add On & Time -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 justify-around">
@@ -298,42 +221,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <div class="flex flex-col w-[330px]">
                 <div class="flex justify-between items-center">
                     <h1 class="text-[#F6DE03] text-[20px] font-regular">Additional</h1>
-                    <button id="selectAllBtn" class="text-[#F6DE03] text-[10px] px-2 py-1 border-[1px] border-[#F6DE03] rounded-[10px] font-regular">Select All</button>
+                    <button 
+                    id="selectAllBtn"
+                     class="z-10 text-[#F6DE03] text-[10px] px-2 py-1 border-[1px] border-[#F6DE03] rounded-[10px] font-regular"
+                    onmousedown="superChecker();"
+                    >
+                    Select All
+                </button>
                 </div>
 
                 <div class="flex flex-col bg-[#F6DE03] gap-4 py-4 px-4 rounded-[20px] mt-2">
-                    <div class="flex justify-between items-center">
-                        <div class="flex gap-2">
-                            <input type="checkbox" class="option-checkbox">
-                            <label for="" class="text-[12px]">Enhanced Photo</label>
+                    <% addOns.map(hamburger => { %>
+                        <div class="flex justify-between items-center">
+                            <div class="flex gap-2">
+                                <input value="<%= `${hamburger.price} - ${hamburger.description}` %>" name="addon[]" type="checkbox" class="option-checkbox">
+                                <label for="addon" class="text-[12px]"> <%= hamburger.description %> </label>
+                            </div>
+                            <p class="text-[12px]" id="addon-price">+ ₱<%= hamburger.price %></p>
                         </div>
-                        <p class="text-[12px]">+349</p>
-                    </div>
-                
-                    <div class="flex justify-between items-center">
-                        <div class="flex gap-2">
-                            <input type="checkbox" class="option-checkbox">
-                            <label for="" class="text-[12px]">Additional Pet</label>
-                        </div>
-                        <p class="text-[12px]">+349</p>
-                    </div>
-                
-                    <div class="flex justify-between items-center">
-                        <div class="flex gap-2">
-                            <input type="checkbox" class="option-checkbox">
-                            <label for="" class="text-[12px]">Additional Person</label>
-                        </div>
-                        <p class="text-[12px]">+349</p>
-                    </div>
-                
-                    <div class="flex justify-between items-center">
-                        <div class="flex gap-2">
-                            <input type="checkbox" class="option-checkbox">
-                            <label for="" class="text-[12px]">Additional 15mins</label>
-                        </div>
-                        <p class="text-[12px]">+499</p>
-                    </div>
-                </div>                
+                    <% }) %>
+                </div>
             </div>
             <!-- End of Additional -->
         </div>
@@ -344,7 +251,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <button type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
 
             <div class="flex flex-col md:flex-row gap-5">
-                <p class="font-semibold text-[#F6DE03]">Total Price:<span>Php 0,000.00</span></p>
+                <p class="font-semibold text-[#F6DE03]">Total Price: <span id="totalPrice" >₱ 0,000.00</span></p>
                 <div class="flex flex-col gap-2">
                     <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px] hover:bg-transparent hover:text-[#F6DE03] hover:border-[1px] hover:border-[#F6DE03] transition duration-200 ease-out hover:ease-in" >Book Now</button>
                     <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button>
@@ -381,13 +288,130 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
     <%- include('../components/client-footer') %>
-
-    <% try { %>
-    <div id="<%= message %>"  class="hidden"></div>
-    <% } catch{} %>
 </body>
 </html>
 
-<script src="/js/booking.js" >
-    
+<script src="/js/booking.js" ></script>
+<script>
+    const radios = document.querySelectorAll("input[type='radio']");
+    const checkboxess = document.querySelectorAll("input[type='checkbox']");
+    const totalPrice = document.getElementById('totalPrice');
+    const formTotal = document.getElementById('total');
+    let previousChosen = 0;
+
+    addEventListener("DOMContentLoaded", () => {
+        radios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                if(radio.checked) {
+                    let servicePrice = Number(radio.id);
+                    let total = Number(
+                        totalPrice.innerHTML
+                        .replace("+", '')
+                        .replace("₱", '')
+                        .replace(".00", '')
+                        .replace(/,/g, '')
+                    );
+
+                    total -= previousChosen;
+                    total += servicePrice;
+                    
+                    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(total)}`;
+                    formTotal.value = `₱ ${new Intl.NumberFormat('en-US').format(total)}`;
+
+                    previousChosen = servicePrice;
+                } 
+            })    
+        });
+
+        checkboxess.forEach(box => {
+            box.addEventListener("change", () => {
+                if(box.checked) {
+                    let total = Number(
+                        totalPrice.innerHTML
+                        .replace("+", '')
+                        .replace("₱", '')
+                        .replace(".00", '')
+                        .replace(/,/g, '')
+                    );
+                    let boxVal = box.value.split(" - ");
+                    boxVal = Number(
+                        boxVal[0]
+                        .replace("+", '')
+                        .replace("₱", '')
+                        .replace(".00", '')
+                        .replace(/,/g, '')
+                    );
+                    
+                    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(total + boxVal)}`;
+                    formTotal.value = `₱ ${new Intl.NumberFormat('en-US').format(total + boxVal)}`;
+                } else {
+                    let total = Number(
+                        totalPrice.innerHTML
+                        .replace("+", '')
+                        .replace("₱", '')
+                        .replace(".00", '')
+                        .replace(/,/g, '')
+                    );
+
+                    let boxVal = box.value.split(" - ");
+                    boxVal = Number(
+                        boxVal[0]
+                        .replace("+", '')
+                        .replace("₱", '')
+                        .replace(".00", '')
+                        .replace(/,/g, '')
+                    );
+                    
+                    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(total - boxVal)}`;
+                    formTotal.value = `₱ ${new Intl.NumberFormat('en-US').format(total - boxVal)}`;
+                }
+            })
+        });
+    });
+
+    let arr = [];
+    let countChecks = [];
+
+function superChecker() {
+    let currentTotal = Number(
+        totalPrice.innerHTML
+        .replace("₱", '')
+        .replace(/,/g, '') // Remove any commas for proper number parsing
+        .trim()
+    );  // Get the current total price
+
+    console.log("Initial total:", currentTotal); // Debugging log
+
+    checkboxess.forEach(box => {
+        let boxVal = box.value.split(" - ");
+        boxVal = Number(
+            boxVal[0]
+            .replace("+", '')
+            .replace("₱", '')
+            .replace(".00", '')
+            .replace(/,/g, '')
+        );
+
+        arr.push(boxVal);
+
+        if (box.checked) {
+            countChecks.push(1)
+        } else {
+            countChecks.pop()
+        }
+    });
+
+    let yahoo = countChecks.length;
+    let addToHTML = 0;
+
+    while(yahoo) {
+        addToHTML += arr[yahoo]
+
+        yahoo--
+    }
+
+    // Update the total price in the UI
+    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(addToHTML)}`;
+}
+
 </script>
