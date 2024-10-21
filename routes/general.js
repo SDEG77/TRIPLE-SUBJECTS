@@ -6,6 +6,8 @@ const Admin = require('../models/Admin');
 const express = require('express');
 const contactController = require('../controllers/ContactController');
 const Photo = require('../models/Photo');
+const ForgotPasswordController = require('../controllers/ForgotPasswordController');
+
 
 
 
@@ -97,18 +99,31 @@ route.get('/forgot', (req, res) => {
   res.render('./general/forgot-password');
 });
 
-route.get('/forgot/email', (req, res) => {
-  res.render('./general/email-verification');
-});
+// route.get('/forgot/email', (req, res) => {
+//   res.render('./general/email-verification');
+// });
 
-route.get('/forgot/new', (req, res) => {
-  res.render('./general/new-password');
-});
+// route.get('/forgot/new', (req, res) => {
+//   res.render('./general/new-password');
+// });
 
 // routes/contactRoutes.js
 
 
 route.post('/contact', contactController.submitContactForm);
+
+
+// Password reset request route
+route.post('/forgot-password', ForgotPasswordController.requestReset);
+
+// Password reset form (link in the email)
+// Password reset form (link in the email)
+route.get('/forgot/reset', ForgotPasswordController.resetPasswordForm);
+
+// Update password (after submitting the form)
+route.post('/forgot/new', ForgotPasswordController.updatePassword);
+
+
 
 
 module.exports =  route;

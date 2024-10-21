@@ -15,6 +15,11 @@ const resourceRoutes = require("./routes/resource");
 const uploadRoutes = require("./routes/upload");
 
 const PORT = process.env.PORT || 6969;
+const methodOverride = require('method-override');
+
+// Allow PUT/DELETE requests in forms with ?_method=PUT or ?_method=DELETE
+app.use(methodOverride('_method'));
+
 
 mongoose
   .connect(process.env.MONGO_URI)

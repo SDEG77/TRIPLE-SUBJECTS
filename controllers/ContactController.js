@@ -1,26 +1,34 @@
 const Contact = require('../models/Contact');
 const nodemailer = require('nodemailer');
 
+const Photo = require('../models/Photo');
+
 exports.submitContactForm = async (req, res) => {
     const { name, email, subject, message } = req.body;
 
     try {
         // Validate inputs
         if (!name || !email || !message) {
-            return res.render('index', { error: 'Please fill in all required fields.', success: null });
+            const photos = await Photo.find(); // Fetch photos for the index page
+            return res.render('general/index', { photos, error: 'Please fill in all required fields.', success: null });
         }
 
         // Save to the database
         const contact = new Contact({ name, email, subject, message });
         await contact.save();
 
-        // Render the view with a success message
-        res.render('general/index', { success: 'Your message has been sent successfully!', error: null });
+        // Fetch photos for the index page before rendering
+        const photos = await Photo.find(); 
+
+        // Render the view with a success message and photos
+        res.render('general/index', { photos, success: 'Your message has been sent successfully!', error: null });
     } catch (error) {
-        // Render the view with an error message
-        res.render('general/index', { error: 'Something went wrong. Please try again later.', success: null });
+        const photos = await Photo.find(); // Fetch photos in case of error as well
+        // Render the view with an error message and photos
+        res.render('general/index', { photos, error: 'Something went wrong. Please try again later.', success: null });
     }
 };
+
 
 
 // Fetch feedbacks for admin
