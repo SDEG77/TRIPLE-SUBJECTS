@@ -5,11 +5,22 @@ const adminAuth = require('../controllers/AdminAuth');
 const Admin = require('../models/Admin');
 const express = require('express');
 const contactController = require('../controllers/ContactController');
+const Photo = require('../models/Photo');
 
 
 
-route.get('/', (req, res) => {
-  res.render('./general/index', { success: null, error: null });
+
+route.get('/', async (req, res) => {
+  try {
+    // Fetch photos from the database
+    const photos = await Photo.find(); // Fetch all photos from the Photo model
+
+    // Render the index page with photos
+    res.render('./general/index', { photos, success: null, error: null });
+  } catch (error) {
+    console.error(error);
+    res.render('./general/index', { photos: [], success: null, error: 'Failed to load photos' });
+  }
 });
 
 // SIGNUP ROUTES

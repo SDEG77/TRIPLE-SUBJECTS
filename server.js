@@ -21,6 +21,8 @@ mongoose
   .then(() => {
     app.use(express.static(path.join(__dirname, "public")));
     app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+    app.use('/index_photos', express.static('index_photos'));
+
 
     app.set("view engine", "ejs");
     app.set("views", "./views");
