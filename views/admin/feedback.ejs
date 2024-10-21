@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="icon" href="pics/logo.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: "Poppins";
+            color: white;
+        }
+
+        body {
+            background-color: #121212;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            transition: margin-left 0.3s;
+        }
+
+        #sidebar {
+            background-color: #262626;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        .content {
+            flex: 1;
+            transition: margin-left 0.3s;
+            margin-left: 16rem;
+        }
+
+        .sidebar-hidden-content {
+            margin-left: 0;
+        }
+
+        .image-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 200px;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+        <div>
+            <div class="m-7 flex justify-center">
+                <img class="rounded-full w-28" src="/assets/logo.jpg" alt="Logo" />
+            </div>
+            <nav class="mt-10 border-t-4 border-yellow-500">
+                <a href="/ark/admin"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
+                </a>
+                <a href="/ark/admin/clients"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-users mr-4"></i> Clients
+                </a>
+                <a href="/ark/admin/bookings"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                </a>
+                <a href="/ark/admin/photo-management"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                </a>
+                <a href="/ark/admin/resource"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                </a>
+                <a href="/ark/admin/feedback"
+                    class="block py-4 px-5 rounded transition duration-200 text-black bg-yellow-500">
+                    <i class="fa-solid fa-message mr-4 text-black"></i> Feedback
+                </a>
+            </nav>
+        </div>
+        <div>
+            <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <main class="content h-[100vh] overflow-auto">
+        <button id="toggleSidebar" class="p-4 text-yellow-500">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="p-5 flex flex-col">
+            <h2 class="text-2xl font-semibold text-yellow-500">
+                Feedback
+            </h2>
+
+            <!-- Feedback Table -->
+            <table class="min-w-full border-collapse bg-transparent text-left text-sm text-gray-400 shadow-md">
+                <thead>
+                    <tr>
+                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Name</th>
+                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Email</th>
+                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Subject</th>
+                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Message</th>
+                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% feedbacks.forEach(function(feedback) { %>
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="border-b border-gray-700 p-4"><%= feedback.name %></td>
+                        <td class="border-b border-gray-700 p-4"><%= feedback.email %></td>
+                        <td class="border-b border-gray-700 p-4"><%= feedback.subject %></td>
+                        <td class="border-b border-gray-700 p-4"><%= feedback.message %></td>
+                        <td class="border-b border-gray-700 p-4">
+                            <!-- Button to trigger the reply modal -->
+                            <button class="reply-button bg-yellow-500 px-4 py-2 rounded" data-email="<%= feedback.email %>">
+                                Reply
+                            </button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Reply Modal -->
+        <div id="replyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div class="bg-gray-800 p-6 rounded-md">
+                <h3 class="text-yellow-500 text-xl mb-4">Reply to Feedback</h3>
+                <form id="replyForm" action="admin/feedback/reply" method="POST">
+                    <input type="hidden" id="emailInput" name="email">
+                    <textarea name="message" rows="5" class="w-full p-2 mb-4 text-black" placeholder="Type your reply..."></textarea>
+                    <button type="submit" class="bg-yellow-500 px-4 py-2 rounded">Send Reply</button>
+                    <button type="button" class="ml-2 bg-gray-500 px-4 py-2 rounded" id="closeModal">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const toggleButton = document.getElementById("toggleSidebar");
+        const content = document.querySelector(".content");
+        const replyButtons = document.querySelectorAll('.reply-button');
+        const replyModal = document.getElementById('replyModal');
+        const emailInput = document.getElementById('emailInput');
+        const closeModal = document.getElementById('closeModal');
+
+        toggleButton.addEventListener("click", () => {
+            sidebar.classList.toggle("sidebar-hidden");
+            content.classList.toggle("sidebar-hidden-content");
+        });
+
+        replyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const email = this.getAttribute('data-email');
+                emailInput.value = email;
+                replyModal.classList.remove('hidden');
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            replyModal.classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

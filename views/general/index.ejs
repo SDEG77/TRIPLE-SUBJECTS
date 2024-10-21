@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="/css/output.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>Ark Vision</title>
+</head>
+<style>
+    * {
+        font-family: 'Poppins';
+    }
+
+    header {
+        background-color: #F6DE03;
+    }
+
+    body {
+        background-color: #121212;
+    }
+
+    header button {
+        border: 1px solid black;
+    }
+
+    .island {
+        font-family: 'Island Moments', cursive;
+    }
+</style>
+
+<body class="overflow-x-hidden flex flex-col">
+
+    <header id="header"  class="flex p-4 justify-center gap-10 items-center fixed top-0 left-0 right-0 z-30">
+        <p class="font-semibold text-center">Capture your perfect moments with Ark Visions Photo Studio! Book now for an unforgettable experience.</p>
+        <button class="p-2 rounded-[20px] text-sm "><a href="/ark/signup">Register now</a></button>
+        <span class="text-3xl hover:cursor-pointer hover:text-rose-700" id="close">&times;</span>
+    </header>
+
+
+
+    <!-- Navigation Bar -->
+    <nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212]/50">
+        <div class="logo">
+            <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
+        </div>
+    
+        <ul class="hidden lg:flex gap-14 uppercase">
+            <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="#services">Gallery</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="/ark/client/booking">Booking</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+        </ul>
+        
+        
+        <div class="YAHOOO"></div>
+
+
+            <div class="lg:hidden block">
+                <button id="hamburger" class="text-white focus:outline-none">
+                    <!-- Simple icon using font-awesome or an SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+    
+            <div id="menu" class="hidden absolute top-[70.1px] bg-[#121212] w-full right-0 p-10 pl-[50px]"
+                style="box-shadow: 0px 5px 5px #f6de0336;">
+                <ul class=" flex flex-col gap-2 uppercase -mt-[20px]">
+                    <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+                    <li><a class="hover:text-[#F6DE03]" href="#services">Services</a></li>
+                    <li><a class="hover:text-[#F6DE03]" href="#pricing">Booking</a></li>
+                    <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+                </ul>
+            </div>
+    
+    
+        </nav>
+    <!-- End of Navigation Bar -->
+
+<!-- Home -->
+<section id="home" class="scroll-mt-[200px] bg-cover bg-center" style="background-image: url('/assets/img/Homebg.jpg'); min-height: 100vh;">
+    <div class="px-[10%] mt-[240px] flex-col-reverse gap-5 relative z-20 w-full">
+        <div class="bg-black bg-opacity-0 p-8 rounded-lg" style="width: 1200px;">
+            <span class="bg-[#F6DE03] px-4 rounded-[20px] font-bold text-sm md:text-lg">EASY SCHEDULING PHOTOSHOOT WITH ARK VISION</span>
+            <h1 class="text-white font-bold text-[60px]">Easy scheduling ahead for your needs</h1>
+            <p class="text-[#C2C1C1]">Ark vision is your scheduling automation platform <br>
+                for eliminating the back-and-forth emails for finding the <br>
+                perfect time - and so much more
+            </p>
+
+            <div class="mt-5 flex gap-5 items-center">    
+                <a class="px-4 py-1 text-center text-black rounded-[20px] text-2xl bg-[#F6DE03]" href="/ark/client/booking">Book Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="relative w-full">
+    <div class="w-full mt-10 mb-10 flex flex-col items-center">
+        <h1 class="text-center text-white font-regular text-[40px] mb-8">Gallery</h1>
+
+        <!-- Carousel Container -->
+        <div class="relative w-full overflow-hidden">
+            <!-- Services Cards (Now Displaying 13 Car Photos) -->
+            <div class="flex gap-6 transition-transform duration-500" id="combinedCarousel">
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car.jpg" alt="Car 1">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (1).jpg" alt="Car 1">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (2).jpg" alt="Car 2">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (3).jpg" alt="Car 3">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (4).jpg" alt="Car 4">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (5).jpg" alt="Car 5">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (6).jpg" alt="Car 6">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (7).jpg" alt="Car 7">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (8).jpg" alt="Car 8">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (9).jpg" alt="Car 9">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (10).jpg" alt="Car 10">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (11).jpg" alt="Car 11">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (12).jpg" alt="Car 12">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (13).jpg" alt="Car 13">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (14).jpg" alt="Car 14">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (15).jpg" alt="Car 15">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (16).jpg" alt="Car 16">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (17).jpg" alt="Car 17">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (18).jpg" alt="Car 18">
+                </div>
+                <div class="w-[500px] flex-shrink-0">
+                    <img class="w-full h-[710px] object-cover" src="/assets/img/car (19).jpg" alt="Car 19">
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <!-- Left Arrow -->
+    <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#F6DE03]/0 w-16 h-16 rounded-full invert" onclick="moveCombinedCarousel(-1)">
+        <span class="text-4xl">&#9664;</span>
+    </button>
+ 
+ <!-- Right Arrow -->
+ <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#F6DE03]/0 px-2 py-2 rounded-full invert pr-12" onclick="moveCombinedCarousel(1)">
+    <span class="text-4xl">&#9654;</span>
+ </button>
+</div>
+    </div>
+</section>
+
+
+  <!-- Services Overview with Featured Image and Avail Now Button -->
+<section id="services-overview" class="scroll-mt-[140px] text-center py-10 bg-[#000000]">
+    <h1 class="text-white text-center text-[40px]">Our Packages</h1>
+    <p class="text-yellow-400 mt-5 mb-10 px-4 md:px-[10%]">
+        Explore our self-directed and professional photoshoot packages designed to meet your needs. Whether you're looking for a solo session, a duo shoot, or a group experience, we’ve got the perfect package for you!
+    </p>
+
+    <!-- Featured Image -->
+    <div class="relative w-full h-[600px] mb-10">
+        <img class="w-full h-full object-cover" src="/assets/img/cover.jpg" alt="Featured Photoshoot">
+        <!-- <div class="absolute inset-0 flex items-center justify-center">
+            <button class="px-8 py-4 bg-[#F6DE03] text-black font-bold text-lg rounded-[20px]">
+                <a href="/ark/client/booking">AVAIL NOW</a>
+            </button>
+        </div> -->
+    </div>
+
+    <!-- Call to Action Button (Optional if you want another button under the image) -->
+    <button class="px-8 py-4 bg-[#F6DE03] text-black font-bold text-2xl rounded-[20px]">
+        <a href="/ark/client/booking">AVAIL NOW</a>
+    </button>
+</section>
+
+<section id="about" class="-scroll-mt-[80px] ml-24 flex space-x-64 items-center min-h-[80vh]">
+    <div class="flex justify-center items-center p-8 pl-11">
+        <!-- Circular image with glow and border -->
+        <div class="relative ml-40 w-[500px]">
+            <img src="/assets/img/profile3.jpg" alt="Couple" class="rounded-full h-auto object-cover border-4 border-[#F6DE03] shadow-xs shadow-[#F6DE03]/50">
+            <!-- Optional glow effect around the image -->
+            <!-- <div class="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6DE03] to-transparent blur-md opacity-50"></div> -->
+        </div>
+    </div>
+    <div class="w-1/2 pr-16">
+        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
+        <p class="text-white font-light mt-10 text-[24px] text-left pr-24">
+            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
+        </p>
+    </div>
+</section>
+
+
+
+       <!-- Contact Us Form -->
+<h1 class="text-[#F6DE03] text-center text-[40px] mt-[40px]">Get in touch</h1>
+<p class="text-center text-[42px] text-white mb-8">Contact us</p>
+
+<div class="justify-center gap-20 flex p-8 rounded-[25px] w-fit self-center" style="box-shadow: 0 0 5px #f6de038d;">
+
+    <!-- Alert for success -->
+    <!-- <% if (success) { %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+    <% } %> -->
+
+    <!-- Alert for error -->
+    <!-- <% if (error) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+    <% } %> -->
+
+    <div class="flex flex-col gap-3">
+        <img src="/assets/img/image 8.png" class="w-[450px]">
+        <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
+        <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
+        <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
+    </div>
+
+    <form action="contact" method="POST" class="flex flex-col gap-2 w-[350px] p-5 rounded-[25px]" style="box-shadow: 0 0 5px #f6de038d;">
+        <h1 class="text-[#FFFFFF] font-semibold tracking-widest mb-5">SEND US A MESSAGE</h1>
+        <input type="text" name="name" placeholder="Name" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3" required>
+        <input type="email" name="email" placeholder="Email" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3" required>
+        <input type="text" name="subject" placeholder="Subject" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3">
+        <textarea name="message" placeholder="Message" class="bg-transparent outline-none text-white rounded-[15px] h-[100px] p-2 mb-3" style="box-shadow: 0 0 5px #f6de0365;" required></textarea>
+
+        <button type="submit" class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">SUBMIT</button>
+    </form>
+</div>
+<!-- End of Contact Us Form -->
+
+
+
+        <!-- Footer -->
+        <footer class="px-[10%] pt-8 w-full mt-64" style="box-shadow: 0 0 5px #f6de038d;">
+            <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
+                <h1 class="text-[#F6DE03] text-[26px] uppercase font-extrabold text-center md:text-left">Ark Vision</h1>
+            
+                <ul class="flex justify-around mb-10 md:mb-0 uppercase items-center">
+                    <li><a href="/ark/client" class="hover:text-[#F6DE03] text-white">Home</a></li>
+                    <li><a href="/ark/client/booking" class="hover:text-[#F6DE03] text-white">Booking</a></li>
+                    <li><a href="/ark/client/gallery" class="hover:text-[#F6DE03] text-white">Album</a></li>
+                </ul>
+
+            <div class="flex flex-col gap-3 ml-20">
+                <h1 class="text-[#F6DE03] text-[20px]">Want To Get Start</h1>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png"
+                        class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100
+                </p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png"
+                        class="w-[20px] mr-2">044 511-5924</p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png"
+                        class="w-[20px] mr-2">arkvision@gmail.com</p>
+            </div>
+        </nav>
+    </footer>
+    <!-- End of Footer -->
+
+</body>
+
+<script>
+    let close = document.getElementById('close');
+    close.addEventListener('click', () => {
+        document.querySelector('#header').style.display = 'none';
+        document.querySelector('#nav').style.top = '0px';
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let combinedSlide = 0;
+        function moveCombinedCarousel(direction) {
+            const carousel = document.getElementById('combinedCarousel');
+            const totalSlides = carousel.children.length;
+            const cardWidth = 500; // 300px is the width of each card
+            combinedSlide += direction;
+
+            // Ensure the slide index stays within bounds
+            if (combinedSlide < 0) {
+                combinedSlide = totalSlides - 1;
+            } else if (combinedSlide >= totalSlides) {
+                combinedSlide = 0;
+            }
+
+            // Update the carousel's transform property to slide
+            const offset = -combinedSlide * cardWidth;
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Bind the function to the window so it can be accessed by the buttons
+        window.moveCombinedCarousel = moveCombinedCarousel;
+    });
+    
+    
+    let hamburger = document.getElementById('hamburger');
+    hamburger.addEventListener('click', () => {
+        let menu = document.querySelector('#menu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    });
+</script>
+
+</html>

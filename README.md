@@ -92,12 +92,12 @@
 
 ---
 ## FORGOT PASSWORD PAGE
-- [ ] Improve the UX of this page
-- [ ] Make all of the links easier to read
-- [ ] Give focus effect for all inputs
-- [ ] Give the submit button a hover effect
-- [ ] Add more padding to submit button
-- [ ] **FINISHED ALL TASKS**
+- [X] Improve the UX of this page
+- [X] Make all of the links easier to read
+- [X] Give focus effect for all inputs
+- [X] Give the submit button a hover effect
+- [X] Add more padding to submit button
+- [X] **FINISHED ALL TASKS**
 
 ---
 
@@ -164,11 +164,16 @@
 ---
 
 # BACKENDS (TODOS)
+<<<<<<< HEAD
 - [X] ***BACKEND FINISHED***
+=======
+- [ ] ***BACKEND FINISHED***
+>>>>>>> c6b1515a8baf3f05ab00a7dd36cee3e41bc36a1e
 
 ---
 
 ## Landing Page
+<<<<<<< HEAD
 - [X] **LANDING PAGE FINISHED**
 
 > ***HEADER***
@@ -178,6 +183,17 @@
 > ***CONTACT US SECTION***
 - [X] Make the form submission functional
 - [X] **CONTACT US FINISHED**
+=======
+- [ ] **LANDING PAGE FINISHED**
+
+> ***HEADER***
+- [ ] Make the register notif disappear once logged in
+- [ ] **HEADER FINISHED**
+
+> ***CONTACT US SECTION***
+- [ ] Make the form submission functional
+- [ ] **CONTACT US FINISHED**
+>>>>>>> c6b1515a8baf3f05ab00a7dd36cee3e41bc36a1e
 
 ---
 ## Register Page

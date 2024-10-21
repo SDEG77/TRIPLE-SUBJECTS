@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" href="pics/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Poppins';
+            color: white;
+        }
+
+        body {
+            background-color: #121212;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            transition: margin-left 0.3s;
+        }
+
+        #sidebar {
+            background-color: #262626;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        .content {
+            flex: 1;
+            transition: margin-left 0.3s;
+            margin-left: 16rem;
+        }
+
+        .sidebar-hidden-content {
+            margin-left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+
+        <div>
+            <div class="m-7 flex justify-center">
+                <img class="rounded-full w-28" src="assets/logo.jpg" alt="Logo">
+            </div>
+
+            <nav class="mt-10 border-t-4 border-yellow-500">
+                <a href="/ark/admin"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
+                </a>
+                <a href="/ark/admin/clients"
+                    class="block py-4 px-5 rounded transition duration-200  bg-yellow-500 text-gray-800">
+                    <i class="fa-solid fa-users mr-4 text-gray-800"></i> Clients
+                </a>
+                <a href="/ark/admin/bookings"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                </a>
+                <a href="/ark/admin/photo-management"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                </a>
+
+                <a href="/ark/admin/resource"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                </a>
+                <a href="/ark/admin/feedback"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-message mr-4"></i> Feedback
+                </a>
+            </nav>
+        </div>
+
+        <div>
+            <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <main class="content">
+        <button id="toggleSidebar" class="p-4 text-yellow-500">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="p-5">
+            <h2 class="text-2xl font-semibold text-yellow-500">Clients</h2>
+        </div>
+        <!-- Table Section -->
+        <div class="mt-6 m-5">
+            <% if(clients) { %>
+                <table class="min-w-full bg-gray-800 border border-gray-800">
+                    <thead>
+                        <tr class="bg-gray-800">
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">ID</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Username</th>
+                            <th class="py-2 px-4 border-b border-gray-600 text-left">Email Address</th>
+                            <th colspan="100" class="py-2 px-4 border-b border-gray-600 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let yah="py-2 px-4 border-b border-gray-600" ; %>
+
+                            <% clients.map((client)=> { %>
+                                <tr class="odd:bg-gray-700 even:bg-gray-700">
+                                    <td class="<%= yah %>">
+                                        <%= client._id %>
+                                    </td>
+                                    <td class="<%= yah %>">
+                                        <%= client.fname %>
+                                            <%= client.lname %>
+                                    </td>
+                                    <td class="<%= yah %>">
+                                        <%= client.email %>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-600 flex justify-center gap-4">
+                                        <form action="/ark/admin/clients" method="post">
+                                            <input type="hidden" value="<%= client._id %>" name="id">
+
+                                            <button onclick="!confirm('You sure?') && event.preventDefault()"
+                                                type="submit"
+                                                class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
+                                                <i class="fa-solid fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+        </div>
+    </main>
+
+    <script>
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggleSidebar');
+        const content = document.querySelector('.content');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+            content.classList.toggle('sidebar-hidden-content');
+        });
+    </script>
+</body>
+
+</html>
