@@ -74,3 +74,34 @@ exports.deletePackage = async (req, res) => {
     res.status(500).send('Error deleting package');
   }
 };
+
+exports.groupPackages = async () => {
+  try {
+    const groupedPackages = await Package.aggregate([
+      {
+        $lookup: {          
+          from: 'services',             
+          localField: 'services',       
+          foreignField: '_id',          
+          as: 'serviceDetails'     
+        }
+      },
+      { 
+        $unwind: '$serviceDetails' 
+      },
+      {
+        $group: {
+          _id: {
+            packageName: '$name',              
+            serviceName: '$serviceDetails.name' 
+          },
+          packages: { $push: '$$ROOT' }        
+        }
+      }, 
+    ]);
+
+    return groupedPackages;
+  } catch (error) {
+    console.error('Error grouping packages:', error);
+  }
+}

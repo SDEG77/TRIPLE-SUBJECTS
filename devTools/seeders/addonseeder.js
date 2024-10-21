@@ -40,6 +40,7 @@ const addOnData = [
 
 async function seedAddOns() {
   try {
+    await AddOn.deleteMany({});
     await AddOn.insertMany(addOnData);
     console.log('Add-ons seeded successfully!');
     mongoose.connection.close(); // Close the connection after seeding

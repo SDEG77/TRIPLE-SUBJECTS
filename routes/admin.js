@@ -157,12 +157,11 @@ route.post("/photo-management/delete", async (req, res) => {
 route.get('/feedback', async (req, res) => {
   if (req.session.isAdminLogged) {
     await ContactController.getFeedbacks(req, res); // Use the controller function to fetch feedbacks
+    // res.render("./admin/feedback");
   } else {
     res.redirect('/login');
   }
 });
-
-
 
 // Route to handle the reply to feedback (POST request)
 route.post('/admin/feedback/reply', async (req, res) => {
@@ -196,10 +195,8 @@ route.get("/resource", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   } else {
-    res.redirect("/login");
+    res.redirect('./login');
   }
 });
-
-
 
 module.exports = route;
