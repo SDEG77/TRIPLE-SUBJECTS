@@ -33,7 +33,9 @@ mongoose
         secret: process.env.WEB_KEY,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false },
+        cookie: {
+          // maxAge: 24 * 60 * 60 * 1000  // 24 hours by default
+        },
       })
     );
 

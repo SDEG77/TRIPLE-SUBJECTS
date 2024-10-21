@@ -43,33 +43,44 @@ route.get('/login', (req, res) => {
 
 let loginMiddleware;
 
+
 route.post('/login', async (req, res) => {
   const logger = await LoggerController.login({
     email: req.body.email,
     password: req.body.password,
   });
-  
-  if(logger) {
+
+  if (logger) {
     const credentials = await User.find({ email: req.body.email });
 
+    // Set session values
     req.session.userID = credentials[0]._id.toString();
     req.session.name = `${credentials[0].fname.toUpperCase()} ${credentials[0].lname.toUpperCase()}`;
     req.session.email = credentials[0].email;
     req.session.logged = true;
     loginMiddleware = true;
 
+    // Handle "Remember Me" functionality
+    if (req.body.remember) {
+      // If "Remember Me" is checked, set cookie maxAge to 30 days
+      req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
+    } else {
+      // If not checked, set cookie to expire when the browser is closed (default behavior)
+      req.session.cookie.expires = false;
+    }
+
     res.redirect('/ark/client');
-    // console.log('general was true')
   } else {
-    // console.log('general was false')
+    // If login fails
     req.session.logged = false;
-    
+
     res.render('./general/login', {
       message: '(Password was incorrect!)',
       email: req.body.email,
     });
   }
-})
+});
+
 
 route.get('/forgot', (req, res) => {
   res.render('./general/forgot-password');
