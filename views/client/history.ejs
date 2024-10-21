@@ -112,73 +112,60 @@
             <hr class="border-[1px] border-[#121212] mt-5">
 
             <div class="flex flex-col gap-3">
-                <a href="/ark/client/profile" class="flex mt-5 bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
+                <a href="/ark/client/profile" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
                 <a href="/ark/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/history" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-clock-rotate-left"></i>History <span class="absolute right-2 text-[20px] bottom-1">></span></a>
+                <a href="/ark/client/history" class="flex bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-clock-rotate-left"></i>History <span class="absolute right-2 text-[20px] bottom-1">></span></a>
                 <a href="/ark/client/logout" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-power-off "></i>Logout</a>
             </div>
         </div>
 
 
-        <div class="bg-[#F6DE03] p-4 rounded-[20px] w-fit md:w-3/4 py-3 px-8">
+        <div class="bg-[#F6DE03]  rounded-[20px] w-fit md:w-3/4  px-8">
+             <!-- Booking History -->
+            <section class=" mb-10">
+                <h2 class="text-[22px] font-bold mb-6 text-[#F6DE03]">Booking History</h2>
+                <div class="flex flex-col gap-5">
+                   
+                    <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div class="md:w-3/4">
+                            <h3 class="text-xl font-semibold">Service: Duo 100 mins</h3>
+                            <p class="text-sm text-gray-400">Additionals: Add 10 minutes to session duration (Self-Directed)</p>
+                            <p class="text-sm text-gray-400">Date & Time: October 22, 2024, 10:00 AM - 12:00 PM</p>
+                            <p class="text-sm text-gray-400">Total Price: ₱15,000</p>
+                         
+                        </div>
+                        <span class="mt-4 md:mt-0 text-sm bg-green-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Completed</span>
+                    </div>
+                    
 
-            <div class="flex justify-between md:items-center md:flex-row flex-col">
-                <div class="flex items-center gap-2 mt-4">
-                    <img src="/assets/img/image.png" class="w-[50px] rounded-[100%]">
-                    <div>
-                        <h1 class="text-[15px]">
-                            <% try{ %>
-                                <%= name %>
-                            <% }catch{} %>
-                        </h1>
-                        <p class="text-[13px]">
-                            <% try{ %>
-                                <%= email %>
-                            <% }catch{} %>
-                        </p>
+                    <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div class="md:w-3/4">
+                            <h3 class="text-xl font-semibold">Service: Solo 20 mins</h3>
+                            <p class="text-sm text-gray-400">Additionals: Get all enhanced photos</p>
+                            <p class="text-sm text-gray-400">Date & Time: October 23, 2024, 2:00 PM - 3:00 PM</p>
+                            <p class="text-sm text-gray-400">Total Price: ₱5,000</p>
+                     
+                        </div>
+                        <span class="mt-4 md:mt-0 text-sm bg-yellow-500 text-black py-2 px-4 rounded-md shadow w-[120px] text-center">Pending</span>
+                    </div>
+            
+                    <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div class="md:w-3/4">
+                            <h3 class="text-xl font-semibold">Service: Group 30 mins</h3>
+                            <p class="text-sm text-gray-400">Additionals: 
+                                Add an extra person to the session</p>
+                            <p class="text-sm text-gray-400">Date & Time: October 24, 2024, 9:00 AM - 10:00 PM</p>
+                            <p class="text-sm text-gray-400">Total Price: ₱10,000</p>
+            
+                        </div>
+                        <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Canceled</span>
                     </div>
                 </div>
-                <p class="flex gap-2 border-b-[1px] border-[#121212] text-[15px] font-semibold mt-5">Schedule Status:<span>Pending</span></p>
-            </div>
-
-            <div>
-                <div class="mt-10 p-4 flex justify-between items-center border-[1px] border-t-[#121212] border-b-[#121212] border-r-[#F6DE03] border-l-[#F6DE03]">
-                    <h1>Name</h1>
-                    <p>John Michael</p>
-                </div>
-                <div class="p-4 flex justify-between items-center border-[1px] border-t-[#F6DE03] border-b-[#121212] border-r-[#F6DE03] border-l-[#F6DE03]">
-                    <h1>Email</h1>
-                    <p>johnmichaeljonatas@gmail.com</p>
-                </div>
-                <div class="p-4 flex justify-between items-center border-[1px] border-t-[#F6DE03] border-b-[#121212] border-r-[#F6DE03] border-l-[#F6DE03]">
-                    <h1>Password</h1>
-                    <div class="flex items-center">
-                        <p id="password" class="mr-2">**********</p>
-                        <button id="togglePassword" class="focus:outline-none">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center mt-[50px]">
-                    <button class="edit-btn border-b-[2px] border-[#121212] text-[#121212] font-semibold flex items-center gap-2 h-fit mb-5" id="editProfileBtn"><i class="fa-solid fa-pencil"></i>Edit Profile</button>
-                </div>
-
-                <!-- Edit Profile Modal -->
-                <div id="editProfileModal" class="modal">
-                    <div class="modal-content">
-                        <h2>Edit Profile</h2>
-                        <form action="#" method="POST">
-                            <input type="text" name="" placeholder="Enter your name" required>
-                            <input type="email" name="" placeholder="Enter your email" required>
-                            <input type="password" name="" placeholder="Enter your password" required>
-                            <button type="submit">Save Changes</button>
-                            <button type="button" class="close-btn" id="closeModalBtn">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- End of Edit Profile Modal -->
-
+            </section>
+            
+            
+            
+            
             </div>
         </div>
     </div>

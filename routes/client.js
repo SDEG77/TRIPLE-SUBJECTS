@@ -177,4 +177,12 @@ route.get('/logout', (req, res) => {
   }
 });
 
+route.get('/history', (req, res) => {
+  if(req.session.logged) {
+    res.render('client/history')
+  } else {
+    res.redirect('../login')
+  }
+});
+
 module.exports = route;
