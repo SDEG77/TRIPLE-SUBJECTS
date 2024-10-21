@@ -155,7 +155,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         <% services.map(service => { %>
             <p class="island text-center text-[#F6DE03] text-[40px]"> <%= service.name %> </p>
             
-            <div class="flex flex-col gap-10"> <!-- the grid's container -->            
                 <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> <!-- the grid itself -->
                     <% groups.map(group => { %>
                         <% if(group._id.serviceName === service.name){ %>
@@ -168,7 +167,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                                         <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold"> <%= package.name %> </h1>
                                     <% } locked = true; %>
                                     <div class="flex gap-2">
-                                        <input type="radio" name="service" id="<%= package.price %>" value="₱<%= package.price %> / <%= package.name %>-<%= package.duration %> / <%= service.name %>">
+                                        <input required type="radio" name="service" id="<%= package.price %>" value="₱<%= package.price %> / <%= package.name %>-<%= package.duration %> / <%= service.name %>">
                                         <h1 class="text-[#F6DE03] text-[30px] font-bold">₱<%= package.price %> - <%= package.duration %> MINS</h1>
                                     </div>
                                     <p class="text-[#F6DE03] text-[10px]"> <%= package.description %> </p>
@@ -177,11 +176,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                         <% } %> <!-- endIf -->
                     <% }) %> <!-- endGroupsMap -->
                     </div> <!-- endGrid -->
-                </div> <!-- endGridContainer -->
         <% }) %> <!-- endServicesMap -->
-    </form>
-
-    
 
         <!-- Add On & Time -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 justify-around">
@@ -201,10 +196,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <div class="flex flex-col">
                 <div class="flex flex-col">
                     <label for="date" class="mb-3 text-[#F6DE03] text-[20px]">Date</label>
-                    <input name="date" type="date">
+                    <input required name="date" type="date">
                 </div>
                 
-                <select name="time" id="" class="mt-5 bg-transparent rounded-[10px] px-4 py-[5px] text-white w-[250px]" style="box-shadow: 0 0 5px #f6de038d;">
+                <select required name="time" id="" class="mt-5 bg-transparent rounded-[10px] px-4 py-[5px] text-white w-[250px]" style="box-shadow: 0 0 5px #f6de038d;">
                     <option selected disabled value="unset" class="bg-[#121212] text-white">Select Time</option>
                     <option value="8:00 AM to 9:00 AM" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
                     <option value="9:00 AM to 10:00 AM" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
@@ -221,7 +216,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <div class="flex flex-col w-[330px]">
                 <div class="flex justify-between items-center">
                     <h1 class="text-[#F6DE03] text-[20px] font-regular">Additional</h1>
-                    <button 
+                    <button  type="button"
                     id="selectAllBtn"
                      class="z-10 text-[#F6DE03] text-[10px] px-2 py-1 border-[1px] border-[#F6DE03] rounded-[10px] font-regular"
                     onmousedown="superChecker();"
@@ -234,10 +229,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                     <% addOns.map(hamburger => { %>
                         <div class="flex justify-between items-center">
                             <div class="flex gap-2">
-                                <input value="<%= `${hamburger.price} - ${hamburger.description}` %>" name="addon[]" type="checkbox" class="option-checkbox">
+                                <input value="<%= `${hamburger.price} - ${hamburger.description}` %>" data-previous-state="0" name="addon[]" type="checkbox" class="option-checkbox">
                                 <label for="addon" class="text-[12px]"> <%= hamburger.description %> </label>
                             </div>
-                            <p class="text-[12px]" id="addon-price">+ ₱<%= hamburger.price %></p>
+                            <p class="text-[12px]" id="addon-price" >
+                                + ₱<%= hamburger.price %>
+                            </p>
                         </div>
                     <% }) %>
                 </div>
@@ -247,17 +244,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
         <hr class="border-[1px] border-[#F6DE03] mt-5">
 
-        <div class="flex justify-between flex-col md:flex-row">
+        <div class="flex justify-between items-center flex-col md:flex-row fixed bottom-0 left-0 w-full py-4 px-10 bg-[#121212] border-t-2 border-[#F6DE03]">
             <button type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
 
             <div class="flex flex-col md:flex-row gap-5">
-                <p class="font-semibold text-[#F6DE03]">Total Price: <span id="totalPrice" >₱ 0,000.00</span></p>
-                <div class="flex flex-col gap-2">
+                <p class="font-semibold text-[#F6DE03] flex items-center">Total Price: <span class="pl-2" id="totalPrice" >₱ 0,000.00</span></p>
+                <div class="flex gap-2">
                     <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px] hover:bg-transparent hover:text-[#F6DE03] hover:border-[1px] hover:border-[#F6DE03] transition duration-200 ease-out hover:ease-in" >Book Now</button>
                     <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button>
                 </div>
             </div>
         </div>
+
+    </form>
 
         <!-- Gcash Modal -->
         <div id="myModal" class="modal">
@@ -291,127 +290,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 </body>
 </html>
 
-<script src="/js/booking.js" ></script>
-<script>
-    const radios = document.querySelectorAll("input[type='radio']");
-    const checkboxess = document.querySelectorAll("input[type='checkbox']");
-    const totalPrice = document.getElementById('totalPrice');
-    const formTotal = document.getElementById('total');
-    let previousChosen = 0;
-
-    addEventListener("DOMContentLoaded", () => {
-        radios.forEach(radio => {
-            radio.addEventListener("change", () => {
-                if(radio.checked) {
-                    let servicePrice = Number(radio.id);
-                    let total = Number(
-                        totalPrice.innerHTML
-                        .replace("+", '')
-                        .replace("₱", '')
-                        .replace(".00", '')
-                        .replace(/,/g, '')
-                    );
-
-                    total -= previousChosen;
-                    total += servicePrice;
-                    
-                    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(total)}`;
-                    formTotal.value = `₱ ${new Intl.NumberFormat('en-US').format(total)}`;
-
-                    previousChosen = servicePrice;
-                } 
-            })    
-        });
-
-        checkboxess.forEach(box => {
-            box.addEventListener("change", () => {
-                if(box.checked) {
-                    let total = Number(
-                        totalPrice.innerHTML
-                        .replace("+", '')
-                        .replace("₱", '')
-                        .replace(".00", '')
-                        .replace(/,/g, '')
-                    );
-                    let boxVal = box.value.split(" - ");
-                    boxVal = Number(
-                        boxVal[0]
-                        .replace("+", '')
-                        .replace("₱", '')
-                        .replace(".00", '')
-                        .replace(/,/g, '')
-                    );
-                    
-                    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(total + boxVal)}`;
-                    formTotal.value = `₱ ${new Intl.NumberFormat('en-US').format(total + boxVal)}`;
-                } else {
-                    let total = Number(
-                        totalPrice.innerHTML
-                        .replace("+", '')
-                        .replace("₱", '')
-                        .replace(".00", '')
-                        .replace(/,/g, '')
-                    );
-
-                    let boxVal = box.value.split(" - ");
-                    boxVal = Number(
-                        boxVal[0]
-                        .replace("+", '')
-                        .replace("₱", '')
-                        .replace(".00", '')
-                        .replace(/,/g, '')
-                    );
-                    
-                    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(total - boxVal)}`;
-                    formTotal.value = `₱ ${new Intl.NumberFormat('en-US').format(total - boxVal)}`;
-                }
-            })
-        });
-    });
-
-    let arr = [];
-    let countChecks = [];
-
-function superChecker() {
-    let currentTotal = Number(
-        totalPrice.innerHTML
-        .replace("₱", '')
-        .replace(/,/g, '') // Remove any commas for proper number parsing
-        .trim()
-    );  // Get the current total price
-
-    console.log("Initial total:", currentTotal); // Debugging log
-
-    checkboxess.forEach(box => {
-        let boxVal = box.value.split(" - ");
-        boxVal = Number(
-            boxVal[0]
-            .replace("+", '')
-            .replace("₱", '')
-            .replace(".00", '')
-            .replace(/,/g, '')
-        );
-
-        arr.push(boxVal);
-
-        if (box.checked) {
-            countChecks.push(1)
-        } else {
-            countChecks.pop()
-        }
-    });
-
-    let yahoo = countChecks.length;
-    let addToHTML = 0;
-
-    while(yahoo) {
-        addToHTML += arr[yahoo]
-
-        yahoo--
-    }
-
-    // Update the total price in the UI
-    totalPrice.innerHTML = `₱ ${new Intl.NumberFormat('en-US').format(addToHTML)}`;
-}
-
-</script>
+<script src="/js/booking(pesco).js" ></script>
+<script src="/js/booking(sigrae).js"></script>
