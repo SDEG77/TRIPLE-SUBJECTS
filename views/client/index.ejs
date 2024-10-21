@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <title>Ark Vision</title>
 </head>
 <style>
-    *{
+    * {
         font-family: 'Poppins';
     }
-    header{
+
+    header {
         background-color: #F6DE03;
     }
     body{
@@ -26,8 +30,7 @@
         border: 1px solid rgb(0, 0, 0);
     }
 
-    .island{
-
+    .island {
         font-family: 'Island Moments', cursive;
     }
 </style>
@@ -38,22 +41,57 @@
         <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
     </div>
 
-    <ul class="flex gap-14 uppercase">
+    <ul class="hidden lg:flex gap-14 uppercase">
         <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
         <li><a class="hover:text-[#F6DE03]" href="#services">Gallery</a></li>
         <li><a class="hover:text-[#F6DE03]" href="/ark/client/booking">Booking</a></li>
         <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
     </ul>
 
-    <div class="flex gap-5 items-center">
-        <a class="w-fit px-2 py-2 text-center text-yellow-400 rounded-[20px] bg-[#f5d939]/0 font-bold" href="/ark/client/profile">
-            <% try{ %>
-            <%= name %>
-            <% }catch{} %>
-        </a>
-    </div>
-</nav>
-<!-- End of Navigation Bar -->
+        <div class="hidden lg:flex gap-5 items-center">
+            <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold"
+                href="/ark/client/profile">
+
+                <% try{ %>
+                    <%= name %>
+                        <% }catch{} %>
+            </a>
+        </div>
+
+        <div class="lg:hidden block">
+            <button id="hamburger" class="text-white focus:outline-none">
+                <!-- Simple icon using font-awesome or an SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="menu" class="hidden absolute top-[70.1px] bg-[#121212] w-full right-0 p-10 pl-[50px]"
+            style="box-shadow: 0px 5px 5px #f6de0336;">
+            <ul class=" flex flex-col gap-2 uppercase -mt-[20px]">
+                <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#services">Services</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#pricing">Booking</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+            </ul>
+
+            <div class="flex gap-5 items-center mt-3">
+                <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold"
+                    href="/ark/client/profile">
+
+                    <% try{ %>
+                        <%= name %>
+                            <% }catch{} %>
+                </a>
+            </div>
+
+        </div>
+
+
+    </nav>
+    <!-- End of Navigation Bar -->
 
 <!-- Home -->
 <section id="home" class="scroll-mt-[200px] bg-cover bg-center" style="background-image: url('/assets/img/Homebg.jpg'); min-height: 100vh;">
@@ -74,54 +112,6 @@
 </section>
 <!-- End of Home -->
      
-
-<!-- 
-<section id="about" class="-scroll-mt-[80px] bg-cover bg-center relative" style="background-image: url('/assets/img/couplebw.jpg'); min-height: 80vh;">
-    <div class="w-fit md:w-[800px] p-8 bg-black bg-opacity-0 rounded-lg pl-20 mt-52 ml-[1000px] items-end">
-        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
-         <p class="text-white font-light text-[24px] text-right">
-            Ark Visions Self Portrait Studio is a cutting-edge 
-            photography studio dedicated to providing a unique 
-            experience for every client. Our mission is to deliver 
-            high-quality self-portraits and professional shoots 
-            tailored to meet the needs and aspirations of our 
-            customers.
-        </p> 
-
-        <p class="text-white font-light mt-10 text-[24px] text-justify">
-            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
-
-        </p>
-    </div>
-<section id="about" class="-scroll-mt-[80px] flex items-center min-h-[80vh]">
-    <div class="w-1/2 flex justify-center items-center p-8">
-        <img src="/assets/img/couplebw.jpg" alt="Couple" class="rounded-full w-1/2 h-auto object-cover">
-    </div>
-    <div class="w-1/2 p-8">
-        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
-        <p class="text-white font-light mt-10 text-[24px] text-justify">
-            At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
-        </p>
-    </div>
-</section> -->
-
-
-
-
-    <!-- <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
-        <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
-        <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
-    </div> -->
-</section>
-
-
-            <!-- <div class="flex justify-center gap-2 absolute -bottom-[120px] right-20 left-20">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-10">
-                <hr class="border-2 border-[#F6DE03] rounded-[20px] w-3">
-            </div>
-        </div> -->
-    </section>
-    <!-- End of About Us -->
 
 <!-- SERVICES -->
 <section id="services" class="relative w-full">
@@ -288,37 +278,43 @@
 <!-- End of Contact Us Form -->
 
 
-        <!-- Footer -->
-        <footer class="px-[10%] pt-8 w-full mt-64" style="box-shadow: 0 0 5px #f6de038d;">
-            <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-                <h1 class="text-[#F6DE03] text-[26px] uppercase font-extrabold text-center md:text-left">Ark Vision</h1>
-            
-                <ul class="flex justify-around mb-10 md:mb-0 uppercase items-center">
-                    <li><a href="/ark/client" class="hover:text-[#F6DE03] text-white">Home</a></li>
-                    <li><a href="/ark/client/booking" class="hover:text-[#F6DE03] text-white">Booking</a></li>
-                    <li><a href="/ark/client/gallery" class="hover:text-[#F6DE03] text-white">Album</a></li>
-                </ul>
+    <!-- Footer -->
+    <footer class="px-[10%] pt-8 w-full mt-64" style="box-shadow: 0 0 5px #f6de038d;">
+        <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
+            <h1 class="text-[#F6DE03] text-[26px] uppercase font-extrabold text-center md:text-left">Ark Vision</h1>
 
-                <div class="flex flex-col gap-3 ml-20">
-                    <h1 class="text-[#F6DE03] text-[20px]">Want To Get Start</h1>
-                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
-                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
-                    <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
-                </div>
-            </nav>
-        </footer>
-        <!-- End of Footer -->
+            <ul class="flex justify-around mb-10 md:mb-0 uppercase items-center">
+                <li><a href="/ark/client" class="hover:text-[#F6DE03] text-white">Home</a></li>
+                <li><a href="/ark/client/booking" class="hover:text-[#F6DE03] text-white">Booking</a></li>
+                <li><a href="/ark/client/gallery" class="hover:text-[#F6DE03] text-white">Album</a></li>
+            </ul>
+
+            <div class="flex flex-col gap-3 ml-20">
+                <h1 class="text-[#F6DE03] text-[20px]">Want To Get Start</h1>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png"
+                        class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100
+                </p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png"
+                        class="w-[20px] mr-2">044 511-5924</p>
+                <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png"
+                        class="w-[20px] mr-2">arkvision@gmail.com</p>
+            </div>
+        </nav>
+    </footer>
+    <!-- End of Footer -->
 
 </body>
 
 <script>
-    // document.getElementById("close").addEventListener("click", function(){
-    //     document.querySelector("header").style.display = "none";
-    // });
-
-    // document.querySelector("header").addEventListener("click", function(){
-    //     document.querySelector("nav").style.top = "0px";
-    // });
+    let hamburger = document.getElementById('hamburger');
+    hamburger.addEventListener('click', () => {
+        let menu = document.querySelector('#menu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    });
 
 
     
@@ -346,4 +342,5 @@
         window.moveCombinedCarousel = moveCombinedCarousel;
     });
 </script>
+
 </html>

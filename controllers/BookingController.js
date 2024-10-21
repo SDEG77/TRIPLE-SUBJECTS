@@ -2,10 +2,20 @@ const Booking = require('../models/Booking');
 
 class BookingController {
   async store(params) {
+    let newArr = []; 
+    
+    if(params.addOns){
+      params.addOns.forEach(add => {
+        newArr.push(add.split(" - ")[1])
+      });
+    }
+
     try {
       await Booking.insertMany({
         client_id: params.client_id,
         service: params.service,
+        total: params.total,
+        addOns: newArr,
         date: params.date,
         time: params.time,
         status: "Pending",

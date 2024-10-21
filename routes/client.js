@@ -21,41 +21,41 @@ route.get('/booking', async (req, res) => {
   const groups = await PackageController.groupPackages();
   const addOns = await AddOnController.getAddOns();
 
-  // groups.map(grp => {
-  //   grp.packages.map(pkg => {
-  //     console.log(`${pkg.name} and is in ${pkg.services}`)
-  //   })
-  // })
+  // RENDER FIELDS BATTALION
+  const rendID = req.session.userID;
+  const rendName = req.session.name;
+  const rendServices = services;
+  const rendAddOns = addOns;
+  const rendGroups = groups.sort((a, b) => {
+    const priority = ['solo', 'duo', 'group', 'specials'];
+  
+    const aName = a._id.packageName.toLowerCase();
+    const bName = b._id.packageName.toLowerCase();
+  
+    // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
+    const aPriority = priority.indexOf(aName);
+    const bPriority = priority.indexOf(bName);
+  
+    // If aName or bName has a priority, sort based on that
+    if (aPriority !== -1 && bPriority !== -1) {
+      return aPriority - bPriority;
+    } else if (aPriority !== -1) {
+      return -1; // aName has priority
+    } else if (bPriority !== -1) {
+      return 1; // bName has priority
+    }
+  
+    // else, fall back to good ol' localeCompare
+    return aName.localeCompare(bName);
+  });
 
   if(req.session.logged) {
     res.render('client/booking', {
-      id: req.session.userID,
-      name: req.session.name,
-      services: services,
-      addOns: addOns,
-      groups: groups.sort((a, b) => {
-        const priority = ['solo', 'duo', 'group', 'specials'];
-      
-        const aName = a._id.packageName.toLowerCase();
-        const bName = b._id.packageName.toLowerCase();
-      
-        // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
-        const aPriority = priority.indexOf(aName);
-        const bPriority = priority.indexOf(bName);
-      
-        // If aName or bName has a priority, sort based on that
-        if (aPriority !== -1 && bPriority !== -1) {
-          return aPriority - bPriority;
-        } else if (aPriority !== -1) {
-          return -1; // aName has priority
-        } else if (bPriority !== -1) {
-          return 1; // bName has priority
-        }
-      
-        // else, fall back to good ol' localeCompare
-        return aName.localeCompare(bName);
-      }),
-      
+      id: rendID,
+      name: rendName,
+      services: rendServices,
+      addOns: rendAddOns,
+      groups: rendGroups,
     });
   } else {
     res.redirect('../login')
@@ -63,6 +63,38 @@ route.get('/booking', async (req, res) => {
 });
 
 route.post('/booking', async (req, res) => {
+  const services = await ServiceController.getServices();
+  const groups = await PackageController.groupPackages();
+  const addOns = await AddOnController.getAddOns();
+
+  // RENDER FIELDS BATTALION
+  const rendID = req.session.userID;
+  const rendName = req.session.name;
+  const rendServices = services;
+  const rendAddOns = addOns;
+  const rendGroups = groups.sort((a, b) => {
+    const priority = ['solo', 'duo', 'group', 'specials'];
+  
+    const aName = a._id.packageName.toLowerCase();
+    const bName = b._id.packageName.toLowerCase();
+  
+    // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
+    const aPriority = priority.indexOf(aName);
+    const bPriority = priority.indexOf(bName);
+  
+    // If aName or bName has a priority, sort based on that
+    if (aPriority !== -1 && bPriority !== -1) {
+      return aPriority - bPriority;
+    } else if (aPriority !== -1) {
+      return -1; // aName has priority
+    } else if (bPriority !== -1) {
+      return 1; // bName has priority
+    }
+  
+    // else, fall back to good ol' localeCompare
+    return aName.localeCompare(bName);
+  });
+
   let success;
   
   if(req.session.logged) {
@@ -71,6 +103,8 @@ route.post('/booking', async (req, res) => {
       service: req.body.service,
       date: req.body.date,
       time: req.body.time,
+      total: req.body.total,
+      addOns: req.body.addon,
     });
   } 
   
@@ -80,17 +114,21 @@ route.post('/booking', async (req, res) => {
 
   if(success) {
     res.render('client/booking', {
-      id: req.session.userID,
-      name: req.session.name,
       message: "Booking Successful",
-      id: req.session.userID,
+      id: rendID,
+      name: rendName,
+      services: rendServices,
+      addOns: rendAddOns,
+      groups: rendGroups,
     });
   } else {
     res.render('client/booking', {
-      id: req.session.userID,
-      name: req.session.name,
       message: "Booking Unsuccessful",
-      id: req.session.userID,
+      id: rendID,
+      name: rendName,
+      services: rendServices,
+      addOns: rendAddOns,
+      groups: rendGroups,    
     });
   }
 });
@@ -131,6 +169,17 @@ route.get('/logout', (req, res) => {
         res.redirect('../login')
       }
     }); 
+  } else {
+    res.redirect('../login')
+  }
+});
+
+route.get('/history', (req, res) => {
+  if(req.session.logged) {
+    res.render('client/history', {
+      name: req.session.name, 
+      id: req.session.userID,
+    })
   } else {
     res.redirect('../login')
   }

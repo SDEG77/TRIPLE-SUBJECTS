@@ -56,16 +56,3 @@ window.onclick = function(event) {
         receiptModal.classList.remove("show");
     }
 }
-
-const selectAllBtn = document.getElementById("selectAllBtn");
-const checkboxes = document.querySelectorAll(".option-checkbox");
-
-selectAllBtn.onclick = function() {
-    const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-    
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = !allChecked;
-    });
-
-    selectAllBtn.textContent = allChecked ? "Select All" : "Deselect All";
-}
