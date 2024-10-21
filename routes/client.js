@@ -98,9 +98,6 @@ route.post('/booking', async (req, res) => {
   let success;
   
   if(req.session.logged) {
-    console.log(req.body.total)
-    console.log(req.body.addon)
-
     success = await BookingController.store({
       client_id: req.body.id,
       service: req.body.service,
@@ -179,7 +176,10 @@ route.get('/logout', (req, res) => {
 
 route.get('/history', (req, res) => {
   if(req.session.logged) {
-    res.render('client/history')
+    res.render('client/history', {
+      name: req.session.name, 
+      id: req.session.userID,
+    })
   } else {
     res.redirect('../login')
   }
