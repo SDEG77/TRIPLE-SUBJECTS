@@ -18,8 +18,8 @@ class BookingController {
         addOns: newArr,
         date: params.date,
         time: params.time,
-        status: "Pending",
-        payment_status: "Pending",
+        status: "pending",
+        payment_status: "pending",
       });
 
       return true;

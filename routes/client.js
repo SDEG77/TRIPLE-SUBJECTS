@@ -6,15 +6,32 @@ const PackageController = require('../controllers/PackageController');
 const AddOnController = require('../controllers/AddOnController');
 const ClientController = require('../controllers/ClientController');
 
-route.get('/', (req, res) => {
+const Photo = require('../models/Photo');
+
+route.get('/', async (req, res) => {
   if (req.session.logged) {
-    res.render('client/index',  {
-      name: req.session.name
-    });
+    try {
+      // Fetch photos from the database
+      const photos = await Photo.find();
+
+      // Render the client index page with the user's name and the photos
+      res.render('client/index', {
+        name: req.session.name,
+        photos: photos
+      });
+    } catch (error) {
+      console.error(error);
+      res.render('client/index', {
+        name: req.session.name,
+        photos: photos, // Send an empty array if there's an error fetching photos
+        error: 'Failed to load photos'
+      });
+    }
   } else {
-    res.redirect('./login')
+    res.redirect('./login');
   }
 });
+
 
 route.get('/booking', async (req, res) => {
   const services = await ServiceController.getServices();

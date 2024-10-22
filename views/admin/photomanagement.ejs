@@ -68,39 +68,41 @@
       </div>
       <nav class="mt-10 border-t-4 border-yellow-500">
         <a href="/ark/admin"
-          class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
-          <i class="fa-solid fa-house mr-4"></i> Dashboard
+        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+        <i class="fa-solid fa-house mr-4"></i> Dashboard
         </a>
         <a href="/ark/admin/clients"
-          class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
-          <i class="fa-solid fa-users mr-4"></i> Clients
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            <i class="fa-solid fa-users mr-4"></i> Clients
         </a>
         <a href="/ark/admin/bookings"
-          class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
-          <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
         </a>
+        <a href="/ark/admin/indexmanager"
+        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+        <i class="fa-solid fa-images mr-4"></i> Index Manager
         <a href="/ark/admin/photo-management"
-          class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-yellow-500">
+          class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
           <i class="fa-solid fa-image mr-4 text-gray-800"></i> Photo
           Management
         </a>
         <a href="/ark/admin/resource"
-          class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
-          <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            <i class="fa-solid fa-box mr-4"></i> Resource Control Center
         </a>
         <a href="/ark/admin/feedback"
-          class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
-          <i class="fa-solid fa-message mr-4"></i> Feedback
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            <i class="fa-solid fa-message mr-4"></i> Feedback
         </a>
-      </nav>
-    </div>
-    <div>
-      <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+    </nav>
+</div>
+<div>
+    <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
         <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
-      </a>
-    </div>
-  </div>
-
+    </a>
+</div>
+</div>
   <main class="content h-[100vh] overflow-auto">
     <button id="toggleSidebar" class="p-4 text-yellow-500">
       <i class="fa-solid fa-bars"></i>
@@ -114,38 +116,35 @@
       <div class="mt-4 space-y-6">
         <% clients.forEach(function(client) { %>
           <div class="border border-gray-700 p-4 rounded-lg bg-gray-700">
-            <h3 class="text-[12px] font-regular">CLIENT'S ID: <%= client.id %>
-            </h3>
+            <h3 class="text-[12px] font-regular">CLIENT'S ID: <%= client.id %></h3>
             <p class="text-[20px] font-semibold uppercase text-[#F6DE03] tracking-tight">
-              Client's Name: <%= client.fname %>
-                <%= client.lname %>
+              Client's Name: <%= client.fname %> <%= client.lname %>
             </p>
-
+        
             <form action="/ark/upload-image" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="clientId" value="<%= client.id %>" />
-
+        
               <div class="mt-4">
-                <input type="file" id="uploadImageClient<%= client.id %>" name="image" accept="image/*"
-                  class="hidden" />
+                <input type="file" id="uploadImageClient<%= client.id %>" name="image" multiple accept="image/*" class="hidden" />
                 <label for="uploadImageClient<%= client.id %>"
                   class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-                  <i class="fa-solid fa-upload"></i> Upload Image
+                  <i class="fa-solid fa-upload"></i> Upload Images
                 </label>
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded ml-4">
-                  <i class="fa-solid fa-upload"></i> Submit Image
+                  <i class="fa-solid fa-upload"></i> Submit Images
                 </button>
               </div>
-              <img id="imagePreviewClient<%= client.id %>" class="image-preview" alt="Image Preview" />
+        
+              <!-- Image preview container -->
+              <div id="imagePreviewContainerClient<%= client.id %>" class="image-preview-container grid grid-cols-6 gap-2 mt-4"></div>
             </form>
-
-            <h1 class="mt-5 uppercase text-[#F6DE03] font-bold tracking-[2px]">
-              Client's Album
-            </h1>
-
+        
+            <h1 class="mt-5 uppercase text-[#F6DE03] font-bold tracking-[2px]">Client's Album</h1>
+        
             <div class="grid grid-cols-6 gap-1 mt-4">
               <% let hasPhotos = false; %>
               <% photos.forEach(function(photo) { %>
-                <% if (photo.clientId.toString()===client.id.toString()) { %>
+                <% if (photo.clientId.toString() === client.id.toString()) { %>
                   <div class="relative">
                     <img src="<%= '/uploads/' + photo.filename %>" alt="Client Photo"
                       class="w-[200px] hover:grayscale h-auto rounded-lg" />
@@ -160,39 +159,39 @@
                   <% hasPhotos = true; %>
                 <% } %>
               <% }) %>
-            
+        
               <% if (!hasPhotos) { %>
                 <p class="col-span-6 text-gray-500">No photos uploaded yet for this client.</p>
               <% } %>
             </div>
-            
           </div>
-
+        
           <script>
             document.addEventListener("DOMContentLoaded", function () {
-              const fileInput = document.getElementById(
-                "uploadImageClient<%= client.id %>"
-              );
-              const previewImage = document.getElementById(
-                "imagePreviewClient<%= client.id %>"
-              );
-
+              const fileInput = document.getElementById("uploadImageClient<%= client.id %>");
+              const previewContainer = document.getElementById("imagePreviewContainerClient<%= client.id %>");
+        
               fileInput.addEventListener("change", function () {
-                const file = fileInput.files[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = "block";
-                  };
-                  reader.readAsDataURL(file);
-                } else {
-                  previewImage.style.display = "none";
+                const files = fileInput.files;
+                previewContainer.innerHTML = ""; 
+        
+                if (files.length > 0) {
+                  Array.from(files).forEach((file) => {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                      const imgElement = document.createElement("img");
+                      imgElement.src = e.target.result;
+                      imgElement.classList.add("w-[250px]", "h-auto", "rounded-lg");
+                      previewContainer.appendChild(imgElement);
+                    };
+                    reader.readAsDataURL(file);
+                  });
                 }
               });
             });
           </script>
-          <% }) %>
+        <% }) %>
+        
       </div>
     </div>
   </main>

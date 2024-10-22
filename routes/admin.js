@@ -1,5 +1,5 @@
-const route = require('express').Router();
-const AdminAuth = require('../controllers/AdminAuth');
+const route = require("express").Router();
+const AdminAuth = require("../controllers/AdminAuth");
 
 const Admin = require("../models/Admin");
 const AdminController = require("../controllers/AdminController");
@@ -10,6 +10,8 @@ const AddOnController = require("../controllers/AddOnController");
 
 const BookingController = require("../controllers/BookingController");
 const ContactController = require("../controllers/ContactController");
+const PhotoController = require('../controllers/PhotoController');
+
 
 
 // LOGIN ROUTES
@@ -189,7 +191,7 @@ route.get("/resource", async (req, res) => {
       const packages = await PackageController.getPackages(req, res);
       const addOns = await AddOnController.getAddOns(req, res);
 
-      res.render("admin/resource", { services, packages, addOns });
+      res.render("admin/resource", { services, packages, addOns, });
     } catch (error) {
       console.error("Error rendering resource page:", error);
       res.status(500).send("Internal Server Error");
@@ -199,4 +201,18 @@ route.get("/resource", async (req, res) => {
   }
 });
 
+
+route.get('/indexmanager', async (req, res) => {
+  if (req.session.isAdminLogged) {
+    await PhotoController.listPhotos(req, res); // Use the controller function to list photos
+  } else {
+    res.redirect('/ark/admin/login');
+  }
+});
+
+// Route to add a new photo (handle file upload)
+route.post('/indexmanager/add', PhotoController.addPhoto);
+
+// Route to delete a photo
+route.post('/indexmanager/delete', PhotoController.deletePhoto);
 module.exports = route;
