@@ -180,11 +180,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"> 
                 <% groups.map(group => { %>
                     <% if(group._id.serviceName === service.name){ %>
-                        <div class="bg-[#121212] border border-yellow-400 rounded-lg p-6 transition-shadow hover:shadow-lg">
+                        <div class="bg-[#121212] border border-yellow-400 rounded-lg p-6 transition-all hover:scale-105 hover:shadow-lg  hover:text-[#121212]">
                             <% let locked; %>                
                             <% group.packages.map(package => { %>
                                 <% if(!locked){ %>
-                                    <h3 class="text-2xl font-bold text-white text-center"><%= package.name %></h3>
+                                    <h3 class="text-2xl font-bold text-white text-center "><%= package.name %></h3>
                                 <% } else {   %>
                                     <hr>
                                 <% } %>
@@ -206,7 +206,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             <% addOns.map(hamburger => { %>
             <!-- Get all enhanced photos -->
-            <div class="bg-[#121212] border border-yellow-400 rounded-lg p-6 transition-shadow hover:shadow-lg">
+            <div class="bg-[#121212] border border-yellow-400 rounded-lg p-6 transition-all hover:scale-105 hover:shadow-lg  hover:text-[#121212]">
                 <h3 class="text-2xl font-bold text-white text-center"><%= hamburger.description %></h3>
                 <p class="text-center text-gray-400 mt-4">+ ₱<%= hamburger.price %></p>
             </div>
