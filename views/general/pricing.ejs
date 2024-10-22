@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="/css/output.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Ark Vision</title>
+</head>
+<style>
+    *{
+        font-family: 'Poppins';
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; 
+        height: 100%; 
+        font-family: 'Poppins';
+    }
+    header{
+        background-color: #F6DE03;
+    }
+    body{
+        background-color: #121212;
+    }
+    header button{
+        border: 1px solid black;
+    }
+    .island{
+        font-family: 'Island Moments', cursive;
+    }
+    .pricingcard:hover {
+    color: black;
+    }
+    input[type="radio"] {
+        accent-color: #F6DE03;
+        width: 20px;
+        border: 1px solid #F6DE03;
+    }
+    input[type="checkbox"] {
+        accent-color: black;
+        width: 20px;
+    }
+    input[type="date"] {
+        width: 250px;
+        background-color: transparent;
+        box-shadow: 0 0 5px #f6de038d;
+        padding: 5px;
+        border-radius: 10px;
+        color: #ffffff;
+    }
+    * {
+    font-family: 'Poppins';
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+header {
+    background-color: #F6DE03;
+}
+
+body {
+    background-color: #121212;
+}
+
+header button {
+    border: 1px solid black;
+}
+
+.island {
+    font-family: 'Island Moments', cursive;
+}
+
+.pricingcard:hover {
+    color: black;
+}
+
+input[type="radio"] {
+    accent-color: #F6DE03;
+    width: 20px;
+    border: 1px solid #F6DE03;
+}
+
+input[type="checkbox"] {
+    accent-color: black;
+    width: 20px;
+}
+
+input[type="date"] {
+    width: 250px;
+    background-color: transparent;
+    box-shadow: 0 0 5px #f6de038d;
+    padding: 5px;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.748);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(-200px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+.highlight {
+            background-image: linear-gradient(90deg, rgba(255,210,5,1) 0%, rgba(246,222,3,1) 50%, rgba(255,237,112,1) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+}
+
+</style>
+<body class="overflow-x-hidden flex flex-col mt-[70px]"> 
+    <!-- Navigation Bar -->
+    <nav id="nav" class="text-white h-[70px] flex justify-between px-[10%] items-center fixed top-0 left-0 right-0 z-30 p-4 bg-[#121212] border-b-2 border-yellow-400">
+        <div class="logo">
+            <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
+        </div>
+
+        <ul class="hidden lg:flex gap-14 uppercase mr-[33%]">
+            <li><a class="hover:text-[#F6DE03]" href="/ark/">Home</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="/ark/#services">Gallery</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="/ark/pricing">Pricing</a></li>
+            <li><a class="hover:text-[#F6DE03]" href="/ark/#about">About</a></li>
+        </ul>
+    </nav>
+    <!-- End of Navigation Bar -->
+
+
+    <header class="bg-[#262626] py-10">
+        <h1 class="text-5xl text-center font-extrabold text-yellow-400 mb-4">Our Pricing Plans</h1>
+        <p class="text-center text-gray-300 text-lg">Choose the best plan for your needs</p>
+    </header>
+    <hr class="border-yellow-400">
+    
+
+    <!-- Pricing Section -->
+    <section class="mt-12 px-8 lg:px-24"> <!-- the form -->
+        <% services.map(service => { %>
+            <h2 class="text-3xl text-center font-bold text-yellow-400 mb-8"> <%= service.name %> </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"> 
+                <% groups.map(group => { %>
+                    <% if(group._id.serviceName === service.name){ %>
+                        <div class="bg-[#121212] border border-yellow-400 rounded-lg p-6 transition-shadow hover:shadow-lg">
+                            <% let locked; %>                
+                            <% group.packages.map(package => { %>
+                                <% if(!locked){ %>
+                                    <h3 class="text-2xl font-bold text-white text-center"><%= package.name %></h3>
+                                <% } else {   %>
+                                    <hr>
+                                <% } %>
+                                <% locked = true %>
+                                <p class="text-center text-gray-400">₱<%= package.price %> - <%= package.duration %> MINS </p>
+                                <p class="text-center mt-4 text-gray-400"><% package.description %></p>
+                            <% }) %> <!-- endPackageMap -->
+                        </div>
+                    <% } %> <!-- endIf -->
+                <% }) %> <!-- endGroupsMap -->
+            </div>
+        <% }) %> <!-- endServicesMap -->
+    </section>
+
+    
+    <!-- Additional Options Section -->
+    <section class="mt-16 px-8 lg:px-24 mb-12">
+        <h2 class="text-3xl text-center font-bold text-yellow-400 mb-8">Additional Options</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <% addOns.map(hamburger => { %>
+            <!-- Get all enhanced photos -->
+            <div class="bg-[#121212] border border-yellow-400 rounded-lg p-6 transition-shadow hover:shadow-lg">
+                <h3 class="text-2xl font-bold text-white text-center"><%= hamburger.description %></h3>
+                <p class="text-center text-gray-400 mt-4">+ ₱<%= hamburger.price %></p>
+            </div>
+            
+            <% }) %>
+        </div>
+    </section>
+    
+    <%- include('../components/client-footer') %>
+</body>
+</html>

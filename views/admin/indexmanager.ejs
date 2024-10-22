@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page Management</title>
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        body {
+            background-color: #121212;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            transition: margin-left 0.3s;
+        }
+
+        #sidebar {
+            background-color: #262626;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        .content {
+            flex: 1;
+            transition: margin-left 0.3s;
+            margin-left: 16rem;
+        }
+
+        .sidebar-hidden-content {
+            margin-left: 0;
+        }
+
+        .card {
+            background-color: #1F1F1F;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        img {
+            border-radius: 8px;
+        }
+
+        form {
+            margin-bottom: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+        <div>
+            <div class="m-7 flex justify-center">
+                <img class="rounded-full w-28" src="/assets/logo.jpg" alt="Logo">
+            </div>
+            <nav class="mt-10 border-t-4 border-yellow-500">
+                <a href="/ark/admin"
+                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <i class="fa-solid fa-house mr-4"></i> Dashboard
+                </a>
+                <a href="/ark/admin/clients"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-users mr-4"></i> Clients
+                </a>
+                <a href="/ark/admin/bookings"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                </a>
+                <a href="/ark/admin/indexmanager"
+                class="block py-4 px-5 rounded transition duration-200 bg-yellow-500">
+                <i class="fa-solid fa-images mr-4"></i> Index Manager
+                <a href="/ark/admin/photo-management"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                </a>
+                <a href="/ark/admin/resource"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                </a>
+                <a href="/ark/admin/feedback"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                    <i class="fa-solid fa-message mr-4"></i> Feedback
+                </a>
+            </nav>
+        </div>
+        <div>
+            <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="content">
+        <button id="toggleSidebar" class="p-4 text-yellow-500">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="p-5">
+            <h1 class="text-3xl">Manage Photos for Landing Page</h1>
+
+            
+                <!-- Add Photo Form -->
+                <form action="indexmanager/add" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="title" placeholder="Title (optional)" class="border p-2 text-black">
+                    <input type="hidden" name="isIndexPhoto" value="true">
+                    <input type="file" name="image" class="border p-2" required> <!-- Changed to file input -->
+                    <button type="submit" class="bg-blue-500 text-white p-2">Add Photo</button>
+                </form>
+            
+                <!-- Display Existing Photos -->
+                <div class="mt-10">
+                    <h2 class="text-2xl">Current Photos</h2>
+                    <div class="grid grid-cols-6 gap-4">
+                        <% photos.forEach(function(photo) { %>
+                        <div class="border p-4">
+                            <img src="<%= photo.image_path %>" alt="<%= photo.title %>" class="w-full h-auto mb-4">
+                            <p><%= photo.title %></p>
+            
+                            <!-- Delete Button -->
+                            <form action="indexmanager/delete" method="POST">
+                                <input type="hidden" name="id" value="<%= photo._id %>">
+                                <button type="submit" class="bg-red-500 text-white p-2">Delete</button>
+                            </form>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </body>
+            </html>
+            
