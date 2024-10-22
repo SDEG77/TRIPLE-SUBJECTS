@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const bookingSchema = mongoose.Schema({
   client_id: String,
+  receipt_uploaded: String,
   package: String,
   service: String,
   addOns: Array,

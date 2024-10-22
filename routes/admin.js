@@ -2,6 +2,8 @@ const route = require("express").Router();
 const AdminAuth = require("../controllers/AdminAuth");
 
 const Admin = require("../models/Admin");
+const Receipt = require("../models/Receipt");
+
 const AdminController = require("../controllers/AdminController");
 const ServicesController = require("../controllers/ServicesController");
 const PackageController = require("../controllers/PackageController");
@@ -88,10 +90,12 @@ route.post("/clients", async (req, res) => {
 // BOOKING PAGE ROUTES
 route.get("/bookings", async (req, res) => {
   const result = await AdminController.viewBookings();
+  const receipts = await Receipt.find();
 
   if (req.session.isAdminLogged) {
     res.render("./admin/adminbookings", {
       snatch: result,
+      receipts: receipts,
     });
   } else {
     res.redirect("./login");
@@ -110,6 +114,26 @@ route.post("/bookings/accept", async (req, res) => {
 route.post("/bookings/cancel", async (req, res) => {
   if (req.session.isAdminLogged) {
     await BookingController.cancel(req.body.id);
+
+    res.redirect("./");
+  } else {
+    res.redirect("./login");
+  }
+});
+
+route.post("/bookings/reject", async (req, res) => {
+  if (req.session.isAdminLogged) {
+    await BookingController.reject(req.body.id);
+
+    res.redirect("./");
+  } else {
+    res.redirect("./login");
+  }
+});
+
+route.post("/bookings/finish", async (req, res) => {
+  if (req.session.isAdminLogged) {
+    await BookingController.finished(req.body.id);
 
     res.redirect("./");
   } else {

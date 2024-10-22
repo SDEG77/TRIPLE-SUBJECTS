@@ -1,4 +1,5 @@
 const Booking = require('../models/Booking');
+const Receipt = require("../models/Receipt");
 
 class BookingController {
   async store(params) {
@@ -13,6 +14,7 @@ class BookingController {
     try {
       await Booking.insertMany({
         client_id: params.client_id,
+        receipt_uploaded: "no",
         service: params.service,
         total: params.total,
         addOns: newArr,
@@ -34,6 +36,14 @@ class BookingController {
 
   async cancel(id) {
     await Booking.updateOne({_id: id}, {status: "cancelled"});
+  }
+
+  async reject(id) {
+    await Booking.updateOne({_id: id}, {status: "rejected"});
+  }
+  
+  async finished(id) {
+    await Booking.updateOne({_id: id}, {status: "finished"});
   }
 
   async remove(id) {

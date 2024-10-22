@@ -143,7 +143,60 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 </style>
 <body class="overflow-x-hidden flex flex-col"> 
 
-    <%- include('../components/client-navbar') %>
+    <!-- Navigation Bar -->
+<nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212] border-b-2 border-yellow-400">
+    <div class="logo">
+        <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
+    </div>
+
+    <ul class="hidden lg:flex gap-14 uppercase">
+        <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="#services">Gallery</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="/ark/client/booking">Booking</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+    </ul>
+
+        <div class="hidden lg:flex gap-5 items-center">
+            <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold"
+                href="/ark/client/profile">
+
+                <% try{ %>
+                    <%= name %>
+                <% }catch{} %>
+            </a>
+        </div>
+
+        <div class="lg:hidden block">
+            <button id="hamburger" class="text-white focus:outline-none">
+                <!-- Simple icon using font-awesome or an SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="menu" class="hidden absolute top-[70.1px] bg-[#121212]/90 w-full right-0 p-10 pl-[50px]"
+            style="box-shadow: 0px 5px 5px #f6de0336;">
+            <ul class=" flex flex-col gap-2 uppercase -mt-[20px]">
+                <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#services">Services</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#pricing">Booking</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#about">About</a></li>
+            </ul>
+
+            <div class="flex gap-5 items-center mt-3">
+                <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold"
+                    href="/ark/client/profile">
+
+                    <% try{ %>
+                        <%= name %>
+                    <% }catch{} %>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navigation Bar -->
 
     <h1 class="text-[#F6DE03] text-center text-[40px] mt-[120px]">Services</h1>
     
@@ -175,6 +228,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 <% }) %> <!-- endGroupsMap -->
             </div> <!-- endGrid -->
         <% }) %> <!-- endServicesMap -->
+
+        <hr class="border-[1px] border-[#F6DE03] mt-5">
 
         <!-- Add On & Time -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 justify-around">
@@ -216,7 +271,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                     <h1 class="text-[#F6DE03] text-[20px] font-regular">Additional</h1>
                     <button  type="button"
                     id="selectAllBtn"
-                     class="z-10 text-[#F6DE03] text-[10px] px-2 py-1 border-[1px] border-[#F6DE03] rounded-[10px] font-regular"
+                     class="text-[#F6DE03] text-[10px] px-2 py-1 border-[1px] border-[#F6DE03] rounded-[10px] font-regular"
                     onmousedown="superChecker();"
                     >
                     Select All
@@ -240,8 +295,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <!-- End of Additional -->
         </div>
 
-        <hr class="border-[1px] border-[#F6DE03] mt-5">
-
         <div class="flex justify-between items-center flex-col md:flex-row fixed bottom-0 left-0 w-full py-4 px-10 bg-[#121212] border-t-2 border-[#F6DE03]">
             <button onmousedown="superResetter();" type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
 
@@ -249,35 +302,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 <p class="font-semibold text-[#F6DE03] flex items-center">Total Price: <span class="pl-2" id="totalPrice" >₱ 0,000.00</span></p>
                 <div class="flex gap-2">
                     <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px] hover:bg-transparent hover:text-[#F6DE03] hover:border-[1px] hover:border-[#F6DE03] transition duration-200 ease-out hover:ease-in" >Book Now</button>
-                    <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button>
+                    <!-- <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button> -->
                 </div>
             </div>
         </div>
     </form>
 
-        <!-- DO NOT DELETE DO NOT DELETE DO NOT DELETE -->
+
+        
+        <% try{ if(message === "Booking Successful") { %>
         <!-- Gcash Modal -->
-        <!-- <div id="myModal" class="modal">
+        <div id="myModal" class="modal">
             <div class="modal-content bg-[#f6de03] w-[650px] h-[430px] relative flex items-center px-5 py-8 justify-center gap-5">
-                <h1 class="text-red-500 font-semibold mb-2 absolute -bottom-16 top-0 ">Note:
-                    <span class="text-[12px] text-black">If you're not able to pay within 1 hour, your appointment will be automatically canceled.</span>
-                </h1>
-                <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span>
+                <!-- <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span> -->
                 <img src="/assets/img/image 9.png" class="h-[380px]">
                 
-
                 <div class="w-[330px] flex flex-col items-center self-end">
-                    <form class="flex flex-col w-[220px] items-center">
-                        <label for="receipt" class="text-black whitespace-nowrap font-bold">Upload Receipt:</label>
-                        <input type="file" id="receipt" class="block mb-2 border border-black rounded-md w-full" required>
+                    <div class="h-[250px] w-[250px] bg-black rounded-lg">
+                        <div id="imagePreviewContainerClient<%= id %>" class="image-preview-container flex justify-center"></div>
+                    </div>
+
+                    <form class="flex flex-col w-[220px] items-center mt-5" action="/ark/client/booking/upload" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="clientId" value="<%= id %>" />
+
+                        <label for="uploadImageClient<%= id %>" class="text-black whitespace-nowrap font-bold">Upload Receipt:</label>
+                        <input type="file" name="image" accept="image/*" id="uploadImageClient<%= id %>" class="block mb-2 border border-black rounded-md w-full" required>
                         <button type="submit" class="bg-black text-[#F6DE03] px-4 py-2 rounded-md w-full">Submit</button>
-    
                     </form>
                 </div>
             </div>
-        </div> -->
+        </div>
+        <% }} catch{} %>
         <!-- End of Gcash Modal -->
-        <!-- DO NOT DELETE DO NOT DELETE DO NOT DELETE -->
 
     </div>
     <!-- End of Receipt Modal -->
@@ -285,9 +341,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     <%- include('../components/client-footer') %>
 
-    <!-- <% try{ %>
-        <div id="<%= message %>" class="hidden"></div>
-    <% } catch{} %> -->
 </body>
 </html>
 
@@ -305,3 +358,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     });
 }
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fileInput = document.getElementById("uploadImageClient<%= id %>");
+      const previewContainer = document.getElementById("imagePreviewContainerClient<%= id %>");
+
+      fileInput.addEventListener("change", function () {
+        const files = fileInput.files;
+        previewContainer.innerHTML = ""; 
+
+        if (files.length > 0) {
+          Array.from(files).forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const imgElement = document.createElement("img");
+              imgElement.src = e.target.result;
+              imgElement.classList.add("w-[100%]", "h-[100%]", "max-h-[250px]", "max-w-[250px]", "rounded-lg");
+              previewContainer.appendChild(imgElement);
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+      });
+    });
+  </script>

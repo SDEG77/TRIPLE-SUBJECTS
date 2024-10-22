@@ -136,7 +136,8 @@
                     <div class="grid grid-cols-6 gap-4">
                         <% photos.forEach(function(photo) { %>
                         <div class="border p-4">
-                            <img src="<%= photo.image_path %>" alt="<%= photo.title %>" class="w-full h-auto mb-4">
+                            <% let decompose = photo.image_path.split("/"); %>
+                            <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="<%= photo.title %>" class="w-full h-auto mb-4">
                             <p><%= photo.title %></p>
             
                             <!-- Delete Button -->

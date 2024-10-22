@@ -6,7 +6,9 @@ const PackageController = require('../controllers/PackageController');
 const AddOnController = require('../controllers/AddOnController');
 const ClientController = require('../controllers/ClientController');
 
+
 const Photo = require('../models/Photo');
+const Booking = require('../models/Booking');
 
 route.get('/', async (req, res) => {
   if (req.session.logged) {
@@ -80,10 +82,15 @@ route.get('/booking', async (req, res) => {
 });
 
 route.post('/booking', async (req, res) => {
+  const oneOnly = await Booking.find({client_id: req.session.userID, receipt_uploaded: "no",});
+
+  if(oneOnly.length === 1) {
+    res.redirect("./booking")
+  } else {
   const services = await ServiceController.getServices();
   const groups = await PackageController.groupPackages();
   const addOns = await AddOnController.getAddOns();
-
+  
   // RENDER FIELDS BATTALION
   const rendID = req.session.userID;
   const rendName = req.session.name;
@@ -94,7 +101,7 @@ route.post('/booking', async (req, res) => {
   
     const aName = a._id.packageName.toLowerCase();
     const bName = b._id.packageName.toLowerCase();
-  
+    
     // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
     const aPriority = priority.indexOf(aName);
     const bPriority = priority.indexOf(bName);
@@ -107,14 +114,15 @@ route.post('/booking', async (req, res) => {
     } else if (bPriority !== -1) {
       return 1; // bName has priority
     }
-  
+    
     // else, fall back to good ol' localeCompare
     return aName.localeCompare(bName);
   });
-
+  
   let success;
   
   if(req.session.logged) {
+    
     success = await BookingController.store({
       client_id: req.body.id,
       service: req.body.service,
@@ -128,7 +136,8 @@ route.post('/booking', async (req, res) => {
   else {
     res.redirect('../login')
   }
-
+  
+  
   if(success) {
     res.render('client/booking', {
       message: "Booking Successful",
@@ -148,6 +157,7 @@ route.post('/booking', async (req, res) => {
       groups: rendGroups,    
     });
   }
+}
 });
 
 route.get('/profile', (req, res) => {
@@ -189,11 +199,14 @@ route.get('/logout', (req, res) => {
   }
 });
 
-route.get('/history', (req, res) => {
+route.get('/history', async (req, res) => {
+  const bookings = await Booking.find({client_id: req.session.userID})
+
   if(req.session.logged) {
     res.render('client/history', {
       name: req.session.name, 
       id: req.session.userID,
+      history: bookings,
     })
   } else {
     res.redirect('../login')

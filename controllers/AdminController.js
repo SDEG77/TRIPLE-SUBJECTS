@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Booking = require("../models/Booking");
 const Image = require("../models/Image");
+const Receipt = require("../models/Receipt");
 
 class AdminController {
   async totalClients() {
@@ -57,11 +58,13 @@ class AdminController {
   async viewBookings() {
     const bookings = await Booking.find();
     const users = await User.find();
+    const receipts = await Receipt.find();
 
     if (bookings.length > 0) {
       return {
         bookings: bookings,
         users: users,
+        receipts: receipts,
       };
     }
 

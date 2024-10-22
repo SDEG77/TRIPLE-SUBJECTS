@@ -115,8 +115,9 @@
         <div class="relative w-full overflow-hidden">
             <div class="flex gap-6 transition-transform duration-500" id="combinedCarousel">
                 <% photos.forEach(function(photo) { %>
+                <% let decompose = photo.image_path.split("/") %>
                 <div class="w-[500px] flex-shrink-0">
-                    <img class="w-full h-[710px] object-cover" src="<%= photo.image_path %>" alt="<%= photo.title %>">
+                    <img class="w-full h-[710px] object-cover" src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="<%= photo.title %>">
                 </div>
                 <% }) %>
             </div>

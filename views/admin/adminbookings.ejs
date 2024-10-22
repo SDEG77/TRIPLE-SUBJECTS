@@ -143,109 +143,187 @@
         </div>
         <div class="mt-6 m-5">
             <% if(snatch.bookings){  %>
-                <table class="min-w-full bg-gray-800 border border-gray-800">
-                    <thead>
-                        <tr class="bg-gray-800">
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Name</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Services</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Requested Date</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Status</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Proof of Payment</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% try{ %>
-                            <% snatch.bookings.map(booking=> { %>
-                                <% const date=new Date(booking.date); const day=date.getDate(); const
-                                    index=date.getMonth(); const months=[ "January" , "February" , "March" , "April"
-                                    , "May" , "June" , "July" , "August" , "September" , "October" , "November"
-                                    , "December" ]; %>
+                <% try{ %>
+                    <% snatch.bookings.map(booking=> { %>
+                        <% const date=new Date(booking.date); const day=date.getDate(); const
+                            index=date.getMonth(); const months=[ "January" , "February" , "March" , "April"
+                            , "May" , "June" , "July" , "August" , "September" , "October" , "November"
+                            , "December" ]; %>
+                        <div class="mb-14 relative"> <!-- table and delete btn container -->
+                            <form class="absolute -top-[33px] right-[40px]" action="/ark/admin/bookings/remove" method="post">
+                                <input type="hidden" value="<%= booking.id %>" name="id">
+        
+                                <button type="submit"
+                                    class="bg-red-500 hover:bg-red-600 border-2 border-yellow-200 -mt-[1px] font-bold text-white py-1 px-2">
+                                    <i class="fa-solid fa-trash"></i> Remove Request
+                                </button>
+                            </form>
+                        <div class="border-yellow-200 border-b-2 border-t-2 border-l-2 border-r-2 rounded-lg overflow-hidden"> <!-- Yellow border container -->
+                        <table class="min-w-full bg-gray-800 border border-gray-800">
+                            <thead>
+                                <tr class="bg-gray-800 text-center">
+                                    <th class="py-2 px-4 border-b border-gray-600">Name</th>
+                                    <th class="py-2 px-4 border-b border-gray-600">Booking Details</th>
+                                    <th class="py-2 px-4 border-b border-gray-600">Requested Schedule</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
 
-                                    <% snatch.users.map(user=> { %>
+                            <% snatch.users.map(user => { %>
+                            <div id="paymentModal-<%= user._id %>" class="modal">
+                                <div class="modal-content rounded-lg shadow-lg p-5 bg-gray-800 mt-10">
+                                    <span onclick="pizzaYum('<%= user._id %>')" class="close close-<% user._id %> text-red-500 hover:text-red-700" style="cursor:pointer;">&times;</span>
+                                    <h2 class="text-2xl font-semibold text-yellow-500 mb-4 text-center">Proof of Payment</h2>
+                                    <% receipts.map(receipt => { %>                                        
+                                        <% if(receipt.bookingId === booking.id) { %>
+                                            <% let decompose = receipt.filepath.split("\\"); %>
+
+                                            <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="Proof of Payment" class="w-full h-auto rounded-lg shadow-md">
+                                        <% } %>
+                                    <% }); %>
+                                </div>
+                            </div>
+
+                            <% if(user.id===booking.client_id){ %>
+                                <tr class="odd:bg-gray-700 even:bg-gray-800">
+                                    <td class="py-2 px-4 border-b border-gray-600">
+                                        <%= user.fname.toUpperCase() %>
+                                            <%= user.lname.toUpperCase() %>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-600 whitespace-nowrap">
+                                        <%= booking.service %>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-600">
+                                        <%= `${months[index]} ${day} || ${booking.time}` %>
+                                    </td>
+                                </tr>
+                                <tr class="border-t-2 border-t-yellow-200">
+                                    <th class="py-2 px-4 border-b border-gray-600">Status</th>
+                                    <th class="py-2 px-4 border-b border-gray-600">Proof of Payment</th>
+                                    <th class="py-2 px-4 border-b border-gray-600" >Addons</th>
+                                </tr>
+                                <tr class="bg-gray-700"> <!-- Editables Row -->
+                                    <td
+                                        class="py-2 px-4 border-b border-gray-600 font-semibold capitalize 
+                                        <% if(booking.status === 'accepted') { %> 
+                                            <%='text-lime-400'%> 
+                                        <% } if(booking.status === 'accepted') { %> 
+                                            <%='text-lime-400'%>  
+                                        <% } if (booking.status === 'pending') { %> 
+                                            <%= "text-amber-500" %> 
+                                        <% } if (booking.status === 'cancelled'){ %> 
+                                            <%= 'text-rose-500' %> 
+                                        <% } if (booking.status === 'rejected'){ %> 
+                                            <%= 'text-rose-500' %> 
+                                        <% } %>">
+                                        <%= booking.status %>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-600">
+                                        <% if(booking.receipt_uploaded === "yes" ){ %>
+                                            <button
+                                                class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
+                                                id="viewPaymentBtn-<%= user._id %>"
+                                                onclick="hotdogSandwhich('<%= user._id %>')"
+                                                >
+                                                <i class="fa-solid fa-eye"></i> View
+                                            </button>
+                                            <% } else {%>
+                                                <span class="text-rose-500 font-semibold">None
+                                                    Provided</span>
+                                                <% } %>
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-600  grid grid-cols-3 justify-center gap-x-3">
+                                        <% if(booking.addOns.length > 0) { %>
+                                        <% booking.addOns.forEach(add => { %>
+                                            <div class="text-white bg-slate-600 mb-2 rounded w-full flex justify-center items-center">
+                                                <p><%= add %></p>
+                                            </div>
+                                        <% }); %>
+                                        <% } else { %>
+                                            <div class="text-transparent mb-2 rounded w-full flex justify-center items-center ">padpadpadpadpadpadpadpad</div>
+                                            <div class="text-white bg-slate-600 mb-2 rounded w-full flex justify-center items-center py-3">
+                                                <p>No Add-Ons</p>
+                                            </div>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr class="odd:bg-gray-700 even:bg-gray-800 relative border-t-2 border-t-yellow-200"> <!-- Button Row -->
+                                    <td class="py-3 px-4 border-b border-gray-600 relative text-center" >
+                                        <p class="font-bold text-lg whitespace-nowrap ">Total Price: <%= booking.total %></p>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-600 relative text-end" colspan="2">
+                                        <% if(booking.status === "cancelled") { %>
+                                        <form class="inline-block" action="/ark/admin/bookings/accept" method="post">
+                                            <input type="hidden" name="id" value="<%= booking.id %>">
+
+                                            <% if(booking.status === "cancelled") { %>
+                                            <button type="submit"
+                                                class="bg-cyan-700 hover:bg-cyan-600 font-bold text-white py-1 px-2 rounded ">
+                                                <i class="fa-solid fa-clock"></i> 
+                                                Re-book
+                                            </button>
+                                            <% } %> 
+                                        </form>
+                                        <% } %>
                                         
-                                        <% if(user.id===booking.client_id){ %>
-                                            <tr class="odd:bg-gray-700 even:bg-gray-800">
-                                                <td class="py-2 px-4 border-b border-gray-600">
-                                                    <%= user.fname.toUpperCase() %>
-                                                        <%= user.lname.toUpperCase() %>
-                                                </td>
-                                                <td class="py-2 px-4 border-b border-gray-600">
-                                                    <%= booking.service %>
-                                                </td>
-                                                <td class="py-2 px-4 border-b border-gray-600">
-                                                    <%= `${months[index]} ${day} || ${booking.time}` %>
-                                                </td>
-                                                <td
-                                                    class="py-2 px-4 border-b border-gray-600 font-semibold capitalize 
-                                                    <% if(booking.status === 'accepted') { %> 
-                                                        <%='text-lime-400'%> 
-                                                    <% } %> 
-                                                    <% if (booking.status === 'pending') { %> 
-                                                        <%= "text-amber-500" %> 
-                                                    <% } if (booking.status === 'cancelled'){ %> 
-                                                        <%= 'text-rose-500' %> 
-                                                    <% } %>">
-                                                    <%= booking.status %>
-                                                </td>
-                                                <td class="py-2 px-4 border-b border-gray-600">
-                                                    <% if(!booking.payment_status==="pending" ){ %>
-                                                        <button
-                                                            class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
-                                                            id="<%= booking.id %>">
-                                                            <i class="fa-solid fa-eye"></i> View
-                                                        </button>
-                                                        <% } else {%>
-                                                            <span class="text-rose-500 font-semibold">None
-                                                                Provided</span>
-                                                            <% } %>
-                                                </td>
-                                                <td class="py-2 px-4 border-b border-gray-600">
-                                                    <form class="inline-block" action="/ark/admin/bookings/accept" method="post">
-                                                        <input type="hidden" name="id" value="<%= booking.id %>">
+                                        <% if(booking.status === "pending") { %> 
+                                        <form class="inline-block" action="/ark/admin/bookings/accept" method="post">
+                                            <input type="hidden" name="id" value="<%= booking.id %>">
+                                            
+                                                <button type="submit"
+                                                class="w-fit bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
+                                                    <i class="fa-solid fa-check"></i>  Accept
+                                                </button>
+                                        </form>
+                                        <form class="inline-block" action="/ark/admin/bookings/reject" method="post">
+                                            <input type="hidden" name="id" value="<%= booking.id %>">
+                                            
+                                                <button type="submit"
+                                                class="w-fit bg-rose-500 hover:bg-rose-600 text-white py-1 px-2 rounded">
+                                                    <i class="fa-solid fa-multiply"></i>  Reject
+                                                </button>
+                                        </form>
+                                        <% } %>
 
-                                                        <button type="submit"
-                                                            class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
-                                                            <i class="fa-solid fa-check"></i> Accept
-                                                        </button>
-                                                    </form>
+                                        <% if(booking.status === "finished"){ %>
+                                            <form class="inline-block" action="/ark/admin/bookings/reschedule" method="post">
+                                                <input type="hidden" value="<%= booking.id %>" name="id">
 
-                                                    <form class="inline-block" action="/ark/admin/bookings/cancel" method="post">
-                                                        <input type="hidden" name="id" value="<%= booking.id %>">
+                                                <button type="submit"
+                                                    class="bg-cyan-700 hover:bg-cyan-600 font-bold text-white py-1 px-2 rounded ">
+                                                    <i class="fa-solid fa-clock"></i> 
+                                                    Rebook
+                                                </button>
+                                            </form>
+                                        <% } %>
 
-                                                        <button
-                                                            class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
-                                                            <i class="fa-solid fa-times"></i> Cancel
-                                                        </button>
-                                                    </form>
+                                        <% if(booking.status === "accepted") { %>
+                                        <form class="inline-block" action="/ark/admin/bookings/cancel" method="post">
+                                            <input type="hidden" name="id" value="<%= booking.id %>">
 
-                                                    <form class="inline-block" action="/ark/admin/bookings/remove" method="post">
-                                                        <input type="hidden" value="<%= booking.id %>" name="id">
-
-                                                        <button type="submit"
-                                                            class="bg-red-500 hover:bg-red-600 font-bold text-white py-1 px-2 rounded">
-                                                            <i class="fa-solid fa-times"></i> Remove
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <% } %> <!--endIf -->
-                                        <% }) %> <!--endInnerMap -->
-                                    <% }) %> <!--endOuterMap -->
-                                <% } catch(err){ console.error(`Sumtin wong ${err}`) } %>
-                    </tbody>
-                </table>
-                <% } %>
+                                            <button type="submit"
+                                            class="bg-cyan-700 hover:bg-cyan-600 font-bold text-white py-1 px-2 rounded ">
+                                                <i class="fa-solid fa-clock"></i> 
+                                                Re-book
+                                            </button>
+                                            <button
+                                                class="w-[100px] bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
+                                                <i class="fa-solid fa-times"></i> Cancel
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                    </td>                                    
+                                </tr>
+                                <% } %> <!--endIf -->
+                            <% }) %> <!--endInnerMap -->
+                        </tbody>
+                    </table>
+                    </div>
+                    </div>
+                    <% }) %> <!--endOuterMap -->
+                <% } catch(err){ console.error(`Sumtin wong ${err}`) } %>
+            <% } %>
         </div>
-
-        <div id="paymentModal" class="modal">
-            <div class="modal-content rounded-lg shadow-lg p-5 bg-gray-800">
-                <span class="close text-red-500 hover:text-red-700" style="cursor:pointer;">&times;</span>
-                <h2 class="text-2xl font-semibold text-yellow-500 mb-4 text-center">Proof of Payment</h2>
-                <img src="#" alt="Proof of Payment" class="w-full h-auto rounded-lg shadow-md">
-            </div>
-        </div>
-
     </main>
 
 </body>
@@ -263,24 +341,23 @@
     });
 
 
-    const modal = document.getElementById("paymentModal");
-    const closeButton = document.getElementsByClassName("close")[0];
-
-    document.getElementById("viewPaymentBtn1").onclick = function () {
+    function hotdogSandwhich(id){
+        const modal = document.getElementById(`paymentModal-${id}`);
+        const closeButton = document.querySelector(`.close-${id}`);
+    
+        
         modal.style.display = "block";
-    };
+            
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    }
 
-    document.getElementById("viewPaymentBtn2").onclick = function () {
-        modal.style.display = "block";
-    };
+    function pizzaYum(id) {
+        const modal = document.getElementById(`paymentModal-${id}`);
 
-    closeButton.onclick = function () {
         modal.style.display = "none";
-    };
-
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
+    }
 </script>

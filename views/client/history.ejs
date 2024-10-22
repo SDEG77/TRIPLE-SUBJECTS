@@ -133,45 +133,59 @@
 
 
         <div class="rounded-[20px] w-fit md:w-3/4  px-8">
-             <!-- Booking History -->
+            <!-- Booking History -->
             <section class=" mb-10">
                 <h2 class="text-[22px] font-bold mb-6 text-[#F6DE03]">Booking History</h2>
                 <div class="flex flex-col gap-5">
-                   
-                    <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
-                        <div class="md:w-3/4">
-                            <h3 class="text-xl font-semibold">Service: Duo 100 mins</h3>
-                            <p class="text-sm text-gray-400">Additionals: Add 10 minutes to session duration (Self-Directed)</p>
-                            <p class="text-sm text-gray-400">Date & Time: October 22, 2024, 10:00 AM - 12:00 PM</p>
-                            <p class="text-sm text-gray-400">Total Price: ₱15,000</p>
-                         
-                        </div>
-                        <span class="mt-4 md:mt-0 text-sm bg-green-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Completed</span>
-                    </div>
-                    
+                    <% history.map(story => { %>
+                    <% 
+                        const date = new Date(story.date); 
+                        const day = date.getDate(); 
+                        const year = `${story.date}`.split(" ")[3];
+                        const index = date.getMonth(); 
+                        const months=[ "January" , "February" , "March" , "April"
+                        , "May" , "June" , "July" , "August" , "September" , "October" , "November"
+                        , "December" ]; 
+                
+                        const decompose = story.service.split(" / ");
 
+                        const serviceType = decompose[1].split("-")[0];
+                        const serviceDuration = decompose[1].split("-")[1];
+                    %>
                     <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
-                        <div class="md:w-3/4">
-                            <h3 class="text-xl font-semibold">Service: Solo 20 mins</h3>
-                            <p class="text-sm text-gray-400">Additionals: Get all enhanced photos</p>
-                            <p class="text-sm text-gray-400">Date & Time: October 23, 2024, 2:00 PM - 3:00 PM</p>
-                            <p class="text-sm text-gray-400">Total Price: ₱5,000</p>
-                     
+                        <div class="md:w-3/4 relative">
+                            <h3 class="text-xl font-semibold"><%= `Service: ${serviceType} ${serviceDuration} mins`%></h3>
+                            <p class="text-sm text-gray-400">Additionals: Add 10 minutes to session duration (Self-Directed)</p>
+                            <p class="text-sm text-gray-400">Date: <%= `${months[index]} ${day}, ${year}, ${story.time}` %></p>
+                            <p class="text-sm text-gray-400">Time: <%= `${story.time}` %></p>
+                            <p class="text-sm text-gray-400">Total Price: <%= story.total %></p>
+                            
                         </div>
-                        <span class="mt-4 md:mt-0 text-sm bg-yellow-500 text-black py-2 px-4 rounded-md shadow w-[120px] text-center">Pending</span>
+                        <% if(story.status === "accepted"){ %>
+                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Canceled</span>
+                        <% } %>
+                        <% if(story.status === "pending"){ %>
+                            <span class="mt-4 md:mt-0 text-sm bg-yellow-500 text-black py-2 px-4 rounded-md shadow w-[120px] text-center">Pending</span>
+                        <% } %>
+                        <% if(story.status === "cancelled"){ %>
+                            <span class="mt-4 md:mt-0 text-sm bg-green-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Accepted</span>                        
+                        <% } %>
                     </div>
-            
-                    <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
+                    <% }); %>
+                    
+                    <!-- <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
                         <div class="md:w-3/4">
                             <h3 class="text-xl font-semibold">Service: Group 30 mins</h3>
                             <p class="text-sm text-gray-400">Additionals: 
                                 Add an extra person to the session</p>
-                            <p class="text-sm text-gray-400">Date & Time: October 24, 2024, 9:00 AM - 10:00 PM</p>
-                            <p class="text-sm text-gray-400">Total Price: ₱10,000</p>
-            
-                        </div>
-                        <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Canceled</span>
-                    </div>
+                                <p class="text-sm text-gray-400">Date & Time: October 24, 2024, 9:00 AM - 10:00 PM</p>
+                                <p class="text-sm text-gray-400">Total Price: ₱10,000</p>
+                                
+                            </div>
+                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Canceled</span>
+                            <span class="mt-4 md:mt-0 text-sm bg-yellow-500 text-black py-2 px-4 rounded-md shadow w-[120px] text-center">Pending</span>
+                            <span class="mt-4 md:mt-0 text-sm bg-green-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Completed</span>
+                        </div> -->
                 </div>
             </section>
             
