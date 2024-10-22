@@ -175,8 +175,6 @@ route.get('/gallery', async (req, res) => {
   }
 });
 
-
-
 route.get('/logout', (req, res) => {
   if(req.session.logged) {
     req.session.destroy((err) => {

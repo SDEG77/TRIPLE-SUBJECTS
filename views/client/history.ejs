@@ -93,34 +93,46 @@
 
 
     <div class="flex flex-col mt-[150px] px-[15%] gap-10 md:flex-row items-center md:items-start md:justify-center ">
-        <div class="fle flex-col gap-5 bg-[#F6DE03] p-4 rounded-[20px] w-fit md:w-1/4 h-fit">
+        <div class="fle flex-col gap-5  p-4 rounded-[20px] w-fit md:w-1/4 h-fit ">
             <div class="flex items-center gap-2">
-                <img src="/assets/img/image.png" class="w-[50px] rounded-[100%]">
+               
                 <div>
-                    <h1 class="text-[12px]">
+                    <h1 class="text-[14px] text-white">
                         <% try{ %>
-                        <%= name %>
+                            <%= name %>
                         <% }catch{} %>
                     </h1>
-                    <p class="text-[10px]">
+                    <p class="text-[10px] text-gray-400">
                         <% try{ %>
                             <%= email %>
                         <% }catch{} %>
                     </p>
                 </div>
             </div>
-            <hr class="border-[1px] border-[#121212] mt-5">
+            <hr class="border-[1px] border-[#F6DE03] mt-5">
 
             <div class="flex flex-col gap-3">
-                <a href="/ark/client/profile" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-user"></i>My Profile <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/gallery" class="flex hover:bg-[#121212] hover:text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-image"></i>Gallery <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/history" class="flex bg-[#121212] text-[#F6DE03] relative p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-clock-rotate-left"></i>History <span class="absolute right-2 text-[20px] bottom-1">></span></a>
-                <a href="/ark/client/logout" class="flex hover:bg-[#121212] hover:text-[#F6DE03] p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in"><i class="fa-solid fa-power-off "></i>Logout</a>
+                <a href="/ark/client/profile" class="flex mt-5 hover:bg-gray-800 hover:text-white p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in text-gray-400">
+                    <i class="fa-solid fa-user"></i> My Profile
+                </a>
+                <a href="/ark/client/gallery" class="flex hover:bg-gray-800 hover:text-white p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in text-gray-400">
+                    <i class="fa-solid fa-image"></i> Gallery 
+     
+                </a>
+                <a href="/ark/client/history" class="flex  text-[#F6DE03] relative p-2 items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left"></i> History
+                    <span class="absolute right-2 text-[20px] bottom-1">></span>
+                </a>
+                <a href="/ark/client/logout" class="flex hover:bg-gray-800 hover:text-white p-2 items-center gap-2 transition duration-200 ease-out hover:ease-in text-gray-400">
+                    <i class="fa-solid fa-power-off "></i> Logout
+                </a>
             </div>
         </div>
 
 
-        <div class="bg-[#F6DE03]  rounded-[20px] w-fit md:w-3/4  px-8">
+
+
+        <div class="rounded-[20px] w-fit md:w-3/4  px-8">
              <!-- Booking History -->
             <section class=" mb-10">
                 <h2 class="text-[22px] font-bold mb-6 text-[#F6DE03]">Booking History</h2>

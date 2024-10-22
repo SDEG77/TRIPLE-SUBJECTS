@@ -109,7 +109,7 @@ input[type="date"] {
 }
 
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -123,13 +123,11 @@ input[type="date"] {
 
 .modal-content {
     background-color: #fefefe;
-    padding: 20px;
     border-radius: 10px;
-    width: 40%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
-    transform: translateY(-200px);
-    opacity: 0;
+    /* transform: translateY(-200px); 
+    opacity: 0;  */
     transition: all 0.4s ease;
 }
 
@@ -155,27 +153,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         <% services.map(service => { %>
             <p class="island text-center text-[#F6DE03] text-[40px]"> <%= service.name %> </p>
             
-                <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> <!-- the grid itself -->
-                    <% groups.map(group => { %>
-                        <% if(group._id.serviceName === service.name){ %>
-                            <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
-                                <% 
-                                    let locked; 
-                                %>                
-                                <% group.packages.map(package => { %>
-                                    <% if(!locked){ %>
-                                        <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold"> <%= package.name %> </h1>
-                                    <% } locked = true; %>
-                                    <div class="flex gap-2">
-                                        <input required type="radio" name="service" id="<%= package.price %>" value="₱<%= package.price %> / <%= package.name %>-<%= package.duration %> / <%= service.name %>">
-                                        <h1 class="text-[#F6DE03] text-[30px] font-bold">₱<%= package.price %> - <%= package.duration %> MINS</h1>
-                                    </div>
-                                    <p class="text-[#F6DE03] text-[10px]"> <%= package.description %> </p>
-                                <% }) %> <!-- endPackageMap -->
-                            </div> <!-- endPackageDiv -->
-                        <% } %> <!-- endIf -->
-                    <% }) %> <!-- endGroupsMap -->
-                    </div> <!-- endGrid -->
+            <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> <!-- the grid itself -->
+                <% groups.map(group => { %>
+                    <% if(group._id.serviceName === service.name){ %>
+                        <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center" style="box-shadow:0 0 5px #f6de038d">
+                            <% 
+                                let locked; 
+                            %>                
+                            <% group.packages.map(package => { %>
+                                <% if(!locked){ %>
+                                    <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold"> <%= package.name %> </h1>
+                                <% } locked = true; %>
+                                <div class="flex gap-2">
+                                    <input required type="radio" name="service" id="<%= package.price %>" value="₱<%= package.price %> / <%= package.name %>-<%= package.duration %> / <%= service.name %>">
+                                    <h1 class="text-[#F6DE03] text-[30px] font-bold">₱<%= package.price %> - <%= package.duration %> MINS</h1>
+                                </div>
+                                <p class="text-[#F6DE03] text-[10px]"> <%= package.description %> </p>
+                            <% }) %> <!-- endPackageMap -->
+                        </div> <!-- endPackageDiv -->
+                    <% } %> <!-- endIf -->
+                <% }) %> <!-- endGroupsMap -->
+            </div> <!-- endGrid -->
         <% }) %> <!-- endServicesMap -->
 
         <!-- Add On & Time -->
@@ -245,7 +243,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         <hr class="border-[1px] border-[#F6DE03] mt-5">
 
         <div class="flex justify-between items-center flex-col md:flex-row fixed bottom-0 left-0 w-full py-4 px-10 bg-[#121212] border-t-2 border-[#F6DE03]">
-            <button type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
+            <button onmousedown="superResetter();" type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
 
             <div class="flex flex-col md:flex-row gap-5">
                 <p class="font-semibold text-[#F6DE03] flex items-center">Total Price: <span class="pl-2" id="totalPrice" >₱ 0,000.00</span></p>
@@ -255,40 +253,55 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 </div>
             </div>
         </div>
-
     </form>
 
+        <!-- DO NOT DELETE DO NOT DELETE DO NOT DELETE -->
         <!-- Gcash Modal -->
-        <div id="myModal" class="modal">
-            <div class="modal-content bg-[#f6de03] w-[350px] relative">
-                <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span>
-                <h1 class="text-red-500 font-semibold mb-2">Note:
+        <!-- <div id="myModal" class="modal">
+            <div class="modal-content bg-[#f6de03] w-[650px] h-[430px] relative flex items-center px-5 py-8 justify-center gap-5">
+                <h1 class="text-red-500 font-semibold mb-2 absolute -bottom-16 top-0 ">Note:
                     <span class="text-[12px] text-black">If you're not able to pay within 1 hour, your appointment will be automatically canceled.</span>
                 </h1>
-                <img src="/assets/img/image 9.png">
-            </div>
-        </div>
-        <!-- End of Gcash Modal -->
-    </form>
+                <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span>
+                <img src="/assets/img/image 9.png" class="h-[380px]">
+                
 
-    <!-- Receipt Modal -->
-    <div id="receiptModal" class="modal">
-        <div class="modal-content bg-[#f6de03] w-[350px] relative">
-            <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span>
-            <h1 class="text-black font-semibold mb-2">Submit Receipt</h1>
-            <form>
-                <label for="receipt" class="text-[#F6DE03]">Upload Receipt:</label>
-                <input type="file" id="receipt" class="block mb-2 border border-black rounded-md w-full" required>
-                <button type="submit" class="bg-black text-[#F6DE03] px-4 py-2 rounded-md">Submit</button>
-            </form>
-        </div>
+                <div class="w-[330px] flex flex-col items-center self-end">
+                    <form class="flex flex-col w-[220px] items-center">
+                        <label for="receipt" class="text-black whitespace-nowrap font-bold">Upload Receipt:</label>
+                        <input type="file" id="receipt" class="block mb-2 border border-black rounded-md w-full" required>
+                        <button type="submit" class="bg-black text-[#F6DE03] px-4 py-2 rounded-md w-full">Submit</button>
+    
+                    </form>
+                </div>
+            </div>
+        </div> -->
+        <!-- End of Gcash Modal -->
+        <!-- DO NOT DELETE DO NOT DELETE DO NOT DELETE -->
+
     </div>
     <!-- End of Receipt Modal -->
 
 
     <%- include('../components/client-footer') %>
+
+    <!-- <% try{ %>
+        <div id="<%= message %>" class="hidden"></div>
+    <% } catch{} %> -->
 </body>
 </html>
 
 <script src="/js/booking(pesco).js" ></script>
 <script src="/js/booking(sigrae).js"></script>
+
+<script>
+    function superResetter() {
+    currentTotal = "0";
+    previousChosen = 0;
+    formTotal.value = "₱ 0,000.00";
+    totalPrice.innerHTML = "₱ 0,000.00";
+    checkboxess.forEach(box => {
+        box.setAttribute("data-previous-state", '0');
+    });
+}
+</script>

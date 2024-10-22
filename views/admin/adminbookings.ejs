@@ -106,8 +106,8 @@
                     <i class="fa-solid fa-users mr-4"></i> Clients
                 </a>
                 <a href="/ark/admin/bookings"
-                class="block py-4 px-5 rounded transition duration-200 bg-yellow-500">
-                <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                    class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
+                    <i class="fa-solid fa-calendar-days mr-4 text-gray-800"></i> Bookings
                 </a>
                 <a href="/ark/admin/indexmanager"
                 class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
@@ -142,7 +142,7 @@
             <h2 class="text-2xl font-semibold text-yellow-500">Bookings</h2>
         </div>
         <div class="mt-6 m-5">
-            <% if(snatch.bookings){ %>
+            <% if(snatch.bookings){  %>
                 <table class="min-w-full bg-gray-800 border border-gray-800">
                     <thead>
                         <tr class="bg-gray-800">
@@ -163,6 +163,7 @@
                                     , "December" ]; %>
 
                                     <% snatch.users.map(user=> { %>
+                                        
                                         <% if(user.id===booking.client_id){ %>
                                             <tr class="odd:bg-gray-700 even:bg-gray-800">
                                                 <td class="py-2 px-4 border-b border-gray-600">
@@ -176,7 +177,15 @@
                                                     <%= `${months[index]} ${day} || ${booking.time}` %>
                                                 </td>
                                                 <td
-                                                    class="py-2 px-4 border-b border-gray-600 font-semibold <%= booking.status === 'accepted' ? 'text-lime-400' : 'text-rose-500' %>">
+                                                    class="py-2 px-4 border-b border-gray-600 font-semibold capitalize 
+                                                    <% if(booking.status === 'accepted') { %> 
+                                                        <%='text-lime-400'%> 
+                                                    <% } %> 
+                                                    <% if (booking.status === 'pending') { %> 
+                                                        <%= "text-amber-500" %> 
+                                                    <% } if (booking.status === 'cancelled'){ %> 
+                                                        <%= 'text-rose-500' %> 
+                                                    <% } %>">
                                                     <%= booking.status %>
                                                 </td>
                                                 <td class="py-2 px-4 border-b border-gray-600">
@@ -192,7 +201,7 @@
                                                             <% } %>
                                                 </td>
                                                 <td class="py-2 px-4 border-b border-gray-600">
-                                                    <form class="inline-block" action="./accept" method="post">
+                                                    <form class="inline-block" action="/ark/admin/bookings/accept" method="post">
                                                         <input type="hidden" name="id" value="<%= booking.id %>">
 
                                                         <button type="submit"
@@ -201,7 +210,7 @@
                                                         </button>
                                                     </form>
 
-                                                    <form class="inline-block" action="./cancel" method="post">
+                                                    <form class="inline-block" action="/ark/admin/bookings/cancel" method="post">
                                                         <input type="hidden" name="id" value="<%= booking.id %>">
 
                                                         <button
@@ -210,7 +219,7 @@
                                                         </button>
                                                     </form>
 
-                                                    <form class="inline-block" action="./bookings/remove" method="post">
+                                                    <form class="inline-block" action="/ark/admin/bookings/remove" method="post">
                                                         <input type="hidden" value="<%= booking.id %>" name="id">
 
                                                         <button type="submit"
@@ -221,9 +230,9 @@
                                                 </td>
                                             </tr>
                                             <% } %> <!--endIf -->
-                                                <% }) %> <!--endInnerMap -->
-                                                    <% }) %> <!--endOuterMap -->
-                                                        <% } catch{} %>
+                                        <% }) %> <!--endInnerMap -->
+                                    <% }) %> <!--endOuterMap -->
+                                <% } catch(err){ console.error(`Sumtin wong ${err}`) } %>
                     </tbody>
                 </table>
                 <% } %>

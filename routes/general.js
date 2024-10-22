@@ -1,15 +1,12 @@
 const route = require('express').Router();
 const LoggerController = require('../controllers/LoggerController') ;
 const User = require('../models/User');
-const adminAuth = require('../controllers/AdminAuth');
-const Admin = require('../models/Admin');
-const express = require('express');
 const contactController = require('../controllers/ContactController');
 const Photo = require('../models/Photo');
 const ForgotPasswordController = require('../controllers/ForgotPasswordController');
-
-
-
+const ServiceController = require('../controllers/ServicesController');
+const PackageController = require('../controllers/PackageController');
+const AddOnController = require('../controllers/AddOnController');
 
 
 route.get('/', async (req, res) => {
@@ -124,6 +121,42 @@ route.get('/forgot/reset', ForgotPasswordController.resetPasswordForm);
 route.post('/forgot/new', ForgotPasswordController.updatePassword);
 
 
+route.get('/pricing', async (req, res) => {
+  const services = await ServiceController.getServices();
+  const groups = await PackageController.groupPackages();
+  const addOns = await AddOnController.getAddOns();
 
+  // RENDER FIELDS BATTALION
+  const rendServices = services;
+  const rendAddOns = addOns;
+  const rendGroups = groups.sort((a, b) => {
+    const priority = ['solo', 'duo', 'group', 'specials'];
+  
+    const aName = a._id.packageName.toLowerCase();
+    const bName = b._id.packageName.toLowerCase();
+  
+    // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
+    const aPriority = priority.indexOf(aName);
+    const bPriority = priority.indexOf(bName);
+  
+    // If aName or bName has a priority, sort based on that
+    if (aPriority !== -1 && bPriority !== -1) {
+      return aPriority - bPriority;
+    } else if (aPriority !== -1) {
+      return -1; // aName has priority
+    } else if (bPriority !== -1) {
+      return 1; // bName has priority
+    }
+  
+    // else, fall back to good ol' localeCompare
+    return aName.localeCompare(bName);
+  });
+
+  res.render('general/pricing', {
+    services: rendServices,
+    addOns: rendAddOns,
+    groups: rendGroups,
+  })
+});
 
 module.exports =  route;

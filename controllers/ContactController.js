@@ -1,10 +1,10 @@
 const Contact = require('../models/Contact');
 const nodemailer = require('nodemailer');
-
 const Photo = require('../models/Photo');
 
 exports.submitContactForm = async (req, res) => {
     const { name, email, subject, message } = req.body;
+    const photos = await Photo.find();
 
     try {
         // Validate inputs
@@ -72,7 +72,6 @@ exports.submitContactForm = async (req, res) => {
         }
     }
 };
-
 
 
 
