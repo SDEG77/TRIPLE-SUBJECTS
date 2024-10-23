@@ -166,14 +166,20 @@
                             <p class="text-sm text-gray-400">Time: <%= `${story.time}` %></p>
                             <p class="text-sm text-gray-400 mt-4">Total Price: <%= story.total %></p>
                         </div>
-                        <% if(story.status === "accepted"){ %>
-                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Canceled</span>
+                        <% if(story.status === "cancelled"){ %>
+                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Cancelled</span>
+                        <% } %>
+                        <% if(story.status === "rejected"){ %>
+                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Rejected</span>
                         <% } %>
                         <% if(story.status === "pending"){ %>
                             <span class="mt-4 md:mt-0 text-sm bg-yellow-500 text-black py-2 px-4 rounded-md shadow w-[120px] text-center">Pending</span>
                         <% } %>
-                        <% if(story.status === "cancelled"){ %>
+                        <% if(story.status === "accepted"){ %>
                             <span class="mt-4 md:mt-0 text-sm bg-green-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Accepted</span>                        
+                        <% } %>
+                        <% if(story.status === "done"){ %>
+                            <span class="mt-4 md:mt-0 text-sm bg-amber-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Done</span>                        
                         <% } %>
                     </div>
                     <% }); %>

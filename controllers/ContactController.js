@@ -123,3 +123,15 @@ exports.replyToFeedback = async (req, res) => {
        res.status(500).send('Server error');
    }
 };
+
+// Delete Feedback
+exports.deleteFeedback = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Contact.findByIdAndDelete(id);
+        res.redirect('/ark/admin/feedback'); // Redirect after deletion
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+};
