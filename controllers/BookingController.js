@@ -49,6 +49,15 @@ class BookingController {
   async remove(id) {
     await Booking.deleteOne({_id: id});
   }
+
+  async update(data) {
+    await Booking.updateOne({_id: data.id}, {$set: {
+          time: data.time,
+          date: data.date,
+        }
+      }
+    )
+  }
 }
 
 

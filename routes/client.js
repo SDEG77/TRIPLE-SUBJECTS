@@ -10,6 +10,97 @@ const ClientController = require('../controllers/ClientController');
 const Photo = require('../models/Photo');
 const Booking = require('../models/Booking');
 
+async function sisig_repeater(type, order, req, res) {
+  if(req.session.logged) {
+    const services = await ServiceController.getServices(); // para sa booking page
+    const groups = await PackageController.groupPackages(); // para sa booking page
+    const addOns = await AddOnController.getAddOns(); // para sa booking page
+    const bookings = await Booking.find({status: "accepted"}); // para sa harang ng occupied time & date
+    const bookings_history = await Booking.aggregate([ //para sa profile history page
+      { 
+        $match: { client_id: req.session.userID } // Match user bookings
+      },
+      {
+        $sort: {
+          date: -1 // Sort by date descending (newest at the top)
+        }
+      },
+      {
+        $group: {
+          _id: "$status", // Group by status
+          bookings: { $push: "$$ROOT" } // Push all documents into the 'bookings' array
+        }
+      },
+  
+      {
+        $project: {
+          status: "$_id", // Rename _id to status for easier access in view
+          bookings: 1,
+          _id: 0
+        }
+      }
+    ]);
+
+    // RENDER FIELDS BATTALION
+    const rendID = req.session.userID; //booking, history
+    const rendName = req.session.name; //booking, history
+    const rendServices = services; //booking
+    const rendAddOns = addOns; //booking
+    const rendBookings = bookings; //booking
+    let rendGroups = groups; //booking
+    const rendHistory = bookings_history; //history
+
+    let choice;
+
+    if(type === "get-booking") {
+      choice = groups;
+    }
+    else if (type === "get-history") {
+      choice = rendHistory;
+    }
+
+    choice.sort((a, b) => {
+      let aName;
+      let bName;
+      let priority;
+
+      if(type === "get-booking"){
+        priority = order;
+      
+        aName = a._id.packageName.toLowerCase();
+        bName = b._id.packageName.toLowerCase();
+      } 
+      
+      else if (type === "get-history") {
+        priority = order;
+      
+        aName = a.status.toLowerCase();
+        bName = b.status.toLowerCase();
+      }
+
+      // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
+      const aPriority = priority.indexOf(aName);
+      const bPriority = priority.indexOf(bName);
+    
+      // If aName or bName has a priority, sort based on that
+      if (aPriority !== -1 && bPriority !== -1) {
+        return aPriority - bPriority;
+      } else if (aPriority !== -1) {
+        return -1; // aName has priority
+      } else if (bPriority !== -1) {
+        return 1; // bName has priority
+      }
+    
+      // else, fall back to good ol' localeCompare
+      return aName.localeCompare(bName);
+    });
+
+    return {
+      rendID, rendAddOns, rendBookings, rendGroups, rendName, rendServices, rendHistory
+    };
+  }
+}
+
 route.get('/', async (req, res) => {
   if (req.session.logged) {
     try {
@@ -36,48 +127,16 @@ route.get('/', async (req, res) => {
 
 
 route.get('/booking', async (req, res) => {
-  const services = await ServiceController.getServices();
-  const groups = await PackageController.groupPackages();
-  const addOns = await AddOnController.getAddOns();
-  const bookings = await Booking.find({status: "accepted",});
-
-  // RENDER FIELDS BATTALION
-  const rendID = req.session.userID;
-  const rendName = req.session.name;
-  const rendServices = services;
-  const rendAddOns = addOns;
-  const rendBookings = bookings;
-  const rendGroups = groups.sort((a, b) => {
-    const priority = ['solo', 'duo', 'group', 'specials'];
-  
-    const aName = a._id.packageName.toLowerCase();
-    const bName = b._id.packageName.toLowerCase();
-  
-    // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
-    const aPriority = priority.indexOf(aName);
-    const bPriority = priority.indexOf(bName);
-  
-    // If aName or bName has a priority, sort based on that
-    if (aPriority !== -1 && bPriority !== -1) {
-      return aPriority - bPriority;
-    } else if (aPriority !== -1) {
-      return -1; // aName has priority
-    } else if (bPriority !== -1) {
-      return 1; // bName has priority
-    }
-  
-    // else, fall back to good ol' localeCompare
-    return aName.localeCompare(bName);
-  });
-
   if(req.session.logged) {
+    const give = await sisig_repeater("get-booking", ['solo', 'duo', 'group', 'specials'], req, res);
+
     res.render('client/booking', {
-      id: rendID,
-      name: rendName,
-      services: rendServices,
-      addOns: rendAddOns,
-      groups: rendGroups,
-      bookings: rendBookings,
+      id: give.rendID,
+      name: give.rendName,
+      services: give.rendServices,
+      addOns: give.rendAddOns,
+      groups: give.rendGroups,
+      bookings: give.rendBookings,
     });
   } else {
     res.redirect('../login')
@@ -86,44 +145,16 @@ route.get('/booking', async (req, res) => {
 
 route.post('/booking', async (req, res) => {
   const oneOnly = await Booking.find({client_id: req.session.userID, receipt_uploaded: "no",});
+  const isItOccupied = await Booking.findOne({status: "accepted", date: req.body.date, time: req.body.time,});
 
+  // if(isItOccupied) {
+  //   res.render(./)
+  // }
   if(oneOnly.length === 1) {
     res.redirect("./booking")
   } else {
-  const services = await ServiceController.getServices();
-  const groups = await PackageController.groupPackages();
-  const addOns = await AddOnController.getAddOns();
-  const bookings = await Booking.find({status: "accepted",});
-  
-  // RENDER FIELDS BATTALION
-  const rendID = req.session.userID;
-  const rendName = req.session.name;
-  const rendServices = services;
-  const rendAddOns = addOns;
-  const rendBookings = bookings;
-  const rendGroups = groups.sort((a, b) => {
-    const priority = ['solo', 'duo', 'group', 'specials'];
-  
-    const aName = a._id.packageName.toLowerCase();
-    const bName = b._id.packageName.toLowerCase();
-    
-    // Checks if either of them is in the priority list, if not then too bad, they get last priority >:)
-    const aPriority = priority.indexOf(aName);
-    const bPriority = priority.indexOf(bName);
-  
-    // If aName or bName has a priority, sort based on that
-    if (aPriority !== -1 && bPriority !== -1) {
-      return aPriority - bPriority;
-    } else if (aPriority !== -1) {
-      return -1; // aName has priority
-    } else if (bPriority !== -1) {
-      return 1; // bName has priority
-    }
-    
-    // else, fall back to good ol' localeCompare
-    return aName.localeCompare(bName);
-  });
-  
+  const give = await sisig_repeater("get-booking", ['solo', 'duo', 'group', 'specials'], req, res);
+
   let success;
   
   if(req.session.logged) {
@@ -146,22 +177,22 @@ route.post('/booking', async (req, res) => {
   if(success) {
     res.render('client/booking', {
       message: "Booking Successful",
-      id: rendID,
-      name: rendName,
-      services: rendServices,
-      addOns: rendAddOns,
-      groups: rendGroups,
-      bookings: rendBookings,
+      id: give.rendID,
+      name: give.rendName,
+      services: give.rendServices,
+      addOns: give.rendAddOns,
+      groups: give.rendGroups,
+      bookings: give.rendBookings,
     });
   } else {
     res.render('client/booking', {
       message: "Booking Unsuccessful",
-      id: rendID,
-      name: rendName,
-      services: rendServices,
-      addOns: rendAddOns,
-      groups: rendGroups,    
-      bookings: rendBookings,
+      id: give.rendID,
+      name: give.rendName,
+      services: give.rendServices,
+      addOns: give.rendAddOns,
+      groups: give.rendGroups,
+      bookings: give.rendBookings,
     });
   }
 }
@@ -172,6 +203,7 @@ route.get('/profile', (req, res) => {
     res.render('client/profile', {
       name: req.session.name,
       email: req.session.email,
+      password: req.session.pazz,
     }); 
   } else {
     res.redirect('../login')
@@ -207,16 +239,21 @@ route.get('/logout', (req, res) => {
 });
 
 route.get('/history', async (req, res) => {
-  const bookings = await Booking.find({client_id: req.session.userID})
+  // const customSortOrder = ["Pending", "Accepted", "Rescheduled", "Done", "Cancelled", "Rejected"];
 
-  if(req.session.logged) {
+  
+
+
+  if (req.session.logged) {
+    const give = await sisig_repeater("get-history", ["pending", "accepted", "rescheduled", "done", "cancelled", "rejected"], req, res);
+
     res.render('client/history', {
-      name: req.session.name, 
+      name: req.session.name,
       id: req.session.userID,
-      history: bookings,
-    })
+      history: give.rendHistory,
+    });
   } else {
-    res.redirect('../login')
+    res.redirect('../login');
   }
 });
 

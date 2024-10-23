@@ -131,23 +131,42 @@
 
 
 
-
         <div class="rounded-[20px] w-fit md:w-3/4  px-8">
+            
             <!-- Booking History -->
             <section class=" mb-10">
                 <h2 class="text-[22px] font-bold mb-6 text-[#F6DE03]">Booking History</h2>
+
+                <% history.forEach(group => { %>
+                <% 
+                    let style; 
+                
+                    if(group.status === "done" || "pending") {
+                        style = "bg-amber-600 text-white font-bold py-[5px] px-[15px]"
+                    }
+
+                    if(group.status === "accepted") {
+                        style = "bg-green-600 text-white font-bold py-[5px] px-[15px]"
+                    }
+                    if(group.status === "rejected" || group.status === "rejected") {
+                        style = "bg-rose-600 text-white font-bold py-[5px] px-[15px]"
+                    }
+                %>
+                <hr class="my-10">
+                
+                <h1 class="<%= style %> text-2xl font-bold mb-5 capitalize rounded-md"><%= group.status %></h1> 
                 <div class="flex flex-col gap-5">
-                    <% history.map(story => { %>
+                    <% group.bookings.forEach(booking => { %>
                     <% 
-                        const date = new Date(story.date); 
+                        const date = new Date(booking.date); 
                         const day = date.getDate(); 
-                        const year = `${story.date}`.split(" ")[3];
+                        const year = `${booking.date}`.split(" ")[3];
                         const index = date.getMonth(); 
                         const months=[ "January" , "February" , "March" , "April"
                         , "May" , "June" , "July" , "August" , "September" , "October" , "November"
                         , "December" ]; 
                 
-                        const decompose = story.service.split(" / ");
+                        const decompose = booking.service.split(" / ");
 
                         const serviceType = decompose[1].split("-")[0];
                         const serviceDuration = decompose[1].split("-")[1];
@@ -157,30 +176,15 @@
                             <h3 class="text-xl font-semibold"><%= `Service: ${serviceType} ${serviceDuration} mins`%></h3>
                             <p class="text-sm text-gray-400 mb-3">
                                 Additionals:
-                                <% story.addOns.forEach(add => { %>
+                                <% booking.addOns.forEach(add => { %>
                                     <br>
                                     <span>- <%= add %></span>
                                 <% }); %>
                             </p>
                             <p class="text-sm text-gray-400">Date: <%= `${months[index]} ${day}, ${year}`%></p>
-                            <p class="text-sm text-gray-400">Time: <%= `${story.time}` %></p>
-                            <p class="text-sm text-gray-400 mt-4">Total Price: <%= story.total %></p>
+                            <p class="text-sm text-gray-400">Time: <%= `${booking.time}` %></p>
+                            <p class="text-sm text-gray-400 mt-4">Total Price: <%= booking.total %></p>
                         </div>
-                        <% if(story.status === "cancelled"){ %>
-                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Cancelled</span>
-                        <% } %>
-                        <% if(story.status === "rejected"){ %>
-                            <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Rejected</span>
-                        <% } %>
-                        <% if(story.status === "pending"){ %>
-                            <span class="mt-4 md:mt-0 text-sm bg-yellow-500 text-black py-2 px-4 rounded-md shadow w-[120px] text-center">Pending</span>
-                        <% } %>
-                        <% if(story.status === "accepted"){ %>
-                            <span class="mt-4 md:mt-0 text-sm bg-green-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Accepted</span>                        
-                        <% } %>
-                        <% if(story.status === "done"){ %>
-                            <span class="mt-4 md:mt-0 text-sm bg-amber-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Done</span>                        
-                        <% } %>
                     </div>
                     <% }); %>
                     
@@ -199,11 +203,9 @@
                         </div> -->
                 </div>
             </section>
+        <% }); %>
             
             
-            
-            
-            </div>
         </div>
     </div>
 

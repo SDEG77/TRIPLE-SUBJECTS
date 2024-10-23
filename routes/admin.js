@@ -161,7 +161,7 @@ route.post("/bookings/accept", async (req, res) => {
     await BookingController.accept(req.body.id);
     res.redirect("./");
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -171,7 +171,7 @@ route.post("/bookings/cancel", async (req, res) => {
 
     res.redirect("./");
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -181,7 +181,7 @@ route.post("/bookings/reject", async (req, res) => {
 
     res.redirect("./");
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -191,7 +191,7 @@ route.post("/bookings/done", async (req, res) => {
 
     res.redirect("./");
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -201,7 +201,17 @@ route.post("/bookings/remove", async (req, res) => {
 
     res.redirect("./");
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
+  }
+});
+
+route.post("/bookings/reschedule", async (req, res) => {
+  if (req.session.isAdminLogged) {
+    await BookingController.update({id: req.body.id, time: req.body.time, date: req.body.date});
+
+    res.redirect("./");
+  } else {
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -213,7 +223,7 @@ route.get("/photo-management", async (req, res) => {
 
     res.render("./admin/photomanagement", { clients: clients, photos: photos });
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -230,7 +240,7 @@ route.post("/photo-management/delete", async (req, res) => {
       res.redirect("/ark/admin/photo-management"); 
     }
   } else {
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   }
 });
 
@@ -239,7 +249,7 @@ route.get('/feedback', async (req, res) => {
     await ContactController.getFeedbacks(req, res); // Use the controller function to fetch feedbacks
     // res.render("./admin/feedback");
   } else {
-    res.redirect('/login');
+    res.redirect('/ark/login');
   }
 });
 
@@ -258,7 +268,7 @@ route.delete('/feedback/:id/delete', ContactController.deleteFeedback);  // New 
 route.get("/logout", (req, res) => {
   if (req.session.isAdminLogged) {
     req.session.destroy();
-    res.redirect("./login");
+    res.redirect("/ark/admin/login");
   } else {
     res.redirect("./login");
   }
@@ -278,7 +288,7 @@ route.get("/resource", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   } else {
-    res.redirect('./login');
+    res.redirect('/ark/login');
   }
 });
 
