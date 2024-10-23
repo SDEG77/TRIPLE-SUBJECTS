@@ -2,6 +2,7 @@ const route = require("express").Router();
 const AdminAuth = require("../controllers/AdminAuth");
 
 const Admin = require("../models/Admin");
+const User = require("../models/User")
 const AdminController = require("../controllers/AdminController");
 const ServicesController = require("../controllers/ServicesController");
 const PackageController = require("../controllers/PackageController");
@@ -45,20 +46,70 @@ route.post("/login", async (req, res) => {
   }
 });
 
-// DASHBOARD ROUTE
+// Dashboard route
 route.get("/", async (req, res) => {
   if (req.session.isAdminLogged) {
-    const totalClients = await AdminController.totalClients();
-    const totalBookings = await AdminController.totalBookings();
-    const totalPhotos = await AdminController.totalImage();
+    try {
+      // Fetch total clients, bookings, and photos
+      const totalClients = await AdminController.totalClients();
+      const totalBookings = await AdminController.totalBookings();
+      const totalPhotos = await AdminController.totalImage();
+      const pendingBookings = await AdminController.totalPendingBookings();
 
-    res.render("./admin/admin", {
-      totalClients: totalClients,
-      totalBookings: totalBookings,
-      totalPhotos: totalPhotos
-    });
+      // Fetch approved bookings (upcoming bookings)
+      const approvedBookings = await AdminController.getApprovedBookings();
+
+      // Fetch all users to match client_id to names
+      const users = await User.find();
+
+     const topServices = await AdminController.getRevenueOverview();
+
+      // Fetch revenue overview (current month)
+      const revenueOverview = await AdminController.getRevenueOverview();
+
+      // Render admin dashboard with all the fetched data
+      res.render("./admin/admin", {
+        totalClients,
+        totalBookings,
+        totalPhotos,
+        pendingBookings, // Pending bookings count
+        approvedBookings, // Approved bookings for upcoming dates
+        users, // All users to match client_id
+        topServices, // Top services and package details
+        revenueOverview // Revenue overview with breakdown by service/package
+      });
+    } catch (error) {
+      console.error("Error fetching data for dashboard:", error);
+      res.status(500).send("Server Error");
+    }
   } else {
     res.redirect("./login");
+  }
+});
+
+
+route.get("/revenue", async (req, res) => {
+  const timeFrame = req.query.timeFrame || 'month'; // Default to month if not specified
+
+  try {
+      const revenueOverview = await AdminController.getRevenueOverview(timeFrame);
+      res.json(revenueOverview); // Return the revenue data as JSON
+  } catch (error) {
+      console.error("Error fetching revenue data:", error);
+      res.status(500).send("Server Error");
+  }
+});
+
+
+// Route for fetching top services/packages data
+route.get('/top-services', async (req, res) => {
+  const { timeFrame } = req.query;
+  try {
+      const topServicesData = await AdminController.getTopServicesOverview(timeFrame);
+      res.json(topServicesData);
+  } catch (error) {
+      console.error('Error fetching top services data:', error);
+      res.status(500).json({ error: 'Failed to fetch top services data' });
   }
 });
 
@@ -171,6 +222,9 @@ route.post('/admin/feedback/reply', async (req, res) => {
 
   await ContactController.replyToFeedback(req, res);
 }});
+
+route.delete('/feedback/:id/delete', ContactController.deleteFeedback);  // New route for delete feedback
+
 
 
 

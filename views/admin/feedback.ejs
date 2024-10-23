@@ -117,77 +117,81 @@
                 Feedback
             </h2>
 
-            <!-- Feedback Table -->
-            <table class="min-w-full border-collapse bg-transparent text-left text-sm text-gray-400 shadow-md">
-                <thead>
-                    <tr>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Name</th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Email</th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Subject</th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Message</th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% feedbacks.forEach(function(feedback) { %>
-                    <tr class="hover:bg-gray-800 transition-colors">
-                        <td class="border-b border-gray-700 p-4"><%= feedback.name %></td>
-                        <td class="border-b border-gray-700 p-4"><%= feedback.email %></td>
-                        <td class="border-b border-gray-700 p-4"><%= feedback.subject %></td>
-                        <td class="border-b border-gray-700 p-4"><%= feedback.message %></td>
-                        <td class="border-b border-gray-700 p-4">
-                            <!-- Button to trigger the reply modal -->
-                            <button class="reply-button bg-yellow-500 px-4 py-2 rounded" data-email="<%= feedback.email %>">
-                                Reply
-                            </button>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+           <!-- Feedback Table -->
+           <table class="min-w-full border-collapse bg-transparent text-left text-sm text-gray-400 shadow-md">
+            <thead>
+                <tr>
+                    <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Name</th>
+                    <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Email</th>
+                    <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Subject</th>
+                    <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Message</th>
+                    <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% feedbacks.forEach(function(feedback) { %>
+                <tr class="hover:bg-gray-800 transition-colors">
+                    <td class="border-b border-gray-700 p-4"><%= feedback.name %></td>
+                    <td class="border-b border-gray-700 p-4"><%= feedback.email %></td>
+                    <td class="border-b border-gray-700 p-4"><%= feedback.subject %></td>
+                    <td class="border-b border-gray-700 p-4"><%= feedback.message %></td>
+                    <td class="border-b border-gray-700 p-4 flex gap-2">
+                        <!-- Button to trigger the reply modal -->
+                        <button class="reply-button bg-yellow-500 px-4 py-2 rounded" data-email="<%= feedback.email %>">
+                            Reply
+                        </button>
+                        <!-- Delete Feedback Button -->
+                        <form action="/ark/admin/feedback/<%= feedback._id %>/delete?_method=DELETE" method="POST">
+                            <button type="submit" class="bg-red-500 px-4 py-2 rounded">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Reply Modal -->
+    <div id="replyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-gray-800 p-6 rounded-md">
+            <h3 class="text-yellow-500 text-xl mb-4">Reply to Feedback</h3>
+            <form id="replyForm" action="/ark/admin/feedback/reply" method="POST">
+                <input type="hidden" id="emailInput" name="email">
+                <textarea name="message" rows="5" class="w-full p-2 mb-4 text-black" placeholder="Type your reply..."></textarea>
+                <button type="submit" class="bg-yellow-500 px-4 py-2 rounded">Send Reply</button>
+                <button type="button" class="ml-2 bg-gray-500 px-4 py-2 rounded" id="closeModal">Cancel</button>
+            </form>
         </div>
+    </div>
 
-        <!-- Reply Modal -->
-        <div id="replyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div class="bg-gray-800 p-6 rounded-md">
-                <h3 class="text-yellow-500 text-xl mb-4">Reply to Feedback</h3>
-                <form id="replyForm" action="admin/feedback/reply" method="POST">
-                    <input type="hidden" id="emailInput" name="email">
-                    <textarea name="message" rows="5" class="w-full p-2 mb-4 text-black" placeholder="Type your reply..."></textarea>
-                    <button type="submit" class="bg-yellow-500 px-4 py-2 rounded">Send Reply</button>
-                    <button type="button" class="ml-2 bg-gray-500 px-4 py-2 rounded" id="closeModal">Cancel</button>
-                </form>
-            </div>
-        </div>
+</main>
 
-    </main>
+<script>
+    const sidebar = document.getElementById("sidebar");
+    const toggleButton = document.getElementById("toggleSidebar");
+    const content = document.querySelector(".content");
+    const replyButtons = document.querySelectorAll('.reply-button');
+    const replyModal = document.getElementById('replyModal');
+    const emailInput = document.getElementById('emailInput');
+    const closeModal = document.getElementById('closeModal');
 
-    <script>
-        const sidebar = document.getElementById("sidebar");
-        const toggleButton = document.getElementById("toggleSidebar");
-        const content = document.querySelector(".content");
-        const replyButtons = document.querySelectorAll('.reply-button');
-        const replyModal = document.getElementById('replyModal');
-        const emailInput = document.getElementById('emailInput');
-        const closeModal = document.getElementById('closeModal');
+    toggleButton.addEventListener("click", () => {
+        sidebar.classList.toggle("sidebar-hidden");
+        content.classList.toggle("sidebar-hidden-content");
+    });
 
-        toggleButton.addEventListener("click", () => {
-            sidebar.classList.toggle("sidebar-hidden");
-            content.classList.toggle("sidebar-hidden-content");
+    replyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const email = this.getAttribute('data-email');
+            emailInput.value = email;
+            replyModal.classList.remove('hidden');
         });
+    });
 
-        replyButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const email = this.getAttribute('data-email');
-                emailInput.value = email;
-                replyModal.classList.remove('hidden');
-            });
-        });
-
-        closeModal.addEventListener('click', function() {
-            replyModal.classList.add('hidden');
-        });
-    </script>
+    closeModal.addEventListener('click', function() {
+        replyModal.classList.add('hidden');
+    });
+</script>
 </body>
 
 </html>
