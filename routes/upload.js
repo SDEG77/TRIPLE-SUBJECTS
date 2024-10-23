@@ -83,7 +83,7 @@ router.get("/client/booking/upload/:clientID", async (req, res) => {
   const detectPartner = await Booking.findOne({client_id: String(req.params.clientID), receipt_uploaded: "no",});
   console.log(detectPartner)
   if(detectPartner) {
-    const id = String(detectPartner._id);
+    const id = detectPartner.id;
 
     await Receipt.updateOne({clientId: String(req.params.clientID), uploaded: "no"}, { uploaded: "yes", bookingId: id, })
     await Booking.updateOne({client_id: String(req.params.clientID), receipt_uploaded: "no"}, {receipt_uploaded: "yes",})

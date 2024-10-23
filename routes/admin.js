@@ -92,6 +92,10 @@ route.get("/bookings", async (req, res) => {
   const result = await AdminController.viewBookings();
   const receipts = await Receipt.find();
 
+  receipts.forEach(rep => {
+    console.log(rep.bookingId)
+  })
+
   if (req.session.isAdminLogged) {
     res.render("./admin/adminbookings", {
       snatch: result,
@@ -131,9 +135,9 @@ route.post("/bookings/reject", async (req, res) => {
   }
 });
 
-route.post("/bookings/finish", async (req, res) => {
+route.post("/bookings/done", async (req, res) => {
   if (req.session.isAdminLogged) {
-    await BookingController.finished(req.body.id);
+    await BookingController.done(req.body.id);
 
     res.redirect("./");
   } else {

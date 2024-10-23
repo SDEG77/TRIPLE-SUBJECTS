@@ -14,8 +14,8 @@ const Contact = require('../models/Contact');
 env.config();
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
-  full()
-  // dev_booking()
+  // full()
+  dev_booking()
   // users()
   // bookings()
   console.log('Fresh Migrate Complete')  

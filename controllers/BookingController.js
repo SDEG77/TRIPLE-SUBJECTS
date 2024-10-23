@@ -42,8 +42,8 @@ class BookingController {
     await Booking.updateOne({_id: id}, {status: "rejected"});
   }
   
-  async finished(id) {
-    await Booking.updateOne({_id: id}, {status: "finished"});
+  async done(id) {
+    await Booking.updateOne({_id: id}, {status: "done"});
   }
 
   async remove(id) {

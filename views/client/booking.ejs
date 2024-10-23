@@ -49,14 +49,14 @@
         accent-color: black;
         width: 20px;
     }
-    input[type="date"] {
+    /* input[type="date"] {
         width: 250px;
         background-color: transparent;
         box-shadow: 0 0 5px #f6de038d;
         padding: 5px;
         border-radius: 10px;
         color: #ffffff;
-    }
+    } */
     * {
     font-family: 'Poppins';
 }
@@ -99,14 +99,14 @@ input[type="checkbox"] {
     width: 20px;
 }
 
-input[type="date"] {
+/* input[type="date"] {
     width: 250px;
     background-color: transparent;
     box-shadow: 0 0 5px #f6de038d;
     padding: 5px;
     border-radius: 10px;
     color: #ffffff;
-}
+} */
 
 .modal {
     display: flex;
@@ -209,7 +209,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> <!-- the grid itself -->
                 <% groups.map(group => { %>
                     <% if(group._id.serviceName === service.name){ %>
-                        <div class="flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center hover:scale-110 transition-transform duration-300" style="box-shadow:0 0 5px #f6de038d">
+                        <div class="min-w-[330px] flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center hover:scale-110 transition-transform duration-300" style="box-shadow:0 0 5px #f6de038d">
                             <% 
                                 let locked; 
                             %>                
@@ -244,27 +244,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                     </ul>
                 </div>
             </div>
-
-            <!-- Time -->
-            <div class="flex flex-col">
-                <div class="flex flex-col">
-                    <label for="date" class="mb-3 text-[#F6DE03] text-[20px]">Date</label>
-                    <input required name="date" type="date">
-                </div>
-                
-                <select required name="time" id="" class="mt-5 bg-transparent rounded-[10px] px-4 py-[5px] text-white w-[250px]" style="box-shadow: 0 0 5px #f6de038d;">
-                    <option selected disabled value="unset" class="bg-[#121212] text-white">Select Time</option>
-                    <option value="8:00 AM to 9:00 AM" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
-                    <option value="9:00 AM to 10:00 AM" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
-                    <option value="10:00 AM to 11:00 AM" class="bg-[#121212] text-white">10:00 AM - 11:00 AM</option>
-                    <option value="11:00 AM to 12:00 AM" class="bg-[#121212] text-white">11:00 AM - 12:00 AM</option>
-                    <option value="1:00 PM to 2:00 PM" class="bg-[#121212] text-white">1:00 PM - 2:00 PM</option>
-                    <option value="2:00 PM to 3:00 PM" class="bg-[#121212] text-white">2:00 PM - 3:00 PM</option>
-                    <option value="3:00 PM to 4:00 PM" class="bg-[#121212] text-white">3:00 PM - 4:00 PM</option>
-                </select>
-            </div>
-            <!-- End of Time -->
-            
+            <div class="text-transparent">edwuhcjbknelowipehuknjmk;eofisd9cuyhekjnmlrfodcsi9xu8yighjbnredfkuoh <br>3edqsouhjb nmwqdsiaxoujhkwndsaxljiuhiwdbjsnxjluh</div>
             <!-- Additional -->
             <div class="flex flex-col w-[330px]">
                 <div class="flex justify-between items-center">
@@ -295,8 +275,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <!-- End of Additional -->
         </div>
 
-        <div class="flex justify-between items-center flex-col md:flex-row fixed bottom-0 left-0 w-full py-4 px-10 bg-[#121212] border-t-2 border-[#F6DE03]">
+        <div class="flex justify-between items-center flex-col md:flex-row fixed bottom-0 left-0 w-full py-4 px-10 bg-[#121212] border-t-2 border-[#F6DE03]"> <!-- FIXED BOTTOM NAV -->
             <button onmousedown="superResetter();" type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
+
+            <!-- Time -->
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <label for="date" class="text-[#F6DE03] text-[20px]">Date:</label>
+                    <input required name="date" type="date" class="bg-transparent h-[35px] rounded-[10px] px-2  text-white w-[250px] border-2 border-yellow-500" >
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <label for="time" class="text-[#F6DE03] text-[20px]">Time</label>
+
+                    <select required name="time" id="" class="bg-transparent h-[35px] rounded-[10px] px-2  text-white w-[250px] border-2 border-yellow-500" >
+                        <option selected disabled value="unset" class="bg-[#121212] text-white">Select Time</option>
+                        <option value="8:00 AM to 9:00 AM" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
+                        <option value="9:00 AM to 10:00 AM" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM to 11:00 AM" class="bg-[#121212] text-white">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM to 12:00 AM" class="bg-[#121212] text-white">11:00 AM - 12:00 AM</option>
+                        <option value="1:00 PM to 2:00 PM" class="bg-[#121212] text-white">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM to 3:00 PM" class="bg-[#121212] text-white">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM to 4:00 PM" class="bg-[#121212] text-white">3:00 PM - 4:00 PM</option>
+                    </select>                    
+                </div>
+            </div>
+            <!-- End of Time -->
 
             <div class="flex flex-col md:flex-row gap-5">
                 <p class="font-semibold text-[#F6DE03] flex items-center">Total Price: <span class="pl-2" id="totalPrice" >₱ 0,000.00</span></p>
@@ -382,4 +386,47 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         }
       });
     });
-  </script>
+  
+    // YUNG HARANG PARA SA OCCUPIED SCHEDULES
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const dateInput = document.getElementById('dateInput');
+    //     const timeInput = document.getElementById('timeInput');
+
+    //     // Bookings data passed from the backend
+    //     const bookings = <%- JSON.stringify(bookings) %>;
+
+    //     // Store booked dates and their times
+    //     const bookedDates = {};
+
+    //     // Process the bookings
+    //     bookings.forEach(booking => {
+    //         const bookingDate = new Date(booking.date).toISOString().split('T')[0];
+    //         const bookingTime = booking.time;
+
+    //         if (!bookedDates[bookingDate]) {
+    //             bookedDates[bookingDate] = [];
+    //         }
+    //         bookedDates[bookingDate].push(bookingTime);
+    //     });
+
+    //     // Disable booked dates
+    //     dateInput.addEventListener('input', (event) => {
+    //         const selectedDate = event.target.value;
+            
+    //         // Reset time options
+    //         const options = timeInput.querySelectorAll('option');
+    //         options.forEach(option => option.disabled = false);
+
+    //         // If the selected date is fully booked, disable those time options
+    //         if (bookedDates[selectedDate]) {
+    //             bookedDates[selectedDate].forEach(bookedTime => {
+    //                 options.forEach(option => {
+    //                     if (option.value === bookedTime) {
+    //                         option.disabled = true;
+    //                     }
+    //                 });
+    //             });
+    //         }
+    //     });
+    // });
+</script>

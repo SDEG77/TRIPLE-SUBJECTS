@@ -155,11 +155,16 @@
                     <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
                         <div class="md:w-3/4 relative">
                             <h3 class="text-xl font-semibold"><%= `Service: ${serviceType} ${serviceDuration} mins`%></h3>
-                            <p class="text-sm text-gray-400">Additionals: Add 10 minutes to session duration (Self-Directed)</p>
-                            <p class="text-sm text-gray-400">Date: <%= `${months[index]} ${day}, ${year}, ${story.time}` %></p>
+                            <p class="text-sm text-gray-400 mb-3">
+                                Additionals:
+                                <% story.addOns.forEach(add => { %>
+                                    <br>
+                                    <span>- <%= add %></span>
+                                <% }); %>
+                            </p>
+                            <p class="text-sm text-gray-400">Date: <%= `${months[index]} ${day}, ${year}`%></p>
                             <p class="text-sm text-gray-400">Time: <%= `${story.time}` %></p>
-                            <p class="text-sm text-gray-400">Total Price: <%= story.total %></p>
-                            
+                            <p class="text-sm text-gray-400 mt-4">Total Price: <%= story.total %></p>
                         </div>
                         <% if(story.status === "accepted"){ %>
                             <span class="mt-4 md:mt-0 text-sm bg-red-600 text-white py-2 px-4 rounded-md shadow w-[120px] text-center">Canceled</span>

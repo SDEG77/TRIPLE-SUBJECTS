@@ -39,12 +39,14 @@ route.get('/booking', async (req, res) => {
   const services = await ServiceController.getServices();
   const groups = await PackageController.groupPackages();
   const addOns = await AddOnController.getAddOns();
+  const bookings = await Booking.find({status: "accepted",});
 
   // RENDER FIELDS BATTALION
   const rendID = req.session.userID;
   const rendName = req.session.name;
   const rendServices = services;
   const rendAddOns = addOns;
+  const rendBookings = bookings;
   const rendGroups = groups.sort((a, b) => {
     const priority = ['solo', 'duo', 'group', 'specials'];
   
@@ -75,6 +77,7 @@ route.get('/booking', async (req, res) => {
       services: rendServices,
       addOns: rendAddOns,
       groups: rendGroups,
+      bookings: rendBookings,
     });
   } else {
     res.redirect('../login')
@@ -90,12 +93,14 @@ route.post('/booking', async (req, res) => {
   const services = await ServiceController.getServices();
   const groups = await PackageController.groupPackages();
   const addOns = await AddOnController.getAddOns();
+  const bookings = await Booking.find({status: "accepted",});
   
   // RENDER FIELDS BATTALION
   const rendID = req.session.userID;
   const rendName = req.session.name;
   const rendServices = services;
   const rendAddOns = addOns;
+  const rendBookings = bookings;
   const rendGroups = groups.sort((a, b) => {
     const priority = ['solo', 'duo', 'group', 'specials'];
   
@@ -146,6 +151,7 @@ route.post('/booking', async (req, res) => {
       services: rendServices,
       addOns: rendAddOns,
       groups: rendGroups,
+      bookings: rendBookings,
     });
   } else {
     res.render('client/booking', {
@@ -155,6 +161,7 @@ route.post('/booking', async (req, res) => {
       services: rendServices,
       addOns: rendAddOns,
       groups: rendGroups,    
+      bookings: rendBookings,
     });
   }
 }
