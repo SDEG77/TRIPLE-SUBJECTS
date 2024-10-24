@@ -8,7 +8,6 @@ const ServiceController = require('../controllers/ServicesController');
 const PackageController = require('../controllers/PackageController');
 const AddOnController = require('../controllers/AddOnController');
 
-
 route.get('/', async (req, res) => {
   try {
     // Fetch photos from the database
@@ -64,6 +63,7 @@ route.post('/login', async (req, res) => {
     req.session.userID = credentials[0]._id.toString();
     req.session.name = `${credentials[0].fname.toUpperCase()} ${credentials[0].lname.toUpperCase()}`;
     req.session.email = credentials[0].email;
+    req.session.pazz = req.body.password;
     req.session.logged = true;
     loginMiddleware = true;
 
