@@ -27,31 +27,28 @@ route.get('/signup', (req, res) => {
 });
 
 route.post('/signup', async (req, res) => {
-  if(await LoggerController.register({
+  if (await LoggerController.register({
     fname: req.body.fname,
     lname: req.body.lname,
     email: req.body.email,
     password: req.body.password,
-  })) {
-    // console.log('true in general')
-    res.redirect('./login')
+  }, req)) {
+    // Redirect to the email verification required page
+    res.render('./general/email-register-verify', { email: req.body.email });
   } else {
-    // console.log('false in general')
     res.render('./general/signup', {
       message: 'Email has been taken!',
       fname: req.body.fname,
       lname: req.body.lname,
       email: req.body.email,
-    })
+    });
   }
 });
-
 route.get('/login', (req, res) => {
   res.render('./general/login');
 });
 
 let loginMiddleware;
-
 
 route.post('/login', async (req, res) => {
   const logger = await LoggerController.login({
@@ -59,7 +56,7 @@ route.post('/login', async (req, res) => {
     password: req.body.password,
   });
 
-  if (logger) {
+  if (logger === 'login_success') {
     const credentials = await User.find({ email: req.body.email });
 
     // Set session values
@@ -81,15 +78,28 @@ route.post('/login', async (req, res) => {
 
     res.redirect('/ark/client');
   } else {
-    // If login fails
+    // Handle different error cases for front-end display
+    let message;
+    if (logger === 'incorrect_password') {
+      message = 'Password was incorrect!';
+    } else if (logger === 'not_verified') {
+      message = 'Please verify your email before logging in!';
+    } else if (logger === 'user_not_found') {
+      message = 'User not found!';
+    } else {
+      message = 'An error occurred. Please try again.';
+    }
+
+    // If login fails, display the specific error message
     req.session.logged = false;
 
     res.render('./general/login', {
-      message: '(Password was incorrect!)',
+      message: message,
       email: req.body.email,
     });
   }
 });
+
 
 
 route.get('/forgot', (req, res) => {
@@ -157,6 +167,49 @@ route.get('/pricing', async (req, res) => {
     addOns: rendAddOns,
     groups: rendGroups,
   })
+});
+
+route.get('/verify-email/:userId/:token', async (req, res) => {
+  try {
+    const { userId, token } = req.params;
+    const result = await LoggerController.verifyEmail(userId, token);
+
+    if (result.success) {
+      // After successful verification, redirect to a success page or login
+      res.render('./general/verification-success', { message: 'Your email has been verified!' });
+    } else {
+      res.render('./general/verification-fail', { message: 'Invalid or expired token.' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+route.post('/resend-verification', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+
+    if (user && !user.isVerified) {
+      const token = crypto.randomBytes(32).toString('hex');
+      await Token.create({
+        userId: user._id,
+        token: token,
+        createdAt: Date.now(),
+      });
+
+      const verificationLink = `http://${req.headers.host}/ark/verify-email/${user._id}/${token}`;
+      await LoggerController.sendVerificationEmail(email, verificationLink);
+
+      res.render('./general/email-register-verify', { message: 'Verification email resent. Check your inbox.', email });
+    } else {
+      res.render('./general/email-register-verify', { message: 'Email is already verified or doesn’t exist.', email });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports =  route;

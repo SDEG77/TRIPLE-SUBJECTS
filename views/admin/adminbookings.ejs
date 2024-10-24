@@ -348,7 +348,6 @@
                                     <span onclick="pizzaYum('<%= booking.id %>')" class="close close-<% booking._id %> text-red-500 hover:text-red-700" style="cursor:pointer;">&times;</span>
                                     <h2 class="text-2xl font-semibold text-yellow-500 mb-4 text-center">Proof of Payment</h2>
 
-                                    <p><%= `${String(yah.rec.bookingId)} - ${String(booking.id)}` %></p>
                                     <% let decompose = yah.rec.filepath.split("\\"); %>
     
                                     <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="Proof of Payment" class="w-full h-auto rounded-lg shadow-md">

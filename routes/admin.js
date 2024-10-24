@@ -142,10 +142,6 @@ route.get("/bookings", async (req, res) => {
   const result = await AdminController.viewBookings();
   const receipts = await Receipt.find();
 
-  receipts.forEach(rep => {
-    console.log(rep.bookingId)
-  })
-
   if (req.session.isAdminLogged) {
     res.render("./admin/adminbookings", {
       snatch: result,
@@ -254,7 +250,7 @@ route.get('/feedback', async (req, res) => {
 });
 
 // Route to handle the reply to feedback (POST request)
-route.post('/admin/feedback/reply', async (req, res) => {
+route.post('/feedback/reply', async (req, res) => {
   if (req.session.isAdminLogged) {
 
   await ContactController.replyToFeedback(req, res);
