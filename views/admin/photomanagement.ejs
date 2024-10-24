@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin</title>
-  <link rel="icon" href="pics/logo.jpg" />
+  <link rel="icon" href="/assets/img/arklogo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
@@ -63,24 +63,25 @@
 <body>
   <div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
     <div>
-      <div class="m-7 flex justify-center">
-        <img class="rounded-full w-28" src="/assets/logo.jpg" alt="Logo" />
-      </div>
-      <nav class="mt-10 border-t-4 border-yellow-500">
+      <div class=" flex justify-center">
+        <img class=" w-full" src="/assets/img/arklogo6.png" alt="Logo">
+        <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
+    </div>
+      <nav class=" ">
         <a href="/ark/admin"
-        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
         <i class="fa-solid fa-house mr-4"></i> Dashboard
         </a>
         <a href="/ark/admin/clients"
-            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
             <i class="fa-solid fa-users mr-4"></i> Clients
         </a>
         <a href="/ark/admin/bookings"
-            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
             <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
         </a>
         <a href="/ark/admin/indexmanager"
-        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
         <i class="fa-solid fa-images mr-4"></i> Index Manager
         <a href="/ark/admin/photo-management"
           class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
@@ -88,11 +89,11 @@
           Management
         </a>
         <a href="/ark/admin/resource"
-            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
             <i class="fa-solid fa-box mr-4"></i> Resource Control Center
         </a>
         <a href="/ark/admin/feedback"
-            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+            class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
             <i class="fa-solid fa-message mr-4"></i> Feedback
         </a>
     </nav>
@@ -105,7 +106,7 @@
 </div>
   <main class="content h-[100vh] overflow-auto">
     <button id="toggleSidebar" class="p-4 text-yellow-500">
-      <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-bars fa-2xl"></i>
     </button>
 
     <div class="p-5">
@@ -114,6 +115,7 @@
       </h2>
 
       <div class="mt-4 space-y-6">
+        <% try{ %>
         <% clients.forEach(function(client) { %>
           <div class="border border-gray-700 p-4 rounded-lg bg-gray-700">
             <h3 class="text-[12px] font-regular">CLIENT'S ID: <%= client.id %></h3>
@@ -190,7 +192,7 @@
               });
             });
           </script>
-        <% }) %>
+        <% }) } catch{}%>
         
       </div>
     </div>

@@ -7,6 +7,8 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   resetPasswordToken: String,  // Token for password reset
   resetPasswordExpires: Date,  // Expiry date for token
+  isVerified: { type: Boolean, default: false } // Add this field
+
 });
 
 /** @type {import('mongoose').Model} */

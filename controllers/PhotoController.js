@@ -5,7 +5,7 @@ const path = require('path');
 // Set up multer for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './index_photos/'); // Path where images will be stored
+        cb(null, 'img_uploads/index_photos/'); // Path where images will be stored
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
@@ -36,7 +36,7 @@ exports.addPhoto = async (req, res) => {
         try {
             const newPhoto = new Photo({
                 title: req.body.title || '', // Optional title field
-                image_path: `/index_photos/${req.file.filename}`, // Store the relative path for the new directory
+                image_path: `img_uploads/index_photos/${req.file.filename}`, // Store the relative path for the new directory
             });
             await newPhoto.save();
             res.redirect('/ark/admin/indexmanager'); // Redirect to indexmanager page after success

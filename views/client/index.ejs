@@ -35,7 +35,7 @@
     }
 </style>
 <body class="overflow-x-hidden flex flex-col"> 
-  <!-- Navigation Bar -->
+<!-- Navigation Bar -->
 <nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212]/90">
     <div class="logo">
         <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
@@ -54,7 +54,7 @@
 
                 <% try{ %>
                     <%= name %>
-                        <% }catch{} %>
+                <% }catch{} %>
             </a>
         </div>
 
@@ -83,13 +83,10 @@
 
                     <% try{ %>
                         <%= name %>
-                            <% }catch{} %>
+                    <% }catch{} %>
                 </a>
             </div>
-
         </div>
-
-
     </nav>
     <!-- End of Navigation Bar -->
 
@@ -105,7 +102,7 @@
             </p>
 
             <div class="mt-5 flex gap-5 items-center">    
-                <a class="px-4 py-1 text-center text-black rounded-[20px] text-2xl bg-[#F6DE03]" href="/ark/client/booking">Book Now</a>
+                <a class="px-6 z-30 py-3 bg-[#ffffff] rounded-2xl text-gray-800 relative font-semibold after:-z-20 after:absolute after:h-1 after:w-1 after:bg-[#ffe91e] after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[300] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-700 transition-all duration-900 text-2xl" href="/ark/client/booking">Book Now</a>
             </div>
         </div>
     </div>
@@ -122,8 +119,9 @@
         <div class="relative w-full overflow-hidden">
             <div class="flex gap-6 transition-transform duration-500" id="combinedCarousel">
                 <% photos.forEach(function(photo) { %>
+                <% let decompose = photo.image_path.split("/"); %>
                 <div class="w-[500px] flex-shrink-0">
-                    <img class="w-full h-[710px] object-cover" src="<%= photo.image_path %>" alt="<%= photo.title %>">
+                    <img class="w-full h-[710px] object-cover" src="/<%= `${decompose[1]}/${decompose[2]}`%>" alt="<%= photo.title %>">
                 </div>
                 <% }) %>
             </div>
@@ -168,7 +166,7 @@
     </div>
 
     <!-- Call to Action Button (Optional if you want another button under the image) -->
-    <button class="px-8 py-4 bg-[#F6DE03] text-black font-bold text-2xl rounded-[20px]">
+    <button class="px-6 z-30 py-3 bg-[#ffffff] rounded-2xl text-gray-800 relative font-semibold after:-z-20 after:absolute after:h-1 after:w-1 after:bg-[#ffe91e] after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[300] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-700 transition-all duration-900 text-2xl">
         <a href="/ark/client/booking">AVAIL NOW</a>
     </button>
 </section>
@@ -196,7 +194,7 @@
 
    
     <div class="flex flex-col gap-3">
-        <img src="/assets/img/image 8.png" class="w-[450px]">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d961.3035762845872!2d120.94716981224575!3d15.472900658048669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339729e11e182cef%3A0x4b12eaa18e0bf97d!2sArk%20Visions!5e0!3m2!1sen!2sph!4v1729600016677!5m2!1sen!2sph" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
         <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
         <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
@@ -207,9 +205,12 @@
         <input type="text" name="name" placeholder="Name" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3" required>
         <input type="email" name="email" placeholder="Email" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3" required>
         <input type="text" name="subject" placeholder="Subject" class="bg-transparent outline-none text-white border-b-2 border-[#f6de0345] mb-3">
-        <textarea name="message" placeholder="Message" class="bg-transparent outline-none text-white rounded-[15px] h-[100px] p-2 mb-3" style="box-shadow: 0 0 5px #f6de0365;" required></textarea>
+        <textarea name="message" placeholder="Message" class="bg-transparent outline-none text-white rounded-[15px] h-[220px] p-2 mb-3 resize-none" style="box-shadow: 0 0 5px #f6de0365;" required></textarea>
 
-        <button type="submit" class="px-4 py-2 bg-[#F6DE03] mt-5 w-fit self-center rounded-[20px]">SUBMIT</button>
+        <button type="submit" class="cursor-pointer transition-all bg-yellow-500 text-white px-6 py-2 rounded-lg
+        border-yellow-400
+        border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+        active:border-b-[2px] active:brightness-90 active:translate-y-[2px">SUBMIT</button>
     </form>
 </div>
 <!-- End of Contact Us Form -->

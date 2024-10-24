@@ -21,7 +21,7 @@
 </style>
 <body class="flex justify-center items-center">
 
-    <div class="flex justify-center bg-white rounded-[20px] flex-col sm:flex-row p-6">
+    <div class="flex justify-center bg-white rounded-[20px] flex-col sm:flex-row ">
         <div>
             <img class="w-[400px] rounded-2xl" src="/assets/img/image 3.png" alt="Ark Vision Logo">
         </div>
@@ -40,7 +40,7 @@
             <!-- Email input -->
             <div class="flex flex-col gap-1 mt-[8px]">
                 <label for="email" class="text-[13px] font-bold">Email</label>
-                <input type="email" name="email" class="border-[1px] border-[black] rounded-[10px] p-[2px]" required>
+                <input type="email" name="email" value="<% try{%><%= email %><%} catch{} %>" class="border-[1px] border-[black] rounded-[10px] p-[2px]" required>
             </div>
 
             <!-- Password input -->

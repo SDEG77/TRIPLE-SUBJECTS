@@ -1,3 +1,4 @@
-uploads/
-index_photos/
-index_photos/*jpg
+img_uploads/**/*
+!index_photos/
+!receipts/
+!uploads/
