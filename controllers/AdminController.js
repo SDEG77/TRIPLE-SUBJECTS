@@ -34,13 +34,15 @@ class AdminController {
   
     async deleteClient(id) {
       const target = await User.findById(id);
-  
+      
       if (!target) {
         // console.log('blovcked')
         return false;
       }
-  
+      
       // console.log(got pass barrier: ${target._id})
+      
+      await Booking.deleteMany({client_id: target._id});
       await User.deleteOne({ _id: target._id });
     }
   

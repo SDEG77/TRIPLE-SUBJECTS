@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://kit.fontawesome.com/a076d05399.js">
     <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/assets/img/arklogo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,12 +36,15 @@
     .island {
         font-family: 'Island Moments', cursive;
     }
+    iframe{
+        border-radius: 20px;
+    }
 </style>
 <body class="overflow-x-hidden flex flex-col"> 
 <!-- Navigation Bar -->
-<nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212]/90">
+<nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212] h-[70px]">
     <div class="logo">
-        <h1 class="font-extrabold text-[#f5d939] text-xl">ARK VISIONS</h1>
+        <%- include('../components/logo') %>
     </div>
 
     <ul class="hidden lg:flex gap-14 uppercase">
@@ -70,7 +74,7 @@
             </button>
         </div>
 
-        <div id="menu" class="hidden absolute top-[70.1px] bg-[#121212]/90 w-full right-0 p-10 pl-[50px]"
+        <div id="menu" class="hidden absolute top-[70.1px] bg-[#121212] w-full right-0 p-10 pl-[50px]"
             style="box-shadow: 0px 5px 5px #f6de0336;">
             <ul class=" flex flex-col gap-2 uppercase -mt-[20px]">
                 <li><a class="hover:text-[#F6DE03]" href="#home">Home</a></li>
@@ -174,14 +178,14 @@
     </button>
 </section>
 
-<section id="about" class="-scroll-mt-[80px] px-10% flex lg:flex-row gap-[100px] justify-center items-center min-h-[80vh]">
+<section id="about" class="-scroll-mt-[80px] px-10% flex flex-col lg:flex-row gap-[100px] justify-center items-center min-h-[80vh]">
         <!-- Circular image with glow and border -->
             <img src="/assets/img/profile3.jpg" alt="Couple" class="rounded-full w-[450px] h-auto object-cover border-4 border-[#F6DE03] shadow-xs shadow-[#F6DE03]/50">
             <!-- Optional glow effect around the image -->
             <!-- <div class="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6DE03] to-transparent blur-md opacity-50"></div> -->
-    <div class="w-1/2 pr-16">
-        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5">About us</h1>
-        <p class="text-white font-light mt-10 text-[24px] text-justify">
+    <div class="lg:w-1/3 lg:pr-16 p-5">
+        <h1 class="text-4xl font-bold text-[#F6DE03] mb-5 text-center lg:text-left">About us</h1>
+        <p class="text-white font-light mt-10 text-[24px] text-justify lg:text-left">
             At Ark Visions, we believe everyone has a unique story to tell. Our sessions are designed to highlight the individuality of our clients, offering solo, duo, and group customization options to suit every need.
         </p>
     </div>
@@ -193,11 +197,11 @@
 <h1 class="text-[#F6DE03] text-center text-[40px] mt-[40px]">Get in touch</h1>
 <p class="text-center text-[42px] text-white mb-8">Contact us</p>
 
-<div class="justify-center gap-20 flex p-8 rounded-[25px] w-fit self-center" style="box-shadow: 0 0 5px #f6de038d;">
+<div class="justify-center gap-20 flex p-8 rounded-[25px] w-fit self-center flex-col items-center lg:flex-row" style="box-shadow: 0 0 5px #f6de038d;">
 
    
     <div class="flex flex-col gap-3">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d961.3035762845872!2d120.94716981224575!3d15.472900658048669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339729e11e182cef%3A0x4b12eaa18e0bf97d!2sArk%20Visions!5e0!3m2!1sen!2sph!4v1729600016677!5m2!1sen!2sph" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d961.3035762845872!2d120.94716981224575!3d15.472900658048669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339729e11e182cef%3A0x4b12eaa18e0bf97d!2sArk%20Visions!5e0!3m2!1sen!2sph!4v1729600016677!5m2!1sen!2sph" width="400" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon.png" class="w-[20px] mr-2">24th Street Kapitan Pepe Phase 2, Cabanatuan City, <br> Philippines, 3100</p>
         <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (1).png" class="w-[20px] mr-2">044 511-5924</p>
         <p class="flex items-center text-[15px] text-white mb-5"><img src="/assets/img/Icon (2).png" class="w-[20px] mr-2">arkvision@gmail.com</p>
@@ -224,7 +228,7 @@
         <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
             <h1 class="text-[#F6DE03] text-[26px] uppercase font-extrabold text-center md:text-left">Ark Vision</h1>
 
-            <ul class="flex justify-around mb-10 md:mb-0 uppercase items-center">
+            <ul class="flex justify-around mb-10 md:mb-0 uppercase">
                 <li><a href="/ark/client" class="hover:text-[#F6DE03] text-white">Home</a></li>
                 <li><a href="/ark/client/booking" class="hover:text-[#F6DE03] text-white">Booking</a></li>
                 <li><a href="/ark/client/gallery" class="hover:text-[#F6DE03] text-white">Album</a></li>
