@@ -54,10 +54,10 @@
             position: fixed;
             z-index: 50;
             left: 0;
-            top: 0;
+            bottom: 20%;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+
         }
 
         .modal-content {
@@ -81,23 +81,44 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        table {
+            padding: 20px;
+        }
+
+        table th {
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        table td {
+            text-transform: capitalize;
+            font-weight: lighter;
+            color: #ffffffb5;
+        }
+
+        .p-5 button {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class=" flex justify-center">
-                <img class=" w-full" src="/assets/img/arklogo6.png" alt="Logo">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+                <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
+                        src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
+                <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
                 <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
             </div>
+
             <nav class=" ">
-                <a href="/ark/admin"
-                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                <i class="fa-solid fa-house mr-4"></i> Dashboard
+                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
                 </a>
-                <a href="/ark/admin/clients"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                     <i class="fa-solid fa-users mr-4"></i> Clients
                 </a>
                 <a href="/ark/admin/bookings"
@@ -105,20 +126,20 @@
                     <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
                 </a>
                 <a href="/ark/admin/indexmanager"
-                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                <i class="fa-solid fa-images mr-4"></i> Index Manager
-                <a href="/ark/admin/photo-management"
                     class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                    <i class="fa-solid fa-image mr-4"></i> Photo Management
-                </a>
-                <a href="/ark/admin/resource"
-                    class="block py-4 px-5 rounded text-black transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] ">
-                    <i class="fa-solid fa-box mr-4 text-black"></i> Resource Control Center
-                </a>
-                <a href="/ark/admin/feedback"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                    <i class="fa-solid fa-message mr-4"></i> Feedback
-                </a>
+                    <i class="fa-solid fa-images mr-4"></i> Index Manager
+                    <a href="/ark/admin/photo-management"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-image mr-4"></i> Photo Management
+                    </a>
+                    <a href="/ark/admin/resource"
+                        class="block py-4 px-5 rounded text-black transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] ">
+                        <i class="fa-solid fa-box mr-4 text-black"></i> Resource Control Center
+                    </a>
+                    <a href="/ark/admin/feedback"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-message mr-4"></i> Feedback
+                    </a>
             </nav>
         </div>
         <div>
@@ -134,11 +155,11 @@
         <!-- Service Management Section -->
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Service Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddServiceModal()">Add New
-                Service</button>
-            <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
+            <button class="bg-green-500 flex gap-2 items-center text-white py-2 px-4 rounded mt-4"
+                onclick="openAddServiceModal()"><i class="fa-solid fa-plus"></i>Add New</button>
+            <table class="min-w-full bg-transparent mt-6">
                 <thead>
-                    <tr class="bg-gray-800">
+                    <tr class="bg-transparent">
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Service Name</th>
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Description</th>
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Actions</th>
@@ -146,7 +167,7 @@
                 </thead>
                 <tbody id="serviceTable">
                     <% services.forEach(service=> { %>
-                        <tr class="odd:bg-gray-700 even:bg-gray-800">
+                        <tr class="hover:bg-gray-700">
                             <td class="py-2 px-4 border-b border-gray-600">
                                 <%= service.name %>
                             </td>
@@ -171,11 +192,11 @@
         <!-- Package Management Section -->
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Package Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddPackageModal()">Add New
-                Package</button>
-            <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
+            <button class="bg-green-500 flex gap-2 text-white py-2 px-4 rounded mt-4 items-center"
+                onclick="openAddPackageModal()"><i class="fa-solid fa-plus"></i>Add New</button>
+            <table class="min-w-full bg-transparent mt-6">
                 <thead>
-                    <tr class="bg-gray-800">
+                    <tr class="bg-transparent">
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Service</th>
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Package</th>
                         <th class="py-2 px-4 border-b border-gray-600 text-left">Description</th>
@@ -187,7 +208,7 @@
                 </thead>
                 <tbody id="packageTable">
                     <% packages.forEach(package=> { %>
-                        <tr class="odd:bg-gray-700 even:bg-gray-800">
+                        <tr class="hover:bg-gray-700">
                             <td class="py-2 px-4 border-b border-gray-600">
                                 <% package.services.forEach(service=> { %>
                                     <%= service.name %><br>
@@ -223,20 +244,20 @@
         <!-- Add-on Management Section -->
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Add-on Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4" onclick="openAddAddonModal()">Add New
-                Add-on</button>
-            <table class="min-w-full bg-gray-800 border border-gray-800 mt-6">
+            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4 flex gap-2 items-center"
+                onclick="openAddAddonModal()"><i class="fa-solid fa-plus"></i>Add New</button>
+            <table class="min-w-full bg-transparent mt-6">
                 <thead>
-                    <tr class="bg-gray-800">
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Add-on Name</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Description</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Price</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Actions</th>
+                    <tr class="bg-transparent">
+                        <th class="py-2 px-4 border-b border-gray-600 text-left uppercase">Add-on Name</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left uppercase">Description</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left uppercase">Price</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left uppercase">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="addonTable">
                     <% addOns.forEach(addOn=> { %>
-                        <tr class="odd:bg-gray-700 even:bg-gray-800">
+                        <tr class="hover:bg-gray-700">
                             <td class="py-2 px-4 border-b border-gray-600">
                                 <%= addOn.name %>
                             </td>

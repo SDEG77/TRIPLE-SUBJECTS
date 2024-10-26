@@ -2,3 +2,4 @@ img_uploads/**/*
 !index_photos/
 !receipts/
 !uploads/
+!DONTDELETE

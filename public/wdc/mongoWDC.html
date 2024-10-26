@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoDB Web Data Connector</title>
+  <script src="/js/wdc-2.1.0.js"></script> <!-- Your locally hosted SDK file -->
+</head>
+<body>
+
+  <h1>MongoDB Multi-Collection Connector</h1>
+
+  <button id="getDataButton">Load MongoDB Data</button>
+
+  <script>
+    (function() {
+      var myConnector = tableau.makeConnector();
+
+      // Define the schema for the WDC
+      myConnector.getSchema = function(schemaCallback) {
+        var cols = [
+          { id: "client_id", dataType: tableau.dataTypeEnum.string },
+          { id: "service", dataType: tableau.dataTypeEnum.string },
+          { id: "package", dataType: tableau.dataTypeEnum.string },
+          { id: "date", dataType: tableau.dataTypeEnum.date },
+          { id: "time", dataType: tableau.dataTypeEnum.string },
+          { id: "status", dataType: tableau.dataTypeEnum.string },
+          { id: "payment_status", dataType: tableau.dataTypeEnum.string },
+          { id: "total", dataType: tableau.dataTypeEnum.float }
+        ];
+
+        var tableSchema = {
+          id: "bookingData",
+          alias: "MongoDB Booking Data",
+          columns: cols
+        };
+
+        schemaCallback([tableSchema]);
+      };
+
+      // Fetch data from the API and pass it to Tableau
+      myConnector.getData = function(table, doneCallback) {
+        fetch('http://localhost:3000/api/data')
+          .then(response => response.json())
+          .then(data => {
+            var tableData = data.bookings.map(booking => ({
+              client_id: booking.client_id,
+              service: booking.service,
+              package: booking.package,
+              date: new Date(booking.date),
+              time: booking.time,
+              status: booking.status,
+              payment_status: booking.payment_status,
+              total: parseFloat(booking.total)
+            }));
+            table.appendRows(tableData);
+            doneCallback();
+          });
+      };
+
+      tableau.registerConnector(myConnector);
+    })();
+
+    // Start the WDC process when the button is clicked
+    document.getElementById("getDataButton").addEventListener("click", function() {
+      tableau.connectionName = "MongoDB Data";  // This will be the name of the data source in Tableau
+      tableau.submit();  // Initiates data transfer
+    });
+  </script>
+</body>
+</html>

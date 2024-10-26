@@ -6,6 +6,13 @@ const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 
+// Import your models for fetching data
+const Booking = require("./models/Booking");
+const User = require("./models/User");
+const Package = require("./models/Package");
+const Service = require("./models/Service");
+const Receipt = require("./models/Receipt");
+
 ENV.config();
 
 const generalRoutes = require("./routes/general");
@@ -49,6 +56,29 @@ mongoose
     app.use("/ark/admin", adminRoutes);
     app.use("/ark/admin", resourceRoutes);
     app.use("/ark", uploadRoutes);
+
+ // New API Route to fetch data from all models
+ app.get("/api/data", async (req, res) => {
+  try {
+    const bookings = await Booking.find();
+    const users = await User.find();
+    const packages = await Package.find().populate('services'); // Populate services in packages
+    const services = await Service.find();
+    const receipts = await Receipt.find();
+
+    res.json({
+      bookings: bookings,
+      users: users,
+      packages: packages,
+      services: services,
+      receipts: receipts
+    });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
+});
+
 
     app.listen(PORT, () => {
       console.log(`SERVER RUNNING ON PORT: [http://localhost:${PORT}/ark]`);

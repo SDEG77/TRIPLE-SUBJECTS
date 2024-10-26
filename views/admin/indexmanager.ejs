@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,25 +66,25 @@
         form {
             margin-bottom: 1rem;
         }
-
     </style>
 </head>
+
 <body>
 
     <!-- Sidebar -->
     <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class=" flex justify-center">
-                <img class=" w-full" src="/assets/img/arklogo6.png" alt="Logo">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+                <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
+                        src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
+                <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
                 <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
             </div>
             <nav class="">
-                <a href="/ark/admin"
-                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                <i class="fa-solid fa-house mr-4"></i> Dashboard
+                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
                 </a>
-                <a href="/ark/admin/clients"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                     <i class="fa-solid fa-users mr-4"></i> Clients
                 </a>
                 <a href="/ark/admin/bookings"
@@ -91,20 +92,20 @@
                     <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
                 </a>
                 <a href="/ark/admin/indexmanager"
-                class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
-                <i class="fa-solid fa-images mr-4 text-gray-800"></i> Index Manager
-                <a href="/ark/admin/photo-management"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                    <i class="fa-solid fa-image mr-4"></i> Photo Management
-                </a>
-                <a href="/ark/admin/resource"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                    <i class="fa-solid fa-box mr-4"></i> Resource Control Center
-                </a>
-                <a href="/ark/admin/feedback"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                    <i class="fa-solid fa-message mr-4"></i> Feedback
-                </a>
+                    class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
+                    <i class="fa-solid fa-images mr-4 text-gray-800"></i> Index Manager
+                    <a href="/ark/admin/photo-management"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-image mr-4"></i> Photo Management
+                    </a>
+                    <a href="/ark/admin/resource"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                    </a>
+                    <a href="/ark/admin/feedback"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-message mr-4"></i> Feedback
+                    </a>
             </nav>
         </div>
         <div>
@@ -121,36 +122,39 @@
         </button>
 
         <div class="p-5">
-            <h1 class="text-3xl">Manage Photos for Landing Page</h1>
+            <h1 class="text-[23px] uppercase text-[#F6DE03] font-semibold">Manage Photos for Landing Page</h1>
 
-            
-                <!-- Add Photo Form -->
-                <form action="indexmanager/add" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="title" placeholder="Title (optional)" class="border p-2 text-black">
-                    <input type="hidden" name="isIndexPhoto" value="true">
-                    <input type="file" name="image" class="border p-2" required> <!-- Changed to file input -->
-                    <button type="submit" class="bg-blue-500 text-white p-2">Add Photo</button>
-                </form>
-            
-                <!-- Display Existing Photos -->
-                <div class="mt-10">
-                    <h2 class="text-2xl">Current Photos</h2>
-                    <div class="grid grid-cols-6 gap-4">
-                        <% photos.forEach(function(photo) { %>
+
+            <!-- Add Photo Form -->
+            <form action="indexmanager/add" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 w-1/2 p-5 rounded-[20px] mt-3" style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.393);">
+                <input type="text" name="title" placeholder="Title (optional)" class="border-b-[2px] border-[#Fde043] p-1 text-black outline-none bg-transparent text-white">
+                <input type="hidden" name="isIndexPhoto" value="true">
+                <input type="file" name="image" class="border-[#Fde043] border-[1px] p-2 rounded-[10px] outline-none " required> <!-- Changed to file input -->
+                <button type="submit" class="bg-blue-500 text-white p-[5px] rounded-[15px] uppercase w-fit px-5 hover:bg-blue-400">Submit</button>
+            </form>
+
+            <!-- Display Existing Photos -->
+            <div class="mt-10">
+                <h2 class="text-[23px] text-[#F6DE03]">Current Photos</h2>
+                <div class="grid grid-cols-6 gap-4">
+                    <% photos.forEach(function(photo) { %>
                         <div class="border p-4">
-                            <% let decompose = photo.image_path.split("/"); %>
-                            <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="<%= photo.title %>" class="w-full h-auto mb-4">
-                            <p><%= photo.title %></p>
-            
-                            <!-- Delete Button -->
-                            <form action="indexmanager/delete" method="POST">
-                                <input type="hidden" name="id" value="<%= photo._id %>">
-                                <button type="submit" class="bg-red-500 text-white p-2">Delete</button>
-                            </form>
+                            <% let decompose=photo.image_path.split("/"); %>
+                                <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="<%= photo.title %>"
+                                    class="w-full h-auto mb-4">
+                                <p>
+                                    <%= photo.title %>
+                                </p>
+
+                                <!-- Delete Button -->
+                                <form action="indexmanager/delete" method="POST">
+                                    <input type="hidden" name="id" value="<%= photo._id %>">
+                                    <button type="submit" class="bg-red-500 text-white p-2">Delete</button>
+                                </form>
                         </div>
                         <% }) %>
-                    </div>
                 </div>
-            </body>
-            </html>
-            
+            </div>
+</body>
+
+</html>

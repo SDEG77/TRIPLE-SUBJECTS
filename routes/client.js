@@ -242,7 +242,7 @@ route.get('/history', async (req, res) => {
   // const customSortOrder = ["Pending", "Accepted", "Rescheduled", "Done", "Cancelled", "Rejected"];
 
   if (req.session.logged) {
-    const give = await sisig_repeater("get-history", ["pending", "accepted", "rescheduled", "done", "cancelled", "rejected"], req, res);
+    const give = await sisig_repeater("get-history", ["re-scheduled", "pending", "accepted", "done", "cancelled", "rejected"], req, res);
 
     res.render('client/history', {
       name: req.session.name,

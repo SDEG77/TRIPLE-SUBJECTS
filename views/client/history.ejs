@@ -6,6 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <link rel="stylesheet" href="/css/output.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="/assets/img/arklogo.png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,8 +149,11 @@
                     if(group.status === "accepted") {
                         style = "bg-green-600 text-white font-bold py-[5px] px-[15px]"
                     }
-                    if(group.status === "rejected" || group.status === "rejected") {
+                    if(group.status === "cancelled" || group.status === "rejected") {
                         style = "bg-rose-600 text-white font-bold py-[5px] px-[15px]"
+                    }
+                    if(group.status === "re-scheduled") {
+                        style = "bg-blue-600 text-white font-bold py-[5px] px-[15px]"
                     }
                 %>
                 <hr class="my-10">
@@ -174,6 +178,7 @@
                     <div class="bg-[#1E1E1E] text-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-start md:items-center">
                         <div class="md:w-3/4 relative">
                             <h3 class="text-xl font-semibold"><%= `Service: ${serviceType} ${serviceDuration} mins`%></h3>
+                            <% if(booking.addOns.length > 0) { %>
                             <p class="text-sm text-gray-400 mb-3">
                                 Additionals:
                                 <% booking.addOns.forEach(add => { %>
@@ -181,6 +186,7 @@
                                     <span>- <%= add %></span>
                                 <% }); %>
                             </p>
+                            <% } %>
                             <p class="text-sm text-gray-400">Date: <%= `${months[index]} ${day}, ${year}`%></p>
                             <p class="text-sm text-gray-400">Time: <%= `${booking.time}` %></p>
                             <p class="text-sm text-gray-400 mt-4">Total Price: <%= booking.total %></p>
@@ -234,20 +240,6 @@
         }
     }
 
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordText = document.getElementById('password');
-
-    let isPasswordHidden = true;
-
-    togglePassword.addEventListener('click', function() {
-        if (isPasswordHidden) {
-            passwordText.textContent = 'sibudaksinapokako'; 
-            isPasswordHidden = false;
-        } else {
-            passwordText.textContent = '**********';
-            isPasswordHidden = true;
-        }
-    });
 </script>
 
 </html>

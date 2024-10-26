@@ -52,6 +52,7 @@ class BookingController {
 
   async update(data) {
     await Booking.updateOne({_id: data.id}, {$set: {
+          status: "re-scheduled",
           time: data.time,
           date: data.date,
         }

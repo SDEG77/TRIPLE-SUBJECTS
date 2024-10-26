@@ -52,6 +52,21 @@
         .sidebar-hidden-content {
             margin-left: 0;
         }
+
+        table th {
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        table td {
+            font-weight: 200;
+            color: #ffffff7d;
+        }
+
+        table button {
+            text-transform: uppercase;
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -60,39 +75,38 @@
     <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
 
         <div>
-            <div class=" flex justify-center">
-                <img class=" w-full" src="/assets/img/arklogo6.png" alt="Logo">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+                <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
+                        src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
+                <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
                 <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
             </div>
-
             <nav class="">
-                <a href="/ark/admin"
-                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                <i class="fa-solid fa-house mr-4"></i> Dashboard
+                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
                 </a>
                 <a href="/ark/admin/clients"
                     class="block py-4 px-5 rounded transition duration-200  bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800">
                     <i class="fa-solid fa-users mr-4 text-gray-800"></i> Clients
                 </a>
-                <a href="/ark/admin/bookings"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                <a href="/ark/admin/bookings" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
                     <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
                 </a>
                 <a href="/ark/admin/indexmanager"
-                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                <i class="fa-solid fa-images mr-4"></i> Index Manager
-                <a href="/ark/admin/photo-management"
                     class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                    <i class="fa-solid fa-image mr-4"></i> Photo Management
-                </a>
-                <a href="/ark/admin/resource"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
-                    <i class="fa-solid fa-box mr-4"></i> Resource Control Center
-                </a>
-                <a href="/ark/admin/feedback"
-                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                    <i class="fa-solid fa-message mr-4"></i> Feedback
-                </a>
+                    <i class="fa-solid fa-images mr-4"></i> Index Manager
+                    <a href="/ark/admin/photo-management"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa-solid fa-image mr-4"></i> Photo Management
+                    </a>
+                    <a href="/ark/admin/resource"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                    </a>
+                    <a href="/ark/admin/feedback"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa-solid fa-message mr-4"></i> Feedback
+                    </a>
             </nav>
         </div>
         <div>
@@ -113,20 +127,20 @@
         <!-- Table Section -->
         <div class="mt-6 m-5">
             <% if(clients) { %>
-                <table class="min-w-full bg-gray-800 border border-gray-800">
+                <table class="min-w-full text-gray-300">
                     <thead>
-                        <tr class="bg-gray-800">
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">ID</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Username</th>
-                            <th class="py-2 px-4 border-b border-gray-600 text-left">Email Address</th>
-                            <th colspan="100" class="py-2 px-4 border-b border-gray-600 text-center">Action</th>
+                        <tr class="text-gray-400">
+                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">ID</th>
+                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Username</th>
+                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Email Address</th>
+                            <th colspan="100" class="py-2 px-4 border-b border-[#2c2c2c] text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% let yah="py-2 px-4 border-b border-gray-600" ; %>
+                        <% let yah="py-2 px-4 border-b border-[#2c2c2c] text-gray-200" ; %>
 
                             <% clients.map((client)=> { %>
-                                <tr class="odd:bg-gray-700 even:bg-gray-700">
+                                <tr>
                                     <td class="<%= yah %>">
                                         <%= client._id %>
                                     </td>
@@ -137,11 +151,10 @@
                                     <td class="<%= yah %>">
                                         <%= client.email %>
                                     </td>
-                                    <td class="py-2 px-4 border-b border-gray-600 flex justify-center gap-4">
+                                    <td class="py-2 px-4 border-b border-[#2c2c2c] flex justify-center gap-4">
                                         <form action="/ark/admin/clients" method="post">
                                             <input type="hidden" value="<%= client._id %>" name="id">
-
-                                            <button onclick="!confirm('You sure?') && event.preventDefault()"
+                                            <button onclick="!confirm('Are you sure?') && event.preventDefault()"
                                                 type="submit"
                                                 class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded">
                                                 <i class="fa-solid fa-trash"></i> Delete
@@ -153,6 +166,7 @@
                     </tbody>
                 </table>
                 <% } %>
+
         </div>
     </main>
 
