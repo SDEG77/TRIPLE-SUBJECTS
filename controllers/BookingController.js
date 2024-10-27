@@ -59,7 +59,20 @@ class BookingController {
       }
     )
   }
+
+  async getAllBookings() {
+    try {
+      return await Booking.find({})
+        .populate({ path: 'client_id', select: 'fname lname' }) // Populate first and last names
+        .lean();
+    } catch (error) {
+      throw error;
+    }
+  }
+  
 }
+
+
 
 
 const BookingCon = new BookingController();
