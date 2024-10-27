@@ -14,6 +14,7 @@ const AddOnController = require("../controllers/AddOnController");
 const BookingController = require("../controllers/BookingController");
 const ContactController = require("../controllers/ContactController");
 const PhotoController = require('../controllers/PhotoController');
+const UnavailableDate = require('../models/UnavailableDate');
 
 
 
@@ -315,4 +316,20 @@ route.post('/indexmanager/add', PhotoController.addPhoto);
 
 // Route to delete a photo
 route.post('/indexmanager/delete', PhotoController.deletePhoto);
+
+route.post('/unavailable-dates', async (req, res) => {
+  try {
+      const { date, timeSlots } = req.body;
+      const newUnavailableDate = new UnavailableDate({ date, timeSlots });
+      await newUnavailableDate.save();
+      res.status(201).json(newUnavailableDate);
+  } catch (error) {
+      res.status(500).json({ message: "Error saving unavailable date", error });
+  }
+});
+
+
+route.get('/manage-unavailable-dates', (req, res) => {
+  res.render('./admin/manageUnavailableDates'); 
+});
 module.exports = route;

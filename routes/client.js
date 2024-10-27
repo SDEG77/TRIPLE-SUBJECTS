@@ -5,6 +5,9 @@ const ServiceController = require('../controllers/ServicesController');
 const PackageController = require('../controllers/PackageController');
 const AddOnController = require('../controllers/AddOnController');
 const ClientController = require('../controllers/ClientController');
+const UnavailableDate = require('../models/UnavailableDate');
+ 
+
 
 
 const Photo = require('../models/Photo');
@@ -251,6 +254,32 @@ route.get('/history', async (req, res) => {
     });
   } else {
     res.redirect('../login');
+  }
+
+  
+
+});
+route.get('/unavailable-dates', BookingController.getUnavailableDates);
+
+  route.post('/unavailable-dates', async (req, res) => {
+    try {
+        const { date, timeSlots } = req.body;
+        const newUnavailableDate = new UnavailableDate({ date, timeSlots });
+        await newUnavailableDate.save();
+        res.status(201).json(newUnavailableDate);
+    } catch (error) {
+        res.status(500).json({ message: "Error saving unavailable date", error });
+    }
+});
+
+route.get('/bookings', async (req, res) => {
+  try {
+      const { date } = req.query; // Receive the date as a query parameter
+      const bookings = await BookingController.getBookingsByDate(date);
+      res.json(bookings);
+  } catch (error) {
+      console.error("Error fetching bookings:", error);
+      res.status(500).json({ message: "Error fetching bookings", error });
   }
 });
 

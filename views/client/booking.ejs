@@ -298,7 +298,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                     <label for="time" class="text-[#F6DE03] text-[20px]">Time</label>
 
                     <select required name="time" id="time" class="bg-transparent h-[35px] rounded-[10px] px-2  text-white w-[250px] border-2 border-yellow-500" >
-                        <option selected disabled value="unset" class="bg-[#121212] text-white">Select Time</option>
+                        <option selected disabled value="Select Time" class="bg-[#121212] text-white">Select Time</option>
                         <option id="options" value="8:00 AM to 9:00 AM" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
                         <option id="options" value="9:00 AM to 10:00 AM" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
                         <option id="options" value="10:00 AM to 11:00 AM" class="bg-[#121212] text-white">10:00 AM - 11:00 AM</option>
@@ -396,3 +396,49 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       });
     });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const dateInput = document.querySelector('input[name="date"]');
+        const timeInput = document.querySelector('select[name="time"]');
+        
+        async function fetchUnavailableDatesAndBookings(selectedDate) {
+            try {
+                const unavailableDatesResponse = await fetch('/ark/client/unavailable-dates');
+                const bookingsResponse = await fetch(`/ark/client/bookings?date=${selectedDate}`);
+                
+                if (!unavailableDatesResponse.ok || !bookingsResponse.ok) 
+                    throw new Error("Network response was not ok");
+
+                const unavailableDates = await unavailableDatesResponse.json();
+                const bookings = await bookingsResponse.json();
+
+                return { unavailableDates, bookings };
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return { unavailableDates: [], bookings: [] };
+            }
+        }
+
+        dateInput.addEventListener("input", async function () {
+            const selectedDate = dateInput.value;
+            const { unavailableDates, bookings } = await fetchUnavailableDatesAndBookings(selectedDate);
+
+            const unavailableTimes = unavailableDates.find(dateObj => dateObj.date === selectedDate)?.timeSlots || [];
+            const bookedTimes = bookings.map(booking => booking.time);
+            const allUnavailableTimes = [...new Set([...unavailableTimes, ...bookedTimes])];
+
+            Array.from(timeInput.options).forEach(option => {
+                if (allUnavailableTimes.includes(option.value)) {
+                    option.disabled = true;
+                    option.textContent = `${option.value} - Time Not Available`;
+                } else {
+                    option.disabled = false;
+                    option.textContent = option.value;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
