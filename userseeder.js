@@ -10,19 +10,22 @@ async function seedUsers() {
   fs.createReadStream('./modified_users_with_oid.csv')
     .pipe(csv())
     .on('data', (row) => {
-      // Parse the _id field to use the provided ObjectId
-      const _id = JSON.parse(row._id).$oid;
+      try {
+        const _id = JSON.parse(row._id).$oid;
 
-      users.push({
-        _id: mongoose.Types.ObjectId(_id), // Use the existing ObjectId
-        fname: row.fname,
-        lname: row.lname,
-        email: row.email,
-        password: row.password,
-        isVerified: row.isVerified === 'true', // Convert to boolean if needed
-        resetPasswordToken: row.resetPasswordToken || null,
-        resetPasswordExpires: row.resetPasswordExpires ? new Date(row.resetPasswordExpires) : null,
-      });
+        users.push({
+          _id: new mongoose.Types.ObjectId(_id), // Use 'new' for ObjectId creation
+          fname: row.fname,
+          lname: row.lname,
+          email: row.email,
+          password: row.password,
+          isVerified: row.isVerified === 'true', // Convert to boolean if needed
+          resetPasswordToken: row.resetPasswordToken || null,
+          resetPasswordExpires: row.resetPasswordExpires ? new Date(row.resetPasswordExpires) : null,
+        });
+      } catch (error) {
+        console.error('Error processing row:', row, error);
+      }
     })
     .on('end', async () => {
       try {
@@ -36,8 +39,7 @@ async function seedUsers() {
     });
 }
 
-// Connect to MongoDB and run the seeder
-mongoose.connect('mongodb://localhost:27017/triple', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/triple')
   .then(() => {
     console.log('MongoDB connected');
     seedUsers();
