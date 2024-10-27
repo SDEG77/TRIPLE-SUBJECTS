@@ -22,14 +22,55 @@ class AdminController {
         return total.length;
       }
     }
-    async viewClients() {
-      const users = await User.find();
+    async viewClients(conditions) {      
+      let users;
+
+      if(conditions.search) {
+        users = await User.find({$or: [
+          {fname: {$regex: conditions.search, $options: "i"}}, 
+          {lname: {$regex: conditions.search, $options: "i"}},
+        ]});
+      } else {
+        users = await User.find();
+      }
   
+      let mentioned = [];
+  
+      users.map(use => {
+        mentioned.push({_id: use._id})
+      });
+
+      // console.log(mentioned)
+    
+      const page = conditions.page || 1; 
+      const pageSize = 15;
+      
+      let totalPage = await User.find({ $or: mentioned });
+  
+      const pageCalc = Math.round(totalPage.length / pageSize) + 1;
+  
+      totalPage = pageCalc ? pageCalc : 1;
+    
+      if (conditions.search) {
+        users = await User.find({ $or: mentioned })
+        .skip((page - 1) * pageSize)
+        .limit(pageSize).sort({ date: -1 });
+      } else {
+        users = await User.find()
+        .skip((page - 1) * pageSize)
+        .limit(pageSize).sort({ date: -1 });
+      }
+
       if (users.length <= 0) {
         return false;
       }
-  
-      return users;
+
+      return {
+        clients: users,
+        total_page: totalPage,
+        current_page: page,
+        current_search: conditions.search,
+      };
     }
   
     async deleteClient(id) {
@@ -70,19 +111,19 @@ class AdminController {
       users = await User.find();
     }
 
-    let contains = [];
+    let mentioned = [];
 
     users.map(use => {
-      contains.push({client_id: use.id})
+      mentioned.push({client_id: use.id})
     });
 
-    // console.log(contains)
+    // console.log(mentioned)
 
-    const page = conditions.page || 1; // The page number ye want to fetch
+    const page = conditions.page || 1; 
     const status = conditions.status ? {status: conditions.status} : {};
     const pageSize = 15;
     
-    let totalPage = await Booking.find(status);
+    let totalPage = await Booking.find({...status, $or: mentioned});
 
     const pageCalc = Math.round(totalPage.length / pageSize) + 1;
 
@@ -91,7 +132,7 @@ class AdminController {
     let bookings;
 
     if (conditions.search) {
-      bookings = await Booking.find({...status, $or: contains})
+      bookings = await Booking.find({...status, $or: mentioned})
       .skip((page - 1) * pageSize)
       .limit(pageSize).sort({ date: -1 });
     } else {

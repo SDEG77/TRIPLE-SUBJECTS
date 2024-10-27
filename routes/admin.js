@@ -117,9 +117,12 @@ route.get('/top-services', async (req, res) => {
 // CLIENT PAGE ROUTES
 route.get("/clients", async (req, res) => {
   if (req.session.isAdminLogged) {
-    const clients = await AdminController.viewClients();
+    const result = await AdminController.viewClients({
+      page: req.query.page, 
+      search: req.query.name,
+    });
 
-    res.render("./admin/adminclients", { clients: clients });
+    res.render("./admin/adminclients", { snatch: result });
   } else {
     res.redirect("./login");
   }
