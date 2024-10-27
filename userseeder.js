@@ -14,7 +14,7 @@ async function seedUsers() {
       const _id = JSON.parse(row._id).$oid;
 
       users.push({
-        _id: mongoose.Types.ObjectId(_id), // Use the existing ObjectId
+        _id: new mongoose.Types.ObjectId(_id), // Use the existing ObjectId
         fname: row.fname,
         lname: row.lname,
         email: row.email,

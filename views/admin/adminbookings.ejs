@@ -90,7 +90,7 @@
     </style>
 </head>
 
-<body>
+<body onscroll="toggleSearchBar(true)">
 
     <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
@@ -143,14 +143,79 @@
             <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
 
-        <div class="p-5">
-            <h2 class="text-2xl font-semibold text-yellow-500">Bookings</h2>
+        <div class="p-5 gap-20">
+            <h2 class="text-2xl font-semibold text-yellow-500">
+                Bookings
+                <% if(snatch.current_status) { %>
+                <span class="text-white">[ <%= snatch.current_status %> ]</span>
+                <% } %>
+            </h2>
         </div>
+
+        <div data-status="false" id="search-div" class="bg-gray-500 justify-center items-center  pr-4 w-fit h-[60px] flex gap-8 justify-self-end mb-11 fixed -right-[560px] top-10 rounded-lg overflow-hidden transition-all ease-in-out duration-500 z-10">
+            <i onclick="toggleSearchBar()" id="search-icon" class="flex items-center bg-gray-500 hover:bg-gray-700 transition-colors border-r-4 border-r-gray-900 h-full px-4 cursor-pointer fa-solid fa-search fa-2xl"></i>
+
+            <input onkeypress="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="booking details" value="<%= snatch.current_search %>">
+            
+            <select onchange="statusHref();" class="text-black/50 h-fit p-1" id="statuz">
+                <option class="text-black" value="" selected disabled>Status</option>
+                <option class="text-black" value="">All</option>
+                <option class="text-black" value="done">Done</option>
+                <option class="text-black" value="accepted">Accepted</option>
+                <option class="text-black" value="cancelled">Cancelled</option>
+                <option class="text-black" value="rejected">Rejected</option>
+                <option class="text-black" value="re-scheduled">Re-scheduled</option>
+                <option class="text-black" value="pending">Pending</option>
+            </select>
+
+            <a class="flex items-center bg-emerald-700 hover:bg-emerald-900 transition-colors py-2 px-4 rounded-xl font-bold tracking-widest" 
+            id="statusSearchBtn" 
+            href="/ark/admin/bookings?page=<%= (snatch.current_page)%>&status=">
+                Search
+            </a>    
+        </div>
+
+        <div class="flex gap-10 ml-5">
+            <% if(snatch.current_page >= 2) { %>
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                    <i class="fa-solid fa-caret-left"></i> prev page
+                </a>
+            <% } %>
+                
+                <% if(snatch.current_page && snatch.total_page && snatch.bookings.length === 15) { %>
+                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page %></span>
+                <% } %>
+
+            <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.bookings.length === 15) { %>
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) + 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                    next page <i class="fa-solid fa-caret-right"></i>
+                </a>
+            <% }%>    
+        </div>
+
         <div class="mt-6 m-5">
             <% if(snatch.bookings){ %>
                 <% try{ %>
-                    <% snatch.bookings.map(booking=> { %>
-                        <% if(booking.id){ %>
+                    <% 
+                        let arr_users = [];
+
+                        snatch.users.map(use => {
+                            arr_users.push(use);
+                        })
+                    %>
+
+                    <% snatch.bookings.map(booking => { %>
+                        <% 
+                            let searchContains;
+                            
+                            arr_users.some(use => {
+                                if(use.id === booking.client_id) {
+                                    searchContains = true;
+                                }
+                            })
+                        %>
+                        
+                        <% if(booking.id && searchContains){ %>
                         <div data-state="closed" id="reschedule-<%= booking.id %>" style="right: -400px;"
                             class="fixed z-10 top-1/2 w-72 h-72 bg-gray-900/95 rounded-2xl border-4 border-yellow-400 transition-all flex justify-center items-center">
                             <form action="/ark/admin/bookings/reschedule" method="post" class="flex flex-col gap-4">
@@ -278,7 +343,8 @@
                                                     <tr class="relative border-t-2">
                                                         <td class="py-3 px-4 border-b border-gray-600 relative text-center">
                                                             <p class="font-bold text-lg whitespace-nowrap text-[#F6DE03]">
-                                                                Total Price: <%= booking.total %>
+                                                                Total Price:
+                                                                <%= booking.total.replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
                                                             </p>
                                                         </td>
                                                         <td class="py-3 px-4 border-b border-gray-600 relative text-end" colspan="2">
@@ -433,5 +499,37 @@
 
         editModal.style.right = "40px";
         editModal.setAttribute("data-state", "opened")
+    }
+
+    function statusHref() {
+        const stats = document.getElementById("statuz").value;
+        const name = document.getElementById("searchName").value;
+
+        document.getElementById("statusSearchBtn").href = `/ark/admin/bookings?status=${stats}&name=${name}`;
+    }
+
+    addEventListener("DOMContentLoaded", statusHref());
+
+    function toggleSearchBar(scroll = false) {
+        const state = document.getElementById("search-div")
+        const icon = document.getElementById("search-icon");
+
+        if (scroll) {
+            state.setAttribute("data-status", "false")
+            state.classList.replace("-right-[3px]", "-right-[560px]")
+            icon.classList.replace("fa-multiply", "fa-search")
+        
+            return;
+        }
+
+        if(state.getAttribute("data-status") === "false") {
+            state.setAttribute("data-status", "true")
+            state.classList.replace("-right-[560px]", "-right-[3px]")
+            icon.classList.replace("fa-search", "fa-multiply")
+        } else if(state.getAttribute("data-status") === "true") {
+            state.setAttribute("data-status", "false")
+            state.classList.replace("-right-[3px]", "-right-[560px]")
+            icon.classList.replace("fa-multiply", "fa-search")
+        } 
     }
 </script>
