@@ -148,12 +148,13 @@
 
                 <div class="p-4 flex justify-between items-center text-white">
                     <h1>Password</h1>
-                    <div class="flex items-center">
-                        <input type="password" id="password" class="bg-transparent border-none text-white" value="<%= password %>" readonly>
-                        <button id="togglePassword" class="focus:outline-none">
+                    <div class="flex items-center gap-2">
+                        <p id="hidden-password">********</p>
+                        <p id="password" class="hidden" style="display: none;"><%= password %></p>
+                        <button onclick="ipapakitaangpassword()" class="focus:outline-none">
                             <i id="eyeIcon" class="fa-solid fa-eye"></i>
                         </button>
-                    </div>
+                    </div>                    
                 </div>
                 
                 
@@ -187,28 +188,25 @@
         }
     }
 
-</script>
-<script>
-    
-    const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const eyeIcon = document.getElementById('eyeIcon');
 
-        let isPasswordHidden = true;
+    function ipapakitaangpassword() {
+        var hiddenPassword = document.getElementById("hidden-password");
+        var password = document.getElementById("password");
+        var eyeIcon = document.getElementById("eyeIcon");
 
-        togglePassword.addEventListener('click', function() {
-            if (isPasswordHidden) {
-                passwordInput.setAttribute('type', 'text'); 
-                eyeIcon.classList.remove('fa-eye'); 
-                eyeIcon.classList.add('fa-eye-slash');
-                isPasswordHidden = false;
-            } else {
-                passwordInput.setAttribute('type', 'password'); 
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-                isPasswordHidden = true;
-            }
-        });
+        if (password.style.display === "none") {
+            password.style.display = "block";
+            hiddenPassword.style.display = "none";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            password.style.display = "none";
+            hiddenPassword.style.display = "block";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+
 
 </script>
 </html>
