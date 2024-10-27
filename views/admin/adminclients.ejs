@@ -140,7 +140,7 @@
                 <!-- <% } %> -->
 
             <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.clients.length === 15) { %>
-                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) + 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) + 1  %>&name=<%= snatch.current_search %>">
                     next page <i class="fa-solid fa-caret-right"></i>
                 </a>
             <% }%>    

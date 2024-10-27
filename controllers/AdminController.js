@@ -26,10 +26,18 @@ class AdminController {
       let users;
 
       if(conditions.search) {
-        users = await User.find({$or: [
-          {fname: {$regex: conditions.search, $options: "i"}}, 
-          {lname: {$regex: conditions.search, $options: "i"}},
-        ]});
+        users = await User.find({
+          $expr: {
+            $regexMatch: {
+              input: { $concat: ["$fname", " ", "$lname"] },
+              regex: conditions.search,
+              options: "i"
+            }
+          }
+        });
+
+        users = users.length > 0 ? users : await User.find();
+
       } else {
         users = await User.find();
       }
@@ -103,10 +111,17 @@ class AdminController {
     let users;
 
     if(conditions.search) {
-      users = await User.find({$or: [
-        {fname: {$regex: conditions.search, $options: "i"}}, 
-        {lname: {$regex: conditions.search, $options: "i"}},
-      ]});
+      users = await User.find({
+        $expr: {
+          $regexMatch: {
+            input: { $concat: ["$fname", " ", "$lname"] },
+            regex: conditions.search,
+            options: "i"
+          }
+        }
+      });
+
+      users = users.length > 0 ? users : await User.find();
     } else {
       users = await User.find();
     }
@@ -117,7 +132,7 @@ class AdminController {
       mentioned.push({client_id: use.id})
     });
 
-    // console.log(mentioned)
+    console.log(mentioned)
 
     const page = conditions.page || 1; 
     const status = conditions.status ? {status: conditions.status} : {};
