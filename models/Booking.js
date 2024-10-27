@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = mongoose.Schema({
-  client_id: { type: mongoose.Schema.Types.ObjectId, ref: 'users' }, // Reference to User model
+  client_id: String, // Reference to User model
   receipt_uploaded: String,
   package: String,
   service: String,
