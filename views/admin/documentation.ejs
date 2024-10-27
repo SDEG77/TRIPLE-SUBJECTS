@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Documentation - Booking Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body class="bg-[#121212] text-white">
+
+<!-- Sidebar -->
+<div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div>
+        <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <p class="flex items-center uppercase text-[#F6DE03] font-semibold">
+                <img src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3"> Ark Visions
+            </p>
+            <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
+        </div>
+
+        <nav>
+            <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+                <i class="fa-solid fa-house mr-4"></i> Dashboard
+            </a>
+            <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                <i class="fa-solid fa-users mr-4"></i> Clients
+            </a>
+            <a href="/ark/admin/bookings" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+            </a>
+            <a href="/ark/admin/indexmanager" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                <i class="fa-solid fa-images mr-4"></i> Index Manager
+            </a>
+            <a href="/ark/admin/photo-management" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                <i class="fa-solid fa-image mr-4"></i> Photo Management
+            </a>
+            <a href="/ark/admin/resource" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+            </a>
+            <a href="/ark/admin/feedback" class="block py-4 px-5 rounded transition duration-200 text-black bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
+                <i class="fa-solid fa-message mr-4 text-black"></i> Feedback
+            </a>
+            <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-[#F6DE03] hover:text-[#121212]">
+                <i class="fa fa-file-text mr-2"></i> Documentation
+            </a>
+        </nav>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto p-5 ml-64">
+  <h1 class="text-4xl text-[#F6DE03] text-center mb-5">Bookings Documentation</h1>
+
+  <!-- Date Filter Inputs and Print Button -->
+  <div class="flex justify-between mb-5">
+    <div class="flex space-x-3">
+      <label for="startDate" class="text-[#F6DE03]">Start Date:</label>
+      <input type="date" id="startDate" class="p-2 rounded-md text-black">
+      
+      <label for="endDate" class="text-[#F6DE03]">End Date:</label>
+      <input type="date" id="endDate" class="p-2 rounded-md text-black">
+      
+      <button onclick="filterByDate()" class="px-4 py-2 bg-[#F6DE03] text-black rounded-md hover:bg-yellow-600">Filter</button>
+    </div>
+    
+    <button onclick="printTable()" class="px-4 py-2 bg-[#F6DE03] text-black rounded-md hover:bg-yellow-600">Print</button>
+  </div>
+
+  <!-- Filtered Total Display -->
+  <div class="mb-5 text-[#F6DE03] font-semibold text-lg">
+    Filtered Total: ₱<span id="filteredTotal">0.00</span>
+  </div>
+
+  <!-- Search Box -->
+  <div class="mb-5">
+    <input type="text" id="searchBox" placeholder="Search by Client Name or Service..." class="p-2 rounded-md w-full text-black">
+  </div>
+
+  <!-- Table to Display Bookings -->
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full bg-white text-black rounded-md" id="bookingDataTable">
+      <thead>
+        <tr class="bg-[#F6DE03] text-[#121212]">
+          <th class="p-2 cursor-pointer" onclick="sortTable(0)">Client Name</th>
+          <th class="p-2 cursor-pointer" onclick="sortTable(1)">Service</th>
+          <th class="p-2 cursor-pointer" onclick="sortTable(2)">Date</th>
+          <th class="p-2 cursor-pointer" onclick="sortTable(3)">Time</th>
+          <th class="p-2 cursor-pointer" onclick="sortTable(4)">Status</th>
+          <th class="p-2 cursor-pointer" onclick="sortTable(5)">Total</th>
+        </tr>
+      </thead>
+      <tbody id="bookingTable">
+        <% bookings.forEach(booking => { %>
+          <tr class="text-center border-b">
+            <td class="p-2"><%= booking.client ? booking.client.fname : 'N/A' %> <%= booking.client ? booking.client.lname : '' %></td>
+            <td class="p-2"><%= booking.service %></td>
+            <td class="p-2"><%= new Date(booking.date).toLocaleDateString() %></td>
+            <td class="p-2"><%= booking.time %></td>
+            <td class="p-2"><%= booking.status %></td>
+            <td class="p-2 total-amount">₱<%= booking.total %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary Section at the Bottom -->
+  <div class="mt-5 text-[#F6DE03] font-semibold text-lg">
+    <p>Total Earnings: ₱<span id="totalEarnings">0.00</span></p>
+    <p>Total Bookings: <span id="totalBookings">0</span></p>
+  </div>
+</div>
+
+<!-- JavaScript for Search, Sort, Date Filter, and Print -->
+<script>
+  // Initialize overall totals on page load
+  function initializeTotals() {
+    let totalEarnings = 0;
+    let totalBookings = 0;
+
+    $('#bookingTable tr').each(function() {
+      const total = parseFloat($(this).find(".total-amount").text().replace(/[^\d.-]/g, '')) || 0;
+      totalEarnings += total;
+      totalBookings += 1;
+    });
+
+    document.getElementById("totalEarnings").textContent = totalEarnings.toFixed(2);
+    document.getElementById("totalBookings").textContent = totalBookings;
+    document.getElementById("filteredTotal").textContent = totalEarnings.toFixed(2);
+  }
+
+  // Search Function with Summary Update
+  $('#searchBox').on('keyup', function() {
+    const value = $(this).val().toLowerCase();
+    let filteredTotal = 0;
+    let filteredBookings = 0;
+
+    $('#bookingTable tr').each(function() {
+      const rowText = $(this).text().toLowerCase();
+      const total = parseFloat($(this).find(".total-amount").text().replace(/[^\d.-]/g, '')) || 0;
+
+      if (rowText.indexOf(value) > -1) {
+        $(this).show();
+        filteredTotal += total;  // Add to filtered total if row is visible
+        filteredBookings += 1;   // Count the booking
+      } else {
+        $(this).hide();
+      }
+    });
+
+    // Update the displayed filtered total, total earnings, and total bookings
+    document.getElementById("filteredTotal").textContent = filteredTotal.toFixed(2);
+    document.getElementById("totalEarnings").textContent = filteredTotal.toFixed(2);
+    document.getElementById("totalBookings").textContent = filteredBookings;
+  });
+
+  // Date Filter Function with Summary Update
+  function filterByDate() {
+    const startDate = new Date(document.getElementById("startDate").value);
+    const endDate = new Date(document.getElementById("endDate").value);
+    let filteredTotal = 0;
+    let filteredBookings = 0;
+
+    $('#bookingTable tr').each(function() {
+        const date = new Date($(this).find("td:eq(2)").text());
+      const total = parseFloat($(this).find(".total-amount").text().replace(/[^\d.-]/g, '')) || 0;
+
+      // Check if the row should be shown based on date range
+      if (startDate && endDate && date >= startDate && date <= endDate) {
+        $(this).show();
+        filteredTotal += total; // Add to filtered total if row is visible
+        filteredBookings += 1; // Count visible bookings
+      } else {
+        $(this).hide();
+      }
+    });
+
+    // Update the displayed filtered total, total earnings, and total bookings
+    document.getElementById("filteredTotal").textContent = filteredTotal.toFixed(2);
+    document.getElementById("totalEarnings").textContent = filteredTotal.toFixed(2);
+    document.getElementById("totalBookings").textContent = filteredBookings;
+  }
+
+  // Sort Function
+  function sortTable(n) {
+    const table = document.getElementById("bookingDataTable");
+    let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    switching = true;
+    dir = "asc"; 
+
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+
+        const isDateColumn = n === 2;
+        const isNumberColumn = n === 5;
+
+        let xContent = x.innerHTML.toLowerCase();
+        let yContent = y.innerHTML.toLowerCase();
+
+        if (isDateColumn) {
+          xContent = new Date(xContent);
+          yContent = new Date(yContent);
+        } else if (isNumberColumn) {
+          xContent = parseFloat(xContent.replace(/[^\d.-]/g, ''));
+          yContent = parseFloat(yContent.replace(/[^\d.-]/g, ''));
+        }
+
+        if (dir === "asc") {
+          if (xContent > yContent) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir === "desc") {
+          if (xContent < yContent) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchcount++;
+      } else {
+        if (switchcount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+
+  // Print Function including the summary section
+  function printTable() {
+    const tableContent = document.getElementById("bookingDataTable").outerHTML;
+    const summaryContent = document.querySelector(".mt-5").outerHTML;
+
+    const printContent = `
+      <html>
+        <head>
+          <title>Print Bookings Data</title>
+          <style>
+            body { font-family: Arial, sans-serif; color: #121212; }
+            table { width: 100%; border-collapse: collapse; }
+            th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+            .summary { margin-top: 20px; font-weight: bold; color: #121212; }
+          </style>
+        </head>
+        <body>
+          ${tableContent}
+          <div class="summary">${summaryContent}</div>
+        </body>
+      </html>
+    `;
+
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    printWindow.print();
+  }
+
+  // Run initial totals setup
+  initializeTotals();
+</script>
+</body>
+</html>
+

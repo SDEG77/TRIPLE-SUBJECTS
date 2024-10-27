@@ -297,6 +297,15 @@ route.get('/indexmanager', async (req, res) => {
   }
 });
 
+route.get('/documentation', async (req, res) => {
+  try {
+    const bookings = await BookingController.getAllBookings(); // New method in the controller to get all bookings
+    res.render('./admin/documentation', { bookings });
+  } catch (error) {
+    res.status(500).send('Error fetching bookings data');
+  }
+});
+
 // Route to add a new photo (handle file upload)
 route.post('/indexmanager/add', PhotoController.addPhoto);
 
