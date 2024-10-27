@@ -57,13 +57,17 @@
       max-height: 200px;
       display: none;
     }
+    #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
   </style>
 </head>
 
 <body>
-  <div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+  <div id="sidebar" class="fixed w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
     <div>
-      <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+      <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
         <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img src="/assets/img/arkvisionlogo.png"
             alt="" class="w-[80px] -mr-3">Ark Visions</p>
         <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
@@ -92,10 +96,10 @@
           <a href="/ark/admin/feedback" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
             <i class="fa-solid fa-message mr-4"></i> Feedback
           </a>
-          <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]">
-            <i class="fa fa-file-text mr-2"></i> Documentation
+          <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+            <i class="fa fa-file-text mr-4"></i> Documentation
           </a>
-          <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800"><i class="fa-solid fa-calendar-times mr-4 text-gray-800"></i> Manage Unavailable Dates</a>
+          <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
 
       </nav>
     </div>
@@ -105,16 +109,16 @@
     </div>
   </div>
   <main class="content h-[100vh] overflow-auto">
-    <button id="toggleSidebar" class="p-4 text-yellow-500">
+    <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
       <i class="fa-solid fa-bars fa-2xl"></i>
-    </button>
+  </button>
 
     <div class="p-5">
-      <h2 class="text-2xl font-semibold text-yellow-500">
+      <h2 class="text-2xl font-semibold text-yellow-500 ml-6">
         Manage Clients' Albums
       </h2>
 
-      <div data-status="false" id="search-div" class="bg-gray-500 justify-center items-center  pr-4 w-fit h-[60px] flex gap-8 justify-self-end mb-11 fixed -right-[383px] top-10 rounded-lg overflow-hidden transition-all ease-in-out duration-500 z-10">
+      <div data-status="false" id="search-div" class="ml-6 bg-gray-500 justify-center items-center  pr-4 w-fit h-[60px] flex gap-8 justify-self-end mb-11 fixed -right-[383px] top-10 rounded-lg overflow-hidden transition-all ease-in-out duration-500 z-10">
           <i onclick="toggleSearchBar()" id="search-icon" class="flex items-center bg-gray-500 hover:bg-gray-700 transition-colors border-r-4 border-r-gray-900 h-full px-4 cursor-pointer fa-solid fa-search fa-2xl"></i>
 
           <input onkeyup="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="client name" value="<%= snatch.current_search %>">
@@ -127,7 +131,7 @@
       </div>
 
       <div class="flex gap-2">
-          <div class="flex gap-10 ml-5">
+          <div class="flex gap-10 ml-6">
             <% if(snatch.current_page >= 2) { %>
                 <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/photo-management?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
                     <i class="fa-solid fa-caret-left"></i> prev page
@@ -147,7 +151,7 @@
       </div>
 
 
-      <div class="mt-4 space-y-6" id="clientsContainer">
+      <div class="mt-4 space-y-6 ml-6 " id="clientsContainer">
         <% try{ %>
           <% snatch.clients.forEach(client => { %>
             <div class="client-item border border-gray-700 p-4 rounded-lg bg-gray-700" data-client-name="<%= client.fname %> <%= client.lname %>">

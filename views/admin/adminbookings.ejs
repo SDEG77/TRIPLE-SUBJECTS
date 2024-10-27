@@ -87,14 +87,18 @@
             text-decoration: none;
             cursor: pointer;
         }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body onscroll="toggleSearchBar(true)">
 
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
                 <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
                         src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
                 <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
@@ -126,10 +130,10 @@
                         class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
-                    <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]">
-                        <i class="fa fa-file-text mr-2"></i> Documentation
+                    <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa fa-file-text mr-4"></i> Documentation
                       </a>
-                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800"><i class="fa-solid fa-calendar-times mr-4 text-gray-800"></i> Manage Unavailable Dates</a>
+                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4"></i> Manage Unavailable Dates</a>
 
             </nav>
         </div>
@@ -141,12 +145,13 @@
     </div>
 
     <main class="content">
-        <button id="toggleSidebar" class="p-4 text-yellow-500">
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
             <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
 
+
         <div class="p-5 gap-20">
-            <h2 class="text-2xl font-semibold text-yellow-500">
+            <h2 class="text-2xl font-semibold text-[#F6DE03] ml-6">
                 Bookings
                 <span class="text-white">
                     <%= snatch.current_search && `[ Name: ${snatch.current_search} ]` %> <%= snatch.current_status && `[ Status: ${snatch.current_status} ]` %>
@@ -177,7 +182,7 @@
             </a>    
         </div>
 
-        <div class="flex gap-10 ml-5">
+        <div class="flex gap-10 ml-6">
             <% if(snatch.current_page >= 2) { %>
                 <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
                     <i class="fa-solid fa-caret-left"></i> prev page
@@ -185,7 +190,7 @@
             <% } %>
                 
                 <% if(snatch.current_page && snatch.total_page && snatch.bookings.length <= 15) { %>
-                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page %></span>
+                    <span class="flex items-center ml-6"><%= snatch.current_page %> of <%= snatch.total_page %></span>
                 <% } %>
 
             <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.bookings.length === 15) { %>
@@ -195,7 +200,7 @@
             <% }%>    
         </div>
 
-        <div class="mt-6 m-5">
+        <div class="mt-6 m-5 ml-6 p-4">
             <% if(snatch.bookings){ %>
                 <% try{ %>
                     <% 
@@ -220,6 +225,8 @@
                         <% if(booking.id && searchContains){ %>
                         <div data-state="closed" id="reschedule-<%= booking.id %>" style="right: -400px;"
                             class="fixed z-10 top-1/2 w-72 h-72 bg-gray-900/95 rounded-2xl border-4 border-yellow-400 transition-all flex justify-center items-center">
+                            <button id="closeBtn-<%= booking.id %>" class="absolute top-2 right-2 text-white text-lg" onclick="closeModal('<%= booking.id %>')">&times;</button>
+                            
                             <form action="/ark/admin/bookings/reschedule" method="post" class="flex flex-col gap-4">
                                 <input type="hidden" name="id" value="<%= booking.id %>" <label
                                     class="text-l text-white font-bold" for="date">Date:</label>
@@ -258,7 +265,7 @@
                         <% const date=new Date(booking.date); const day=date.getDate(); const index=date.getMonth();
                             const months=[ "January" , "February" , "March" , "April" , "May" , "June" , "July"
                             , "August" , "September" , "October" , "November" , "December" ]; %>
-                            <div class="mb-20 relative border-[1px] border-t-white"> <!-- table and delete btn container -->
+                            <div class="mb-20 relative border-[1px] "> <!-- table and delete btn container -->
                                 <form class="absolute -top-[33px] right-[40px]" action="/ark/admin/bookings/remove"
                                     method="post">
                                     <input type="hidden" value="<%= booking.id %>" name="id">
@@ -269,17 +276,17 @@
                                         <i class="fa-solid fa-trash"></i> Remove Request
                                     </button>
                                 </form>
-                                <div class="rounded-lg overflow-hidden">
+                                <div class=" overflow-hidden">
                                     <!-- Yellow border container -->
-                                    <table class="min-w-full border-b-[2px]">
+                                    <table class="min-w-full ">
                                         <thead>
-                                            <tr class="text-center uppercase font-regular">
-                                                <th class="py-2 px-4 border-b border-gray-600">Name</th>
-                                                <th class="py-2 px-4 border-b border-gray-600">Booking Details</th>
-                                                <th class="py-2 px-4 border-b border-gray-600">Requested Schedule</th>
+                                            <tr class="text-center uppercase font-regular bg-[#F6DE03] ">
+                                                <th class="py-2 px-4  text-gray-800">Name</th>
+                                                <th class="py-2 px-4  text-gray-800">Booking Details</th>
+                                                <th class="py-2 px-4  text-gray-800">Requested Schedule</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="text-center">
+                                        <tbody class="text-center bg-gray-800">
                                             <% snatch.users.map(user => { %>
                                                 <% if (user.id === booking.client_id) { %>
                                                     <tr>
@@ -328,7 +335,7 @@
                                                         <td class="py-2 px-4 border-b border-gray-600 grid grid-cols-3 justify-center gap-x-3">
                                                             <% if (booking.addOns.length > 0) { %>
                                                                 <% booking.addOns.forEach(add => { %>
-                                                                    <div class="text-white bg-slate-600 mb-2 rounded w-full flex justify-center items-center">
+                                                                    <div class="text-white bg-gray-600 mb-2 rounded w-full flex justify-center items-center">
                                                                         <p><%= add %></p>
                                                                     </div>
                                                                 <% }) %>
@@ -502,7 +509,11 @@
         editModal.style.right = "40px";
         editModal.setAttribute("data-state", "opened")
     }
-
+    function closeModal(id) {
+        const editModal = document.getElementById(`reschedule-${id}`);
+        editModal.style.right = "-400px"; 
+        editModal.setAttribute("data-state", "closed"); 
+    }
     function statusHref() {
         const stats = document.getElementById("statuz").value;
         const name = document.getElementById("searchName").value;

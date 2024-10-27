@@ -4,92 +4,228 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Documentation - Booking Data</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="icon" href="/assets/img/arklogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+      rel="stylesheet">
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * {
+        font-family: 'Poppins';
+        color: white;
+    }
+
+    body {
+        background-color: #121212;
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        transition: margin-left 0.3s;
+    }
+
+    #sidebar {
+        background-color: #262626;
+        transition: transform 0.3s ease;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .sidebar-hidden {
+        transform: translateX(-100%);
+    }
+
+    .content {
+        flex: 1;
+        transition: margin-left 0.3s;
+        margin-left: 16rem;
+    }
+
+    .sidebar-hidden-content {
+        margin-left: 0;
+    }
+
+    .card {
+        background-color: #1F1F1F;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        margin-bottom: 20px;
+    }
+
+    .chart-container {
+        height: 400px;
+        margin: 0 auto;
+        background-color: #1f1f1f;
+        padding: 20px;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #1f1f1f;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 800px;
+        height: 80%;
+        overflow: auto;
+    }
+
+    .modal-close {
+        float: right;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    #calendar {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Responsive Grid Layout */
+    .grid-2-col {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .grid-2-col {
+            grid-template-columns: 1fr;
+        }
+    }
+    #sidebar{
+        position: fixed;
+        height: 100vh;
+    }
+</style>
 </head>
 <body class="bg-[#121212] text-white">
 
-<!-- Sidebar -->
-<div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
-    <div>
-        <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
-            <p class="flex items-center uppercase text-[#F6DE03] font-semibold">
-                <img src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3"> Ark Visions
-            </p>
+
+  <div id="sidebar" class="fixed w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div class="">
+        <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
+            <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
+                    src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
             <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
+            <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
         </div>
 
-        <nav>
-            <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
+        <nav class="">
+            <a href="/ark/admin"
+                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 active:bg-yellow-500">
                 <i class="fa-solid fa-house mr-4"></i> Dashboard
             </a>
-            <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+            <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                 <i class="fa-solid fa-users mr-4"></i> Clients
             </a>
-            <a href="/ark/admin/bookings" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+            <a href="/ark/admin/bookings"
+                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                 <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
             </a>
-            <a href="/ark/admin/indexmanager" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+            <a href="/ark/admin/indexmanager"
+                class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                 <i class="fa-solid fa-images mr-4"></i> Index Manager
-            </a>
-            <a href="/ark/admin/photo-management" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                <i class="fa-solid fa-image mr-4"></i> Photo Management
-            </a>
-            <a href="/ark/admin/resource" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                <i class="fa-solid fa-box mr-4"></i> Resource Control Center
-            </a>
-            <a href="/ark/admin/feedback" class="block py-4 px-5 rounded transition duration-200 text-black bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
-                <i class="fa-solid fa-message mr-4 text-black"></i> Feedback
-            </a>
-            <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-[#F6DE03] hover:text-[#121212]">
-                <i class="fa fa-file-text mr-2"></i> Documentation
-            </a>
-            <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800"><i class="fa-solid fa-calendar-times mr-4 text-gray-800"></i> Manage Unavailable Dates</a>
+                <a href="/ark/admin/photo-management"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-image mr-4"></i> Photo Management
+                </a>
+                <a href="/ark/admin/resource"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                </a>
+                <a href="/ark/admin/feedback"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-message mr-4 "></i> Feedback
+                </a>
+                <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 text-black bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
+                    <i class="fa fa-file-text mr-4 text-black"></i> Documentation
+                  </a>
+                  <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4"></i> Manage Unavailable Dates</a>
 
         </nav>
     </div>
+    <div>
+        <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+            <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+        </a>
+    </div>
 </div>
 
-<!-- Main Content -->
-<div class="container mx-auto p-5 ml-64">
-  <h1 class="text-4xl text-[#F6DE03] text-center mb-5">Bookings Documentation</h1>
+<main class="content">
+    <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
+        <i class="fa-solid fa-bars fa-2xl"></i>
+    </button>
+
+<div class=" p-5 ml-6">
+  <div class="flex justify-between items-center">
+    <h2 class="text-2xl font-semibold text-yellow-500 mb-10">
+      Booking Documentation
+  </h2>
+    <button onclick="printTable()" class="px-4 py-2 bg-[#F6DE03] text-black rounded-md hover:bg-yellow-600">Print</button>
+  </div>
+ 
 
   <!-- Date Filter Inputs and Print Button -->
-  <div class="flex justify-between mb-5">
-    <div class="flex space-x-3">
+  <div class="flex justify-between mb-5 ">
+    <div class="flex  space-x-3">
       <label for="startDate" class="text-[#F6DE03]">Start Date:</label>
-      <input type="date" id="startDate" class="p-2 rounded-md text-black">
+      <input type="date" id="startDate" class="p-2 rounded-md text-yellow-500 bg-gray-800">
       
       <label for="endDate" class="text-[#F6DE03]">End Date:</label>
-      <input type="date" id="endDate" class="p-2 rounded-md text-black">
+      <input type="date" id="endDate" class="p-2 rounded-md text-yellow-500 bg-gray-800">
       
       <button onclick="filterByDate()" class="px-4 py-2 bg-[#F6DE03] text-black rounded-md hover:bg-yellow-600">Filter</button>
     </div>
     
-    <button onclick="printTable()" class="px-4 py-2 bg-[#F6DE03] text-black rounded-md hover:bg-yellow-600">Print</button>
+ 
   </div>
 
   <!-- Filtered Total Display -->
-  <div class="mb-5 text-[#F6DE03] font-semibold text-lg">
+  <div class="mb-5  font-semibold text-lg">
     Filtered Total: ₱<span id="filteredTotal">0.00</span>
   </div>
 
   <!-- Search Box -->
   <div class="mb-5">
-    <input type="text" id="searchBox" placeholder="Search by Client Name or Service..." class="p-2 rounded-md w-full text-black">
+    <input type="text" id="searchBox" placeholder="Search by Client Name or Service..." class="p-2 rounded-md w-full text-white bg-gray-800">
   </div>
 
   <!-- Table to Display Bookings -->
   <div class="overflow-x-auto">
-    <table class="table-auto w-full bg-white text-black rounded-md" id="bookingDataTable">
+    <table class="table-auto w-full bg-gray-800 text-black rounded-md" id="bookingDataTable">
       <thead>
-        <tr class="bg-[#F6DE03] text-[#121212]">
-          <th class="p-2 cursor-pointer" onclick="sortTable(0)">Client Name</th>
-          <th class="p-2 cursor-pointer" onclick="sortTable(1)">Service</th>
-          <th class="p-2 cursor-pointer" onclick="sortTable(2)">Date</th>
-          <th class="p-2 cursor-pointer" onclick="sortTable(3)">Time</th>
-          <th class="p-2 cursor-pointer" onclick="sortTable(4)">Status</th>
-          <th class="p-2 cursor-pointer" onclick="sortTable(5)">Total</th>
+        <tr class="bg-[#F6DE03]">
+          <th class="p-2 cursor-pointer text-gray-800" onclick="sortTable(0)">Client Name</th>
+          <th class="p-2 cursor-pointer text-gray-800" onclick="sortTable(1)">Service</th>
+          <th class="p-2 cursor-pointer text-gray-800" onclick="sortTable(2)">Date</th>
+          <th class="p-2 cursor-pointer text-gray-800" onclick="sortTable(3)">Time</th>
+          <th class="p-2 cursor-pointer text-gray-800" onclick="sortTable(4)">Status</th>
+          <th class="p-2 cursor-pointer text-gray-800" onclick="sortTable(5)">Total</th>
         </tr>
       </thead>
       <tbody id="bookingTable">
@@ -113,6 +249,7 @@
     <p>Total Bookings: <span id="totalBookings">0</span></p>
   </div>
 </div>
+</main>
 
 <!-- JavaScript for Search, Sort, Date Filter, and Print -->
 <script>
@@ -269,6 +406,32 @@
 
   // Run initial totals setup
   initializeTotals();
+</script>
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const toggleButton = document.getElementById("toggleSidebar");
+  const content = document.querySelector(".content");
+  const replyButtons = document.querySelectorAll('.reply-button');
+  const replyModal = document.getElementById('replyModal');
+  const emailInput = document.getElementById('emailInput');
+  const closeModal = document.getElementById('closeModal');
+
+  toggleButton.addEventListener("click", () => {
+      sidebar.classList.toggle("sidebar-hidden");
+      content.classList.toggle("sidebar-hidden-content");
+  });
+
+  replyButtons.forEach(button => {
+      button.addEventListener('click', function () {
+          const email = this.getAttribute('data-email');
+          emailInput.value = email;
+          replyModal.classList.remove('hidden');
+      });
+  });
+
+  closeModal.addEventListener('click', function () {
+      replyModal.classList.add('hidden');
+  });
 </script>
 </body>
 </html>

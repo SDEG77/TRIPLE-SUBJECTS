@@ -64,13 +64,17 @@
         button[type="submit"]:hover {
             background-color: #d5c502;
         }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] relative">
                 <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
                 <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
             </div>
@@ -82,7 +86,7 @@
                 <a href="/ark/admin/photo-management" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-image mr-4"></i> Photo Management</a>
                 <a href="/ark/admin/resource" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-box mr-4"></i> Resource Control Center</a>
                 <a href="/ark/admin/feedback" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-message mr-4"></i> Feedback</a>
-                <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]"><i class="fa fa-file-text mr-2"></i> Documentation</a>
+                <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa fa-file-text mr-4"></i> Documentation</a>
                 <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800"><i class="fa-solid fa-calendar-times mr-4 text-gray-800"></i> Manage Unavailable Dates</a>
             </nav>
         </div>
@@ -92,13 +96,16 @@
     </div>
 
     <main class="content">
-        <button id="toggleSidebar" class="p-4 text-yellow-500"><i class="fa-solid fa-bars fa-2xl"></i></button>
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </button>
+
         
-        <div class="p-5">
+        <div class="p-5 ml-6">
             <h2 class="text-2xl font-semibold text-yellow-500">Manage Unavailable Dates</h2>
         </div>
 
-        <form id="unavailableDatesForm" class="mt-4 p-5 bg-gray-800 rounded-lg">
+        <form id="unavailableDatesForm" class="mt-4 p-5 bg-gray-800 rounded-lg ml-6">
             <div class="mb-4">
                 <label for="date" class="block text-yellow-500 font-semibold mb-2">Date:</label>
                 <input type="date" id="date" name="date" required class="w-full p-2 bg-gray-700 text-white rounded">

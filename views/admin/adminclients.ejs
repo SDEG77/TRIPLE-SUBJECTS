@@ -67,15 +67,19 @@
             text-transform: uppercase;
             font-weight: 500;
         }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
 
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
 
         <div>
-            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
                 <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
                         src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
                 <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
@@ -107,10 +111,10 @@
                         class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
-                    <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]">
-                        <i class="fa fa-file-text mr-2"></i> Documentation
+                    <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa fa-file-text mr-4"></i> Documentation
                       </a>
-                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800"><i class="fa-solid fa-calendar-times mr-4 text-gray-800"></i> Manage Unavailable Dates</a>
+                    <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
 
             </nav>
         </div>
@@ -122,15 +126,15 @@
     </div>
 
     <main class="content">
-        <button id="toggleSidebar" class="p-4 text-yellow-500">
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
             <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
 
-        <div class="p-5">
+        <div class="p-5 ml-6">
             <h2 class="text-2xl font-semibold text-yellow-500">Clients</h2>
         </div>
 
-        <div class="flex gap-10 ml-5">
+        <div class="flex gap-10 ml-6">
             <% if(snatch.current_page >= 2) { %>
                 <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
                     <i class="fa-solid fa-caret-left"></i> prev page
@@ -138,7 +142,7 @@
             <% } %>
                 
                 <!-- <% if(snatch.current_page && snatch.total_page && snatch.clients.length <= 15) { %> -->
-                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page > snatch.current_page ? snatch.total_page - 1 : snatch.total_page %></span>
+                    <span class="flex items-center ml-6"><%= snatch.current_page %> of <%= snatch.total_page > snatch.current_page ? snatch.total_page - 1 : snatch.total_page %></span>
                 <!-- <% } %> -->
 
             <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.clients.length === 15) { %>
@@ -161,7 +165,7 @@
         </div>
 
         <!-- Table Section -->
-        <div class="mt-6 m-5">
+        <div class="mt-6 m-5 ml-6 p-4">
             <% if(snatch.clients) { %>
                 <table class="min-w-full text-gray-300">
                     <thead>

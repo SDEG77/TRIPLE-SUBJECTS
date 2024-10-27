@@ -66,15 +66,19 @@
         form {
             margin-bottom: 1rem;
         }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
                 <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
                         src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
                 <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
@@ -107,10 +111,10 @@
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
                     
-                    <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]">
-                        <i class="fa fa-file-text mr-2"></i> Documentation
+                    <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa fa-file-text mr-4"></i> Documentation
                       </a>
-                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 bg-gradient-to-r from-[#F6DE03] to-[#dbe043] text-gray-800"><i class="fa-solid fa-calendar-times mr-4 text-gray-800"></i> Manage Unavailable Dates</a>
+                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
 
                       
             </nav>
@@ -124,28 +128,29 @@
 
     <!-- Main Content -->
     <main class="content">
-        <button id="toggleSidebar" class="p-4 text-yellow-500">
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
             <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
 
+
         <div class="p-5">
-            <h1 class="text-[23px] uppercase text-[#F6DE03] font-semibold">Manage Photos for Landing Page</h1>
+            <h1 class="text-[23px] uppercase text-[#F6DE03] font-semibold ml-6">Manage Photos for Landing Page</h1>
 
 
             <!-- Add Photo Form -->
-            <form action="indexmanager/add" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 w-1/2 p-5 rounded-[20px] mt-3" style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.393);">
-                <input type="text" name="title" placeholder="Title (optional)" class="border-b-[2px] border-[#Fde043] p-1 text-black outline-none bg-transparent text-white">
+            <form action="indexmanager/add" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 w-1/2 p-5 rounded-[20px] mt-3 ml-6 bg-gray-800" style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.393);">
+                <input type="text" name="title" placeholder="Title (optional)" class="border-b-[2px] border-[#Fde043] p-1  outline-none bg-transparent text-white">
                 <input type="hidden" name="isIndexPhoto" value="true">
-                <input type="file" name="image" class="border-[#Fde043] border-[1px] p-2 rounded-[10px] outline-none " required> <!-- Changed to file input -->
+                <input type="file" name="image" class="border-b-[2px] border-[#Fde043]  p-2 rounded-[10px] outline-none " required> <!-- Changed to file input -->
                 <button type="submit" class="bg-blue-500 text-white p-[5px] rounded-[15px] uppercase w-fit px-5 hover:bg-blue-400">Submit</button>
             </form>
 
             <!-- Display Existing Photos -->
-            <div class="mt-10">
-                <h2 class="text-[23px] text-[#F6DE03]">Current Photos</h2>
-                <div class="grid grid-cols-6 gap-4">
+            <div class="mt-10 ml-6" >
+                <h2 class="text-[23px] text-[#F6DE03] ">Current Photos</h2>
+                <div class="grid grid-cols-6 gap-4 ">
                     <% photos.forEach(function(photo) { %>
-                        <div class="border p-4">
+                        <div class=" p-4 bg-gray-800 rounded-lg">
                             <% let decompose=photo.image_path.split("/"); %>
                                 <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="<%= photo.title %>"
                                     class="w-full h-auto mb-4">
@@ -156,12 +161,22 @@
                                 <!-- Delete Button -->
                                 <form action="indexmanager/delete" method="POST">
                                     <input type="hidden" name="id" value="<%= photo._id %>">
-                                    <button type="submit" class="bg-red-500 text-white p-2">Delete</button>
+                                    <button type="submit" class="bg-red-500 text-white p-2 hover:bg-red-600">Delete</button>
                                 </form>
                         </div>
                         <% }) %>
                 </div>
             </div>
 </body>
+<script>
+      // Sidebar toggle functionality
+      const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggleSidebar');
+        const content = document.querySelector('.content');
 
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+            content.classList.toggle('sidebar-hidden-content');
+        });
+</script>
 </html>

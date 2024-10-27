@@ -117,14 +117,18 @@
                 grid-template-columns: 1fr;
             }
         }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
 
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
                 <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
                         src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
                 <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
@@ -157,8 +161,8 @@
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     
                     </a>
-                    <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]">
-                        <i class="fa fa-file-text mr-2"></i> Documentation
+                    <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa fa-file-text mr-4"></i> Documentation
                       </a>
 
                       <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
@@ -174,11 +178,11 @@
     </div>
 
     <main class="content h-[100vh] overflow-auto">
-        <button id="toggleSidebar" class="p-4 text-yellow-500">
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
             <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
 
-        <div class="p-5 grid-2-col">
+        <div class="p-10 grid-2-col">
             <!-- Upcoming Bookings -->
             <div class="card">
                 <div class="flex items-center">
