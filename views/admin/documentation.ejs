@@ -93,7 +93,7 @@
       <tbody id="bookingTable">
         <% bookings.forEach(booking => { %>
           <tr class="text-center border-b">
-            <td class="p-2"><%= booking.client_id.fname %> <%= booking.client_id.lname %></td>
+            <td class="p-2"><%= booking.client ? booking.client.fname : 'N/A' %> <%= booking.client ? booking.client.lname : '' %></td>
             <td class="p-2"><%= booking.service %></td>
             <td class="p-2"><%= new Date(booking.date).toLocaleDateString() %></td>
             <td class="p-2"><%= booking.time %></td>

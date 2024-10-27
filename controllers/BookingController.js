@@ -1,5 +1,7 @@
 const Booking = require('../models/Booking');
 const Receipt = require("../models/Receipt");
+const User = require('../models/User');
+
 
 class BookingController {
   async store(params) {
@@ -62,14 +64,25 @@ class BookingController {
 
   async getAllBookings() {
     try {
-      return await Booking.find({})
-        .populate({ path: 'client_id', select: 'fname lname' }) // Populate first and last names
-        .lean();
-    } catch (error) {
+      const bookings = await Booking.find(); // Retrieve all bookings
+
+      // Fetch user details for each booking
+      const bookingsWithClientData = await Promise.all(
+          bookings.map(async (booking) => {
+              const client = await User.findOne({ _id: booking.client_id });
+              return {
+                  ...booking.toObject(),
+                  client, // Attach client (user) details to each booking
+              };
+          })
+      );
+
+      return bookingsWithClientData;
+  } catch (error) {
+      console.error("Error fetching bookings with client data:", error);
       throw error;
-    }
   }
-  
+}
 }
 
 
