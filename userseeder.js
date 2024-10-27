@@ -1,22 +1,27 @@
 const mongoose = require('mongoose');
+const User = require('./models/User');
 const fs = require('fs');
 const csv = require('csv-parser');
-const bcrypt = require('bcrypt');
-const User = require('./models/User'); // Update path to actual User model
 
 async function seedUsers() {
   const users = [];
 
-  fs.createReadStream('./filipino_users.csv') // Path to your CSV file in the root folder
+  // Read CSV file and parse each row
+  fs.createReadStream('./modified_users_with_oid.csv')
     .pipe(csv())
     .on('data', (row) => {
+      // Parse the _id field to use the provided ObjectId
+      const _id = JSON.parse(row._id).$oid;
+
       users.push({
-        _id: row._id,
+        _id: mongoose.Types.ObjectId(_id), // Use the existing ObjectId
         fname: row.fname,
         lname: row.lname,
         email: row.email,
-        password: bcrypt.hashSync('password123', 10), // Hash a generic password
-        isVerified: row.isVerified === 'true',
+        password: row.password,
+        isVerified: row.isVerified === 'true', // Convert to boolean if needed
+        resetPasswordToken: row.resetPasswordToken || null,
+        resetPasswordExpires: row.resetPasswordExpires ? new Date(row.resetPasswordExpires) : null,
       });
     })
     .on('end', async () => {
