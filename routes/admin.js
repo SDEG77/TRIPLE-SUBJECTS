@@ -118,9 +118,12 @@ route.get('/top-services', async (req, res) => {
 // CLIENT PAGE ROUTES
 route.get("/clients", async (req, res) => {
   if (req.session.isAdminLogged) {
-    const clients = await AdminController.viewClients();
+    const result = await AdminController.viewClients({
+      page: req.query.page, 
+      search: req.query.name,
+    });
 
-    res.render("./admin/adminclients", { clients: clients });
+    res.render("./admin/adminclients", { snatch: result });
   } else {
     res.redirect("./login");
   }
@@ -219,10 +222,13 @@ route.post("/bookings/reschedule", async (req, res) => {
 // PHOTO MANAGEMENT PAGE ROUTES
 route.get("/photo-management", async (req, res) => {
   if (req.session.isAdminLogged) {
-    const clients = await AdminController.viewClients();
+    const result = await AdminController.viewClients({
+      page: req.query.page, 
+      search: req.query.name,
+    });
     const photos = await AdminController.viewPhotos(); 
 
-    res.render("./admin/photomanagement", { clients: clients, photos: photos });
+    res.render("./admin/photomanagement", { snatch: result, photos: photos });
   } else {
     res.redirect("/ark/admin/login");
   }

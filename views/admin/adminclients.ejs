@@ -129,14 +129,45 @@
         <div class="p-5">
             <h2 class="text-2xl font-semibold text-yellow-500">Clients</h2>
         </div>
+
+        <div class="flex gap-10 ml-5">
+            <% if(snatch.current_page >= 2) { %>
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                    <i class="fa-solid fa-caret-left"></i> prev page
+                </a>
+            <% } %>
+                
+                <!-- <% if(snatch.current_page && snatch.total_page && snatch.clients.length <= 15) { %> -->
+                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page > snatch.current_page ? snatch.total_page - 1 : snatch.total_page %></span>
+                <!-- <% } %> -->
+
+            <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.clients.length === 15) { %>
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) + 1  %>&name=<%= snatch.current_search %>">
+                    next page <i class="fa-solid fa-caret-right"></i>
+                </a>
+            <% }%>    
+        </div>
+
+        <div data-status="false" id="search-div" class="bg-gray-500 justify-center items-center  pr-4 w-fit h-[60px] flex gap-8 justify-self-end mb-11 fixed -right-[383px] top-10 rounded-lg overflow-hidden transition-all ease-in-out duration-500 z-10">
+            <i onclick="toggleSearchBar()" id="search-icon" class="flex items-center bg-gray-500 hover:bg-gray-700 transition-colors border-r-4 border-r-gray-900 h-full px-4 cursor-pointer fa-solid fa-search fa-2xl"></i>
+
+            <input onkeyup="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="client name" value="<%= snatch.current_search %>">
+            
+            <a class="flex items-center bg-emerald-700 hover:bg-emerald-900 transition-colors py-2 px-4 rounded-xl font-bold tracking-widest" 
+            id="statusSearchBtn" 
+            href="/ark/admin/clients?page=<%= (snatch.current_page)%>&status=">
+                Search
+            </a>    
+        </div>
+
         <!-- Table Section -->
         <div class="mt-6 m-5">
-            <% if(clients) { %>
+            <% if(snatch.clients) { %>
                 <table class="min-w-full text-gray-300">
                     <thead>
                         <tr class="text-gray-400">
                             <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">ID</th>
-                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Username</th>
+                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Full Name</th>
                             <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Email Address</th>
                             <th colspan="100" class="py-2 px-4 border-b border-[#2c2c2c] text-center">Action</th>
                         </tr>
@@ -144,7 +175,7 @@
                     <tbody>
                         <% let yah="py-2 px-4 border-b border-[#2c2c2c] text-gray-200" ; %>
 
-                            <% clients.map((client)=> { %>
+                            <% snatch.clients.map((client)=> { %>
                                 <tr>
                                     <td class="<%= yah %>">
                                         <%= client._id %>
@@ -175,17 +206,47 @@
         </div>
     </main>
 
-    <script>
-
-        const sidebar = document.getElementById('sidebar');
-        const toggleButton = document.getElementById('toggleSidebar');
-        const content = document.querySelector('.content');
-
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('sidebar-hidden');
-            content.classList.toggle('sidebar-hidden-content');
-        });
-    </script>
 </body>
 
 </html>
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleButton = document.getElementById('toggleSidebar');
+    const content = document.querySelector('.content');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('sidebar-hidden');
+        content.classList.toggle('sidebar-hidden-content');
+    });
+
+    function statusHref() {
+        const name = document.getElementById("searchName").value;
+
+        document.getElementById("statusSearchBtn").href = `/ark/admin/clients?name=${name}`;
+    }
+
+    addEventListener("DOMContentLoaded", statusHref());
+
+    function toggleSearchBar(scroll = false) {
+        const state = document.getElementById("search-div")
+        const icon = document.getElementById("search-icon");
+
+        if (scroll) {
+            state.setAttribute("data-status", "false")
+            state.classList.replace("-right-[3px]", "-right-[383px]")
+            icon.classList.replace("fa-multiply", "fa-search")
+        
+            return;
+        }
+
+        if(state.getAttribute("data-status") === "false") {
+            state.setAttribute("data-status", "true")
+            state.classList.replace("-right-[383px]", "-right-[3px]")
+            icon.classList.replace("fa-search", "fa-multiply")
+        } else if(state.getAttribute("data-status") === "true") {
+            state.setAttribute("data-status", "false")
+            state.classList.replace("-right-[3px]", "-right-[383px]")
+            icon.classList.replace("fa-multiply", "fa-search")
+        } 
+    }
+</script>

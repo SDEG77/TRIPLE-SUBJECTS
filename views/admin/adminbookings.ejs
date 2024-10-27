@@ -148,16 +148,16 @@
         <div class="p-5 gap-20">
             <h2 class="text-2xl font-semibold text-yellow-500">
                 Bookings
-                <% if(snatch.current_status) { %>
-                <span class="text-white">[ <%= snatch.current_status %> ]</span>
-                <% } %>
+                <span class="text-white">
+                    <%= snatch.current_search && `[ Name: ${snatch.current_search} ]` %> <%= snatch.current_status && `[ Status: ${snatch.current_status} ]` %>
+                </span>
             </h2>
         </div>
 
         <div data-status="false" id="search-div" class="bg-gray-500 justify-center items-center  pr-4 w-fit h-[60px] flex gap-8 justify-self-end mb-11 fixed -right-[560px] top-10 rounded-lg overflow-hidden transition-all ease-in-out duration-500 z-10">
             <i onclick="toggleSearchBar()" id="search-icon" class="flex items-center bg-gray-500 hover:bg-gray-700 transition-colors border-r-4 border-r-gray-900 h-full px-4 cursor-pointer fa-solid fa-search fa-2xl"></i>
 
-            <input onkeypress="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="booking details" value="<%= snatch.current_search %>">
+            <input onkeyup="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="client name" value="<%= snatch.current_search %>">
             
             <select onchange="statusHref();" class="text-black/50 h-fit p-1" id="statuz">
                 <option class="text-black" value="" selected disabled>Status</option>
@@ -184,7 +184,7 @@
                 </a>
             <% } %>
                 
-                <% if(snatch.current_page && snatch.total_page && snatch.bookings.length === 15) { %>
+                <% if(snatch.current_page && snatch.total_page && snatch.bookings.length <= 15) { %>
                     <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page %></span>
                 <% } %>
 

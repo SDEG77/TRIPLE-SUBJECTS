@@ -67,7 +67,6 @@
         <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img src="/assets/img/arkvisionlogo.png"
             alt="" class="w-[80px] -mr-3">Ark Visions</p>
         <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
-        <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
       </div>
 
       <nav class=" ">
@@ -101,9 +100,8 @@
       </nav>
     </div>
     <div>
-      <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
-        <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
-      </a>
+      <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600"><i
+          class="fa-solid fa-sign-out-alt mr-2"></i> Logout</a>
     </div>
   </div>
   <main class="content h-[100vh] overflow-auto">
@@ -116,15 +114,47 @@
         Manage Clients' Albums
       </h2>
 
-      <div class="mt-4 space-y-6">
+      <div data-status="false" id="search-div" class="bg-gray-500 justify-center items-center  pr-4 w-fit h-[60px] flex gap-8 justify-self-end mb-11 fixed -right-[383px] top-10 rounded-lg overflow-hidden transition-all ease-in-out duration-500 z-10">
+          <i onclick="toggleSearchBar()" id="search-icon" class="flex items-center bg-gray-500 hover:bg-gray-700 transition-colors border-r-4 border-r-gray-900 h-full px-4 cursor-pointer fa-solid fa-search fa-2xl"></i>
+
+          <input onkeyup="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="client name" value="<%= snatch.current_search %>">
+          
+          <a class="flex items-center bg-emerald-700 hover:bg-emerald-900 transition-colors py-2 px-4 rounded-xl font-bold tracking-widest" 
+          id="statusSearchBtn" 
+          href="/ark/admin/photo-management=<%= (snatch.current_page)%>&status=">
+              Search
+          </a>    
+      </div>
+
+      <div class="flex gap-2">
+          <div class="flex gap-10 ml-5">
+            <% if(snatch.current_page >= 2) { %>
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/photo-management?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                    <i class="fa-solid fa-caret-left"></i> prev page
+                </a>
+            <% } %>
+                
+                <!-- <% if(snatch.current_page && snatch.total_page && snatch.clients.length <= 15) { %> -->
+                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page > snatch.current_page ? snatch.total_page - 1 : snatch.total_page %></span>
+                <!-- <% } %> -->
+
+            <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.clients.length === 15) { %>
+                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/photo-management?page=<%= Number(snatch.current_page) + 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                    next page <i class="fa-solid fa-caret-right"></i>
+                </a>
+            <% }%>    
+        </div>
+      </div>
+
+
+      <div class="mt-4 space-y-6" id="clientsContainer">
         <% try{ %>
-          <% clients.forEach(function(client) { %>
-            <div class="border border-gray-700 p-4 rounded-lg bg-gray-700">
+          <% snatch.clients.forEach(client => { %>
+            <div class="client-item border border-gray-700 p-4 rounded-lg bg-gray-700" data-client-name="<%= client.fname %> <%= client.lname %>">
               <h3 class="text-[12px] font-regular">CLIENT'S ID: <%= client.id %>
               </h3>
               <p class="text-[20px] font-semibold uppercase text-[#F6DE03] tracking-tight">
-                Client's Name: <%= client.fname %>
-                  <%= client.lname %>
+                Client's Name: <%= client.fname %> <%= client.lname %>
               </p>
 
               <form action="/ark/upload-image" method="POST" enctype="multipart/form-data">
@@ -152,7 +182,7 @@
               <div class="grid grid-cols-6 gap-1 mt-4">
                 <% let hasPhotos=false; %>
                   <% photos.forEach(function(photo) { %>
-                    <% if (photo.clientId.toString()===client.id.toString()) { %>
+                    <% if (photo.clientId.toString() === client.id) { %>
                       <div class="relative">
                         <img src="<%= '/uploads/' + photo.filename %>" alt="Client Photo"
                           class="w-[200px] hover:grayscale h-auto rounded-lg" />
@@ -165,55 +195,104 @@
                         </form>
                       </div>
                       <% hasPhotos=true; %>
-                        <% } %>
-                          <% }) %>
+                    <% } %>
+                  <% }) %>
 
-                            <% if (!hasPhotos) { %>
-                              <p class="col-span-6 text-gray-500">No photos uploaded yet for this client.</p>
-                              <% } %>
+                  <% if (!hasPhotos) { %>
+                    <p class="col-span-6 text-gray-500">No photos uploaded yet for this client.</p>
+                  <% } %>
               </div>
             </div>
 
             <script>
               document.addEventListener("DOMContentLoaded", function () {
-                const fileInput = document.getElementById("uploadImageClient<%= client.id %>");
-                const previewContainer = document.getElementById("imagePreviewContainerClient<%= client.id %>");
+                const fileInput = document.getElementById('uploadImageClient<%= client.id %>');
+                const previewContainer = document.getElementById('imagePreviewContainerClient<%= client.id %>');
 
-                fileInput.addEventListener("change", function () {
-                  const files = fileInput.files;
-                  previewContainer.innerHTML = "";
+                fileInput.addEventListener('change', function (e) {
+                  const files = e.target.files;
+                  previewContainer.innerHTML = ''; 
 
-                  if (files.length > 0) {
-                    Array.from(files).forEach((file) => {
-                      const reader = new FileReader();
-                      reader.onload = function (e) {
-                        const imgElement = document.createElement("img");
-                        imgElement.src = e.target.result;
-                        imgElement.classList.add("w-[250px]", "h-auto", "rounded-lg");
-                        previewContainer.appendChild(imgElement);
-                      };
-                      reader.readAsDataURL(file);
-                    });
+                  for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+
+                    reader.onload = function (event) {
+                      const img = document.createElement('img');
+                      img.src = event.target.result;
+                      img.classList.add('w-[200px]', 'h-auto', 'rounded-lg');
+                      previewContainer.appendChild(img);
+                    };
+
+                    reader.readAsDataURL(file);
                   }
                 });
               });
             </script>
-            <% }) } catch{}%>
-
+          <% }) %> <!-- endForeach -->
+        <% } catch (err) { %>
+          <p class="text-red-500">An error occurred while fetching clients.</p>
+        <% } %>
       </div>
     </div>
+
   </main>
-
-  <script>
-    const sidebar = document.getElementById("sidebar");
-    const toggleButton = document.getElementById("toggleSidebar");
-    const content = document.querySelector(".content");
-
-    toggleButton.addEventListener("click", () => {
-      sidebar.classList.toggle("sidebar-hidden");
-      content.classList.toggle("sidebar-hidden-content");
-    });
-  </script>
 </body>
 
 </html>
+
+<script>
+  const toggleSidebar = document.getElementById("toggleSidebar");
+  const sidebar = document.getElementById("sidebar");
+  const content = document.querySelector(".content");
+
+  toggleSidebar.addEventListener("click", function () {
+    sidebar.classList.toggle("sidebar-hidden");
+    content.classList.toggle("sidebar-hidden-content");
+  });
+
+  const searchBox = document.getElementById('searchBox');
+  const clientsContainer = document.getElementById('clientsContainer');
+
+  searchBox.addEventListener('input', function () {
+    const searchTerm = searchBox.value.toLowerCase();
+    const clients = clientsContainer.getElementsByClassName('client-item');
+
+    Array.from(clients).forEach(client => {
+      const clientName = client.getAttribute('data-client-name').toLowerCase();
+      client.style.display = clientName.includes(searchTerm) ? '' : 'none';
+    });
+  });
+
+
+  function statusHref() {
+        const name = document.getElementById("searchName").value;
+
+        document.getElementById("statusSearchBtn").href = `/ark/admin/photo-management?name=${name}`;
+    }
+
+    addEventListener("DOMContentLoaded", statusHref());
+
+    function toggleSearchBar(scroll = false) {
+        const state = document.getElementById("search-div")
+        const icon = document.getElementById("search-icon");
+
+        if (scroll) {
+            state.setAttribute("data-status", "false")
+            state.classList.replace("-right-[3px]", "-right-[383px]")
+            icon.classList.replace("fa-multiply", "fa-search")
+        
+            return;
+        }
+
+        if(state.getAttribute("data-status") === "false") {
+            state.setAttribute("data-status", "true")
+            state.classList.replace("-right-[383px]", "-right-[3px]")
+            icon.classList.replace("fa-search", "fa-multiply")
+        } else if(state.getAttribute("data-status") === "true") {
+            state.setAttribute("data-status", "false")
+            state.classList.replace("-right-[3px]", "-right-[383px]")
+            icon.classList.replace("fa-multiply", "fa-search")
+        } 
+    }
+</script>
