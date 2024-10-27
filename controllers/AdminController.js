@@ -58,9 +58,48 @@ class AdminController {
       return 0;
     }
 
-  async viewBookings() {
-    const bookings = await Booking.find();
-    const users = await User.find();
+  async viewBookings(conditions) {
+    let users;
+
+    if(conditions.search) {
+      users = await User.find({$or: [
+        {fname: {$regex: conditions.search, $options: "i"}}, 
+        {lname: {$regex: conditions.search, $options: "i"}},
+      ]});
+    } else {
+      users = await User.find();
+    }
+
+    let contains = [];
+
+    users.map(use => {
+      contains.push({client_id: use.id})
+    });
+
+    // console.log(contains)
+
+    const page = conditions.page || 1; // The page number ye want to fetch
+    const status = conditions.status ? {status: conditions.status} : {};
+    const pageSize = 15;
+    
+    let totalPage = await Booking.find(status);
+
+    const pageCalc = Math.round(totalPage.length / pageSize) + 1;
+
+    totalPage = pageCalc ? pageCalc : 1;
+
+    let bookings;
+
+    if (conditions.search) {
+      bookings = await Booking.find({...status, $or: contains})
+      .skip((page - 1) * pageSize)
+      .limit(pageSize).sort({ date: -1 });
+    } else {
+      bookings = await Booking.find({...status})
+      .skip((page - 1) * pageSize)
+      .limit(pageSize).sort({ date: -1 });
+    }
+
     const receipts = await Receipt.find();
 
     if (bookings.length > 0) {
@@ -68,6 +107,10 @@ class AdminController {
         bookings: bookings,
         users: users,
         receipts: receipts,
+        current_page: page,
+        current_status: conditions.status,
+        current_search: conditions.search,
+        total_page: totalPage,
       };
     }
 

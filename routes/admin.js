@@ -139,7 +139,11 @@ route.post("/clients", async (req, res) => {
 
 // BOOKING PAGE ROUTES
 route.get("/bookings", async (req, res) => {
-  const result = await AdminController.viewBookings();
+  const result = await AdminController.viewBookings({
+    page: req.query.page, 
+    status: req.query.status,
+    search: req.query.name,
+  });
   const receipts = await Receipt.find();
 
   if (req.session.isAdminLogged) {
