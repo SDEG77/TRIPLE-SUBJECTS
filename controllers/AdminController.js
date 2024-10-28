@@ -24,8 +24,9 @@ class AdminController {
     }
     async viewClients(conditions) {      
       let users;
+      let ser = conditions.search || false; 
 
-      if(conditions.search) {
+      if(ser) {
         users = await User.find({
           $expr: {
             $regexMatch: {

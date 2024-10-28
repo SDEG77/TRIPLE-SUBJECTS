@@ -101,13 +101,17 @@
             text-transform: uppercase;
             font-weight: bold;
         }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
-    <div id="sidebar" class="fixed w-64 h-screen bg-gray-800 text-white flex flex-col justify-between">
+    <div id="sidebar" class="fixed w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
         <div>
-            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03] mb-5 relative">
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
                 <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
                         src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
                 <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
@@ -140,9 +144,11 @@
                         class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
-                    <a href="/ark/admin/documentation" class="block p-2 hover:bg-[#F6DE03] hover:text-[#121212]">
-                        <i class="fa fa-file-text mr-2"></i> Documentation
+                    <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa fa-file-text mr-4"></i> Documentation
                       </a>
+                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
+
             </nav>
         </div>
         <div>
@@ -153,12 +159,14 @@
     </div>
 
     <main class="content h-[100vh] overflow-auto">
-        <button id="toggleSidebar" class="p-4 text-yellow-500"><i class="fa-solid fa-bars fa-2xl"></i></button>
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </button>
 
         <!-- Service Management Section -->
-        <div class="p-5">
+        <div class="p-5 ml-6">
             <h2 class="text-2xl font-semibold text-yellow-500">Service Management</h2>
-            <button class="bg-green-500 flex gap-2 items-center text-white py-2 px-4 rounded mt-4"
+            <button class="bg-green-500 flex gap-2 items-center text-white py-2 px-4 rounded mt-4 transition duration-400 hover:bg-green-600"
                 onclick="openAddServiceModal()"><i class="fa-solid fa-plus"></i>Add New</button>
             <table class="min-w-full bg-transparent mt-6">
                 <thead>
@@ -182,7 +190,7 @@
                                     onclick="openEditServiceModal('<%= service._id %>')">Edit</button>
                                 <form method="POST" action="services/<%= service._id %>?_method=DELETE"
                                     style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                    <button onclick="!confirm(`Your Sure?`) && event.preventDefault()" class="bg-red-500 text-white py-1 px-2 rounded"
                                         type="submit">Delete</button>
                                 </form>
                             </td>
@@ -193,9 +201,9 @@
         </div>
 
         <!-- Package Management Section -->
-        <div class="p-5">
+        <div class="p-5 ml-6">
             <h2 class="text-2xl font-semibold text-yellow-500">Package Management</h2>
-            <button class="bg-green-500 flex gap-2 text-white py-2 px-4 rounded mt-4 items-center"
+            <button class="bg-green-500 flex gap-2 text-white py-2 px-4 rounded mt-4 items-center transition duration-400 hover:bg-green-600"
                 onclick="openAddPackageModal()"><i class="fa-solid fa-plus"></i>Add New</button>
             <table class="min-w-full bg-transparent mt-6">
                 <thead>
@@ -234,7 +242,7 @@
                                     onclick="openEditPackageModal('<%= package._id %>')">Edit</button>
                                 <form method="POST" action="packages/<%= package._id %>?_method=DELETE"
                                     style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                    <button onclick="!confirm(`Your Sure?`) && event.preventDefault()"  class="bg-red-500 text-white py-1 px-2 rounded"
                                         type="submit">Delete</button>
                                 </form>
                             </td>
@@ -245,9 +253,9 @@
         </div>
 
         <!-- Add-on Management Section -->
-        <div class="p-5">
+        <div class="p-5 ml-6">
             <h2 class="text-2xl font-semibold text-yellow-500">Add-on Management</h2>
-            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4 flex gap-2 items-center"
+            <button class="bg-green-500 text-white py-2 px-4 rounded mt-4 flex gap-2 items-center transition duration-400 hover:bg-green-600"
                 onclick="openAddAddonModal()"><i class="fa-solid fa-plus"></i>Add New</button>
             <table class="min-w-full bg-transparent mt-6">
                 <thead>
@@ -274,7 +282,7 @@
                                     onclick="openEditAddonModal('<%= addOn._id %>')">Edit</button>
                                 <form method="POST" action="addons/<%= addOn._id %>?_method=DELETE"
                                     style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                    <button onclick="!confirm(`Your Sure?`) && event.preventDefault()"  class="bg-red-500 text-white py-1 px-2 rounded"
                                         type="submit">Delete</button>
                                 </form>
                             </td>

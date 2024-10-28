@@ -1,6 +1,7 @@
 const Booking = require('../models/Booking');
 const Receipt = require("../models/Receipt");
 const User = require('../models/User');
+const UnavailableDate = require('../models/UnavailableDate');
 
 
 class BookingController {
@@ -83,11 +84,27 @@ class BookingController {
       throw error;
   }
 }
+
+
+async getUnavailableDates(req, res) {
+  try {
+    const unavailableDates = await UnavailableDate.find({});
+    res.json(unavailableDates);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching unavailable dates", error });
+  }
 }
 
+async getBookingsByDate(date) {
+  try {
+    const bookings = await Booking.find({ date });
+    return bookings.map(booking => ({ date: booking.date, time: booking.time }));
+  } catch (error) {
+    console.error("Error fetching bookings by date:", error);
+    throw error;
+  }
+}
+}
 
-
-
-const BookingCon = new BookingController();
-
-module.exports = BookingCon;
+const bookingController = new BookingController();
+module.exports = bookingController;
