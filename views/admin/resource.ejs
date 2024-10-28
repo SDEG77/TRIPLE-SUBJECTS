@@ -190,7 +190,7 @@
                                     onclick="openEditServiceModal('<%= service._id %>')">Edit</button>
                                 <form method="POST" action="services/<%= service._id %>?_method=DELETE"
                                     style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                    <button onclick="!confirm(`Your Sure?`) && event.preventDefault()" class="bg-red-500 text-white py-1 px-2 rounded"
                                         type="submit">Delete</button>
                                 </form>
                             </td>
@@ -242,7 +242,7 @@
                                     onclick="openEditPackageModal('<%= package._id %>')">Edit</button>
                                 <form method="POST" action="packages/<%= package._id %>?_method=DELETE"
                                     style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                    <button onclick="!confirm(`Your Sure?`) && event.preventDefault()"  class="bg-red-500 text-white py-1 px-2 rounded"
                                         type="submit">Delete</button>
                                 </form>
                             </td>
@@ -282,7 +282,7 @@
                                     onclick="openEditAddonModal('<%= addOn._id %>')">Edit</button>
                                 <form method="POST" action="addons/<%= addOn._id %>?_method=DELETE"
                                     style="display:inline;">
-                                    <button class="bg-red-500 text-white py-1 px-2 rounded"
+                                    <button onclick="!confirm(`Your Sure?`) && event.preventDefault()"  class="bg-red-500 text-white py-1 px-2 rounded"
                                         type="submit">Delete</button>
                                 </form>
                             </td>

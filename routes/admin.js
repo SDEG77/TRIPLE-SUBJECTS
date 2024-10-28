@@ -131,11 +131,14 @@ route.get("/clients", async (req, res) => {
 
 route.post("/clients", async (req, res) => {
   if (req.session.isAdminLogged) {
+    const result = await AdminController.viewClients({
+      page: false, 
+      search: false,
+    });
+
     await AdminController.deleteClient(req.body.id);
 
-    const clients = await AdminController.viewClients();
-
-    res.render("./admin/adminclients", { clients: clients });
+    res.render("./admin/adminclients", { snatch: result });
   } else {
     res.redirect("./login");
   }
