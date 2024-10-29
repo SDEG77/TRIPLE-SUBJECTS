@@ -59,10 +59,13 @@
         }
 
         table td {
-            font-weight: 200;
-            color: #ffffff7d;
+            font-weight: 400;
+            color: white;
         }
-
+        table tr:nth-child(even){
+            background-color: rgba(128, 128, 128, 0.459);
+        }
+      
         table button {
             text-transform: uppercase;
             font-weight: 500;
@@ -112,7 +115,7 @@
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
                     <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                        <i class="fa fa-file-text mr-4"></i> Documentation
+                        <i class="fa fa-file-text mr-4"></i> Reports
                       </a>
                     <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
 
@@ -134,19 +137,19 @@
             <h2 class="text-2xl font-semibold text-yellow-500">Clients</h2>
         </div>
 
-        <div class="flex gap-10 ml-6">
+        <div class="flex gap-10 items-center justify-center">
             <% if(snatch.current_page >= 2) { %>
-                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                <a class="bg-blue-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
                     <i class="fa-solid fa-caret-left"></i> prev page
                 </a>
             <% } %>
                 
                 <!-- <% if(snatch.current_page && snatch.total_page && snatch.clients.length <= 15) { %> -->
-                    <span class="flex items-center ml-6"><%= snatch.current_page %> of <%= snatch.total_page > snatch.current_page ? snatch.total_page - 1 : snatch.total_page %></span>
+                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page > snatch.current_page ? snatch.total_page - 1 : snatch.total_page %></span>
                 <!-- <% } %> -->
 
             <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.clients.length === 15) { %>
-                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) + 1  %>&name=<%= snatch.current_search %>">
+                <a class="bg-blue-500 flex gap-2 items-center p-2" href="/ark/admin/clients?page=<%= Number(snatch.current_page) + 1  %>&name=<%= snatch.current_search %>">
                     next page <i class="fa-solid fa-caret-right"></i>
                 </a>
             <% }%>    
@@ -157,7 +160,7 @@
 
             <input onkeyup="statusHref()" class="text-black h-fit p-1" type="text" id="searchName" placeholder="client name" value="<%= snatch.current_search %>">
             
-            <a class="flex items-center bg-emerald-700 hover:bg-emerald-900 transition-colors py-2 px-4 rounded-xl font-bold tracking-widest" 
+            <a class="flex items-center bg-yellow-400 hover:bg-yellow-400 transition-colors py-2 px-4 rounded-xl font-semibold uppercase text-black tracking-wide" 
             id="statusSearchBtn" 
             href="/ark/admin/clients?page=<%= (snatch.current_page)%>&status=">
                 Search
@@ -168,19 +171,19 @@
         <div class="mt-6 m-5 ml-6 p-4">
             <% if(snatch.clients) { %>
                 <table class="min-w-full text-gray-300">
-                    <thead>
-                        <tr class="text-gray-400">
-                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">ID</th>
-                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Full Name</th>
-                            <th class="py-2 px-4 border-b border-[#2c2c2c] text-left">Email Address</th>
-                            <th colspan="100" class="py-2 px-4 border-b border-[#2c2c2c] text-center">Action</th>
+                    <thead >
+                        <tr class=" font-bold uppercase bg-yellow-300">
+                            <th class="py-4 px-4 border-b border-[#2c2c2c] text-black  font-bold uppercase text-left ">ID</th>
+                            <th class="py-4 px-4 border-b border-[#2c2c2c] text-black  font-bold uppercase text-left">Full Name</th>
+                            <th class="py-4 px-4 border-b border-[#2c2c2c] text-black  font-bold uppercase text-left">Email Address</th>
+                            <th colspan="100" class="py-4 px-4 border-b text-black  font-bold uppercase  border-[#2c2c2c] text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% let yah="py-2 px-4 border-b border-[#2c2c2c] text-gray-200" ; %>
 
                             <% snatch.clients.map((client)=> { %>
-                                <tr>
+                                <tr >
                                     <td class="<%= yah %>">
                                         <%= client._id %>
                                     </td>

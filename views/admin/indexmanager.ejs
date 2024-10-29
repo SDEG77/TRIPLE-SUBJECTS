@@ -112,7 +112,7 @@
                     </a>
                     
                     <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                        <i class="fa fa-file-text mr-4"></i> Documentation
+                        <i class="fa fa-file-text mr-4"></i> Reports
                       </a>
                       <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
 
@@ -138,11 +138,11 @@
 
 
             <!-- Add Photo Form -->
-            <form action="indexmanager/add" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 w-1/2 p-5 rounded-[20px] mt-3 ml-6 bg-gray-800" style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.393);">
+            <form action="indexmanager/add" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 w-1/4 p-5 rounded-[10px] mt-3 ml-6 bg-gray-800" style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.393);">
                 <input type="text" name="title" placeholder="Title (optional)" class="border-b-[2px] border-[#Fde043] p-1  outline-none bg-transparent text-white">
                 <input type="hidden" name="isIndexPhoto" value="true">
-                <input type="file" name="image" class="border-b-[2px] border-[#Fde043]  p-2 rounded-[10px] outline-none " required> <!-- Changed to file input -->
-                <button type="submit" class="bg-blue-500 text-white p-[5px] rounded-[15px] uppercase w-fit px-5 hover:bg-blue-400">Submit</button>
+                <input type="file" name="image" class="border-b-[2px] border-[#Fde043]  p-2  outline-none " required> <!-- Changed to file input -->
+                <button type="submit" class="bg-blue-500 text-white p-[5px] rounded-[10px] uppercase w-fit px-5 hover:bg-blue-400">Submit</button>
             </form>
 
             <!-- Display Existing Photos -->

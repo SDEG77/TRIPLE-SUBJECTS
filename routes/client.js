@@ -132,6 +132,7 @@ route.get('/', async (req, res) => {
 route.get('/booking', async (req, res) => {
   if(req.session.logged) {
     const give = await sisig_repeater("get-booking", ['solo', 'duo', 'group', 'specials'], req, res);
+    let pending = await Booking.find({status: "pending", client_id: req.session.userID,});
 
     res.render('client/booking', {
       id: give.rendID,
@@ -140,6 +141,7 @@ route.get('/booking', async (req, res) => {
       addOns: give.rendAddOns,
       groups: give.rendGroups,
       bookings: give.rendBookings,
+      locked: pending.length,
     });
   } else {
     res.redirect('../login')
@@ -149,11 +151,12 @@ route.get('/booking', async (req, res) => {
 route.post('/booking', async (req, res) => {
   const oneOnly = await Booking.find({client_id: req.session.userID, receipt_uploaded: "no",});
   const isItOccupied = await Booking.findOne({status: "accepted", date: req.body.date, time: req.body.time,});
+  let pending = await Booking.find({status: "pending", client_id: req.session.userID,});
 
   // if(isItOccupied) {
   //   res.render(./)
   // }
-  if(oneOnly.length === 1) {
+  if(false) {
     res.redirect("./booking")
   } else {
   const give = await sisig_repeater("get-booking", ['solo', 'duo', 'group', 'specials'], req, res);
@@ -186,6 +189,7 @@ route.post('/booking', async (req, res) => {
       addOns: give.rendAddOns,
       groups: give.rendGroups,
       bookings: give.rendBookings,
+      locked: pending.length,
     });
   } else {
     res.render('client/booking', {
@@ -196,6 +200,7 @@ route.post('/booking', async (req, res) => {
       addOns: give.rendAddOns,
       groups: give.rendGroups,
       bookings: give.rendBookings,
+      locked: pending.length,
     });
   }
 }

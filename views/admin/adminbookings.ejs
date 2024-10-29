@@ -131,7 +131,7 @@
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
                     <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                        <i class="fa fa-file-text mr-4"></i> Documentation
+                        <i class="fa fa-file-text mr-4"></i> Reports
                       </a>
                       <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4"></i> Manage Unavailable Dates</a>
 
@@ -175,26 +175,26 @@
                 <option class="text-black" value="pending">Pending</option>
             </select>
 
-            <a class="flex items-center bg-emerald-700 hover:bg-emerald-900 transition-colors py-2 px-4 rounded-xl font-bold tracking-widest" 
+            <a class="flex items-center bg-yellow-400 hover:bg-yeloow-900 transition-colors py-2 px-4 rounded-xl font-semibold text-black uppercase tracking-wide" 
             id="statusSearchBtn" 
             href="/ark/admin/bookings?page=<%= (snatch.current_page)%>&status=">
                 Search
             </a>    
         </div>
 
-        <div class="flex gap-10 ml-6">
+        <div class="flex gap-10 justify-center items-center">
             <% if(snatch.current_page >= 2) { %>
-                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                <a class="bg-blue-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) - 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
                     <i class="fa-solid fa-caret-left"></i> prev page
                 </a>
             <% } %>
                 
                 <% if(snatch.current_page && snatch.total_page && snatch.bookings.length <= 15) { %>
-                    <span class="flex items-center ml-6"><%= snatch.current_page %> of <%= snatch.total_page %></span>
+                    <span class="flex items-center"><%= snatch.current_page %> of <%= snatch.total_page %></span>
                 <% } %>
 
             <% if(snatch.current_page >= 0 && snatch.current_page <= snatch.total_page && snatch.bookings.length === 15) { %>
-                <a class="bg-slate-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) + 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
+                <a class="bg-blue-500 flex gap-2 items-center p-2" href="/ark/admin/bookings?page=<%= Number(snatch.current_page) + 1  %>&status=<%= snatch.current_status %>&name=<%= snatch.current_search %>">
                     next page <i class="fa-solid fa-caret-right"></i>
                 </a>
             <% }%>    

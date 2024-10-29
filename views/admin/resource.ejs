@@ -93,13 +93,21 @@
 
         table td {
             text-transform: capitalize;
-            font-weight: lighter;
-            color: #ffffffb5;
+            font-weight: regular;
+            color: #ffffff;
         }
 
         .p-5 button {
             text-transform: uppercase;
             font-weight: bold;
+        }
+        table th{
+            background-color: rgb(230, 214, 1);
+            color: black;
+            font-weight: 600;
+        }
+        table tr:nth-child(even){
+            background-color: rgba(128, 128, 128, 0.459);
         }
         #sidebar{
             position: fixed;
@@ -145,7 +153,7 @@
                         <i class="fa-solid fa-message mr-4"></i> Feedback
                     </a>
                     <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                        <i class="fa fa-file-text mr-4"></i> Documentation
+                        <i class="fa fa-file-text mr-4"></i> Reports
                       </a>
                       <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
 
@@ -170,10 +178,10 @@
                 onclick="openAddServiceModal()"><i class="fa-solid fa-plus"></i>Add New</button>
             <table class="min-w-full bg-transparent mt-6">
                 <thead>
-                    <tr class="bg-transparent">
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Service Name</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Description</th>
-                        <th class="py-2 px-4 border-b border-gray-600 text-left">Actions</th>
+                    <tr class="bg-yellow-300">
+                        <th class="py-2 px-4 border-b border-gray-600 text-left text-black font-bold">Service Name</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left text-black font-bold">Description</th>
+                        <th class="py-2 px-4 border-b border-gray-600 text-left text-black font-bold">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="serviceTable">

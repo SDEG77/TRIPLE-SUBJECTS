@@ -81,7 +81,7 @@ router.post("/client/booking/upload", uploadReceipt.array("image", 200), async (
 
 router.get("/client/booking/upload/:clientID", async (req, res) => {
   const detectPartner = await Booking.findOne({client_id: String(req.params.clientID), receipt_uploaded: "no",});
-  console.log(detectPartner)
+  // console.log(detectPartner)
   if(detectPartner) {
     const id = detectPartner.id;
 

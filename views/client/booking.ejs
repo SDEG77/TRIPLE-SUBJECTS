@@ -315,7 +315,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <div class="flex flex-col md:flex-row gap-5">
                 <p class="font-semibold text-[#F6DE03] flex items-center">Total Price: <span class="pl-2" id="totalPrice" >₱ 0,000.00</span></p>
                 <div class="flex gap-2">
+                    <% if(!locked) { %>
                     <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px] hover:bg-transparent hover:text-[#F6DE03] hover:border-[1px] hover:border-[#F6DE03] transition duration-200 ease-out hover:ease-in" >Book Now</button>
+                    <% } else { %>
+                        <p class="text-red-400 uppercase font-bold tracking-wide text-[18px] flex gap-2 items-center">
+                            <span class="animate-pulse duration-1000">
+                                <i class="text-red-500 fa-solid fa-triangle-exclamation animate-ping"></i>
+                                You have one appointment pending
+                                <i class="text-red-500 fa-solid fa-triangle-exclamation animate-ping"></i>
+                            </span>
+                        </p>
+                    <% } %>
                     <!-- <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button> -->
                 </div>
             </div>

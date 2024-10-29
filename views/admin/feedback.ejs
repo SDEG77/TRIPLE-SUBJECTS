@@ -65,6 +65,33 @@
             position: fixed;
             height: 100vh;
         }
+        table {
+            padding: 20px;
+        }
+
+        table th {
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        table td {
+            text-transform: capitalize;
+            font-weight: regular;
+            color: #ffffff;
+        }
+
+        .p-5 button {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        table th{
+            background-color: rgb(230, 214, 1);
+            color: black;
+            font-weight: 600;
+        }
+        table tr:nth-child(even){
+            background-color: rgba(128, 128, 128, 0.459);
+        }
     </style>
 </head>
 
@@ -106,7 +133,7 @@
                         <i class="fa-solid fa-message mr-4 text-black"></i> Feedback
                     </a>
                     <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
-                        <i class="fa fa-file-text mr-4"></i> Documentation
+                        <i class="fa fa-file-text mr-4"></i> Reports
                       </a>
                       <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4"></i> Manage Unavailable Dates</a>
 
@@ -130,18 +157,18 @@
             </h2>
 
             <!-- Feedback Table -->
-            <table class="min-w-full border-collapse bg-transparent text-left text-sm text-gray-400 shadow-md ">
+            <table class="min-w-full border-collapse bg-transparent text-left text-sm shadow-md ">
                 <thead>
                     <tr>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Name
+                        <th class="border-b border-gray-700 p-4 uppercase text-[20px]">Name
                         </th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Email
+                        <th class="border-b border-gray-700 p-4 uppercase text-[20px]">Email
                         </th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Subject
+                        <th class="border-b border-gray-700 p-4 uppercase text-[20px]">Subject
                         </th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Message
+                        <th class="border-b border-gray-700 p-4 uppercase text-[20px]">Message
                         </th>
-                        <th class="border-b border-gray-700 p-4 font-medium text-gray-300 uppercase text-[20px]">Action
+                        <th class="border-b border-gray-700 p-4 uppercase text-[20px]">Action
                         </th>
                     </tr>
                 </thead>
@@ -162,7 +189,7 @@
                             </td>
                             <td class="border-b border-gray-700 p-4 flex gap-2">
                                 <!-- Button to trigger the reply modal -->
-                                <button class="reply-button bg-yellow-500 px-4 py-2 rounded"
+                                <button class="reply-button bg-blue-500 px-4 py-2 rounded"
                                     data-email="<%= feedback.email %>">
                                     Reply
                                 </button>
