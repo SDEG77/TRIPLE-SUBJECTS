@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon server.js",
+    "docker": "node server.js",
     "seed:admin": "node ./devTools/seeders/seedAdmin.js",
     "seed:addons": "node ./devTools/seeders/addonseeder.js",
     "seed:packages": "node ./devTools/seeders/packageseeder.js",
